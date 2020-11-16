@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Mollie\Console\Commands\GenerateCurrencyAmountMapCommand;
+
+$app = new Application();
+
+// Add all custom Core commands here.
+$app->add(new GenerateCurrencyAmountMapCommand());
+
+$app->run();

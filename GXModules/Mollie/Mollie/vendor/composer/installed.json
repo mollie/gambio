@@ -1,0 +1,45 @@
+[
+    {
+        "name": "mollie/integration-core",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:mollie/orocore.git",
+            "reference": "4af9e822d23c4c554b203bd5d47513d917bc2de4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mollie/orocore/zipball/4af9e822d23c4c554b203bd5d47513d917bc2de4",
+            "reference": "4af9e822d23c4c554b203bd5d47513d917bc2de4",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "codacy/coverage": "dev-master",
+            "ext-json": "*",
+            "phpunit/phpunit": "^4.8.35",
+            "symfony/console": "^5.1"
+        },
+        "time": "2020-11-05T12:24:17+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Mollie\\": "src"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Mollie\\Tests\\": "tests",
+                "Mollie\\Console\\": "console"
+            }
+        },
+        "license": [
+            "proprietary"
+        ],
+        "description": "Mollie integrations core library"
+    }
+]
