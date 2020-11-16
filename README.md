@@ -24,39 +24,24 @@ Mollie requires no minimum costs, no fixed contracts, no hidden costs. At Mollie
 
 ## Supported Mollie Payment Methods ##
 - iDEAL
-
 - Creditcard
-
 - CartaSi & Cartes Bancaires
-
 - Bancontact
-
 - Belfius Pay Button
-
 - ING HomePay
-
 - KBC/CBC-Betaalknop
-
 - SOFORT Banking
-
 - BankTransfer
-
 - PayPal
-
 - Paysafecard
-
 - Przelewy24
-
 - SEPA bank transfer
-
 - Klarna
-
 - Giftcards
-
 - Apple Pay
 
 ## Configuration, FAQ and Troubleshooting  ##
-If you experience problems with the extension installation, setup or whenever you need more information about how to setup the Mollie Payment extension in Gambio, please see our [WIKI Page](https://<oro>/wiki) or send an e-mail to [info@mollie.com](mailto:info@mollie.com) with an exact description of the problem.
+If you experience problems with the extension installation, setup or whenever you need more information about how to setup the Mollie Payment extension in Gambio, please send an e-mail to [info@mollie.com](mailto:info@mollie.com) with an exact description of the problem.
 
 # Install using FTP
 ```
@@ -65,7 +50,7 @@ This branch contains mollie module which is eligible for Gambio versions 3.0.x -
 If you have Gambio 3.5.x - 4.0.x versions, please checkout on `main` branch of this Github repository.
 ```
 
-To install the Mollie plugin for the Gambio 3.0.x - 3.4.x. system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
+To install the Mollie plugin for the **Gambio 3.0.x - 3.4.x.** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
  1. Download the latest `0.1.0` version of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with Gambio 3.0.x - 3.4.x.
