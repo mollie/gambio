@@ -13,8 +13,8 @@ use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
 use Mollie\Infrastructure\Logger\Logger;
 use Mollie\Infrastructure\ServiceRegister;
 
-require_once __DIR__ . '/../../../../GXModules/Mollie/Mollie/autoload.php';
-include_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/mollie_config_fields.php';
+require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/autoload.php';
+require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/mollie_config_fields.php';
 
 /**
  * Class mollie

@@ -1,0 +1,108 @@
+{load_language_text section="module_center_module"}
+
+<link rel="stylesheet" href="/admin/html/assets/mollie/Styles/mollie_order_dashboard.css">
+<link rel="stylesheet" href="/admin/html/assets/mollie/Styles/payment_link.css">
+<link rel="stylesheet" href="/admin/html/assets/mollie/Styles/mollie_line_list.css">
+
+<script src="/admin/html/assets/mollie/Javascripts/mollie-copy.js"></script>
+<script src="/admin/html/assets/mollie/Javascripts/mollie-modal.js"></script>
+<script src="/admin/html/assets/mollie/Javascripts/mollie-refund.js"></script>
+<script src="/admin/html/assets/mollie/Javascripts/mollie-shipment.js"></script>
+<script src="/admin/html/assets/mollie/Javascripts/mollie-payment-link.js"></script>
+
+<input type="hidden" id="txt-mollie-refund" value="{{$txt.mollie_refund}}">
+<input type="hidden" id="txt-mollie-refunds" value="{{$txt.mollie_refunds}}">
+<input type="hidden" id="txt-mollie-shipments" value="{{$txt.mollie_shipments}}">
+<input type="hidden" id="txt-submit-shipments" value="{{$txt.mollie_submit_shipment}}">
+<input type="hidden" id="txt-mollie-copy-to-clipboard" value="{{$txt.mollie_copy_to_clipboard}}">
+<input type="hidden" id="txt-mollie-payment-link" value="{{$txt.mollie_payment_link}}">
+
+<!--popup dialog-->
+<div class="mollie-modal mollie-hidden">
+    <div id="mollie-popup" class="mollie-modal-content">
+
+    </div>
+</div>
+<!--popup dialog-->
+
+<div class="mollie-action-buttons">
+    {if $mollie.display_payment_button}
+        <button class="btn" id="mollie-payment-link">
+            <i class="fa fa-link"></i> {$txt.mollie_payment_link}
+        </button>
+    {/if}
+
+    {if $mollie.display_shipment_button}
+        <button class="btn" id="mollie-shipment-button">
+            <i class="fa fa-truck"></i> {$txt.mollie_shipments}
+        </button>
+    {/if}
+
+    {if $mollie.display_refund_button}
+        <button class="btn" id="mollie-refund-button">
+            <i class="fa fa-money"></i> {$txt.mollie_refunds}
+        </button>
+    {/if}
+
+    {if $mollie.mollie_url}
+        <a href="{{$mollie.mollie_url}}" target="_blank">
+            <button type="button" class="btn">
+                <i class="fa fa-external-link"></i> {$txt.mollie_open_in_mollie}
+            </button>
+        </a>
+    {/if}
+</div>
+
+<table class="dataTableRow gx-container mollie-info-table">
+    <tbody>
+    <tr>
+        <td class="label">
+            {$txt.mollie_payment_method}
+        </td>
+        <td>
+            <img src="{$mollie.logo_src}">
+            <span>{{$mollie.payment_method_desc}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {$txt.mollie_checkout_type}
+        </td>
+        <td>
+            {if $mollie.api_used == 'payment_api'}
+                {$txt.mollie_payments_api}
+            {else}
+                {$txt.mollie_orders_api}
+            {/if}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {if $mollie.api_used == 'payment_api'}
+                {$txt.mollie_payment_status}
+            {else}
+                {$txt.mollie_order_status}
+            {/if}
+        </td>
+        <td>
+            {{$mollie.status_name}}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {$txt.mollie_paid_amount}
+        </td>
+        <td>
+            {{$mollie.total_amount}} {{$mollie.currency}}
+        </td>
+    </tr>
+    <tr class="">
+        <td class="label">
+            {$txt.mollie_refunded_amount}
+        </td>
+        <td>
+            {{$mollie.refunded_amount}} {{$mollie.currency}}
+        </td>
+    </tr>
+    </tbody>
+</table>

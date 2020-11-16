@@ -1,10 +1,10 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x. 
+This branch contains mollie module which is eligible for Gambio versions 3.0.x - 3.4.x. 
 
-If you have Gambio from 3.0 to 3.4 versions, please checkout on `3.0-3.4` branch of this Github repository.
-https://github.com/mollie/gambio/tree/3.0-3.4
+If you have Gambio 3.5.x - 4.0.x versions, please checkout on `main` branch of this Github repository.
+https://github.com/mollie/gambio
 ***
 
 ## Installation of the Mollie Gambio Payments module ##
