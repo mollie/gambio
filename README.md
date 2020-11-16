@@ -65,11 +65,11 @@ This branch contains mollie module which is eligible for Gambio versions 3.5.x -
 If you have Gambio from 3.0 to 3.4 versions, please checkout on 3.0-3.4 branch of this Github repository.
 ```
 
-To install the Mollie plugin for the Gambio GX3 and GX4 system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
+To install the Mollie plugin for the Gambio 3.5.x - 4.0.x system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
- 1. Download the latest version of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
- 2. Copy the all content of the `gambio-1.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
+ 1. Download the latest `1.0.0` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
+ 2. Copy the all content of the `gambio-1.0.0` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
  3. Go to `Toolbox` » `Cache` on the Gambio admin page
  4. Clear the module, output, and text cache
  5. Go to `Modules` » `Modules-Center` on the Gambio admin page
