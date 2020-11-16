@@ -1,8 +1,10 @@
 # Mollie module for Gambio
-## Supported GX versions
- - GX3.5.# - GX3.15.#
- - GX4.0.#
 
+## Supported GX versions
+This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x. 
+
+If you have Gambio from 3.0 to 3.4 versions, please checkout on `3.0-3.4` branch of this Github repository.
+https://github.com/mollie/gambio/tree/3.0-3.4
 ***
 
 ## Installation of the Mollie Gambio Payments module ##
@@ -57,7 +59,11 @@ Mollie requires no minimum costs, no fixed contracts, no hidden costs. At Mollie
 If you experience problems with the extension installation, setup or whenever you need more information about how to setup the Mollie Payment extension in Gambio, please see our [WIKI Page](https://<oro>/wiki) or send an e-mail to [info@mollie.com](mailto:info@mollie.com) with an exact description of the problem.
 
 # Install using FTP
-**This branch contains mollie module which is eligible for Gambio versions 3.5.# - 4.0.#. If you have Gambio 3.4.# or some prior versions, please checkout on `v3.0` branch of this Github repository.**
+```
+This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x.
+
+If you have Gambio from 3.0 to 3.4 versions, please checkout on 3.0-3.4 branch of this Github repository.
+```
 
 To install the Mollie plugin for the Gambio GX3 and GX4 system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
