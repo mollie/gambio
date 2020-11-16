@@ -69,10 +69,10 @@ To install the Mollie plugin for the Gambio GX3 and GX4 system, you will need to
 
 Step-by-step to install the Gambio module:
  1. Download the latest version of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
- 2. Please copy the all content from the extracted files to the root of your Gambio store on your webserver using your FTP client.
- 3. Please go to `Toolbox` » `Cache` on the Gambio admin page
+ 2. Copy the all content of the `gambio-1.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
+ 3. Go to `Toolbox` » `Cache` on the Gambio admin page
  4. Clear the module, output, and text cache
- 5. Please go to `Modules` » `Modules-Center` on the Gambio admin page
+ 5. Go to `Modules` » `Modules-Center` on the Gambio admin page
  6. From the module list, select `Mollie` and click on the `Install` button
 ---
 
