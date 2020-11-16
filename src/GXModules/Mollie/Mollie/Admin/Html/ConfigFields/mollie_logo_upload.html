@@ -1,0 +1,19 @@
+{load_language_text section="module_center_module"}
+
+<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-logo-upload.js"></script>
+<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Admin/Styles/mollie_config_fields.css">
+
+
+<div class="mollie-logo-upload-container">
+    <div class="mollie-logo-upload-content">
+        <img src="{{$mollie.image_src}}" id="mollie-preview-logo" />
+        <label for="mollie-logo-upload-button" class="btn cursor-pointer">
+            <i class="fa fa-fw fa-plus"></i>
+            {$txt.mollie_change_logo}
+        </label>
+        <input type="file" id="mollie-logo-upload-button"  data-file-input-name="">
+        <input type="hidden" id="mollie-logo-form-field" value="{{$mollie.value}}" name="configuration[{{$mollie.key}}]">
+        <input type="hidden" id="mollie-logo-endpoint" value="{{$mollie.file_upload_url}}">
+        <p class="mollie-logo-upload-error mollie-hidden">{$txt.mollie_change_logo_error}</p>
+    </div>
+</div>

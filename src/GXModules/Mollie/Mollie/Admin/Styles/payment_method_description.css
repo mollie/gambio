@@ -1,0 +1,61 @@
+.mollie-info-container {
+    background: #ffffff;
+    height: 110px;
+    padding: 0 10px 0 10px;
+    border: 1px solid #ccc;
+    font-size: 13px
+}
+
+.mollie-info-container .mollie-info-row {
+    display: flex;
+    height: 50%;
+    align-items: center;
+}
+
+.mollie-info-container .float-right {
+    float: right;
+}
+
+.mollie-info-container .mollie-info-item {
+    width: 50%;
+}
+
+.mollie-config-button-container {
+    margin-bottom: 20px;
+}
+
+.mollie-config-button-container .btn-primary {
+    width: 100%;
+    float: none;
+    margin: 10px 0 !important;
+}
+
+.mollie-payment-method-info-container {
+    margin-bottom: 40px;
+    height: 50px;
+}
+
+.mollie-payment-method-info-container .logo {
+    float: left;
+    width: 80px;
+}
+
+.mollie-payment-method-info-container .logo img {
+    max-width: 65px;
+    max-height: 50px;
+}
+
+.mollie-payment-method-info-container .badge {
+    font-size: 11px;
+    vertical-align: middle;
+    float: right;
+}
+
+.mollie-payment-method-info {
+    float: left;
+    width: calc(100% - 80px);
+}
+
+.mollie-payment-method-info .mollie-label {
+    font-size: 18px !important;
+}

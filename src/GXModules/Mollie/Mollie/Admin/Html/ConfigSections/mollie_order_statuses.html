@@ -1,0 +1,58 @@
+{load_language_text section="module_center_module"}
+
+{block name="mollie-payment-methods"}
+
+<fieldset id="mollie-order-statuses">
+    <legend>{$txt.mollie_order_statuses}</legend>
+    <div class="form-group mollie-vertical-align">
+        <div class="col-md-3 mollie-vertical-align">
+
+            {$txt.mollie_status} {$txt.mollie_created}
+        </div>
+        <div class="col-md-7 mollie-vertical-align">
+            <select id="mollie-created" name="orderStatuses[mollie_created]" class="form-control order-status">
+                {foreach item=order_status from=$content.order_statuses}
+                <option value="{$order_status.id}" {if $order_status.id == $content.saved_statuses.mollie_created}selected{/if}>{$order_status.name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group mollie-vertical-align">
+        <div class="col-md-3 mollie-vertical-align">
+            {$txt.mollie_status} {$txt.mollie_authorized}
+        </div>
+        <div class="col-md-7 mollie-vertical-align">
+            <select id="mollie-authorized" name="orderStatuses[mollie_authorized]" class="form-control order-status">
+                {foreach item=order_status from=$content.order_statuses}
+                <option value="{$order_status.id}" {if $order_status.id == $content.saved_statuses.mollie_authorized}selected{/if}>{$order_status.name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group mollie-vertical-align">
+        <div class="col-md-3 mollie-vertical-align">
+            {$txt.mollie_status} {$txt.mollie_paid}
+        </div>
+        <div class="col-md-7 mollie-vertical-align">
+            <select id="mollie-paid" name="orderStatuses[mollie_paid]" class="form-control order-status">
+                {foreach item=order_status from=$content.order_statuses}
+                <option value="{$order_status.id}" {if $order_status.id == $content.saved_statuses.mollie_paid}selected{/if}>{$order_status.name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group mollie-vertical-align">
+        <div class="col-md-3 mollie-vertical-align">
+            {$txt.mollie_status} {$txt.mollie_refunded}
+        </div>
+        <div class="col-md-7 mollie-vertical-align">
+            <select id="mollie-refunded" name="orderStatuses[mollie_refunded]" class="form-control order-status">
+                {foreach item=order_status from=$content.order_statuses}
+                <option value="{$order_status.id}" {if $order_status.id == $content.saved_statuses.mollie_refunded}selected{/if}>{$order_status.name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+</fieldset>
+{/block}

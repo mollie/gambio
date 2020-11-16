@@ -1,0 +1,9 @@
+.mollie-payment-link-wrapper {
+    background-color: white;
+    margin-bottom: 0;
+    text-align: left
+}
+
+.mollie-payment-link-wrapper input {
+    width: 450px;
+}

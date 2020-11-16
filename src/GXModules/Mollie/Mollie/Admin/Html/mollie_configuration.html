@@ -1,0 +1,46 @@
+{extends file="../../../../../admin/html/content/layouts/main/layout.html"}
+
+{block name="content"}
+{load_language_text section="module_center_module"}
+{load_language_text section="admin_buttons" name="admin_buttons"}
+
+<div class="col-md-9 form-configuration mollie-configuration"
+     data-gx-extension="visibility_switcher"
+     data-gx-compatibility="bottom_save_bar"
+     data-visibility_switcher-rows=".hide-icon"
+     data-visibility_switcher-selections=".icon-col">
+
+    {block name="module_center_module_mollie_connect_form"}
+    <input type="hidden" id="mollie-notification-page-count" value="{$content.notification_page_count}">
+    <input type="hidden" id="mollie-notification-url" value="{$content.notification_url}">
+    <input type="hidden" id="mollie-order-status-url" value="{$content.order_status_url}">
+    <input type="hidden" id="mollie-connect-verify-url" value="{$content.mollie_verify_token}">
+    <form id="mollie-config-form" name="mollie-config" class="form-horizontal" method="POST" action="{$content.mollie_save_config_url}">
+
+        {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_connect.html"}
+
+        {if $content.is_connected}
+
+            {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_payment_methods.html"}
+
+            {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_order_statuses.html"}
+
+            {if $content.notification_page_count > 0}
+                {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_notifications.html"}
+            {/if}
+        {/if}
+
+        <div class="row bottom-save-bar-content">
+            <div class="col-sm-12">
+                <a id="mollie-config-cancel" class="btn secondary mollie-footer-buttons" href="{$content.modules_url}">
+                    {$txt.mollie_cancel}
+                </a>
+                <button type="button" id="mollie-config-save" class="btn btn-primary mollie-footer-buttons">
+                    {$txt.mollie_save_changes}
+                </button>
+            </div>
+        </div>
+    </form>
+    {/block}
+</div>
+{/block}

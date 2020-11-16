@@ -1,0 +1,46 @@
+{load_language_text section="module_center_module"}
+
+
+{block name="mollie-payment-methods"}
+
+<fieldset data-gx-widget="switcher">
+    <legend>
+        {$txt.mollie_payment_methods}
+    </legend>
+    <table class="mollie-payment-methods">
+        <tbody>
+        {foreach item=module_data from=$content.methods}
+        <tr>
+            <td class="mollie-payment-image">
+                <img src="{$module_data.image_src}">
+            </td>
+
+            <td class="mollie-payment-label">
+                {$module_data.label}
+            </td>
+
+            <td class="mollie-payment-status">
+                <div class="badge badge-warning {if $module_data.is_enabled}active{/if}">
+                    {if $module_data.is_enabled}
+                        <i class="fa fa-circle" aria-hidden="true"></i>
+                        {$txt.mollie_enabled}
+                    {else}
+                        <i class="fa fa-circle-thin" aria-hidden="true"></i>
+                        {$txt.mollie_disabled}
+                    {/if}
+                </div>
+            </td>
+
+            <td class="mollie-payment-configure-button text-right">
+                <a href="/admin/modules.php?set=payment&module=mollie_{{$module_data.id}}" class="btn">
+                    {$txt.mollie_configure}
+                </a>
+            </td>
+        </tr>
+
+        {/foreach}
+        </tbody>
+    </table>
+</fieldset>
+{/block}
+

@@ -1,0 +1,29 @@
+{load_language_text section="module_center_module"}
+
+<fieldset id="mollie-notifications">
+    <legend>{$txt.mollie_notifications}</legend>
+
+    <div class="form-group mollie-vertical-align" style="font-weight: bold;">
+        <div class="col-sm-1 mollie-vertical-align">#</div>
+        <div class="col-sm-2 mollie-vertical-align">{$txt.mollie_date}</div>
+        <div class="col-sm-2 mollie-vertical-align">{$txt.mollie_type}</div>
+        <div class="col-sm-2 mollie-vertical-align">{$txt.mollie_order_number}</div>
+        <div class="col-sm-2 mollie-vertical-align">{$txt.mollie_message}</div>
+        <div class="col-sm-3 mollie-vertical-align">{$txt.mollie_details}</div>
+    </div>
+
+    <div class="form-group navigation-buttons">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3">
+            <div class="pull-right">
+                <button type="button" id="mollie-notification-prev" class="btn btn-default previous">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+
+                <button type="button" id="mollie-notification-next" class="btn btn-default next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>

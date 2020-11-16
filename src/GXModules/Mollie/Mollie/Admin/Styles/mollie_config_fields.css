@@ -1,0 +1,27 @@
+.mollie-logo-upload-content {
+    margin-top: 10px;
+}
+
+.mollie-logo-upload-content img{
+    vertical-align: middle;
+    max-width: 65px;
+    max-height: 50px;
+}
+
+#mollie-logo-upload-button {
+    display:none;
+}
+
+.mollie-hidden {
+    display: none;
+}
+
+.mollie-logo-upload-error {
+    color: #F30106;
+}
+
+.list-group-item img {
+    max-height: 64px;
+    margin-right: 10px;
+    float: left;
+}

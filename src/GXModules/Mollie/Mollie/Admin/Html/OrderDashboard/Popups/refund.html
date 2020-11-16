@@ -1,0 +1,175 @@
+{block name="mollie_refund"}
+{load_language_text section="module_center_module"}
+
+<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Admin/Styles/mollie_line_list.css">
+<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-tabs.js"></script>
+<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-quantity-checker.js"></script>
+<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-items-build.js"></script>
+
+{if $content.is_orders_api}
+{assign var=amountAvailable value=$content.order.availableForRefund}
+{else}
+{assign var=amountAvailable value=$content.payment.availableForRefund}
+{/if}
+
+<div class="message_stack_container mollie-popup-error-msg mollie-hidden">
+    <div class="alert alert-warning" id="refund-error-msg">
+        {$txt.mollie_not_refundable}
+    </div>
+</div>
+
+<div id="mollie-refund-content" class="main-page-content">
+    <input type="hidden" value="{$content.process_refund_url}" id="mollie-process-refund-url">
+    <input type="hidden" value="{$content.currency}" id="mollie-refund-currency">
+    <input type="hidden" value="{$amountAvailable}" id="mollie-available">
+
+    <div class="mollie-navigation-wrapper">
+        <div class="mollie-navigation-content">
+            {if $content.is_orders_api}
+            <a class="mollie-tab navigation-action" href="#" data-action="order-details-table" id="mollie-items">
+                <div class="mollie-tab-text mollie-navigation-item">
+                    {$txt.mollie_items}
+                </div>
+            </a>
+            {/if}
+            <a class="mollie-tab navigation-action" href="#" data-action="payment-details-table" id="mollie-amount">
+                <div class="mollie-tab-text mollie-navigation-item">
+                    {$txt.mollie_amount}
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {if $content.is_orders_api}
+    <div class="mollie-table-wrapper">
+        <table data-action="order-details-table" class="mollie-tab-content mollie-table-content mollie-line-table"
+               style="display: table">
+            <thead>
+            <tr>
+                <th>
+                    {$txt.mollie_model}
+                </th>
+                <th>
+                    {$txt.mollie_products}
+                </th>
+
+                <th>
+                    {$txt.mollie_ordered_qty}
+                </th>
+                <th>
+                    {$txt.mollie_refunded_qty}
+                </th>
+                <th>
+                    {$txt.mollie_price}
+                </th>
+                <th>
+                    {$txt.mollie_qty_to_refund}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach item=module_data from=$content.order.lines}
+                <tr class="mollie-refund-item-row">
+                    <td>
+                        {if $module_data.type == 'physical'}
+                        {$module_data.sku}
+                        {else}
+                        {$module_data.type}
+                        {/if}
+                    </td>
+                    <td>
+                        <div class="products-name">{$module_data.name}</div>
+                    </td>
+
+                    <td>
+                        <div class="mollie-ordered-qty">
+                            {$module_data.quantity}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mollie-processed-qty">
+                            {$module_data.quantityRefunded}
+                        </div>
+                    </td>
+                    <td>
+                        {$module_data.unitPrice.value} {$content.currency}
+                    </td>
+                    <td>
+                        {if $module_data.type != 'discount'}
+                            <input type="number" class="mollie-qty-input" min="0" value="{$module_data.refundableQuantity}" {if $module_data.refundableQuantity == 0}disabled{/if}>
+                            <input type="hidden" value="{$module_data.id}" class="mollie-line-id">
+                        {/if}
+                    </td>
+                </tr>
+            {/foreach}
+
+            <tr>
+                <td colspan="5" class="text-right">
+                    <strong>{$txt.mollie_total_refunded}:</strong>
+                </td>
+                <td class="text-center">
+                    {$content.order.amountRefunded.value} {$content.currency}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-right">
+                    <strong>{$txt.mollie_available_to_refund}:</strong>
+                </td>
+                <td class="text-center">
+                    {{$content.order.availableForRefund}} {$content.currency}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    {/if}
+
+    <div class="mollie-table-wrapper">
+        <table data-action="payment-details-table" class="mollie-tab-content mollie-hidden mollie-table-content"
+               style="display: table">
+            <tr>
+                <td class="text-right" style="width: 300px">
+                    <strong>{$txt.mollie_refund_amount}:</strong>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" id="refund-payment-amount" value="{$amountAvailable}">
+                        <div class="input-group-addon">{$content.currency}</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">
+                    <strong>{$txt.mollie_refund_reason}:</strong>
+                </td>
+                <td class="text-center">
+                    <input type="text" id="refund-desc">
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">
+                    <strong>{$txt.mollie_total_refunded}:</strong>
+                </td>
+                <td>
+                    {if $content.is_orders_api}
+                        {$content.order.amountRefunded.value} {$content.currency}
+                    {else}
+                        {$content.payment.amountRefunded.value} {$content.currency}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">
+                    <strong>{$txt.mollie_available_to_refund}:</strong>
+                </td>
+                <td>
+                    <div id="mollie-amount-available">
+                        {$amountAvailable} {$content.currency}
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{/block}

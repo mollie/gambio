@@ -1,0 +1,53 @@
+.mollie-navigation-wrapper {
+    text-align: left;
+    min-height: 40px;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.mollie-navigation-wrapper .mollie-navigation-content {
+    display: flex;
+    height: 100%;
+}
+
+.mollie-navigation-wrapper .mollie-navigation-content .mollie-navigation-item {
+    text-align: center;
+    display: inline-block;
+    width: auto;
+    padding: 13px;
+}
+
+.active-tab .mollie-tab-text {
+    background-color:  #f5f5f5;
+    font-weight: bold;
+}
+
+.mollie-table-content {
+    margin-top: 30px;
+}
+
+.mollie-hidden {
+    display: none;
+}
+
+.mollie-line-table {
+    text-align: center;
+}
+
+#mollie-popup .mollie-qty-input {
+    width: 50px;
+}
+
+#mollie-refund-content .mollie-line-table th,
+#mollie-shipment-content .mollie-line-table th {
+    text-align: center;
+}
+
+#mollie-shipment-content input,
+#mollie-refund-content input,
+#mollie-payment-link-url {
+    width: 100%;
+}
+
+#mollie-popup .mollie-input-error {
+    border-color: #F30106;
+}

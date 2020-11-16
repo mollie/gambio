@@ -1,0 +1,12 @@
+#mollie-lang-wrapper img {
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+#mollie-lang-wrapper input {
+    width: 90%;
+}
+
+#mollie-lang-wrapper .mollie-lang-input-error {
+    border-color: #F30106;
+}

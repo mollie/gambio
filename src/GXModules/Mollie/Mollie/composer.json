@@ -1,0 +1,19 @@
+{
+  "name": "mollie/gambio",
+  "require": {
+    "php": ">=5.4",
+    "mollie/integration-core": "1.1.0"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "no-api": true,
+      "url":  "git@github.com:mollie/orocore.git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mollie\\Gambio\\": "Components"
+    }
+  }
+}

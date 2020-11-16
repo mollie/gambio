@@ -1,0 +1,114 @@
+.mollie-heading-wrapper {
+    display: flex;
+    width: 100%;
+    padding-top: 2px;
+}
+
+.mollie-heading-wrapper .mollie-support-button {
+    text-align: right;
+    width: 100%;
+}
+
+.mollie-version input[readonly] {
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+}
+
+#mollie-payment-methods legend {
+    border-bottom: 3px solid #3877FF;
+}
+
+#mollie-connect legend {
+    border-bottom: 3px solid #3877FF;
+}
+
+.mollie-configuration .mollie-payment-methods {
+    width: 100%;
+}
+
+.mollie-configuration input.form-control, .mollie-configuration select.form-control {
+    max-width: 100% !important;
+}
+
+.mollie-configuration .mollie-payment-methods tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.mollie-configuration .mollie-payment-methods td {
+    padding: 10px;
+}
+
+.mollie-configuration .mollie-payment-methods img {
+    width: 60px;
+}
+
+.mollie-configuration .mollie-payment-methods .mollie-payment-image {
+    width: 60px;
+}
+
+.mollie-configuration .mollie-payment-methods .mollie-payment-label {
+    width: 200px;
+    padding: 2%;
+}
+
+.mollie-configuration .mollie-payment-methods .mollie-payment-status {
+    padding: 2%;
+}
+
+.mollie-configuration .mollie-payment-methods .mollie-payment-status .badge {
+    margin: 0;
+    padding: 5px 8px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    text-shadow: none;
+    border-radius: .25em;
+}
+
+.mollie-configuration .mollie-payment-status .active {
+    background: #378000 linear-gradient(#5ebd5e, #50b750);
+    border-color: #45a845 #45a845 #3c923c;
+    color: #fff;
+}
+
+.mollie-configuration .mollie-payment-configure-button {
+    padding: 1%;
+}
+
+.mollie-configuration .mollie-payment-configure-button a {
+    float: none;
+}
+
+.mollie-configuration .form-group .badge {
+    font-size: 11px;
+}
+
+.mollie-info {
+    background: #6495ED;
+}
+
+.mollie-warning {
+    background: #F7A505;
+}
+
+.mollie-error {
+    background: #F30106;
+}
+
+.mollie-vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.mollie-notification-grid {
+    background: #f9f9f9;
+}
+
+.mollie-footer-buttons {
+    margin-left: 5px;
+}
+
+#main-footer #mollie-config-save {
+    color: #ffffff;
+}
