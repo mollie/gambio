@@ -89,6 +89,10 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'API de paiement',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => "Vous allez être redirigé vers le site web de la passerelle de paiement pour effectuer votre achat après l'étape de révision de la commande.",
+    'mollie_issuer_list_none'        => 'Don\'t show issuer list',
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'List with images',
+    'mollie_select_bank'             => 'Select bank',
 
     'mollie_canceled_comment' => 'Le client a annulé le paiement.',
     'mollie_expired_comment'  => 'Le paiement a expiré sur Mollie.',

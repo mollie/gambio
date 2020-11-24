@@ -1,0 +1,37 @@
+{load_language_text section="module_center_module"}
+
+
+<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-issuers.css">
+
+<div id="mollie-issuers">
+    <input type="hidden" id="mollie-list-type" value="{{$mollie.list_type}}">
+
+    {if $mollie.list_type == 'dropdown'}
+    <div class="mollie-issuer-dropdown-wrapper">
+        <label for="mollie-issuer-dropdown">
+            {$txt.mollie_select_bank}
+        </label>
+        <select id="mollie-issuer-dropdown" name="mollie-issuer-dropdown">
+            {foreach item=module_data from=$mollie.issuers}
+                <option value="{{$module_data.id}}">{$module_data.name}</option>
+            {/foreach}
+        </select>
+    </div>
+    {else}
+        <div class="mollie-issuer-list-wrapper">
+            <ul>
+                {foreach item=module_data from=$mollie.issuers}
+                <li>
+                    <label>
+                        <img src="{{$module_data.image.svg}}">
+                        <span>{$module_data.name}</span>
+                        <input type="radio" name="mollie-issuer-list" value="{{$module_data.id}}">
+                    </label>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    {/if}
+
+</div>
+

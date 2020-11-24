@@ -22,6 +22,7 @@ class PathProvider
     {
         return new \ExistingFile(new \NonEmptyStringType(static::getAdminTemplatePath($fileName, $subDir)));
     }
+
     /**
      * Return path to the given filename name
      *
@@ -38,6 +39,21 @@ class PathProvider
     }
 
     /**
+     * Return path to the given filename name
+     *
+     * @param string $fileName
+     * @param string $subDir
+     *
+     * @return string
+     */
+    public static function getShopTemplatePath($fileName, $subDir = null)
+    {
+        $relativePath = static::getRelativePath($fileName, $subDir);
+
+        return static::getShopDir() . "Html/$relativePath";
+    }
+
+    /**
      * Return plugin admin directory
      *
      * @return string
@@ -45,6 +61,16 @@ class PathProvider
     public static function getAdminDir()
     {
         return static::getPluginDir() . 'Admin/';
+    }
+
+    /**
+     * Return plugin shop directory
+     *
+     * @return string
+     */
+    public static function getShopDir()
+    {
+        return static::getPluginDir() . 'Shop/';
     }
 
 
