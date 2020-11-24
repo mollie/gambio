@@ -1,6 +1,6 @@
 <?php
 
-include_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/autoload.php';
+require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/autoload.php';
 
 /**
  * Class MollieIssuerListController

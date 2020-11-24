@@ -39,21 +39,6 @@ class PathProvider
     }
 
     /**
-     * Return path to the given filename name
-     *
-     * @param string $fileName
-     * @param string $subDir
-     *
-     * @return string
-     */
-    public static function getShopTemplatePath($fileName, $subDir = null)
-    {
-        $relativePath = static::getRelativePath($fileName, $subDir);
-
-        return static::getShopDir() . "Html/$relativePath";
-    }
-
-    /**
      * Return plugin admin directory
      *
      * @return string

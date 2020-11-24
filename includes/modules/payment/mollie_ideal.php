@@ -47,12 +47,7 @@ class mollie_ideal extends mollie
         }
 
         if ($this->issuersProvider->displayIssuers()) {
-            $selection['fields'] = [
-                [
-                    'title' => $this->issuersProvider->renderIssuerList(),
-                    'field' => '',
-                ]
-            ];
+            $selection['description'] .= $this->issuersProvider->renderIssuerList();
         }
 
         return $selection;

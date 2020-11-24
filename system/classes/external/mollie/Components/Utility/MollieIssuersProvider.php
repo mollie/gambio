@@ -50,7 +50,7 @@ class MollieIssuersProvider
      */
     public function renderIssuerList()
     {
-        $template = PathProvider::getShopTemplatePath('mollie_issuer_list.html');
+        $template = PathProvider::getAdminTemplatePath('mollie_issuer_list.html', 'Components');
 
         return mollie_render_template(
             $template,

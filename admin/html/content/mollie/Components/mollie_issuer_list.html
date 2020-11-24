@@ -1,11 +1,10 @@
 {load_language_text section="module_center_module"}
 
 
-<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-issuers.css">
+<link rel="stylesheet" href="/templates/Honeygrid/usermod/css/mollie-issuers.css">
 
-<div id="mollie-issuers">
-    <input type="hidden" id="mollie-list-type" value="{{$mollie.list_type}}">
-
+<div class="mollie-issuers mollie-hidden">
+    <input type="hidden" class="mollie-list-type" value="{{$mollie.list_type}}">
     {if $mollie.list_type == 'dropdown'}
     <div class="mollie-issuer-dropdown-wrapper">
         <label for="mollie-issuer-dropdown">
