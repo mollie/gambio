@@ -5,6 +5,26 @@ use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
 
 /**
+ * Renders issuer list select dropdown
+ *
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_issuer_list_select($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_issuer_list_select.html', 'ConfigFields');
+    $data         = [
+        'key'   => $key,
+        'value' => $key_value,
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders img element
  *
  * @param string $code
