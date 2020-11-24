@@ -1,0 +1,30 @@
+.mollie-issuer-list-wrapper li {
+    list-style-type:none;
+    padding-bottom: 10px
+}
+
+.mollie-issuer-list-wrapper label {
+    display: flex;
+    min-width: 200px;
+}
+
+.mollie-issuer-list-wrapper img {
+    max-width: 33px;
+}
+
+.mollie-issuer-list-wrapper input {
+    align-content: flex-end;
+}
+
+.mollie-issuer-list-wrapper span {
+    padding-left: 10px;
+}
+
+.mollie-issuer-dropdown-wrapper {
+    display: flex;
+    min-width: 500px;
+}
+
+.mollie-issuer-dropdown-wrapper label{
+    padding: 0 10px 0 0;
+}
