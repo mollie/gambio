@@ -1,5 +1,7 @@
 #mollie-component-wrapper {
     padding: 10px;
+    margin-top: 20px;
+    background-color: #ffffff;
     max-width: 350px;
     min-width: 320px;
 }
@@ -29,6 +31,10 @@
 
     transform-origin: top left;
     transition: all 0.05s ease;
+}
+
+#mollie-component-wrapper .form-group {
+    margin: 0;
 }
 
 /* Move the label to the top on focus or when the field is dirty */

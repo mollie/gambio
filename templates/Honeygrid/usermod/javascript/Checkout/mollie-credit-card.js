@@ -1,7 +1,27 @@
 (function() {
     document.addEventListener("DOMContentLoaded", function () {
-
+        let paymentMethods = document.querySelectorAll('li.list-group-item');
         let checkoutForm = document.querySelector('#checkout_payment');
+        let creditCardComponents = document.querySelector('#mollie-component-wrapper');
+
+        if (isCreditCardMethod()) {
+            creditCardComponents.classList.remove('mollie-hidden');
+        }
+
+        if (isCreditCardMethod()) {
+            creditCardComponents.classList.remove('mollie-hidden');
+        }
+
+        for (let i = 0; i < paymentMethods.length; i++) {
+            paymentMethods[i].addEventListener('click', function () {
+                creditCardComponents.classList.add('mollie-hidden');
+                if (isCreditCardMethod()) {
+                    creditCardComponents.classList.remove('mollie-hidden');
+                }
+            });
+        }
+
+
         /**
          * Create card holder input
          */

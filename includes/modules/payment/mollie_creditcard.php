@@ -42,12 +42,7 @@ class mollie_creditcard extends mollie
 
         $configKey = $this->_formatKey('COMPONENTS_STATUS');
         if (@constant($configKey) === 'True') {
-            $selection['fields'] = [
-                [
-                    'title' => $this->_renderCreditCardInfo(),
-                    'field' => '',
-                ]
-            ];
+            $selection['description'] .= $this->_renderCreditCardInfo();
         }
 
         return $selection;
@@ -61,13 +56,18 @@ class mollie_creditcard extends mollie
     {
         /** @var \Mollie\Gambio\Services\Business\ConfigurationService $configService */
         $configService = ServiceRegister::getService(Configuration::CLASS_NAME);
-        $template = PathProvider::getShopTemplatePath('mollie_credit_card.html');
+        $template = PathProvider::getAdminTemplatePath('mollie_credit_card.html', 'Components');
 
+        $currentLanguage = $_SESSION['language_code'];
+        $countryCode = $currentLanguage === 'en' ? 'US' : strtoupper($currentLanguage);
+        $lang = $currentLanguage . '_' . $countryCode;
+        
         return mollie_render_template(
             $template,
             [
                 'profile_id' => $configService->getWebsiteProfile()->getId(),
                 'test_mode' => $configService->isTestMode(),
+                'lang' => $lang,
             ]
         );
     }

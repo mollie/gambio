@@ -1,4 +1,4 @@
-var Mollie = window.Mollie || {};
+var MollieHttpClient = window.Mollie || {};
 
 (function () {
     function HttpService() {
@@ -78,5 +78,5 @@ var Mollie = window.Mollie || {};
         }
     }
 
-    Mollie.http = new HttpService();
+    MollieHttpClient.http = new HttpService();
 })();
