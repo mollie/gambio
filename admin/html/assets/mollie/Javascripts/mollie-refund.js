@@ -3,15 +3,15 @@ $(document).ready(function () {
         let orderId = $(this).parents('tr').attr('id') || $('body').find('#gm_order_id').val();
         let serverUrl = 'admin.php?do=MollieRefund&orders_id=' + orderId;
 
-        Mollie.modal.openModal(serverUrl, getModalConfig());
+        MollieHttpClient.modal.openModal(serverUrl, getModalConfig());
     })
 
     function getModalConfig() {
         let label = $('#txt-mollie-refund').val();
         let title = $('#txt-mollie-refunds').val();
         let buttons = [
-            Mollie.modal.createCancelButton(),
-            Mollie.modal.createActionButton('process-refund', label)
+            MollieHttpClient.modal.createCancelButton(),
+            MollieHttpClient.modal.createActionButton('process-refund', label)
         ];
 
         var initialization = init;
@@ -142,7 +142,7 @@ $(document).ready(function () {
         }
 
         function getLineItemsData() {
-            return  {'lines': Mollie.orderLines.buildOrderLines('.mollie-refund-item-row')};
+            return  {'lines': MollieHttpClient.orderLines.buildOrderLines('.mollie-refund-item-row')};
         }
 
         function getPaymentData() {

@@ -169,7 +169,7 @@ class OrderMapper
         $payment = new Payment();
         $payment->setWebhookUrl($this->_getConfigService()->getWebhookUrl());
 
-        $this->addIssuer($payment);
+        $this->addSpecificParameters($payment);
 
 
         return $payment;
