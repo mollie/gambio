@@ -77,13 +77,20 @@ trait MapperUtility
     }
 
     /**
+     * Adds issuer and card token params
+     *
      * @param Payment $payment
      */
-    protected function addIssuer($payment)
+    protected function addSpecificParameters($payment)
     {
         if (!empty($_SESSION['mollie_issuer'])) {
             $payment->setIssuer($_SESSION['mollie_issuer']);
             unset($_SESSION['mollie_issuer']);
+        }
+
+        if (!empty($_SESSION['card_token'])) {
+            $payment->setCardToken($_SESSION['card_token']);
+            unset($_SESSION['card_token']);
         }
     }
 

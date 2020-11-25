@@ -39,7 +39,7 @@
 
         function fetchNotifications(page) {
             var buttonWrapper = document.querySelector('.navigation-buttons');
-            Mollie.http.get(notificationUrl.value + '&page=' + page).then(
+            MollieHttpClient.http.get(notificationUrl.value + '&page=' + page).then(
                 (notifications) => {
                     let notificationsCount = notifications.length;
                     let display = notificationsCount > 0 ? 'block' : 'none';

@@ -1,0 +1,46 @@
+{load_language_text section="module_center_module"}
+
+<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-credit-card.css">
+
+
+<div id="mollie-component-wrapper">
+    <div class="form-fields">
+        <div id="card-holder-group" class="form-group form-group--cardHolder">
+            <label class="label" for="card-holder">Card holder</label>
+            <div id="card-holder"></div>
+            <div id="card-holder-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--cardNumber">
+            <label class="label" for="card-number">Card number</label>
+            <div id="card-number"></div>
+            <div id="card-number-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--expiryDate">
+            <label class="label" for="expiry-date">Expiry date</label>
+            <div id="expiry-date"></div>
+            <div id="expiry-date-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--verificationCode">
+            <label class="label" for="verification-code">Verification code</label>
+            <div id="verification-code"></div>
+            <div id="verification-code-error" class="field-error" role="alert"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var profileId = "{{$mollie.profile_id}}";
+    var testMode = "{{$mollie.test_mode}}";
+    var isTest = testMode === '1';
+    var mollie = MollieHttpClient(
+        profileId,
+        {
+            locale: "en_US",
+            testmode: isTest
+        }
+    );
+</script>
+

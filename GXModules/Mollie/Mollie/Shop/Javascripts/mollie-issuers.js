@@ -10,7 +10,7 @@
                 if (issuers) {
                     let selectedIssuer = getSelectedIssuer(issuers);
                     let data = {"issuer": selectedIssuer};
-                    Mollie.http.post('/shop.php?do=MollieIssuerList', data);
+                    MollieHttpClient.http.post('/shop.php?do=MollieIssuerList', data);
                 }
             })
         }
