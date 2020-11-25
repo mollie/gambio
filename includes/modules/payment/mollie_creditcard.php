@@ -63,11 +63,16 @@ class mollie_creditcard extends mollie
         $configService = ServiceRegister::getService(Configuration::CLASS_NAME);
         $template = PathProvider::getShopTemplatePath('mollie_credit_card.html');
 
+        $currentLanguage = $_SESSION['language_code'];
+        $countryCode = $currentLanguage === 'en' ? 'US' : strtoupper($currentLanguage);
+        $lang = $currentLanguage . '_' . $countryCode;
+
         return mollie_render_template(
             $template,
             [
                 'profile_id' => $configService->getWebsiteProfile()->getId(),
                 'test_mode' => $configService->isTestMode(),
+                'lang' => $lang,
             ]
         );
     }

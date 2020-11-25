@@ -6,25 +6,25 @@
 <div id="mollie-component-wrapper">
     <div class="form-fields">
         <div id="card-holder-group" class="form-group form-group--cardHolder">
-            <label class="label" for="card-holder">Card holder</label>
+            <label class="label" for="card-holder">{$txt.mollie_card_holder}</label>
             <div id="card-holder"></div>
             <div id="card-holder-error" class="field-error" role="alert"></div>
         </div>
 
         <div class="form-group form-group--cardNumber">
-            <label class="label" for="card-number">Card number</label>
+            <label class="label" for="card-number">{$txt.mollie_card_number}</label>
             <div id="card-number"></div>
             <div id="card-number-error" class="field-error" role="alert"></div>
         </div>
 
         <div class="form-group form-group--expiryDate">
-            <label class="label" for="expiry-date">Expiry date</label>
+            <label class="label" for="expiry-date">{$txt.mollie_expiry_date}</label>
             <div id="expiry-date"></div>
             <div id="expiry-date-error" class="field-error" role="alert"></div>
         </div>
 
         <div class="form-group form-group--verificationCode">
-            <label class="label" for="verification-code">Verification code</label>
+            <label class="label" for="verification-code">{$txt.mollie_verification_code}</label>
             <div id="verification-code"></div>
             <div id="verification-code-error" class="field-error" role="alert"></div>
         </div>
@@ -33,13 +33,13 @@
 
 <script>
     var profileId = "{{$mollie.profile_id}}";
-    var testMode = "{{$mollie.test_mode}}";
-    var isTest = testMode === '1';
-    var mollie = MollieHttpClient(
+    var testMode = "{{$mollie.test_mode}}" === '1';
+    var lang = "{{$mollie.lang}}";
+    var mollie = Mollie(
         profileId,
         {
-            locale: "en_US",
-            testmode: isTest
+            locale: lang,
+            testmode: testMode
         }
     );
 </script>
