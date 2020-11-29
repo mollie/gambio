@@ -198,7 +198,11 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         $statuses = $this->orderStatusService->findAll();
         foreach ($statuses->getArray() as $status) {
             $formattedStatus['id'] = $status->getId();
-            $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType($_SESSION['language_code'])));
+            try {
+                $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType($_SESSION['language_code'])));
+            } catch (InvalidArgumentException $exception) {
+                $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType('en')));
+            }
 
             $formattedStatuses[] = $formattedStatus;
         }

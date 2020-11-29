@@ -1,28 +1,28 @@
 <?php
 
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_TEXT_TITLE', 'Pay later');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_TEXT_DESCRIPTION', 'You will be redirected to payment gateway website to complete your purchase after the order review step.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_TEXT_DESCRIPTION', 'Nach dem Kontrollieren Ihrer Bestellung werden Sie zur Website des Zahlungsanbieters weitergeleitet, um den Einkauf abzuschließen.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_STATUS_TITLE', 'Enable payment method');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_STATUS_DESC', 'Do you want to accept Pay later as payments?');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_STATUS_TITLE', 'Zahlungsmethode aktivieren');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_STATUS_DESC', 'Möchten Sie Pay later als Zahlungen akzeptieren?');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_NAME_TITLE', 'Checkout name');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_NAME_DESC', 'Please define name that will be used in checkout.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_NAME_TITLE', 'Checkout-Name');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_NAME_DESC', 'Bitte geben Sie den Namen an, der beim Checkout angezeigt werden soll.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_DESCRIPTION_TITLE', 'Checkout description');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_DESCRIPTION_DESC', 'Please define description text that will be used in checkout.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_DESCRIPTION_TITLE', 'Checkout-Beschreibung');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_CHECKOUT_DESCRIPTION_DESC', 'Bitte geben Sie eine Beschreibung an, die beim Checkout angezeigt werden soll.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_ALLOWED_ZONES_TITLE', 'Allow payment to specific countries');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_ALLOWED_ZONES_DESC', 'Please select countries where payment method will be available. If none is selected, payment will be available for all activated countries.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_ALLOWED_ZONES_TITLE', 'Zahlungen in ausgewählte Länder erlauben');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_ALLOWED_ZONES_DESC', 'Wählen Sie die Länder aus, in denen die Zahlungsmethode verfügbar sein wird. Wir keine ausgewählt, so ist die Zahlung für alle aktivierten Länder verfügbar.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SURCHARGE_TITLE', 'Surcharge');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SURCHARGE_DESC', 'Please enter the extra costs for a payment in default currency. If field is empty, no additional payment costs will be charged to customers.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SURCHARGE_TITLE', 'Aufschlag');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SURCHARGE_DESC', 'Geben Sie die zusätzlichen Kosten für eine Zahlung in der Standardwährung ein. Bleibt dieses Feld leer, werden den Kunden keine zusätzlichen Kosten berechnet.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_API_METHOD_TITLE', 'API method');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_API_METHOD_DESC', '<b>Payment API</b><br>Use the Payment API Platform for the transactions.<br><br><b>Order API</b><br>Use the new Order API Platform and get additional insights in the orders.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_API_METHOD_TITLE', 'API-Methode');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_API_METHOD_DESC', '<b>Zahlungs-API</b><br>Verwenden Sie für Transaktionen die Zahlungs-API-Plattform.<br><br><b>Zahlungs-API</b><br>Verwenden Sie die neue Auftrags-API-Plattform, um mehr Einblicke in die Bestellungen zu erhalten.');
 
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_LOGO_TITLE', 'Logo');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_LOGO_DESC', 'Please upload logo that will be used in checkout.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_LOGO_DESC', 'Bitte laden Sie ein Logo hoch, das beim Checkout angezeigt werden soll.');
 
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SORT_ORDER_TITLE', 'Sort order of display in checkout');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SORT_ORDER_TITLE', 'Sortierreihenfolge der Anzeige beim Checkout');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYLATER_SORT_ORDER_DESC', 'Der niedrigste Wert wird beim Checkout zuerst angezeigt');
