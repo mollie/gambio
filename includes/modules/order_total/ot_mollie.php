@@ -104,9 +104,9 @@ class ot_mollie
     {
         if (!isset($this->check)) {
             $query = xtc_db_query(
-                'SELECT configuration_value 
+                'SELECT `value` 
                  FROM ' . TABLE_CONFIGURATION . " 
-                 WHERE configuration_key = 'MODULE_ORDER_TOTAL_MOLLIE_STATUS'"
+                 WHERE `key` = 'configuration/MODULE_ORDER_TOTAL_MOLLIE_STATUS'"
             );
 
             $this->check = xtc_db_num_rows($query);
@@ -133,17 +133,16 @@ class ot_mollie
     protected function _configuration()
     {
         return [
-            'MODULE_ORDER_TOTAL_MOLLIE_STATUS'     => [
-                'configuration_value' => 'True',
-                'set_function'        => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
+            'configuration/MODULE_ORDER_TOTAL_MOLLIE_STATUS'     => [
+                'value' => 'true',
+                'type'  => 'switcher',
             ],
-            'MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS'  => [
-                'configuration_value' => '0',
-                'set_function'        => 'xtc_cfg_pull_down_tax_classes( ',
-                'use_function'        => 'xtc_get_tax_class_title',
+            'configuration/MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS'  => [
+                'value' => '0',
+                'type'  => 'tax-class',
             ],
-            'MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER' => [
-                'configuration_value' => self::DEFAULT_OT_MOLLIE_SORT_ORDER,
+            'configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER' => [
+                'value' => self::DEFAULT_OT_MOLLIE_SORT_ORDER,
             ],
         ];
     }
@@ -156,8 +155,8 @@ class ot_mollie
     protected function _getHiddenFields()
     {
         return [
-            'MODULE_ORDER_TOTAL_MOLLIE_TITLE' => [
-                'configuration_value' => defined('MODULE_ORDER_TOTAL_MOLLIE_TITLE') ? MODULE_ORDER_TOTAL_MOLLIE_TITLE : $this->title,
+            'configuration/MODULE_ORDER_TOTAL_MOLLIE_TITLE' => [
+                'value' => defined('MODULE_ORDER_TOTAL_MOLLIE_TITLE') ? MODULE_ORDER_TOTAL_MOLLIE_TITLE : $this->title,
             ],
         ];
     }
@@ -170,10 +169,8 @@ class ot_mollie
         $config     = array_merge($this->_configuration(), $this->_getHiddenFields());
 
         foreach ($config as $key => $data) {
-            $setFunction = array_key_exists('set_function', $data) ? $data['set_function'] : '';
-            $useFunction = array_key_exists('use_function', $data) ? $data['use_function'] : '';
-            $install_query = 'INSERT INTO ' . TABLE_CONFIGURATION . ' ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) ' .
-                "values ('" . $key . "', '" . xtc_db_input($data['configuration_value']) . "', '6', '" . 0 . "', '" . addslashes($setFunction) . "', '" . addslashes($useFunction) . "', now())";
+            $install_query = 'INSERT INTO ' . TABLE_CONFIGURATION . ' ( `key`, `value`,  legacy_group_id, sort_order, type) ' .
+                "values ('" . $key . "', '" . xtc_db_input($data['value']) . "', '6', '" . 0 . "', '" . $data['type'] . "')";
             xtc_db_query($install_query);
         }
     }
@@ -188,7 +185,7 @@ class ot_mollie
 
         $keys = '"' . implode('", "', $allKeys) . '"';
 
-        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " WHERE configuration_key IN (" . $keys . ")");
+        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " WHERE `key` IN (" . $keys . ")");
     }
 
 }

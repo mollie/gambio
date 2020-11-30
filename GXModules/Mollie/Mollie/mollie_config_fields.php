@@ -35,8 +35,11 @@ function mollie_api_select($key_value, $key = '')
 {
     $templatePath = PathProvider::getAdminTemplatePath('mollie_api_select.html', 'ConfigFields');
     $data         = [
-        'key'   => $key,
+        'key'   => _appendPrefix($key),
         'value' => $key_value,
+        'title' => @constant("{$key}_TITLE"),
+        'desc'  => @constant("{$key}_DESC"),
+
     ];
 
     return mollie_render_template($templatePath, $data);
@@ -58,7 +61,7 @@ function mollie_multi_language_text($key_value, $key = '')
         $langKey                 = $key . '_' . strtoupper($language['code']);
         $value                   = stripslashes(@constant($langKey));
         $data['lang_specific'][] = [
-            'lang_key'   => $langKey,
+            'lang_key'   => _appendPrefix($langKey),
             'lang_value' => $value,
             'image'      => DIR_WS_LANGUAGES . $language['directory'] . '/admin/images/' . $language['image'],
         ];
@@ -66,8 +69,10 @@ function mollie_multi_language_text($key_value, $key = '')
 
     $currentLang              = strtoupper($_SESSION['language_code']);
     $data['default_value']    = stripslashes(@constant($key . '_' . $currentLang));
-    $data['key']              = $key;
+    $data['key']              = _appendPrefix($key);
     $data['current_lang_key'] = $key . '_' . $currentLang;
+    $data['title']            = @constant("{$key}_TITLE");
+    $data['desc']             = @constant("{$key}_DESC");
 
     return mollie_render_template($templatePath, $data);
 }
@@ -96,8 +101,10 @@ function mollie_multi_select_countries($key_value, $key = '')
 
     }
 
-    $data['key']  = $key;
-    $templatePath = PathProvider::getAdminTemplatePath('mollie_zones_multiple.html', 'ConfigFields');
+    $data['key']   = _appendPrefix($key);
+    $data['title'] = @constant("{$key}_TITLE");
+    $data['desc']  = @constant("{$key}_DES");
+    $templatePath  = PathProvider::getAdminTemplatePath('mollie_zones_multiple.html', 'ConfigFields');
 
     return mollie_render_template($templatePath, $data);
 }
@@ -120,8 +127,10 @@ function mollie_logo_upload($key_value, $key = '')
     $data         = [
         'file_upload_url' => UrlProvider::generateAdminUrl('admin.php', 'MollieFileUpload'),
         'image_src'       => $existingImgSrc,
-        'key'             => $key,
+        'key'             => _appendPrefix($key),
         'value'           => $key_value,
+        'title'           => @constant("{$key}_TITLE"),
+        'desc'            => @constant("{$key}_DESC"),
     ];
 
     return mollie_render_template($templatePath, $data);
@@ -145,4 +154,14 @@ function mollie_render_template($path, $data = [])
     $contentView->set_content_data('mollie', $data);
 
     return $contentView->get_html();
+}
+
+/**
+ * @param string $key
+ *
+ * @return string
+ */
+function _appendPrefix($key)
+{
+    return "configuration/$key";
 }

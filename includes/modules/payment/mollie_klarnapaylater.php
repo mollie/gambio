@@ -18,9 +18,9 @@ class mollie_klarnapaylater extends mollie
     public function keys()
     {
         $keys   = parent::keys();
-        $hidden = ['MODULE_PAYMENT_' . strtoupper($this->code) . '_API_METHOD'];
+        $hidden = $this->_formatKey('API_METHOD');
 
-        return array_values(array_diff($keys, $hidden));
+        return array_values(array_diff($keys, [$hidden]));
     }
 
     /**

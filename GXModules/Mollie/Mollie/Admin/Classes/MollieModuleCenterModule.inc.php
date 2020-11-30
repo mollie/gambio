@@ -1,5 +1,6 @@
 <?php
 
+use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Entity\Repository\GambioStatusRepository;
 
 
@@ -50,6 +51,10 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
      * @var GambioStatusRepository
      */
     private $orderStatusRepository;
+    /**
+     * @var GambioConfigRepository
+     */
+    private $configRepository;
 
     /**
      * @inheritDoc
@@ -62,6 +67,7 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
         $this->description        = $this->languageTextManager->get_text('mollie_description');
         $this->sortOrder          = 1;
         $this->orderStatusRepository          = new GambioStatusRepository();
+        $this->configRepository          = new GambioConfigRepository();
     }
 
     /**
@@ -141,9 +147,8 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
      */
     private function _addOrderStatuses()
     {
-        $sql   = 'SELECT * FROM ' . TABLE_CONFIGURATION . ' WHERE configuration_key = "' . static::MOLLIE_DEFAULT_STATUSES . '"';
-        $count = $this->db->query($sql)->num_rows();
-        if ($count > 0) {
+        $mollieConfig = $this->configRepository->getMollieConfiguration();
+        if (empty($mollieConfig)) {
             return;
         }
 
@@ -154,8 +159,8 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
         }
 
         $sql = 'INSERT INTO ' . TABLE_CONFIGURATION .
-            " (configuration_key, configuration_value) 
-            VALUES ('" . static::MOLLIE_DEFAULT_STATUSES . "', '" . json_encode($defaultStatusesMap) . "')";
+            " (`key`, `value`) 
+            VALUES ('configuration/" . static::MOLLIE_DEFAULT_STATUSES . "', '" . json_encode($defaultStatusesMap) . "')";
 
         $this->db->query($sql);
     }

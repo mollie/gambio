@@ -61,7 +61,7 @@ class mollie
         $this->title = $this->_prependLogo("/images/icons/payment/{$this->code}.png", $this->title);
 
         $this->sort_order = @constant($this->_formatKey('SORT_ORDER'));
-        $this->enabled    = @constant($this->_formatKey('STATUS')) === 'True';
+        $this->enabled    = @constant($this->_formatKey('STATUS')) === 'true';
 
         $this->description = $this->_renderDescription($order);
     }
@@ -221,8 +221,8 @@ class mollie
     public function check()
     {
         if (!isset ($this->_check)) {
-            $key          = $this->_formatKey('STATUS');
-            $check_query  = xtc_db_query('SELECT configuration_value FROM ' . TABLE_CONFIGURATION . " WHERE configuration_key = '$key'");
+            $key          = $this->_formatKey('STATUS', true);
+            $check_query  = xtc_db_query('SELECT `value` FROM ' . TABLE_CONFIGURATION . " WHERE `key` = '$key'");
             $this->_check = xtc_db_num_rows($check_query);
         }
 
@@ -241,12 +241,11 @@ class mollie
         $configGroup = 6;
 
         foreach ($config as $key => $data) {
-            $key = $this->_formatKey($key);
-            $setFunction = array_key_exists('set_function', $data) ? $data['set_function'] : '';
-            $useFunction = array_key_exists('use_function', $data) ? $data['use_function'] : '';
+            $key = $this->_formatKey($key, true);
+            $type = array_key_exists('type', $data) ? $data['type'] : '';
             $sql = 'INSERT INTO ' . TABLE_CONFIGURATION . ' ' .
-                '( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) ' .
-                "VALUES ('" . $key . "', '" . xtc_db_input($data['configuration_value']) . "', '" . $configGroup . "', '" . $sortOrder . "', '" . xtc_db_input($setFunction) . "', '" . xtc_db_input($useFunction) . "', now())";
+                '( `key`, `value`,  `type`, `legacy_group_id`, `sort_order`) ' .
+                "VALUES ('" . $key . "', '" . xtc_db_input($data['value']) . "', '" . $type . "', '" . $configGroup . "', '" . $sortOrder . "')";
 
             xtc_db_query($sql);
         }
@@ -258,7 +257,7 @@ class mollie
     public function remove()
     {
         $keys = $this->_getAllKeys($this->_configuration());
-        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $keys) . "')");
+        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " where `key` in ('" . implode("', '", $keys) . "')");
     }
 
     /**
@@ -271,7 +270,7 @@ class mollie
         $keys         = $this->_getAllKeys($this->_configuration());
         $hiddenFields = $this->_getAllKeys($this->_getHiddenFields());
         if (!$this->_otMollieEnabled()) {
-            $hiddenFields[] = $this->_formatKey('SURCHARGE');
+            $hiddenFields[] = $this->_formatKey('SURCHARGE', true);
         }
 
         return array_values(array_diff($keys, $hiddenFields));
@@ -282,40 +281,16 @@ class mollie
      */
     public function _configuration()
     {
-        $currentLang = strtoupper($_SESSION['language_code']);
-        $method      = $this->_getCurrentMollieMethod();
-        $name        = $method ? $method->getDescription() : $this->titleLabel;
-
         $baseConfig = [
             'STATUS'               => [
-                'configuration_value' => 'True',
-                'set_function'        => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
-            ],
-            'LOGO'                 => [
-                'configuration_value' => "/images/icons/payment/{$this->code}.png",
-                'set_function'        => 'mollie_logo_upload( ',
-            ],
-            'CHECKOUT_NAME'        => [
-                'configuration_value' => @constant($this->_formatKey('_CHECKOUT_NAME_' . $currentLang)) ?: $name,
-                'set_function'        => 'mollie_multi_language_text( ',
-            ],
-            'CHECKOUT_DESCRIPTION' => [
-                'configuration_value' => $this->translate($currentLang, 'mollie_checkout_desc'),
-                'set_function'        => 'mollie_multi_language_text( ',
-            ],
-            'API_METHOD'           => [
-                'configuration_value' => $this->_getDefaultApi(),
-                'set_function'        => 'mollie_api_select( ',
+                'value' => 'true',
+                'type'  => 'switcher',
             ],
             'SURCHARGE'            => [
-                'configuration_value' => '0',
-            ],
-            'ALLOWED_ZONES'        => [
-                'configuration_value' => '0',
-                'set_function'        => 'mollie_multi_select_countries(',
+                'value' => '0',
             ],
             'SORT_ORDER'           => [
-                'configuration_value' => '0',
+                'value' => '0',
             ],
         ];
 
@@ -337,24 +312,39 @@ class mollie
         $name           = $method ? $method->getDescription() : $this->titleLabel;
         $fields         = [
             'ORIGINAL_CONFIG' => [
-                'configuration_value' => json_encode($originalConfig),
+                'value' => json_encode($originalConfig),
             ],
             'ALLOWED'         => [
-                'configuration_value' => '',
+                'value' => '',
             ],
             'TEXT'            => [
-                'configuration_value' => $name,
+                'value' => $name,
             ],
+            'LOGO'            => [
+                'value' => "/images/icons/payment/{$this->code}.png",
+            ],
+            'API_METHOD'      => [
+                'value' => $this->_getDefaultApi(),
+            ],
+            'ALLOWED_ZONES'   => [
+                'value' => '',
+            ],
+            'CHECKOUT_NAME'   =>  [
+                'value' => $name
+            ],
+            'CHECKOUT_DESCRIPTION'   =>  [
+                'value' => $this->translate($_SESSION['language_code'], 'mollie_checkout_desc'),
+            ]
         ];
 
         foreach (xtc_get_languages() as $language) {
             $code                             = strtoupper($language['code']);
             $fields['CHECKOUT_NAME_' . $code] = [
-                'configuration_value' => $name,
+                'value' => $name,
             ];
 
             $fields['CHECKOUT_DESCRIPTION_' . $code] = [
-                'configuration_value' => $this->translate($code, 'mollie_checkout_desc'),
+                'value' => $this->translate($code, 'mollie_checkout_desc'),
             ];
         }
 
@@ -434,7 +424,7 @@ class mollie
         $configKeys = array_keys($baseArray);
         $keys       = [];
         foreach ($configKeys as $key) {
-            $keys[] = $this->_formatKey($key);
+            $keys[] = $this->_formatKey($key, true);
         }
 
         return $keys;
@@ -604,14 +594,16 @@ class mollie
      * Returns fully formatted key
      *
      * @param string $key
+     * @param bool $addPrefix
      *
      * @return string
      */
-    protected function _formatKey($key)
+    protected function _formatKey($key, $addPrefix = false)
     {
         $code = strtoupper($this->code);
+        $constantKey = "MODULE_PAYMENT_{$code}_{$key}";
 
-        return "MODULE_PAYMENT_{$code}_{$key}";
+        return $addPrefix ? "configuration/$constantKey" : $constantKey;
     }
 
     /**

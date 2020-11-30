@@ -36,7 +36,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * Detects mollie changes at top level (based on get and post params)
      */
-    public function proceed()
+    public function proceed(): void
     {
         try {
             if ($this->isOrderCanceled()) {

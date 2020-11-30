@@ -64,7 +64,7 @@ class PaymentMethodService extends BaseService
 
         $prefix = 'MODULE_PAYMENT_' . strtoupper($id);
         $originalConfigKey = $prefix . '_ORIGINAL_CONFIG';
-        $jsonConfig = json_decode($this->_getConfigValue($originalConfigKey), true);
+        $jsonConfig = json_decode(@constant($originalConfigKey), true);
         if (empty($jsonConfig)) {
             return null;
         }
@@ -84,22 +84,6 @@ class PaymentMethodService extends BaseService
         $paymentMethodConfig->setImage(@constant($prefix . '_LOGO'));
 
         return $paymentMethodConfig;
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return string|null
-     */
-    private function _getConfigValue($key)
-    {
-        foreach ($this->savedConfigs as $config) {
-            if ($config['configuration_key'] === $key) {
-                return $config['configuration_value'];
-            }
-        }
-
-        return null;
     }
 
     /**
