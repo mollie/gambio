@@ -1,10 +1,13 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x. 
+This branch contains mollie module which is eligible for Gambio versions 4.1.x - 4.3.x. 
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
+
+If you have Gambio from 3.5.x to 4.0.x versions, please checkout on `main` branch of this Github repository.
+https://github.com/mollie/gambio/tree/main
 ***
 
 ## Installation of the Mollie Gambio Payments module ##
@@ -50,7 +53,7 @@ This branch contains mollie module which is eligible for Gambio versions 3.5.x -
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on 3.0-3.4 branch of this Github repository.
 ```
 
-To install the Mollie plugin for the **Gambio 3.5.x - 4.0.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
+To install the Mollie plugin for the **Gambio 4.1.x - 4.3.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
  1. Download the latest `1.0.0` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
