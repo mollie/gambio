@@ -200,7 +200,7 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
             $formattedStatus['id'] = $status->getId();
             try {
                 $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType($_SESSION['language_code'])));
-            } catch (InvalidArgumentException $exception) {
+            } catch (Exception $exception) {
                 $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType('en')));
             }
 

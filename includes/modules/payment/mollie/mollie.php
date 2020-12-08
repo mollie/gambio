@@ -4,6 +4,7 @@ use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
+use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\MollieModuleChecker;
 use Mollie\Gambio\Utility\PathProvider;
@@ -222,7 +223,7 @@ class mollie
     {
         if (!isset ($this->_check)) {
             $key          = $this->_formatKey('STATUS', true);
-            $check_query  = xtc_db_query('SELECT `value` FROM ' . TABLE_CONFIGURATION . " WHERE `key` = '$key'");
+            $check_query  = xtc_db_query('SELECT `value` FROM ' . GambioConfigRepository::TABLE_NAME . " WHERE `key` = '$key'");
             $this->_check = xtc_db_num_rows($check_query);
         }
 
@@ -243,7 +244,7 @@ class mollie
         foreach ($config as $key => $data) {
             $key = $this->_formatKey($key, true);
             $type = array_key_exists('type', $data) ? $data['type'] : '';
-            $sql = 'INSERT INTO ' . TABLE_CONFIGURATION . ' ' .
+            $sql = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME . ' ' .
                 '( `key`, `value`,  `type`, `legacy_group_id`, `sort_order`) ' .
                 "VALUES ('" . $key . "', '" . xtc_db_input($data['value']) . "', '" . $type . "', '" . $configGroup . "', '" . $sortOrder . "')";
 
@@ -257,7 +258,7 @@ class mollie
     public function remove()
     {
         $keys = $this->_getAllKeys($this->_configuration());
-        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " where `key` in ('" . implode("', '", $keys) . "')");
+        xtc_db_query('DELETE FROM ' . GambioConfigRepository::TABLE_NAME . " where `key` in ('" . implode("', '", $keys) . "')");
     }
 
     /**
@@ -385,7 +386,7 @@ class mollie
         $originalConfig = json_decode(@constant($key), true);
         if (empty($originalConfig)) {
             $config = $this->_getCurrentMollieMethod()->toArray();
-            $sql    = 'UPDATE ' . TABLE_CONFIGURATION . " 
+            $sql    = 'UPDATE ' . GambioConfigRepository::TABLE_NAME . " 
                     SET configuration_value = '" . json_encode($config) . "'
                     WHERE configuration_key = '" . $key . "'";
             xtc_db_query($sql);

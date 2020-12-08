@@ -147,8 +147,8 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
      */
     private function _addOrderStatuses()
     {
-        $mollieConfig = $this->configRepository->getMollieConfiguration();
-        if (empty($mollieConfig)) {
+        $mollieConfig = $this->configRepository->getByKey('configuration/' . self::MOLLIE_DEFAULT_STATUSES);
+        if (!empty($mollieConfig)) {
             return;
         }
 
@@ -158,7 +158,7 @@ class MollieModuleCenterModule extends AbstractModuleCenterModule
             $defaultStatusesMap[$statusKey] = $id;
         }
 
-        $sql = 'INSERT INTO ' . TABLE_CONFIGURATION .
+        $sql = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME .
             " (`key`, `value`) 
             VALUES ('configuration/" . static::MOLLIE_DEFAULT_STATUSES . "', '" . json_encode($defaultStatusesMap) . "')";
 

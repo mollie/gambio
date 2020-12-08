@@ -2,10 +2,6 @@
 
 namespace Mollie\Gambio\Entity\Repository;
 
-use Mollie\Gambio\Services\Business\ConfigurationService;
-use Mollie\Infrastructure\Configuration\Configuration;
-use Mollie\Infrastructure\ServiceRegister;
-
 /**
  * Class GambioConfigRepository
  *
@@ -13,6 +9,7 @@ use Mollie\Infrastructure\ServiceRegister;
  */
 class GambioConfigRepository extends GambioBaseRepository
 {
+    const TABLE_NAME = 'gx_configurations';
     const KEY_ALIAS = 'configuration_key';
     const VALUE_ALIAS = 'configuration_value';
 
@@ -46,7 +43,7 @@ class GambioConfigRepository extends GambioBaseRepository
      */
     protected function _getTableName()
     {
-        return 'gx_configurations';
+        return self::TABLE_NAME;
     }
 
     /**
@@ -55,14 +52,6 @@ class GambioConfigRepository extends GambioBaseRepository
     protected function _getIdentifierKey()
     {
         return '';
-    }
-
-    protected function _isLegacyVersion()
-    {
-        /** @var ConfigurationService $configService */
-        $configService = ServiceRegister::getService(Configuration::CLASS_NAME);
-
-        return version_compare('v4.1.0', $configService->getIntegrationVersion(), 'gt');
     }
 
     /**
