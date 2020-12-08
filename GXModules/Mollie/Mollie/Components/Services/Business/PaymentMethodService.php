@@ -34,6 +34,7 @@ class PaymentMethodService extends BaseService
     }
 
     /**
+     * @inheritcDoc
      * @param string $profileId
      *
      * @return \Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig[]
@@ -64,7 +65,7 @@ class PaymentMethodService extends BaseService
 
         $prefix = 'MODULE_PAYMENT_' . strtoupper($id);
         $originalConfigKey = $prefix . '_ORIGINAL_CONFIG';
-        $jsonConfig = json_decode(@constant($originalConfigKey), true);
+        $jsonConfig = json_decode($this->_getConfigValue("configuration/$originalConfigKey"), true);
         if (empty($jsonConfig)) {
             return null;
         }
@@ -87,7 +88,7 @@ class PaymentMethodService extends BaseService
     }
 
     /**
-     * @param array $mollieConfigs
+     * Returns payment method ids which are stored in configuration
      *
      * @return array
      */
@@ -103,5 +104,23 @@ class PaymentMethodService extends BaseService
         }
 
         return $ids;
+    }
+
+    /**
+     * Return config value from database
+     *
+     * @param string $key
+     *
+     * @return string|null
+     */
+    private function _getConfigValue($key)
+    {
+        foreach ($this->savedConfigs as $config) {
+            if ($config['configuration_key'] === $key) {
+                return $config['configuration_value'];
+            }
+        }
+
+        return null;
     }
 }

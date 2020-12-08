@@ -1,5 +1,7 @@
 <?php
 
+use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
+
 /**
  * Class ot_mollie
  */
@@ -105,7 +107,7 @@ class ot_mollie
         if (!isset($this->check)) {
             $query = xtc_db_query(
                 'SELECT `value` 
-                 FROM ' . TABLE_CONFIGURATION . " 
+                 FROM ' . GambioConfigRepository::TABLE_NAME . " 
                  WHERE `key` = 'configuration/MODULE_ORDER_TOTAL_MOLLIE_STATUS'"
             );
 
@@ -169,7 +171,7 @@ class ot_mollie
         $config     = array_merge($this->_configuration(), $this->_getHiddenFields());
 
         foreach ($config as $key => $data) {
-            $install_query = 'INSERT INTO ' . TABLE_CONFIGURATION . ' ( `key`, `value`,  legacy_group_id, sort_order, type) ' .
+            $install_query = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME . ' ( `key`, `value`,  legacy_group_id, sort_order, type) ' .
                 "values ('" . $key . "', '" . xtc_db_input($data['value']) . "', '6', '" . 0 . "', '" . $data['type'] . "')";
             xtc_db_query($install_query);
         }
@@ -185,7 +187,7 @@ class ot_mollie
 
         $keys = '"' . implode('", "', $allKeys) . '"';
 
-        xtc_db_query('DELETE FROM ' . TABLE_CONFIGURATION . " WHERE `key` IN (" . $keys . ")");
+        xtc_db_query('DELETE FROM ' . GambioConfigRepository::TABLE_NAME . " WHERE `key` IN (" . $keys . ")");
     }
 
 }

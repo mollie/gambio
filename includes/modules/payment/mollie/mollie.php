@@ -159,6 +159,8 @@ class mollie
     }
 
     /**
+     * Handles payment action
+     *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
      * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
@@ -265,6 +267,10 @@ class mollie
      * Determines the module's configuration keys
      *
      * @return array
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     public function keys()
     {
@@ -278,7 +284,13 @@ class mollie
     }
 
     /**
+     * Return payment method configuration fields with default rendering options
+     *
      * @return string[][]
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     public function _configuration()
     {
@@ -299,6 +311,8 @@ class mollie
     }
 
     /**
+     * Return config fields which has custom rendering options
+     *
      * @return array
      *
      * @throws HttpAuthenticationException
@@ -353,6 +367,8 @@ class mollie
     }
 
     /**
+     * Renders payment method description
+     *
      * @return string|string[]
      * @throws Exception
      */
@@ -375,6 +391,8 @@ class mollie
     }
 
     /**
+     * Set original payment method configuration (if not already set in the config table)
+     *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
      * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
@@ -387,14 +405,16 @@ class mollie
         if (empty($originalConfig)) {
             $config = $this->_getCurrentMollieMethod()->toArray();
             $sql    = 'UPDATE ' . GambioConfigRepository::TABLE_NAME . " 
-                    SET configuration_value = '" . json_encode($config) . "'
-                    WHERE configuration_key = '" . $key . "'";
+                    SET `value` = '" . json_encode($config) . "'
+                    WHERE `key` = 'configuration/" . $key . "'";
             xtc_db_query($sql);
         }
     }
 
 
     /**
+     * Check if method enabled on Mollie
+     *
      * @return bool
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
@@ -432,6 +452,8 @@ class mollie
     }
 
     /**
+     * Return flag that indicates whether is payment method available on checkout
+     *
      * @param $order
      *
      * @return bool
@@ -583,6 +605,8 @@ class mollie
     }
 
     /**
+     * Checks whether ot_mollie module is enabled
+     *
      * @return bool
      */
     protected function _otMollieEnabled()
@@ -608,6 +632,8 @@ class mollie
     }
 
     /**
+     * Retruns translated phrase
+     *
      * @param string $langCode
      * @param string $phrase
      *
@@ -619,6 +645,8 @@ class mollie
     }
 
     /**
+     * Returns language id based on lang code
+     *
      * @param string $langCode
      *
      * @return int

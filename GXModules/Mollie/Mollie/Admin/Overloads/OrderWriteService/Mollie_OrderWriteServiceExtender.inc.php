@@ -157,6 +157,10 @@ class Mollie_OrderWriteServiceExtender extends Mollie_OrderWriteServiceExtender_
      */
     private function _isReferenceExists($orderId)
     {
+        if (!MollieModuleChecker::isConnected()) {
+            return false;
+        }
+
         /** @var OrderReferenceService $orderReferenceService */
         $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
 
