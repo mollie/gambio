@@ -3,15 +3,13 @@
 
 <link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-issuers.css">
 
-<div id="mollie-issuers">
-    <input type="hidden" id="mollie-list-type" value="{{$mollie.list_type}}">
-
+<div class="mollie-issuers">
     {if $mollie.list_type == 'dropdown'}
     <div class="mollie-issuer-dropdown-wrapper">
-        <label for="mollie-issuer-dropdown">
+        <label for="{{$mollie.payment_method}}-issuer">
             {$txt.mollie_select_bank}
         </label>
-        <select id="mollie-issuer-dropdown" name="mollie-issuer-dropdown">
+        <select id="{{$mollie.payment_method}}-issuer" class="mollie-issuer-dropdown" name="{{$mollie.payment_method}}-issuer">
             {foreach item=module_data from=$mollie.issuers}
                 <option value="{{$module_data.id}}">{$module_data.name}</option>
             {/foreach}
@@ -25,7 +23,7 @@
                     <label>
                         <img src="{{$module_data.image.svg}}">
                         <span>{$module_data.name}</span>
-                        <input type="radio" name="mollie-issuer-list" value="{{$module_data.id}}">
+                        <input type="radio" name="{{$mollie.payment_method}}-issuer" value="{{$module_data.id}}">
                     </label>
                 </li>
                 {/foreach}

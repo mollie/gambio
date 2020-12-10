@@ -1,4 +1,4 @@
-#mollie-component-wrapper {
+.mollie-component-wrapper {
     padding: 10px;
     max-width: 350px;
     min-width: 320px;
@@ -16,7 +16,7 @@
     min-height: 52px;
 }
 
-#mollie-component-wrapper label {
+.mollie-component-wrapper label {
     padding-left: 0;
 }
 

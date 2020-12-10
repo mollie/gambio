@@ -19,17 +19,72 @@ class MollieIssuersProvider
      * @var string
      */
     private $issuerListType;
+    /**
+     * @var string
+     */
+    private $code;
 
     /**
      * MollieIssuersProvider constructor.
      *
      * @param PaymentMethod $paymentMethod
      * @param string $issuerListType
+     * @param string $code
      */
-    public function __construct($paymentMethod, $issuerListType)
+    public function __construct($paymentMethod, $issuerListType, $code)
     {
         $this->paymentMethod = $paymentMethod;
         $this->issuerListType = $issuerListType;
+        $this->code = $code;
+    }
+
+    /**
+     * Extends base configuration with the issuer specific fields
+     *
+     * @param array $configuration
+     *
+     * @return mixed
+     */
+    public function extendConfiguration(array $configuration)
+    {
+        $configuration['ISSUER_LIST'] = [
+            'configuration_value' => 'none',
+            'set_function'        => 'mollie_issuer_list_select( ',
+        ];
+
+        return $configuration;
+    }
+
+    /**
+     * Extends base selection with issuer list
+     *
+     * @param array $selection
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function extendCheckoutSelection(array $selection)
+    {
+        if ($this->displayIssuers()) {
+            $selection['fields'] = [
+                [
+                    'title' => $this->renderIssuerList(),
+                    'field' => '',
+                ]
+            ];
+        }
+
+        return $selection;
+    }
+
+    /**
+     * Store selected issuer on checkout into session
+     */
+    public function setSelectedIssuer()
+    {
+        if (!empty($_POST[$this->code . '-issuer'])) {
+            $_SESSION['mollie_issuer'] = $_POST[$this->code . '-issuer'];
+        }
     }
 
     /**
@@ -37,7 +92,7 @@ class MollieIssuersProvider
      *
      * @return bool
      */
-    public function displayIssuers()
+    private function displayIssuers()
     {
         return $this->issuerListType && $this->issuerListType !== 'none';
     }
@@ -48,13 +103,14 @@ class MollieIssuersProvider
      * @return string
      * @throws \Exception
      */
-    public function renderIssuerList()
+    private function renderIssuerList()
     {
         $template = PathProvider::getShopTemplatePath('mollie_issuer_list.html');
 
         return mollie_render_template(
             $template,
             [
+                'payment_method' => $this->code,
                 'issuers' => $this->_formatIssuers(),
                 'list_type' => $this->issuerListType,
             ]

@@ -3,15 +3,15 @@ $(document).ready(function () {
         let orderId = $(this).parents('tr').attr('id') || $('body').find('#gm_order_id').val();
         let serverUrl = 'admin.php?do=MollieShipment&orders_id=' + orderId;
 
-        MollieHttpClient.modal.openModal(serverUrl, getModalConfig());
+        Mollie.modal.openModal(serverUrl, getModalConfig());
     })
 
     function getModalConfig() {
         let label = $('#txt-submit-shipments').val();
         let title = $('#txt-mollie-shipments').val();
         let buttons = [
-            MollieHttpClient.modal.createCancelButton(),
-            MollieHttpClient.modal.createActionButton('process-shipment', label)
+            Mollie.modal.createCancelButton(),
+            Mollie.modal.createActionButton('process-shipment', label)
         ];
 
         var initialization = init;
@@ -92,7 +92,7 @@ $(document).ready(function () {
 
         function getRequestData() {
             return {
-                'lines': MollieHttpClient.orderLines.buildOrderLines('.mollie-ship-item-row'),
+                'lines': Mollie.orderLines.buildOrderLines('.mollie-ship-item-row'),
                 'tracking': getTrackingData()
             };
         }
