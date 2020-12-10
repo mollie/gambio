@@ -55,7 +55,7 @@ class mollie_creditcard extends mollie
     public function process_button()
     {
         if (!empty($_POST['mollieCardToken'])) {
-            $_SESSION['card_token'] = $_POST['mollieCardToken'];
+            $_SESSION['mollie_card_token'] = $_POST['mollieCardToken'];
         }
 
         return parent::process_button();

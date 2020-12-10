@@ -88,9 +88,9 @@ trait MapperUtility
             unset($_SESSION['mollie_issuer']);
         }
 
-        if (!empty($_SESSION['card_token'])) {
-            $payment->setCardToken($_SESSION['card_token']);
-            unset($_SESSION['card_token']);
+        if (!empty($_SESSION['mollie_card_token'])) {
+            $payment->setCardToken($_SESSION['mollie_card_token']);
+            unset($_SESSION['mollie_card_token']);
         }
     }
 
