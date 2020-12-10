@@ -3,12 +3,12 @@ $(document).ready(function () {
         let orderId = $(this).parents('tr').attr('id') || $('body').find('#gm_order_id').val();
         let serverUrl = 'admin.php?do=MolliePaymentLink&orders_id=' + orderId;
 
-        MollieHttpClient.modal.openModal(serverUrl,getModalConfig());
+        Mollie.modal.openModal(serverUrl,getModalConfig());
     })
 
     function init() {
         $('#process-payment').click(function () {
-            MollieHttpClient.copyToClipboard.copy($('#mollie-payment-link-url').val())
+            Mollie.copyToClipboard.copy($('#mollie-payment-link-url').val())
         });
     }
 
@@ -16,8 +16,8 @@ $(document).ready(function () {
         let label = $('#txt-mollie-copy-to-clipboard').val();
         let title = $('#txt-mollie-payment-link').val();
         let buttons = [
-            MollieHttpClient.modal.createCancelButton(),
-            MollieHttpClient.modal.createActionButton('process-payment', label)
+            Mollie.modal.createCancelButton(),
+            Mollie.modal.createActionButton('process-payment', label)
         ];
 
         var initialization = init;
