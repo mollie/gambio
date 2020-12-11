@@ -49,6 +49,19 @@ class mollie_creditcard extends mollie
     }
 
     /**
+     * @inheritDoc
+     * @return string
+     */
+    public function process_button()
+    {
+        if (!empty($_POST['mollieCardToken'])) {
+            $_SESSION['card_token'] = $_POST['mollieCardToken'];
+        }
+
+        return parent::process_button();
+    }
+
+    /**
      * @return string|string[]
      * @throws Exception
      */
@@ -62,12 +75,15 @@ class mollie_creditcard extends mollie
         $countryCode = $currentLanguage === 'en' ? 'US' : strtoupper($currentLanguage);
         $lang = $currentLanguage . '_' . $countryCode;
         
+        $profileId = $configService->getWebsiteProfile() ? $configService->getWebsiteProfile()->getId() : null;
+
         return mollie_render_template(
             $template,
             [
-                'profile_id' => $configService->getWebsiteProfile()->getId(),
+                'profile_id' => $profileId,
                 'test_mode' => $configService->isTestMode(),
                 'lang' => $lang,
+                'payment_method' => $this->code
             ]
         );
     }

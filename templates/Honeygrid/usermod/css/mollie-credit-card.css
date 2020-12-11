@@ -33,7 +33,7 @@
     transition: all 0.05s ease;
 }
 
-#mollie-component-wrapper .form-group {
+.mollie-component-wrapper .form-group {
     margin: 0;
 }
 

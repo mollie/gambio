@@ -21,7 +21,7 @@ class mollie_ideal extends mollie
         parent::__construct();
         $currentMethod = $this->_getCurrentMollieMethod();
         $issuerListType = @constant($this->_formatKey('ISSUER_LIST'));
-        $this->issuersProvider = new MollieIssuersProvider($currentMethod, $issuerListType);
+        $this->issuersProvider = new MollieIssuersProvider($currentMethod, $issuerListType, $this->code);
     }
 
     /**
@@ -31,14 +31,26 @@ class mollie_ideal extends mollie
     public function _configuration()
     {
         $config = parent::_configuration();
-        $config['ISSUER_LIST'] = [
-            'configuration_value' => 'none',
-            'set_function'        => 'mollie_issuer_list_select( ',
-        ];
 
-        return $config;
+        return $this->issuersProvider->extendConfiguration($config);
     }
 
+    /**
+     * @return string
+     */
+    public function process_button()
+    {
+        $this->issuersProvider->setSelectedIssuer();
+
+        return parent::process_button();
+    }
+
+    /**
+     * @inheritDoc
+     * @return array|bool
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
+     */
     public function selection()
     {
         $selection = parent::selection();
@@ -46,10 +58,6 @@ class mollie_ideal extends mollie
             return false;
         }
 
-        if ($this->issuersProvider->displayIssuers()) {
-            $selection['description'] .= $this->issuersProvider->renderIssuerList();
-        }
-
-        return $selection;
+        return $this->issuersProvider->extendCheckoutSelection($selection);
     }
 }
