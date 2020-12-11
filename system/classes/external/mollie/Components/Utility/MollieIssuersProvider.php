@@ -66,7 +66,7 @@ class MollieIssuersProvider
     public function extendCheckoutSelection(array $selection)
     {
         if ($this->displayIssuers()) {
-            $selection['description'] = $this->renderIssuerList();
+            $selection['description'] .= $this->renderIssuerList();
         }
 
         return $selection;
