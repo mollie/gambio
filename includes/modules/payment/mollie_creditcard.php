@@ -21,8 +21,8 @@ class mollie_creditcard extends mollie
     {
         $config = parent::_configuration();
         $config['COMPONENTS_STATUS'] = [
-            'configuration_value' => 'True',
-            'set_function' => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
+            'value' => 'true',
+            'type' => 'switcher',
         ];
 
         return $config;
@@ -41,7 +41,7 @@ class mollie_creditcard extends mollie
         }
 
         $configKey = $this->_formatKey('COMPONENTS_STATUS');
-        if (@constant($configKey) === 'True') {
+        if (@constant($configKey) === 'true') {
             $selection['fields'] = [
                 [
                     'title' => $this->_renderCreditCardInfo(),

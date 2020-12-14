@@ -48,8 +48,7 @@ class MollieIssuersProvider
     public function extendConfiguration(array $configuration)
     {
         $configuration['ISSUER_LIST'] = [
-            'configuration_value' => 'none',
-            'set_function'        => 'mollie_issuer_list_select( ',
+            'value' => 'list',
         ];
 
         return $configuration;

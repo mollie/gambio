@@ -32,14 +32,17 @@ abstract class mollie_issuer_providable extends mollie
     }
 
     /**
-     * @inheritDoc
-     * @return string[][]
+     * @return array|mixed
+     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
-    public function _configuration()
+    public function _getHiddenFields()
     {
-        $config = parent::_configuration();
+        $hiddenFields = parent::_getHiddenFields();
 
-        return $this->issuersProvider->extendConfiguration($config);
+        return $this->issuersProvider->extendConfiguration($hiddenFields);
     }
 
     /**

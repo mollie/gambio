@@ -19,6 +19,8 @@ function mollie_issuer_list_select($key_value, $key = '')
     $data         = [
         'key'   => $key,
         'value' => $key_value,
+        'title' => @constant("{$key}_TITLE"),
+        'desc'  => @constant("{$key}_DESC"),
     ];
 
     return mollie_render_template($templatePath, $data);
