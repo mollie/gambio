@@ -25,6 +25,10 @@ class PaymentMethod extends BaseDto
      * @var Image
      */
     protected $image;
+    /**
+     * @var Issuer[]
+     */
+    protected $issuers = array();
 
     /**
      * @inheritDoc
@@ -37,6 +41,7 @@ class PaymentMethod extends BaseDto
         $result->id = static::getValue($raw, 'id');
         $result->description = static::getValue($raw, 'description');
         $result->image = Image::fromArray(static::getValue($raw, 'image', array()));
+        $result->issuers = !empty($raw['issuers']) ? Issuer::fromArrayBatch($raw['issuers']) : array();
 
         return $result;
     }
@@ -46,11 +51,17 @@ class PaymentMethod extends BaseDto
      */
     public function toArray()
     {
+        $issuers = array();
+        foreach ($this->issuers as $issuer) {
+            $issuers[] = $issuer->toArray();
+        }
+
         return array(
             'resource' => $this->resource,
             'id' => $this->id,
             'description' => $this->description,
             'image' => $this->image->toArray(),
+            'issuers' => $issuers,
         );
     }
 
@@ -116,5 +127,21 @@ class PaymentMethod extends BaseDto
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return Issuer[]
+     */
+    public function getIssuers()
+    {
+        return $this->issuers;
+    }
+
+    /**
+     * @param Issuer[] $issuers
+     */
+    public function setIssuers($issuers)
+    {
+        $this->issuers = $issuers;
     }
 }

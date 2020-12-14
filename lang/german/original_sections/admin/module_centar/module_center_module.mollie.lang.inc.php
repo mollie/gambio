@@ -90,6 +90,15 @@ $t_language_text_section_content_array = [
     'mollie_unknown_error'           => 'Unbekannter Fehler in der Mollie-API',
     'mollie_checkout_desc'           => 'Nach dem Kontrollieren Ihrer Bestellung werden Sie zur Website des Zahlungsanbieters weitergeleitet, um den Einkauf abzuschließen.',
 
+    'mollie_issuer_list_none'        => 'Don\'t show issuer list',
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'List with images',
+    'mollie_select_bank'             => 'Select bank',
+    'mollie_card_holder'             => 'Card holder',
+    'mollie_card_number'             => 'Card number',
+    'mollie_expiry_date'             => 'Expiry date',
+    'mollie_verification_code'       => 'Verification code',
+
     'mollie_canceled_comment' => 'Der Kunde hat die Zahlung abgebrochen.',
     'mollie_expired_comment'  => 'Die Zahlung ist bei Mollie abgelaufen.',
     'mollie_failed_comment'   => 'Die Zahlung ist fehlgeschlagen und kann mit der gewählten Zahlungsmethode nicht abgeschlossen werden.',

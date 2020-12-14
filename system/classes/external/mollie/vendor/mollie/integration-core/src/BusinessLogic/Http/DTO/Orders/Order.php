@@ -124,6 +124,10 @@ class Order extends BaseDto
      */
     protected $webhookUrl;
     /**
+     * @var Payment
+     */
+    protected $payment;
+    /**
      * @var OrderLine[]
      */
     protected $lines = array();
@@ -176,6 +180,7 @@ class Order extends BaseDto
         $order->shippingAddress = !empty($shippingAddress) ? Address::fromArray($shippingAddress) : null;
         $order->redirectUrl = static::getValue($raw, 'redirectUrl');
         $order->webhookUrl = static::getValue($raw, 'webhookUrl');
+        $order->cardToken = static::getValue($raw, 'cardToken');
         $order->setLines(OrderLine::fromArrayBatch(static::getValue($raw, 'lines', array())));
         if (array_key_exists('_embedded', $raw)) {
             $order->embedded['payments'] = Payment::fromArrayBatch(static::getValue($raw['_embedded'], 'payments', array()));
@@ -184,6 +189,10 @@ class Order extends BaseDto
 
         foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
             $order->links[$linkKey] = Link::fromArray($linkData);
+        }
+
+        if (!empty($raw['payment'])) {
+            $order->payment = Payment::fromArray($raw['payment']);
         }
 
         return $order;
@@ -246,6 +255,7 @@ class Order extends BaseDto
             'shippingAddress' => $this->shippingAddress ? $this->shippingAddress->toArray() : array(),
             'redirectUrl' => $this->redirectUrl,
             'webhookUrl' => $this->webhookUrl,
+            'payment' => $this->payment ? $this->payment->toArray() : null,
             'lines' => $lines,
             '_embedded' => $embedded,
             '_links' => $links,
@@ -724,6 +734,22 @@ class Order extends BaseDto
     public function setLinks($links)
     {
         $this->links = $links;
+    }
+
+    /**
+     * @return Payment
+     */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @param Payment $payment
+     */
+    public function setPayment($payment)
+    {
+        $this->payment = $payment;
     }
 
     /**

@@ -2,7 +2,7 @@
   "name": "mollie/gambio",
   "require": {
     "php": ">=5.4",
-    "mollie/integration-core": "1.1.0"
+    "mollie/integration-core": "dev-dev"
   },
   "repositories": [
     {

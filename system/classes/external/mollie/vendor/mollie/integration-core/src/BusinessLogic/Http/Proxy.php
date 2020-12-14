@@ -292,7 +292,7 @@ class Proxy
      */
     public function getAllPaymentMethods()
     {
-        $response = $this->call(self::HTTP_METHOD_GET, '/methods/all');
+        $response = $this->call(self::HTTP_METHOD_GET, '/methods/all?include=issuers');
         $result = $response->decodeBodyAsJson();
 
         return PaymentMethod::fromArrayBatch(

@@ -79,6 +79,15 @@ class Payment extends BaseDto
     );
 
     /**
+     * @var string
+     */
+    protected $cardToken;
+    /**
+     * @var string
+     */
+    protected $issuer;
+
+    /**
      * @inheritDoc
      */
     public static function fromArray(array $raw)
@@ -95,6 +104,8 @@ class Payment extends BaseDto
         $result->status = static::getValue($raw, 'status');
         $result->redirectUrl = static::getValue($raw, 'redirectUrl');
         $result->webhookUrl = static::getValue($raw, 'webhookUrl');
+        $result->cardToken = static::getValue($raw, 'cardToken');
+        $result->issuer = static::getValue($raw, 'issuer');
         $result->setLocale(static::getValue($raw, 'locale'));
         $method = static::getValue($raw, 'method', array());
         $method = is_array($method) ? $method : array($method);
@@ -150,6 +161,8 @@ class Payment extends BaseDto
             'locale' => $this->locale,
             'method' => $this->method,
             'metadata' => $this->metadata,
+            'cardToken' => $this->cardToken,
+            'issuer' => $this->issuer,
             '_embedded' => $embedded,
             '_links' => $links,
         );
@@ -426,5 +439,37 @@ class Payment extends BaseDto
     public function setEmbedded($embedded)
     {
         $this->embedded = $embedded;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardToken()
+    {
+        return $this->cardToken;
+    }
+
+    /**
+     * @param string $cardToken
+     */
+    public function setCardToken($cardToken)
+    {
+        $this->cardToken = $cardToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIssuer()
+    {
+        return $this->issuer;
+    }
+
+    /**
+     * @param string $issuer
+     */
+    public function setIssuer($issuer)
+    {
+        $this->issuer = $issuer;
     }
 }
