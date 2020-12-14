@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_DESC', 'Please upload logo that wi
 
 define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SORT_ORDER_TITLE', 'Sort order of display in checkout');
 define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
+
+define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_TITLE', 'Enable Mollie components on checkout');
+define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_DESC', 'When Mollie components are integrated inside the checkout process, the end-customer does not need to enter cardholder information after redirect to the Mollie payment page.');

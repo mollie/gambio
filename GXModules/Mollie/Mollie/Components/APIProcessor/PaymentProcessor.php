@@ -50,7 +50,12 @@ class PaymentProcessor implements Interfaces\Processor
 
             $this->updateStatus($orderId, 'mollie_created');
 
-            return new Result(true, $createdPayment->getLink('checkout')->getHref());
+            $links = $createdPayment->getLinks();
+            $redirectUrl = array_key_exists('checkout', $links) ?
+                $createdPayment->getLink('checkout')->getHref() :
+                $createdPayment->getLink('changePaymentState')->getHref();
+
+            return new Result(true, $redirectUrl);
         } catch (\Exception $exception) {
             $result = new Result(false);
             $result->setErrorMessage("Couldn't create payment on Mollie: {$exception->getMessage()}");

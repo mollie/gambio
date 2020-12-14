@@ -3,12 +3,13 @@
 namespace Mollie\BusinessLogic\Http\DTO;
 
 /**
- * Class PaymentMethod
+ * Class Issuer
  *
  * @package Mollie\BusinessLogic\Http\DTO
  */
-class PaymentMethod extends BaseDto
+class Issuer extends BaseDto
 {
+
     /**
      * @var string
      */
@@ -20,30 +21,28 @@ class PaymentMethod extends BaseDto
     /**
      * @var string
      */
-    protected $description;
+    protected $name;
     /**
      * @var Image
      */
     protected $image;
-    /**
-     * @var Issuer[]
-     */
-    protected $issuers = array();
 
     /**
      * @inheritDoc
+     * @param array $raw
+     *
+     * @return Issuer
      */
     public static function fromArray(array $raw)
     {
-        $result = new static();
+        $issuer = new static();
 
-        $result->resource = static::getValue($raw, 'resource');
-        $result->id = static::getValue($raw, 'id');
-        $result->description = static::getValue($raw, 'description');
-        $result->image = Image::fromArray(static::getValue($raw, 'image', array()));
-        $result->issuers = !empty($raw['issuers']) ? Issuer::fromArrayBatch($raw['issuers']) : array();
+        $issuer->resource = static::getValue($raw, 'resource');
+        $issuer->id = static::getValue($raw, 'id');
+        $issuer->name = static::getValue($raw, 'name');
+        $issuer->image = Image::fromArray(static::getValue($raw, 'image', array()));
 
-        return $result;
+        return $issuer;
     }
 
     /**
@@ -51,17 +50,13 @@ class PaymentMethod extends BaseDto
      */
     public function toArray()
     {
-        $issuers = array();
-        foreach ($this->issuers as $issuer) {
-            $issuers[] = $issuer->toArray();
-        }
+        $image = $this->image ? $this->image->toArray() : null;
 
         return array(
             'resource' => $this->resource,
             'id' => $this->id,
-            'description' => $this->description,
-            'image' => $this->image->toArray(),
-            'issuers' => $issuers,
+            'name' => $this->name,
+            'image' => $image
         );
     }
 
@@ -100,17 +95,17 @@ class PaymentMethod extends BaseDto
     /**
      * @return string
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
-     * @param string $description
+     * @param string $name
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
+        $this->name = $name;
     }
 
     /**
@@ -127,21 +122,5 @@ class PaymentMethod extends BaseDto
     public function setImage($image)
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return Issuer[]
-     */
-    public function getIssuers()
-    {
-        return $this->issuers;
-    }
-
-    /**
-     * @param Issuer[] $issuers
-     */
-    public function setIssuers($issuers)
-    {
-        $this->issuers = $issuers;
     }
 }

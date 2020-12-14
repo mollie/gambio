@@ -1,0 +1,7 @@
+{load_language_text section="module_center_module"}
+
+<select name="configuration[{{$mollie.key}}]">
+    <option value="none" {if $mollie.value == 'none'}selected{/if}>{{$txt.mollie_issuer_list_none}}</option>
+    <option value="dropdown" {if $mollie.value == 'dropdown'}selected{/if}>{{$txt.mollie_issuer_list_dropdown}}</option>
+    <option value="list" {if $mollie.value == 'list'}selected{/if}>{{$txt.mollie_issuer_list_images}}</option>
+</select>
