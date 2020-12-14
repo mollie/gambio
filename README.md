@@ -3,6 +3,9 @@
 ## Supported GX versions
 This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x. 
 
+If you have Gambio from 4.1.x to 4.3.x versions, please checkout on `4.1-4.x` branch of this Github repository.
+https://github.com/mollie/gambio/tree/4.1-4.x
+
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
 ***
@@ -47,14 +50,15 @@ If you experience problems with the extension installation, setup or whenever yo
 ```
 This branch contains mollie module which is eligible for Gambio versions 3.5.x - 4.0.x.
 
-If you have Gambio from 3.0.x to 3.4.x versions, please checkout on 3.0-3.4 branch of this Github repository.
+If you have Gambio from 4.1.x to 4.3.x versions, please checkout on `4.1-4.x` branch of this Github repository.
+If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 ```
 
 To install the Mollie plugin for the **Gambio 3.5.x - 4.0.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
- 1. Download the latest `1.0.0` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
- 2. Copy the all content of the `gambio-1.0.0` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
+ 1. Download the latest `1.x.x` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 3.5.x - 4.0.x.
+ 2. Copy the all content of the `gambio-1.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
  3. Go to `Toolbox` » `Cache` on the Gambio admin page
  4. Clear the module, output, and text cache
  5. Go to `Modules` » `Modules-Center` on the Gambio admin page
@@ -84,3 +88,7 @@ The payment methods are disabled by default in your account so you firstly need 
  4. **Check if the order amount min and/or max value is fulfilled**
  5. **Check if there is any information in the Notifications section `Modules` » `Modules-Center` » `Mollie` » `Notifications`**
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
+
+# Release notes
+- 1.0.1: Translations for NL, DE, and FR are added.
+- 1.0.0: The initial release of Mollie integration with Gambio.
