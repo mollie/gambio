@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_GIFTCARD_LOGO_DESC', 'Bitte laden Sie ein Logo hoc
 
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_SORT_ORDER_TITLE', 'Sortierreihenfolge der Anzeige beim Checkout');
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_SORT_ORDER_DESC', 'Der niedrigste Wert wird beim Checkout zuerst angezeigt');
+
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_TITLE', 'Issuer list style');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
