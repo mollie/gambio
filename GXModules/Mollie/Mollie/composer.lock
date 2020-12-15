@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mollie/orocore.git",
-                "reference": "31ec9ccd4a150cd2e188901ad9ffa12f7aa599e7"
+                "reference": "38cd5337428f40754c8b8503d31a4b533cf6985c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/orocore/zipball/31ec9ccd4a150cd2e188901ad9ffa12f7aa599e7",
-                "reference": "31ec9ccd4a150cd2e188901ad9ffa12f7aa599e7",
+                "url": "https://api.github.com/repos/mollie/orocore/zipball/38cd5337428f40754c8b8503d31a4b533cf6985c",
+                "reference": "38cd5337428f40754c8b8503d31a4b533cf6985c",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "proprietary"
             ],
             "description": "Mollie integrations core library",
-            "time": "2020-12-15T14:31:56+00:00"
+            "time": "2020-12-15T23:27:27+00:00"
         }
     ],
     "packages-dev": [],
