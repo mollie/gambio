@@ -89,7 +89,7 @@ class MollieIssuersProvider
      */
     private function displayIssuers()
     {
-        return in_array($this->issuerListType, ['list', 'dropdown'], true);
+        return $this->issuerListType && !empty($this->paymentMethod->getIssuers());
     }
 
     /**
