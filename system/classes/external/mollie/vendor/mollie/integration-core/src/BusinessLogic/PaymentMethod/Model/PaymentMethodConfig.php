@@ -23,7 +23,7 @@ class PaymentMethodConfig extends Entity
     const API_METHOD_PAYMENT = 'payment_api';
     const API_METHOD_ORDERS = 'orders_api';
 
-    const ISSUER_NONE = 'none';
+    const ISSUER_LIST = 'list';
     const ISSUER_DROPDOWN = 'dropdown';
 
     /**
