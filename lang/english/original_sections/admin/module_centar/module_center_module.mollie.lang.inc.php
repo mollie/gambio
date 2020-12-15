@@ -89,11 +89,12 @@ $t_language_text_section_content_array = [
     'mollie_change_logo_error'       => 'Failed to upload logo',
     'mollie_orders_api'              => 'Orders API',
     'mollie_payments_api'            => 'Payments API',
-    'mollie_issuer_list_none'        => 'Don\'t show issuer list',
-    'mollie_issuer_list_dropdown'    => 'Dropdown',
-    'mollie_issuer_list_images'      => 'List with images',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => 'You will be redirected to payment gateway website to complete your purchase after the order review step.',
+
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'List with images',
+
     'mollie_select_bank'             => 'Select bank',
     'mollie_card_holder'             => 'Card holder',
     'mollie_card_number'             => 'Card number',

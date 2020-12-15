@@ -27,5 +27,5 @@ define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_DESC', 'Veuillez charger le logo à utili
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
 
-define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_TITLE', 'Issuer list style');
+define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
 define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
