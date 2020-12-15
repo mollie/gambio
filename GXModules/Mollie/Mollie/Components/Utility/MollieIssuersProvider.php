@@ -93,7 +93,7 @@ class MollieIssuersProvider
      */
     private function displayIssuers()
     {
-        return $this->issuerListType && $this->issuerListType !== 'none';
+        return $this->issuerListType && !empty($this->paymentMethod->getIssuers());
     }
 
     /**

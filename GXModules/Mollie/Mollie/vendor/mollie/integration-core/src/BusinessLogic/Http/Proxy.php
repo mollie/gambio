@@ -292,7 +292,7 @@ class Proxy
      */
     public function getAllPaymentMethods()
     {
-        $response = $this->call(self::HTTP_METHOD_GET, '/methods/all?include=issuers');
+        $response = $this->call(self::HTTP_METHOD_GET, '/methods/all');
         $result = $response->decodeBodyAsJson();
 
         return PaymentMethod::fromArrayBatch(
@@ -320,6 +320,7 @@ class Proxy
         $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS
     ) {
         $params = array(
+            'include' => 'issuers',
             'includeWallets' => 'applepay',
             'resource' => $apiMethod === PaymentMethodConfig::API_METHOD_PAYMENT ? 'payments' : 'orders',
         );
