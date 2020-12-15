@@ -22,9 +22,13 @@
 
 .mollie-issuer-dropdown-wrapper {
     display: flex;
-    min-width: 500px;
 }
 
-.mollie-issuer-dropdown-wrapper label{
-    padding: 0 10px 0 0;
+.mollie-issuer-dropdown-wrapper label {
+    width: 100%;
+    padding: 0 10px 10px 0;
+}
+
+.mollie-issuer-dropdown {
+    margin-top: 10px;
 }
