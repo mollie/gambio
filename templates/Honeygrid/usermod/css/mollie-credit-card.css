@@ -12,23 +12,23 @@
     grid-gap: 20px;
 }
 
-.form-group {
+.mollie-component-wrapper .form-group--cardHolder,
+.mollie-component-wrapper .form-group--cardNumber,
+.mollie-component-wrapper .form-group--expiryDate,
+.mollie-component-wrapper .form-group--verificationCode {
     position: relative;
-    /* Set a min-height for when the components are still loading */
     min-height: 52px;
+    margin-bottom: 0;
 }
 
 .mollie-component-wrapper label {
     padding-left: 0;
-}
-
-/* Position the label over the input field (as if its a placeholder) */
-.label {
+    font-size: 100%;
+    font-weight: normal;
     position: absolute;
     top: 16px;
     left: 17px;
     color: #888;
-
     transform-origin: top left;
     transition: all 0.05s ease;
 }
