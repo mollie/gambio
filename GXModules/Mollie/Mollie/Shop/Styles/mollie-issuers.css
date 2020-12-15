@@ -8,6 +8,10 @@
     min-width: 200px;
 }
 
+.mollie-issuer-list-wrapper .issuer-list-label {
+    padding-bottom: 10px;
+}
+
 .mollie-issuer-list-wrapper img {
     max-width: 33px;
 }
