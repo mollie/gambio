@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/mollie/orocore/compare/v1.1.0...dev)
+ - Changed `OrderService` and `PaymentService` create method, to 
+ set initial status to null
+ - Added `useMollieComponents` and `issuerListStyle` to the `PaymentMethodConfig`
+ entity
  - Added `cardToken` property to the `Order` and `Payment` DTOs
  - Added `issuers` property to the `PaymentMethod` DTOs
  - Modify `Proxy::getAllPaymentMethods` to use `incloude=issuers` in the query string
