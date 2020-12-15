@@ -48,9 +48,13 @@ class PaymentService extends BaseService
     {
         $createdPayment = $this->getProxy()->createPayment($payment);
 
+        // set initial status in order reference table to null,
+        // so it can be updated within the webhook
+        $createdPaymentForReference = clone $createdPayment;
+        $createdPaymentForReference->setStatus(null);
         /** @var OrderReferenceService $orderReferenceService */
         $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
-        $orderReferenceService->updateOrderReference($createdPayment, $shopReference, PaymentMethodConfig::API_METHOD_PAYMENT);
+        $orderReferenceService->updateOrderReference($createdPaymentForReference, $shopReference, PaymentMethodConfig::API_METHOD_PAYMENT);
 
 
         return $createdPayment;
