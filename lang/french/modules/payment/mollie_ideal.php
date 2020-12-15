@@ -27,5 +27,5 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC', 'Veuillez charger le logo à uti
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
 
-define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', 'Issuer list style');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
 define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');

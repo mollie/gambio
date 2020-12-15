@@ -27,5 +27,5 @@ define('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_DESC', 'Bitte laden Sie ein Logo h
 define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SORT_ORDER_TITLE', 'Sortierreihenfolge der Anzeige beim Checkout');
 define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SORT_ORDER_DESC', 'Der niedrigste Wert wird beim Checkout zuerst angezeigt');
 
-define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_TITLE', 'Enable Mollie components on checkout');
-define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_DESC', 'When Mollie components are integrated inside the checkout process, the end-customer does not need to enter cardholder information after redirect to the Mollie payment page.');
+define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_TITLE', 'Mollie Components verwenden');
+define('MODULE_PAYMENT_MOLLIE_CREDITCARD_COMPONENTS_STATUS_DESC', 'Read more about <a href="https://www.mollie.com/en/news/post/better-checkout-flows-with-mollie-components" target="_blank">Mollie Components</a> and how it improves your conversion');

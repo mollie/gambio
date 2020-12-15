@@ -90,6 +90,15 @@ $t_language_text_section_content_array = [
     'mollie_unknown_error'           => 'Er is een onbekende fout opgetreden op de Mollie-API',
     'mollie_checkout_desc'           => 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.',
 
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'Lijst met afbeeldingen',
+
+    'mollie_select_bank'             => 'Selecteer Bank',
+    'mollie_card_holder'             => 'Kaarthouder',
+    'mollie_card_number'             => 'Kaartnummer',
+    'mollie_expiry_date'             => 'Vervaldatum',
+    'mollie_verification_code'       => 'Verificatie code',
+
     'mollie_canceled_comment' => 'De klant heeft de betaling geannuleerd.',
     'mollie_expired_comment'  => 'De betaling is op Mollie verlopen.',
     'mollie_failed_comment'   => 'De betaling is mislukt en kan niet worden voltooid met de geselecteerde betalingsmethode.',
