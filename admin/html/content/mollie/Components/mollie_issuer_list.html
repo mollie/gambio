@@ -18,6 +18,7 @@
     </div>
     {else}
         <div class="mollie-issuer-list-wrapper">
+            <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
             <ul>
                 {foreach item=module_data from=$mollie.issuers}
                 <li>
