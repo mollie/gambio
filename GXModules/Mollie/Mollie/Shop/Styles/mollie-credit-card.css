@@ -9,7 +9,7 @@
 .mollie-component-wrapper {
     padding: 10px;
     max-width: 350px;
-    min-width: 320px;
+    min-width: 345px;
 }
 
 .mollie-component-wrapper .form-group--cardHolder,
@@ -23,11 +23,12 @@
 
 .mollie-component-wrapper label {
     padding-left: 0;
-    font-size: 100%;
+    font-size: 13px;
+    letter-spacing: -0.02em;
     font-weight: normal;
     position: absolute;
-    top: 16px;
-    left: 17px;
+    top: 17px;
+    left: 10px;
     color: #888;
     transform-origin: top left;
     transition: all 0.05s ease;

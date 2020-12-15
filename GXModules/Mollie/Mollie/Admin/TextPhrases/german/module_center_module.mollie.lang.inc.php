@@ -51,14 +51,14 @@ $t_language_text_section_content_array = [
     'mollie_payment_link'            => 'Zahlungslink',
     'mollie_shipments'               => 'Shipments',
 
-    'mollie_issuer_list_none'        => 'Don\'t show issuer list',
     'mollie_issuer_list_dropdown'    => 'Dropdown',
-    'mollie_issuer_list_images'      => 'List with images',
-    'mollie_select_bank'             => 'Select bank',
-    'mollie_card_holder'             => 'Card holder',
-    'mollie_card_number'             => 'Card number',
-    'mollie_expiry_date'             => 'Expiry date',
-    'mollie_verification_code'       => 'Verification code',
+    'mollie_issuer_list_images'      => 'Liste mit Abbildungen',
+
+    'mollie_select_bank'             => 'Bank auswählen',
+    'mollie_card_holder'             => 'Kartenhalter',
+    'mollie_card_number'             => 'Kartenhalter',
+    'mollie_expiry_date'             => 'Verfallsdatum',
+    'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
 
     'mollie_canceled_comment' => 'Der Kunde hat die Zahlung abgebrochen.',
     'mollie_expired_comment'  => 'Die Zahlung ist bei Mollie abgelaufen.',

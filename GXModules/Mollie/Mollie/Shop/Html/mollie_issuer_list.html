@@ -7,7 +7,7 @@
     {if $mollie.list_type == 'dropdown'}
     <div class="mollie-issuer-dropdown-wrapper">
         <label for="{{$mollie.payment_method}}-issuer">
-            {$txt.mollie_select_bank}
+            <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
             <select id="{{$mollie.payment_method}}-issuer" class="form-control mollie-issuer-dropdown" name="{{$mollie.payment_method}}-issuer">
                 {foreach item=module_data from=$mollie.issuers}
                     <option value="{{$module_data.id}}">{$module_data.name}</option>
