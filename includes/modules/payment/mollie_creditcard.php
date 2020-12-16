@@ -2,6 +2,7 @@
 
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Utility\PathProvider;
+use Mollie\Gambio\Utility\VersionCompatibilityProvider;
 use Mollie\Infrastructure\Configuration\Configuration;
 use Mollie\Infrastructure\ServiceRegister;
 
@@ -14,9 +15,15 @@ class mollie_creditcard extends mollie
 {
     public $title = 'Credit card';
 
+    /**
+     * @var VersionCompatibilityProvider
+     */
+    private $versionCompatibilityProvider;
+
     public function __construct()
     {
         parent::__construct();
+        $this->versionCompatibilityProvider = new VersionCompatibilityProvider();
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
         $useComponents = @constant($componentsKey);
@@ -52,12 +59,7 @@ class mollie_creditcard extends mollie
 
         $configKey = $this->_formatKey('COMPONENTS_STATUS');
         if (@constant($configKey) === 'True') {
-            $selection['fields'] = [
-                [
-                    'title' => $this->_renderCreditCardInfo(),
-                    'field' => '',
-                ]
-            ];
+            $this->versionCompatibilityProvider->extendSelection($selection, $this->_renderCreditCardInfo());
         }
 
         return $selection;
@@ -97,7 +99,8 @@ class mollie_creditcard extends mollie
                 'profile_id' => $profileId,
                 'test_mode' => $configService->isTestMode(),
                 'lang' => $lang,
-                'payment_method' => $this->code
+                'payment_method' => $this->code,
+                'isLegacy' => $this->versionCompatibilityProvider->isLegacyVersion(),
             ]
         );
     }

@@ -95,7 +95,7 @@ $t_language_text_section_content_array = [
 
     'mollie_select_bank'             => 'Bank auswählen',
     'mollie_card_holder'             => 'Kartenhalter',
-    'mollie_card_number'             => 'Kartenhalter',
+    'mollie_card_number'             => 'Kartennummer',
     'mollie_expiry_date'             => 'Verfallsdatum',
     'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
 

@@ -1,9 +1,7 @@
 {load_language_text section="module_center_module"}
 
 
-<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-issuers.css">
-
-<div class="mollie-issuers">
+<div class="mollie-issuers {{if $mollie.isLegacy}}mollie-hidden{{/if}}">
     {if $mollie.list_type == 'dropdown'}
     <div class="mollie-issuer-dropdown-wrapper">
         <label for="{{$mollie.payment_method}}-issuer">

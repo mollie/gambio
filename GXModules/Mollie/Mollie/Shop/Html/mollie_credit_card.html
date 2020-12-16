@@ -1,9 +1,10 @@
 {load_language_text section="module_center_module"}
 
-<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-credit-card.css">
+{{if $mollie.isLegacy}}
+    <script src="https://js.mollie.com/v1/mollie.js"></script>
+{{/if}}
 
-
-<div class="mollie-component-wrapper"
+<div class="mollie-component-wrapper {{if $mollie.isLegacy}}mollie-hidden{{/if}}"
      data-method-id="{{$mollie.payment_method}}"
      data-profile-id="{{$mollie.profile_id}}"
      data-test-mode="{{$mollie.test_mode}}"

@@ -25,6 +25,8 @@ class MollieIssuersProvider
      */
     private $code;
 
+    private $versionCompatibilityProvider;
+
     /**
      * MollieIssuersProvider constructor.
      *
@@ -37,6 +39,8 @@ class MollieIssuersProvider
         $this->paymentMethod = $paymentMethod;
         $this->issuerListType = $issuerListType;
         $this->code = $code;
+
+        $this->versionCompatibilityProvider = new VersionCompatibilityProvider();
     }
 
     /**
@@ -67,12 +71,7 @@ class MollieIssuersProvider
     public function extendCheckoutSelection(array $selection)
     {
         if ($this->displayIssuers()) {
-            $selection['fields'] = [
-                [
-                    'title' => $this->renderIssuerList(),
-                    'field' => '',
-                ]
-            ];
+            $this->versionCompatibilityProvider->extendSelection($selection, $this->renderIssuerList());
         }
 
         return $selection;
@@ -111,6 +110,7 @@ class MollieIssuersProvider
         return mollie_render_template(
             $template,
             [
+                'isLegacy' => $this->versionCompatibilityProvider->isLegacyVersion(),
                 'payment_method' => $this->code,
                 'issuers' => $this->_formatIssuers(),
                 'list_type' => $this->issuerListType,
