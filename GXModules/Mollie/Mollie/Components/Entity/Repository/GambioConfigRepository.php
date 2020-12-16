@@ -13,7 +13,6 @@ class GambioConfigRepository extends GambioBaseRepository
     const KEY_ALIAS = 'configuration_key';
     const VALUE_ALIAS = 'configuration_value';
 
-
     /**
      * @return mixed
      */
@@ -36,6 +35,11 @@ class GambioConfigRepository extends GambioBaseRepository
             ->where('`key`', $key, true)
             ->get($this->_getTableName())
             ->result('array');
+    }
+
+    public function insert($values)
+    {
+        $this->queryBuilder->insert(self::TABLE_NAME, $values, true);
     }
 
     /**
