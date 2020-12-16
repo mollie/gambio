@@ -680,6 +680,18 @@ class mollie
 
         return $surcharge;
     }
+
+    /**
+     * Check if module installed
+     *
+     * @return bool
+     */
+    protected function _isInstalled()
+    {
+        $statusKey = $this->_formatKey('STATUS');
+
+        return defined($statusKey);
+    }
 }
 
 MainFactory::load_origin_class('mollie');
