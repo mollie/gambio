@@ -1,5 +1,6 @@
 <?php
 
+use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Infrastructure\Configuration\Configuration;
 use Mollie\Infrastructure\ServiceRegister;
@@ -13,6 +14,18 @@ class mollie_creditcard extends mollie
 {
     public $title = 'Credit card';
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
+        $useComponents = @constant($componentsKey);
+        if (empty($useComponents)) {
+            $this->setInitialMollieComponentsUsage($componentsKey);
+            define($componentsKey, 'True');
+        }
+    }
+
     /**
      * @inheritDoc
      * @return string[][]
@@ -20,10 +33,7 @@ class mollie_creditcard extends mollie
     public function _configuration()
     {
         $config = parent::_configuration();
-        $config['COMPONENTS_STATUS'] = [
-            'configuration_value' => 'True',
-            'set_function' => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
-        ];
+        $config['COMPONENTS_STATUS'] = $this->getComponentsConfig();
 
         return $config;
     }
@@ -86,5 +96,30 @@ class mollie_creditcard extends mollie
                 'payment_method' => $this->code
             ]
         );
+    }
+
+    /**
+     * @param $key
+     */
+    private function setInitialMollieComponentsUsage($key)
+    {
+        $repository = new GambioConfigRepository();
+        $insert = $this->getComponentsConfig();
+        $insert['configuration_key'] = $key;
+        $insert['configuration_group_id'] = 6;
+        $insert['sort_order'] = 0;
+
+        $repository->insert($insert);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getComponentsConfig()
+    {
+        return [
+            'configuration_value' => 'True',
+            'set_function' => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
+        ];
     }
 }

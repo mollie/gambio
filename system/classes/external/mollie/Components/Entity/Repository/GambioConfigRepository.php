@@ -9,6 +9,8 @@ namespace Mollie\Gambio\Entity\Repository;
  */
 class GambioConfigRepository extends GambioBaseRepository
 {
+    const TABLE_NAME = 'configuration';
+
     /**
      * @return mixed
      */
@@ -20,12 +22,17 @@ class GambioConfigRepository extends GambioBaseRepository
             ->result('array');
     }
 
+    public function insert($values)
+    {
+        $this->queryBuilder->insert(self::TABLE_NAME, $values, true);
+    }
+
     /**
      * @return string
      */
     protected function _getTableName()
     {
-        return 'configuration';
+        return self::TABLE_NAME;
     }
 
     /**
