@@ -20,7 +20,7 @@ class mollie_creditcard extends mollie
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
         $useComponents = @constant($componentsKey);
-        if (empty($useComponents)) {
+        if (empty($useComponents) && $this->_isInstalled()) {
             $this->setInitialMollieComponentsUsage($componentsKey);
             define($componentsKey, 'True');
         }
