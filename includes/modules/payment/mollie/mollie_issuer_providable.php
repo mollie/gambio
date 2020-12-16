@@ -1,5 +1,7 @@
 <?php
 
+use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
+use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Utility\MollieIssuersProvider;
 
 require_once __DIR__ . '/mollie.php';
@@ -28,7 +30,14 @@ abstract class mollie_issuer_providable extends mollie
         parent::__construct();
 
         $currentMethod = $this->getCurrentMethod();
-        $issuerListType = @constant($this->_formatKey('ISSUER_LIST'));
+        $issuerListKey = $this->_formatKey('ISSUER_LIST');
+        $issuerListType = @constant($issuerListKey);
+
+        if (empty($issuerListType) && $this->_isInstalled()) {
+            $this->setInitialIssuerListStyle($this->_formatKey('ISSUER_LIST', true));
+            define($issuerListKey, PaymentMethodConfig::ISSUER_LIST);
+        }
+
         $this->issuersProvider = new MollieIssuersProvider($currentMethod, $issuerListType, $this->code);
     }
 
@@ -93,5 +102,21 @@ abstract class mollie_issuer_providable extends mollie
         }
 
         return $currentMethod;
+    }
+
+    /**
+     * @param $key
+     */
+    private function setInitialIssuerListStyle($key)
+    {
+        $repository = new GambioConfigRepository();
+        $values = [
+            'key'      => $key,
+            'value'    => PaymentMethodConfig::ISSUER_LIST,
+            'legacy_group_id' => 6,
+            'sort_order' => 0,
+        ];
+
+        $repository->insert($values);
     }
 }

@@ -3,6 +3,7 @@
 namespace Mollie\Gambio\Utility;
 
 use Mollie\BusinessLogic\Http\DTO\PaymentMethod;
+use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 
 /**
  * Class MollieIssuersProvider
@@ -48,7 +49,7 @@ class MollieIssuersProvider
     public function extendConfiguration(array $configuration)
     {
         $configuration['ISSUER_LIST'] = [
-            'value' => 'list',
+            'value' => PaymentMethodConfig::ISSUER_LIST,
         ];
 
         return $configuration;
