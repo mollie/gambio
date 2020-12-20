@@ -138,7 +138,7 @@ class MollieRefundController extends AdminHttpViewController
         $mollieOrder = $this->_getOrderService()->getOrder($orderId);
 
         $data                       = $mollieOrder->toArray();
-        $data['availableForRefund'] = number_format($mollieOrder->getAmount()->getAmountValue() - $mollieOrder->getAmountRefunded()->getAmountValue(), 2);
+        $data['availableForRefund'] = $mollieOrder->getAmount()->getAmountValue() - $mollieOrder->getAmountRefunded()->getAmountValue();
 
         return $data;
     }
@@ -158,7 +158,7 @@ class MollieRefundController extends AdminHttpViewController
         $molliePayment = $this->_getPaymentService()->getPayment($orderId);
 
         $data                       = $molliePayment->toArray();
-        $data['availableForRefund'] = number_format($molliePayment->getAmount()->getAmountValue() - $molliePayment->getAmountRefunded()->getAmountValue(), 2);
+        $data['availableForRefund'] = $molliePayment->getAmount()->getAmountValue() - $molliePayment->getAmountRefunded()->getAmountValue();
 
         return $data;
     }
