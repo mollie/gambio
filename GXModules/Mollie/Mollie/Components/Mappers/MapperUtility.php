@@ -69,9 +69,8 @@ trait MapperUtility
     {
         $amount = new Amount();
 
-        $formattedValue = number_format((float)$value, 2);
         $amount->setCurrency($currency);
-        $amount->setAmountValue($formattedValue);
+        $amount->setAmountValue($value);
 
         return $amount;
     }
