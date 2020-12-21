@@ -3,28 +3,54 @@ var MollieComponents = window.MollieComponents || {};
 (function () {
     /**
      *
-     * @param {HTMLElement} cardWrapper
      * @constructor
      */
-    function CreditCardService(cardWrapper) {
+    function CreditCardService() {
+        this.mount = mount;
+        this.unmount = unmount;
 
-        const mollie = init();
+        function mount(cardWrapper) {
+            if (isMounted()) {
+                return;
+            }
 
-        // mount components
-        const cardHolder = createMollieComponent('cardHolder', 'card-holder');
-        const cardNumber = createMollieComponent('cardNumber', 'card-number');
-        const expDate = createMollieComponent('expiryDate', 'expiry-date');
-        const verificationCode = createMollieComponent('verificationCode', 'verification-code');
+            const mollie = init(cardWrapper);
+            // mount components
+            const cardHolder = createMollieComponent('cardHolder', 'card-holder', cardWrapper, mollie);
+            const cardNumber = createMollieComponent('cardNumber', 'card-number', cardWrapper, mollie);
+            const expDate = createMollieComponent('expiryDate', 'expiry-date', cardWrapper, mollie);
+            const verificationCode = createMollieComponent('verificationCode', 'verification-code', cardWrapper, mollie);
 
-        //add validation listeners
-        addValidationListeners(cardHolder, buildIdSelector('card-holder'));
-        addValidationListeners(cardNumber, buildIdSelector('card-number'));
-        addValidationListeners(expDate, buildIdSelector('expiry-date'));
-        addValidationListeners(verificationCode, buildIdSelector('verification-code'));
 
-        addSubmitPaymentListener();
+            //add validation listeners
+            addValidationListeners(cardHolder, buildIdSelector('card-holder', cardWrapper));
+            addValidationListeners(cardNumber, buildIdSelector('card-number', cardWrapper));
+            addValidationListeners(expDate, buildIdSelector('expiry-date', cardWrapper));
+            addValidationListeners(verificationCode, buildIdSelector('verification-code', cardWrapper));
 
-        function addSubmitPaymentListener() {
+            addSubmitPaymentListener(cardWrapper, mollie);
+        }
+
+
+        function unmount() {
+            try {
+                let mollieComponents = document.querySelectorAll('.mollie-component');
+                for (let i = 0; i < mollieComponents.length; i++) {
+                    mollieComponents[i].remove();
+                }
+
+                let mollieControllers = document.querySelectorAll('.mollie-components-controller');
+                for (let i = 0; i < mollieControllers.length; i++) {
+                    mollieControllers[i].remove();
+                }
+
+            } catch (e) {
+
+            }
+
+        }
+
+        function addSubmitPaymentListener(cardWrapper, mollie) {
             let checkoutForm = document.querySelector('#checkout_payment');
             checkoutForm.addEventListener('submit', async event => {
                 if (getSelectedMethod() === cardWrapper.getAttribute('data-method-id')) {
@@ -61,7 +87,7 @@ var MollieComponents = window.MollieComponents || {};
 
         }
 
-        function createMollieComponent(type, selector) {
+        function createMollieComponent(type, selector, cardWrapper, mollie) {
             let paymentMethod = cardWrapper.getAttribute('data-method-id');
             let baseSelector = '#' + paymentMethod + '-' + selector;
             let errorSelector = '#' + paymentMethod+ '-' + selector + '-error';
@@ -92,15 +118,21 @@ var MollieComponents = window.MollieComponents || {};
         /**
          *
          * @param baseSelector
+         * @param cardWrapper
          * @returns {string}
          */
-        function buildIdSelector(baseSelector) {
+        function buildIdSelector(baseSelector, cardWrapper) {
             let paymentMethod = cardWrapper.getAttribute('data-method-id');
 
             return '#' + paymentMethod + '-' + baseSelector;
         }
 
-        function init () {
+        /**
+         *
+         * @param cardWrapper
+         * @returns {*}
+         */
+        function init (cardWrapper) {
             return Mollie(
                 cardWrapper.getAttribute('data-profile-id'),
                 {
@@ -109,7 +141,15 @@ var MollieComponents = window.MollieComponents || {};
                 }
             );
         }
+
+        /**
+         *
+         * @returns {boolean}
+         */
+        function isMounted() {
+            return document.querySelectorAll('.mollie-component').length > 0;
+        }
     }
 
-    MollieComponents.creditCard = CreditCardService;
+    MollieComponents.creditCard = new CreditCardService();
 })();
