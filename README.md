@@ -91,5 +91,6 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+- 2.0.2: Removed thousand separator when sending amount to Mollie API.
 - 2.0.1: Translations for NL, DE, and FR are added.
 - 2.0.0: The initial release of Mollie integration with Gambio.
