@@ -1,25 +1,27 @@
 (function() {
     document.addEventListener("DOMContentLoaded", function () {
-        let cards = document.querySelectorAll('.mollie-component-wrapper');
-        cards.forEach(card => {
-            MollieComponents.creditCard(card);
-        });
 
-
-        let paymentMethods = document.querySelectorAll('li.list-group-item');
+        let cardWrapper = document.querySelector('.mollie-component-wrapper');
+        let paymentMethods = document.querySelectorAll('input[name="payment"]');
         let creditCardComponents = document.querySelector('.mollie-component-wrapper');
 
         if (isCreditCardMethod()) {
             creditCardComponents.classList.remove('mollie-hidden');
+            mountIfActive();
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
-            paymentMethods[i].addEventListener('click', function () {
-                creditCardComponents.classList.add('mollie-hidden');
-                if (isCreditCardMethod()) {
+            paymentMethods[i].onchange =  function (event) {
+
+                let target = event.target;
+                if (target.value === 'mollie_creditcard') {
                     creditCardComponents.classList.remove('mollie-hidden');
+                    mountIfActive();
+                } else {
+                    creditCardComponents.classList.add('mollie-hidden');
+                    MollieComponents.creditCard.unmount();
                 }
-            });
+            }
         }
 
         function isCreditCardMethod()
@@ -30,6 +32,13 @@
             }
 
             return false;
+        }
+
+        function mountIfActive() {
+            let creditCardWrapper = document.querySelector('.mollie_creditcard');
+            if (creditCardWrapper && creditCardWrapper.classList.contains('active')) {
+                MollieComponents.creditCard.mount(cardWrapper);
+            }
         }
     });
 })();
