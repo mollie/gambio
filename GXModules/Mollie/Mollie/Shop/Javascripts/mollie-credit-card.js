@@ -5,7 +5,7 @@
         let paymentMethods = document.querySelectorAll('input[name="payment"]');
 
         if (isCreditCardMethod()) {
-            mountIfActive();
+            setTimeout(mountIfActive, 500);
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
