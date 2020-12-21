@@ -128,26 +128,16 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
         if ($orderTotalChanged) {
             $line->setQuantity($input['products_quantity']);
             $line->setVatRate($input['products_tax']);
-            $finalPrice = $this->_formatNumber($input['products_quantity'] * $input['products_price']);
+            $finalPrice = $input['products_quantity'] * $input['products_price'];
 
-            $vatAmount = $this->_formatNumber($finalPrice * ($input['products_tax'] / (100 + $input['products_tax'])));
+            $vatAmount = $finalPrice * ($input['products_tax'] / (100 + $input['products_tax']));
 
-            $line->setUnitPrice(Amount::fromArray(['currency' => $currency, 'value' => $this->_formatNumber($input['products_price'])]));
+            $line->setUnitPrice(Amount::fromArray(['currency' => $currency, 'value' => $input['products_price']]));
             $line->setTotalAmount(Amount::fromArray(['currency' => $currency, 'value' => $finalPrice]));
             $line->setVatAmount(Amount::fromArray(['currency' => $currency, 'value' => $vatAmount]));
         }
 
         $this->_getEventBus()->fire(new IntegrationOrderLineChangedEvent($orderId, $line));
-    }
-
-    /**
-     * @param $number
-     *
-     * @return string
-     */
-    private function _formatNumber($number)
-    {
-        return number_format($number, 2);
     }
 
     /**
