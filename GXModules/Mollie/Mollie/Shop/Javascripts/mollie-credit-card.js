@@ -2,10 +2,10 @@
     document.addEventListener("DOMContentLoaded", function () {
 
         let cardWrapper = document.querySelector('.mollie-component-wrapper');
-        let paymentMethods = document.querySelectorAll('input[name="payment"]');
+        let paymentMethods = document.querySelectorAll('li.list-group-item');
 
         if (isCreditCardMethod()) {
-            mountIfActive();
+            setTimeout(mountIfActive, 100);
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
@@ -13,7 +13,7 @@
 
                 let target = event.target;
                 if (target.value === 'mollie_creditcard') {
-                    mountIfActive();
+                    setTimeout(mountIfActive, 100);
                 } else {
                     MollieComponents.creditCard.unmount();
                 }
