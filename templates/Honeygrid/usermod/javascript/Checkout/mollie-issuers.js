@@ -1,16 +1,45 @@
 (function() {
     document.addEventListener("DOMContentLoaded", function () {
+        let issuerListWrappers = document.querySelectorAll('.mollie-issuer-list-wrapper');
         let paymentMethods = document.querySelectorAll('li.list-group-item');
         let allIssuerLists = document.querySelectorAll('.mollie-issuers');
 
-
         showIssuerList();
 
+        for (let i = 0; i < issuerListWrappers.length; i++) {
+            addIssuerListListeners(issuerListWrappers[i]);
+        }
+
+        function addIssuerListListeners(issuerListWrapper) {
+            let issuers = issuerListWrapper.querySelectorAll('.mollie-issuer-list');
+            let issuerListHiddenInput = issuerListWrapper.querySelector('input[type="hidden"]');
+            setSelectedIssuer();
+            for (let i = 0; i < issuers.length; i++) {
+                issuers[i].addEventListener('click', function (event) {
+                    disableAll(issuers);
+                    event.target.checked = true;
+                    issuerListHiddenInput.value = event.target.value;
+                    event.stopPropagation();
+                });
+            }
+
+
+            function disableAll(issuers) {
+                for (let i = 0; i < issuers.length; i++) {
+                    issuers[i].checked = false;
+                }
+            }
+
+            function setSelectedIssuer() {
+                let selectedIssuer = issuerListWrapper.querySelector('input[type="radio"]:checked')
+                issuerListHiddenInput.value = selectedIssuer.value;
+            }
+        }
 
         for (let i = 0; i < paymentMethods.length; i++) {
-            paymentMethods[i].addEventListener('click', function () {
-                showIssuerList();
-            });
+            paymentMethods[i].onclick = function () {
+                setTimeout(showIssuerList, 100);
+            };
         }
 
         function showIssuerList() {
