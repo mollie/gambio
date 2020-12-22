@@ -5,7 +5,6 @@
         let paymentMethods = document.querySelectorAll('li.list-group-item');
         let creditCardComponents = document.querySelector('.mollie-component-wrapper');
 
-        debugger;
         if (isCreditCardMethod()) {
             creditCardComponents.classList.remove('mollie-hidden');
             setTimeout(mountIfActive, 100);
