@@ -2,12 +2,13 @@
     document.addEventListener("DOMContentLoaded", function () {
 
         let cardWrapper = document.querySelector('.mollie-component-wrapper');
-        let paymentMethods = document.querySelectorAll('input[name="payment"]');
+        let paymentMethods = document.querySelectorAll('li.list-group-item');
         let creditCardComponents = document.querySelector('.mollie-component-wrapper');
 
+        debugger;
         if (isCreditCardMethod()) {
             creditCardComponents.classList.remove('mollie-hidden');
-            mountIfActive();
+            setTimeout(mountIfActive, 100);
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
@@ -16,7 +17,7 @@
                 let target = event.target;
                 if (target.value === 'mollie_creditcard') {
                     creditCardComponents.classList.remove('mollie-hidden');
-                    mountIfActive();
+                    setTimeout(mountIfActive, 100);
                 } else {
                     creditCardComponents.classList.add('mollie-hidden');
                     MollieComponents.creditCard.unmount();

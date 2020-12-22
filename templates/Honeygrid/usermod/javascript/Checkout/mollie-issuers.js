@@ -1,8 +1,8 @@
 (function() {
     document.addEventListener("DOMContentLoaded", function () {
+        let issuerListWrappers = document.querySelectorAll('.mollie-issuer-list-wrapper');
         let paymentMethods = document.querySelectorAll('li.list-group-item');
         let allIssuerLists = document.querySelectorAll('.mollie-issuers');
-        let issuerListWrappers = document.querySelectorAll('.mollie-issuer-list-wrapper');
 
         showIssuerList();
 
@@ -37,9 +37,9 @@
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
-            paymentMethods[i].addEventListener('click', function () {
-                showIssuerList();
-            });
+            paymentMethods[i].onclick = function () {
+                setTimeout(showIssuerList, 100);
+            };
         }
 
         function showIssuerList() {
