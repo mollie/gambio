@@ -19,6 +19,7 @@
         <div class="mollie-issuer-list-wrapper">
             <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
             <ul>
+                <input type="hidden" class="issuer-list-value" name="{{$mollie.payment_method}}-issuer" value="{{$mollie.issuers.0.id}}">
                 {assign var=isFirst value='1'}
                 {foreach item=module_data from=$mollie.issuers}
 
@@ -26,7 +27,7 @@
                     <label>
                         <img src="{{$module_data.image.svg}}">
                         <span>{$module_data.name}</span>
-                        <input type="radio" name="{{$mollie.payment_method}}-issuer" value="{{$module_data.id}}" {{if $isFirst == '1'}}checked{{/if}}>
+                        <input class="mollie-issuer-list" type="radio" name="{{$module_data.id}}" value="{{$module_data.id}}" {{if $isFirst == '1'}}checked{{/if}}>
                         {assign var=isFirst value='0'}
                     </label>
                 </li>
