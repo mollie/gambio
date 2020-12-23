@@ -168,10 +168,11 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         foreach ($paymentMethodConfigs as $methodConfig) {
             $originalConfig     = $methodConfig->getOriginalAPIConfig();
             $methodsFormatted[] = [
-                'id'         => $originalConfig->getId(),
-                'label'      => $originalConfig->getDescription(),
-                'image_src'  => $originalConfig->getImage()->getSvg(),
-                'is_enabled' => $methodConfig->isEnabled(),
+                'id'          => $originalConfig->getId(),
+                'label'       => $originalConfig->getDescription(),
+                'image_src'   => $originalConfig->getImage()->getSvg(),
+                'is_enabled'  => $methodConfig->isEnabled(),
+                'module_link' => UrlProvider::generateAdminUrl('modules.php', null, ['set' => 'payment', 'module' => "mollie_{$originalConfig->getId()}"])
             ];
         }
 

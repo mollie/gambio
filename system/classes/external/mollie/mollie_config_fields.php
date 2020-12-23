@@ -156,6 +156,8 @@ function mollie_logo_upload($key_value, $key = '')
  */
 function mollie_render_template($path, $data = [])
 {
+    $data['css_admin'] = UrlProvider::getPluginCssUrl('');
+    $data['js_admin']  = UrlProvider::getPluginJavascriptUrl('');
     /** @var ContentView $contentView */
     $contentView = MainFactory::create('ContentView');
     $contentView->set_template_dir(dirname($path));
