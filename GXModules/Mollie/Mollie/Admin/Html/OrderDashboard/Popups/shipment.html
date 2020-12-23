@@ -1,10 +1,10 @@
 {block name="mollie_shipment"}
 {load_language_text section="module_center_module"}
 
-<link rel="stylesheet" href="/GXModules/Mollie/Mollie/Admin/Styles/mollie_line_list.css">
-<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-tabs.js"></script>
-<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-quantity-checker.js"></script>
-<script src="/GXModules/Mollie/Mollie/Admin/Javascripts/mollie-items-build.js"></script>
+<link rel="stylesheet" href="{$content.css_admin}mollie_line_list.css">
+<script src="{$content.js_admin}mollie-tabs.js"></script>
+<script src="{$content.js_admin}mollie-quantity-checker.js"></script>
+<script src="{$content.js_admin}mollie-items-build.js"></script>
 
 <input type="hidden" value="{$content.process_shipment_url}" id="mollie-process-shipment-url">
 <input type="hidden" value="{$content.is_shippable}" id="mollie-is-shippable">
