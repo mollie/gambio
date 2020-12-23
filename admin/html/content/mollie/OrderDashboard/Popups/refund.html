@@ -1,10 +1,10 @@
 {block name="mollie_refund"}
 {load_language_text section="module_center_module"}
 
-<link rel="stylesheet" href="/admin/html/assets/mollie/Styles/mollie_line_list.css">
-<script src="/admin/html/assets/mollie/Javascripts/mollie-tabs.js"></script>
-<script src="/admin/html/assets/mollie/Javascripts/mollie-quantity-checker.js"></script>
-<script src="/admin/html/assets/mollie/Javascripts/mollie-items-build.js"></script>
+<link rel="stylesheet" href="{$content.css_admin}mollie_line_list.css">
+<script src="{$content.js_admin}mollie-tabs.js"></script>
+<script src="{$content.js_admin}mollie-quantity-checker.js"></script>
+<script src="{$content.js_admin}mollie-items-build.js"></script>
 
 {if $content.is_orders_api}
 {assign var=amountAvailable value=$content.order.availableForRefund}
