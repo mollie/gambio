@@ -1,6 +1,12 @@
 {block name="checkout_payment_modules_list"}
-    <script src="/GXModules/Mollie/Mollie/Shop/Javascripts/mollie-applepay.js"></script>
-    <link rel="stylesheet" href="/GXModules/Mollie/Mollie/Shop/Styles/mollie-applepay.css">
+    <link rel="stylesheet" href="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Styles/mollie-credit-card.css">
+    <link rel="stylesheet" href="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Styles/mollie-issuers.css">
+    <script src="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Javascripts/mollie-applepay.js"></script>
+    <script src="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Javascripts/mollie-components.js"></script>
+    <script src="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Javascripts/mollie-credit-card.js"></script>
+    <script src="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Javascripts/mollie-issuers.js"></script>
+    <script src="https://js.mollie.com/v1/mollie.js"></script>
+    <link rel="stylesheet" href="{php} echo \Mollie\Gambio\Utility\UrlProvider::getPluginUrl(){/php}Shop/Styles/mollie-applepay.css">
 
     {$smarty.block.parent}
 

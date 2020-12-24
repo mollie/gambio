@@ -1,0 +1,111 @@
+
+
+.form-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+.mollie-component-wrapper {
+    padding: 10px;
+    max-width: 350px;
+    min-width: 345px;
+}
+
+.mollie-component-wrapper .form-group--cardHolder,
+.mollie-component-wrapper .form-group--cardNumber,
+.mollie-component-wrapper .form-group--expiryDate,
+.mollie-component-wrapper .form-group--verificationCode {
+    position: relative;
+    min-height: 52px;
+    margin-bottom: 0;
+}
+
+.mollie-component-wrapper label {
+    padding-left: 0;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    font-weight: normal;
+    position: absolute;
+    top: 17px;
+    left: 10px;
+    color: #888;
+    transform-origin: top left;
+    transition: all 0.05s ease;
+}
+
+/* Move the label to the top on focus or when the field is dirty */
+.form-group.has-focus .label,
+.form-group.is-dirty .label {
+    transform: scale(0.65) translateY(-65%);
+}
+
+.form-error,
+.field-error {
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #f00;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.mollie-component {
+    width: 100%;
+    padding: 18px 15px 10px;
+    color: #222;
+
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.05s ease;
+}
+
+.mollie-component.has-focus {
+    border-color: #07f;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+}
+
+.mollie-component.is-invalid {
+    border-color: #f00;
+    background-color: #fff0f0;
+}
+
+/* Hide the iframe by default */
+.mollie-component iframe {
+    opacity: 0;
+    transition: all 0.05s ease;
+}
+
+/* Show the iframe on focus or when dirty */
+.form-group.has-focus .mollie-component iframe,
+.form-group.is-dirty .mollie-component iframe {
+    opacity: 1;
+}
+
+@media (min-width: 321px) {
+    .form-fields {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-group--cardHolder {
+        grid-column: span 2;
+    }
+
+    .form-group--cardNumber {
+        grid-column: span 2;
+    }
+}
+
+@media (min-width: 480px) {
+    .wrapper {
+        padding: 20px;
+    }
+
+    .form {
+        padding: 40px;
+    }
+}

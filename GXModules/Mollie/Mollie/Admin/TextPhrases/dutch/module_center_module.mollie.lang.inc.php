@@ -7,8 +7,8 @@ $t_language_text_section_content_array = [
     'mollie_test_mode'               => 'Testmodus',
     'mollie_live_token'              => 'Live API-key',
     'mollie_test_token'              => 'Test API-key',
-    'mollie_live_token_msg'          => 'Je kunt je live API-Key vinden in je Mollie-profiel.',
-    'mollie_test_token_msg'          => 'Je kunt je test-API Key vinden in je Mollie-profiel.',
+    'mollie_live_token_msg'          => 'Je kunt je live API-Key vinden in je <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie-profiel</a>.',
+    'mollie_test_token_msg'          => 'Je kunt je test-API Key vinden in je <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie-profiel</a>.',
     'mollie_verify'                  => 'Verifieer token',
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/nl',
@@ -89,6 +89,15 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'Payments API',
     'mollie_unknown_error'           => 'Er is een onbekende fout opgetreden op de Mollie-API',
     'mollie_checkout_desc'           => 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.',
+
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'Lijst met afbeeldingen',
+
+    'mollie_select_bank'             => 'Selecteer Bank',
+    'mollie_card_holder'             => 'Kaarthouder',
+    'mollie_card_number'             => 'Kaartnummer',
+    'mollie_expiry_date'             => 'Vervaldatum',
+    'mollie_verification_code'       => 'Verificatie code',
 
     'mollie_canceled_comment' => 'De klant heeft de betaling geannuleerd.',
     'mollie_expired_comment'  => 'De betaling is op Mollie verlopen.',

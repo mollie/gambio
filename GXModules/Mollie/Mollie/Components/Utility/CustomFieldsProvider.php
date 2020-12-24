@@ -33,15 +33,20 @@ class CustomFieldsProvider
         $zonesKey = $this->_formatKey('ALLOWED_ZONES');
         $titleKey = $this->_formatKey('CHECKOUT_NAME');
         $descKey = $this->_formatKey('CHECKOUT_DESCRIPTION');
+        $issuerListKey = $this->_formatKey('ISSUER_LIST');
 
         $apiMethod = $this->_isKlarna() ?
             mollie_api_select($this->getConstantValue($apiMethodKey), $apiMethodKey) : '';
+
+        $issuerList = $this->_isIssuersSupported() ?
+            mollie_issuer_list_select($this->getConstantValue($issuerListKey), $issuerListKey) : '';
 
         return mollie_logo_upload($this->getConstantValue($logoKey), $logoKey) .
             mollie_multi_language_text($this->getConstantValue($titleKey), $titleKey) .
             mollie_multi_language_text($this->getConstantValue($descKey), $descKey).
             $apiMethod .
-            mollie_multi_select_countries($this->getConstantValue($zonesKey), $zonesKey);
+            mollie_multi_select_countries($this->getConstantValue($zonesKey), $zonesKey) .
+            $issuerList;
     }
 
     /**
@@ -55,11 +60,15 @@ class CustomFieldsProvider
         $apiMethod = $this->_isKlarna() ?
             mollie_render_template($templatePath, $this->_formatOverviewData('API_METHOD')) : '';
 
+        $issuerList = $this->_isIssuersSupported() ?
+            mollie_render_template($templatePath, $this->_formatOverviewData('ISSUER_LIST')) : '';
+
         return mollie_render_template($templatePath, $this->_formatOverviewData('LOGO')) .
             mollie_render_template($templatePath, $this->_formatOverviewData('CHECKOUT_NAME')) .
             mollie_render_template($templatePath, $this->_formatOverviewData('CHECKOUT_DESCRIPTION')) .
             $apiMethod .
-            mollie_render_template($templatePath, $this->_formatOverviewData('ALLOWED_ZONES'));
+            mollie_render_template($templatePath, $this->_formatOverviewData('ALLOWED_ZONES')) .
+            $issuerList;
     }
 
     /**
@@ -69,6 +78,15 @@ class CustomFieldsProvider
     {
         return strpos($_GET['module'], 'klarna') === false;
     }
+
+    /**
+     * @return bool
+     */
+    private function _isIssuersSupported()
+    {
+        return in_array($_GET['module'], ['mollie_ideal', 'mollie_kbc', 'mollie_giftcard'], true);
+    }
+
     /**
      * @param string $key
      *

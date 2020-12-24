@@ -23,6 +23,9 @@ class PaymentMethodConfig extends Entity
     const API_METHOD_PAYMENT = 'payment_api';
     const API_METHOD_ORDERS = 'orders_api';
 
+    const ISSUER_DROPDOWN = 'dropdown';
+    const ISSUER_LIST = 'list';
+
     /**
      * @var string[]
      */
@@ -37,6 +40,20 @@ class PaymentMethodConfig extends Entity
     protected static $surchargeRestrictedPaymentMethods = array(PaymentMethods::KlarnaPayLater, PaymentMethods::KlarnaSliceIt);
 
     /**
+     * @var array
+     */
+    protected static $mollieComponentsSupportedMethods = array(PaymentMethods::CreditCard);
+
+    /**
+     * @var array
+     */
+    protected static $mollieIssuerSupportedMethods = array(
+        PaymentMethods::iDEAL,
+        PaymentMethods::GiftCard,
+        PaymentMethods::KBC,
+    );
+
+    /**
      * @inheritDoc
      */
     protected $fields = array(
@@ -48,6 +65,8 @@ class PaymentMethodConfig extends Entity
         'surcharge',
         'image',
         'enabled',
+        'useMollieComponents',
+        'issuerListStyle'
     );
 
     /**
@@ -82,6 +101,15 @@ class PaymentMethodConfig extends Entity
      * @var PaymentMethod
      */
     protected  $originalAPIConfig;
+
+    /**
+     * @var bool
+     */
+    protected $useMollieComponents = true;
+    /**
+     * @var string
+     */
+    protected $issuerListStyle = self::ISSUER_LIST;
 
     /**
      * @inheritDoc
@@ -133,6 +161,22 @@ class PaymentMethodConfig extends Entity
     public function isApiMethodRestricted()
     {
         return array_key_exists($this->getMollieId(), static::$adiMethodRestrictions);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMollieComponentsSupported()
+    {
+        return in_array($this->getMollieId(), static::$mollieComponentsSupportedMethods, true);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIssuerListSupported()
+    {
+        return in_array($this->getMollieId(), static::$mollieIssuerSupportedMethods, true);
     }
 
     /**
@@ -302,5 +346,37 @@ class PaymentMethodConfig extends Entity
     public function setSurcharge($surcharge)
     {
         $this->surcharge = $surcharge;
+    }
+
+    /**
+     * @return bool
+     */
+    public function useMollieComponents()
+    {
+        return $this->useMollieComponents;
+    }
+
+    /**
+     * @param bool $useMollieComponents
+     */
+    public function setUseMollieComponents($useMollieComponents)
+    {
+        $this->useMollieComponents = $useMollieComponents;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIssuerListStyle()
+    {
+        return $this->issuerListStyle;
+    }
+
+    /**
+     * @param string $issuerListStyle
+     */
+    public function setIssuerListStyle($issuerListStyle)
+    {
+        $this->issuerListStyle = $issuerListStyle;
     }
 }

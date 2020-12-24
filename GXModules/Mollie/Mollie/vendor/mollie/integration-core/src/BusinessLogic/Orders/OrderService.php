@@ -50,7 +50,12 @@ class OrderService extends BaseService
     public function createOrder($shopReference, Order $order)
     {
         $createdOrder = $this->getProxy()->createOrder($order);
-        $this->updateOrderReference($shopReference, $createdOrder);
+
+        // set initial status in order reference table to null,
+        // so it can be updated within the webhook
+        $createdOrderForReference = clone $createdOrder;
+        $createdOrderForReference->setStatus(null);
+        $this->updateOrderReference($shopReference, $createdOrderForReference);
 
         return $createdOrder;
     }
