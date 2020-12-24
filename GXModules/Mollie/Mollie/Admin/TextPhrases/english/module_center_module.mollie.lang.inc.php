@@ -7,8 +7,8 @@ $t_language_text_section_content_array = [
     'mollie_test_mode'               => 'Test mode',
     'mollie_live_token'              => 'Live API key',
     'mollie_test_token'              => 'Test API key',
-    'mollie_live_token_msg'          => 'You can find your live Api Key in your Mollie Profile.',
-    'mollie_test_token_msg'          => 'You can find your test Api Key in your Mollie Profile.',
+    'mollie_live_token_msg'          => 'You can find your live Api Key in your <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie Profile</a>.',
+    'mollie_test_token_msg'          => 'You can find your test Api Key in your <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie Profile</a>.',
     'mollie_verify'                  => 'Verify token',
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/en-us',
@@ -91,6 +91,15 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'Payments API',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => 'You will be redirected to payment gateway website to complete your purchase after the order review step.',
+
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'List with images',
+
+    'mollie_select_bank'             => 'Select bank',
+    'mollie_card_holder'             => 'Card holder',
+    'mollie_card_number'             => 'Card number',
+    'mollie_expiry_date'             => 'Expiry date',
+    'mollie_verification_code'       => 'Verification code',
 
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',

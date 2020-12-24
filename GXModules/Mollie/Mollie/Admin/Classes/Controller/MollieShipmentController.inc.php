@@ -130,6 +130,8 @@ class MollieShipmentController extends AdminHttpViewController
         $orderId = $this->_getQueryParameter('orders_id');
         $shippableItems = $this->_getShippableItems($orderId);
         return [
+            'js_admin'              => UrlProvider::getPluginJavascriptUrl(''),
+            'css_admin'             => UrlProvider::getPluginCssUrl(''),
             'is_shippable'          => !empty($shippableItems),
             'shipments'             => $this->_getAllShipments($orderId),
             'shippable_order_lines' => $this->_getShippableItems($orderId),

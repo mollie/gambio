@@ -2,9 +2,12 @@
 
 namespace Mollie\Gambio\APIProcessor;
 
+use Mollie\BusinessLogic\Http\DTO\Orders\Order;
 use Mollie\BusinessLogic\Orders\OrderService;
 use Mollie\Gambio\Mappers\OrderMapper;
 use Mollie\Gambio\Services\Business\StatusUpdate;
+use Mollie\Gambio\Utility\UrlProvider;
+use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
 use Mollie\Infrastructure\ServiceRegister;
 
 /**
@@ -47,9 +50,15 @@ class OrderProcessor implements Interfaces\Processor
                 $this->mapper->getOrder($orderId)
             );
 
-            $this->updateStatus($orderId, 'mollie_created');
+            $checkoutLink = $createdOrder->getLink('checkout');
+            if ($checkoutLink) {
+                $this->updateStatus($orderId, 'mollie_created');
+                return new Result(true, $checkoutLink->getHref());
+            }
 
-            return new Result(true, $createdOrder->getLink('checkout')->getHref());
+            $redirectUrl = UrlProvider::generateShopUrl('shop.php', 'MollieCheckoutRedirect', ['order_id' => $orderId]);
+
+            return new Result(true, $redirectUrl);
         } catch (\Exception $exception) {
             $result = new Result(false);
             $result->setErrorMessage("Couldn't create payment on Mollie: {$exception->getMessage()}");

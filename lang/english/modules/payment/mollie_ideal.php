@@ -19,10 +19,13 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TITLE', 'Surcharge');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC', 'Please enter the extra costs for a payment in default currency. If field is empty, no additional payment costs will be charged to customers.');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE', 'API method');
-define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Use the Payment API Platform for the transactions.<br><br><b>Order API</b><br>Use the new Order API Platform and get additional insights in the orders.');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Use the Payment API Platform for the transactions.<br><br><b>Order API</b><br>Use the new Order API Platform and get additional insights in the orders. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Read more</a>.');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC', 'Please upload logo that will be used in checkout.');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_TITLE', 'Sort order of display in checkout');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
+
+define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', 'Issuer list style');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');

@@ -6,6 +6,7 @@ namespace Mollie\Gambio\Mappers;
 
 use Mollie\BusinessLogic\Configuration;
 use Mollie\BusinessLogic\Http\DTO\Amount;
+use Mollie\BusinessLogic\Http\DTO\Payment;
 use Mollie\Gambio\Entity\Repository\GambioProductRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\UrlProvider;
@@ -72,6 +73,24 @@ trait MapperUtility
         $amount->setAmountValue($value);
 
         return $amount;
+    }
+
+    /**
+     * Adds issuer and card token params
+     *
+     * @param Payment $payment
+     */
+    protected function addSpecificParameters($payment)
+    {
+        if (!empty($_SESSION['mollie_issuer'])) {
+            $payment->setIssuer($_SESSION['mollie_issuer']);
+            unset($_SESSION['mollie_issuer']);
+        }
+
+        if (!empty($_SESSION['mollie_card_token'])) {
+            $payment->setCardToken($_SESSION['mollie_card_token']);
+            unset($_SESSION['mollie_card_token']);
+        }
     }
 
     /**

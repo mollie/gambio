@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased](https://github.com/mollie/orocore/compare/v1.1.0...dev)
+ - Changed `OrderService` and `PaymentService` create method, to 
+ set initial status to null
+ - Added `useMollieComponents` and `issuerListStyle` to the `PaymentMethodConfig`
+ entity
+ - Added `cardToken` property to the `Order` and `Payment` DTOs
+ - Added `issuers` property to the `PaymentMethod` DTOs
+ - Modify `Proxy::getAllPaymentMethods` to use `incloude=issuers` in the query string
+
+## [v1.1.2](https://github.com/mollie/orocore/tree/v1.1.2) - 2020-11-18
+ - Remove leading zeros from the phone numbers
+ 
+## [v1.1.1](https://github.com/mollie/orocore/tree/v1.1.1) - 2020-11-12
+ - Added address phone sanitization for order create/update requests.
+ All common delimiters like spaces, `/`, and `-` are removed from phone input and
+ code ensures that `+` sign is always at the beginning of the phone number.
 
 ## [v1.1.0](https://github.com/mollie/orocore/tree/v1.1.0) - 2020-11-05
 **BREAKING CHANGES**

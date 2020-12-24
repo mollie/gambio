@@ -7,8 +7,8 @@ $t_language_text_section_content_array = [
     'mollie_test_mode'               => 'Mode test',
     'mollie_live_token'              => 'Clé API live',
     'mollie_test_token'              => 'Clé API test',
-    'mollie_live_token_msg'          => 'Vous trouverez votre clé API live dans votre profil Mollie.',
-    'mollie_test_token_msg'          => 'Vous trouverez votre clé API test dans votre profil Mollie.',
+    'mollie_live_token_msg'          => 'Vous trouverez votre clé API live dans votre <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">profile Mollie</a>.',
+    'mollie_test_token_msg'          => 'Vous trouverez votre clé API test dans votre <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">profile Mollie</a>.',
     'mollie_verify'                  => 'Vérifier les jetons',
     'mollie_support'                 => 'Assistance',
     'mollie_support_link'            => 'https://help.mollie.com/hc/en-us',
@@ -89,6 +89,15 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'API de paiement',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => "Vous allez être redirigé vers le site web de la passerelle de paiement pour effectuer votre achat après l'étape de révision de la commande.",
+
+    'mollie_issuer_list_dropdown'    => 'Liste déroulante',
+    'mollie_issuer_list_images'      => 'Liste avec images',
+
+    'mollie_select_bank'             => 'Choisir une banque',
+    'mollie_card_holder'             => 'Titulaire de la carte',
+    'mollie_card_number'             => 'Numéro de carte',
+    'mollie_expiry_date'             => "Date d'expiration",
+    'mollie_verification_code'       => 'Code de vérification',
 
     'mollie_canceled_comment' => 'Le client a annulé le paiement.',
     'mollie_expired_comment'  => 'Le paiement a expiré sur Mollie.',

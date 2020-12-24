@@ -8,6 +8,7 @@ use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\MollieModuleChecker;
 use Mollie\Gambio\Utility\PathProvider;
+use Mollie\Gambio\Utility\UrlProvider;
 use Mollie\Infrastructure\Configuration\Configuration;
 use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
 use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
@@ -336,7 +337,7 @@ class mollie
                 'value' => $name,
             ],
             'LOGO'            => [
-                'value' => "/images/icons/payment/{$this->code}.png",
+                'value' => UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png"),
             ],
             'API_METHOD'      => [
                 'value' => $this->_getDefaultApi(),
@@ -385,6 +386,10 @@ class mollie
             'is_method_active' => $this->_isMethodEnabled($order),
             'logo_path'        => $this->_getMethodLogo(),
             'is_installed'     => MollieModuleChecker::isInstalled(),
+            'css_folder'       => UrlProvider::getPluginCssUrl(''),
+            'plugin_url'       => UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule'),
+
+            'plugin_not_installed_url' => UrlProvider::generateAdminUrl('admin.php', 'ModuleCenter'),
         ];
 
         return mollie_render_template($descPath, $data);
@@ -580,7 +585,9 @@ class mollie
         $constantKey = $this->_formatKey('LOGO');
         $imagePath   = defined($constantKey) ? @constant($constantKey) : null;
 
-        return !empty($imagePath) ? $imagePath : "/images/icons/payment/{$this->code}.png";
+        $defaultImagePath = UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png");
+
+        return !empty($imagePath) ? $imagePath : $defaultImagePath;
     }
 
     /**
@@ -700,6 +707,18 @@ class mollie
         }
 
         return $surcharge;
+    }
+
+    /**
+     * Check if module installed
+     *
+     * @return bool
+     */
+    protected function _isInstalled()
+    {
+        $statusKey = $this->_formatKey('STATUS');
+
+        return defined($statusKey);
     }
 }
 

@@ -40,6 +40,7 @@ class MolliePaymentLinkController extends AdminHttpViewController
 
         $link    = UrlProvider::generateShopUrl('shop.php', 'MolliePaymentLinkRedirect', $query);
         $data    = [
+            'css_admin'          => UrlProvider::getPluginCssUrl(''),
             'mollie_payment_url' => $link,
         ];
 

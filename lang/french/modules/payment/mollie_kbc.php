@@ -19,10 +19,13 @@ define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_TITLE', 'Supplément');
 define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_DESC', 'Veuillez entrer le coût additionnel pour un paiement dans la devise par défaut. Si le champ est vide, auncun coût additionnel de paiement ne sera facturé au client.');
 
 define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_TITLE', "Méthode d'API");
-define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_DESC', "<b>API de paiement</b><br>Utilisez la plateforme d'API de paiement pour les transactions.<br><br><b>API de commande</b><br>Utilisez la nouvelle plateforme d'API de commande et obtenez plus d'informations sur les commandes.");
+define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_DESC', "<b>API de paiement</b><br>Utilisez la plateforme d'API de paiement pour les transactions.<br><br><b>API de commande</b><br>Utilisez la nouvelle plateforme d'API de commande et obtenez plus d'informations sur les commandes. <a href='https://docs.mollie.com/orders/why-use-orders' target='_blank'>Read more</a>.");
 
 define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_DESC', 'Veuillez charger le logo à utiliser au checkout.');
 
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
+
+define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
+define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
