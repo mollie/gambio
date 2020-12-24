@@ -91,6 +91,16 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
-- 0.1.2: Removed thousand separator when sending amount to Mollie API.
-- 0.1.1: Translations for NL, DE, and FR are added.
-- 0.1.0: The initial release of Mollie integration with Gambio.
+*0.1.3*
+- New feature: Implemented integration with Mollie Components.
+- New feature: Added iDeal, Giftcard, and KBC/CBC issuer selection in the checkout.
+- Bugfix: Fixed links and icons URL within context path.
+
+*0.1.2*
+- Removed thousand separator when sending amount to Mollie API.
+
+*0.1.1* 
+- Translations for NL, DE, and FR are added.
+
+*0.1.0*
+- The initial release of Mollie integration with Gambio.

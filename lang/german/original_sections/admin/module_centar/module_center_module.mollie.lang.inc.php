@@ -7,8 +7,8 @@ $t_language_text_section_content_array = [
     'mollie_test_mode'               => 'Test mode',
     'mollie_live_token'              => 'Live-API-Schlüssel',
     'mollie_test_token'              => 'Test-API-Schlüssel',
-    'mollie_live_token_msg'          => 'Den Live-API-Schlüssel finden Sie in Ihrem Mollie-Profil.',
-    'mollie_test_token_msg'          => 'Den Test-API-Schlüssel finden Sie in Ihrem Mollie-Profil.',
+    'mollie_live_token_msg'          => 'Den Live-API-Schlüssel finden Sie in Ihrem <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie-Profil</a>.',
+    'mollie_test_token_msg'          => 'Den Test-API-Schlüssel finden Sie in Ihrem <a href="https://www.mollie.com/dashboard/developers/api-keys" target="_blank">Mollie-Profil</a>.',
     'mollie_verify'                  => 'Token bestätigen',
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/de',
@@ -89,6 +89,15 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'Zahlungs-API',
     'mollie_unknown_error'           => 'Unbekannter Fehler in der Mollie-API',
     'mollie_checkout_desc'           => 'Nach dem Kontrollieren Ihrer Bestellung werden Sie zur Website des Zahlungsanbieters weitergeleitet, um den Einkauf abzuschließen.',
+
+    'mollie_issuer_list_dropdown'    => 'Dropdown',
+    'mollie_issuer_list_images'      => 'Liste mit Abbildungen',
+
+    'mollie_select_bank'             => 'Bank auswählen',
+    'mollie_card_holder'             => 'Kartenhalter',
+    'mollie_card_number'             => 'Kartenhalter',
+    'mollie_expiry_date'             => 'Verfallsdatum',
+    'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
 
     'mollie_canceled_comment' => 'Der Kunde hat die Zahlung abgebrochen.',
     'mollie_expired_comment'  => 'Die Zahlung ist bei Mollie abgelaufen.',

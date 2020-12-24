@@ -19,7 +19,7 @@ define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_TITLE', 'Toeslag');
 define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_DESC', 'Voer de extra kosten in voor een betaling in de standaardvaluta. Als het veld leeg is, worden er geen extra betalingskosten aan klanten in rekening gebracht..');
 
 define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_TITLE', 'API-methode');
-define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties.');
+define('MODULE_PAYMENT_MOLLIE_KBC_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
 
 define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_DESC', 'Upload een logo dat zal worden gebruikt bij het afrekenen.');
@@ -27,3 +27,5 @@ define('MODULE_PAYMENT_MOLLIE_KBC_LOGO_DESC', 'Upload een logo dat zal worden ge
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_TITLE', 'Sorteer de weergavevolgorde bij de checkout');
 define('MODULE_PAYMENT_MOLLIE_KBC_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
 
+define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_TITLE', 'Issuer list style');
+define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');

@@ -42,7 +42,7 @@
         </div>
 
         <span class="col-md-1 icon-col" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">
-                    {$txt.mollie_live_token_msg}
+                    {$txt.mollie_live_token_msg|unescape:"html" nofilter}
                 </span>
     </div>
 
@@ -54,7 +54,7 @@
         </div>
 
         <span class="col-md-1 icon-col" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">
-                    {$txt.mollie_test_token_msg}
+                    {$txt.mollie_test_token_msg|unescape:"html" nofilter}
                 </span>
     </div>
 

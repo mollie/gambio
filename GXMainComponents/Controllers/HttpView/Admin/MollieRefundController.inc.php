@@ -114,6 +114,8 @@ class MollieRefundController extends AdminHttpViewController
 
         $data['currency']           = $gambioOrder->getCurrencyCode()->getCode();
         $data['is_orders_api']      = $isOrdersApiUsed;
+        $data['js_admin']           = UrlProvider::getPluginJavascriptUrl('');
+        $data['css_admin']           = UrlProvider::getPluginCssUrl('');
         $data['process_refund_url'] = UrlProvider::generateAdminUrl(
             'admin.php',
             'MollieRefund/processRefund',

@@ -320,6 +320,7 @@ class Proxy
         $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS
     ) {
         $params = array(
+            'include' => 'issuers',
             'includeWallets' => 'applepay',
             'resource' => $apiMethod === PaymentMethodConfig::API_METHOD_PAYMENT ? 'payments' : 'orders',
         );

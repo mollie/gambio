@@ -1,6 +1,6 @@
 {load_language_text section="module_center_module"}
 
-<link rel="stylesheet" href="/admin/html/assets/mollie/Styles/payment_method_description.css">
+<link rel="stylesheet" href="{{$mollie.css_folder}}payment_method_description.css">
 
 <div class="mollie-info-container">
     <div class="mollie-info-row">
@@ -33,13 +33,17 @@
 </div>
 <div class="mollie-config-button-container">
     {if $mollie.is_installed}
-        {assign var=mollieConfigUrl value='/admin/admin.php?do=MollieModuleCenterModule'}
+        <a href="{$mollie.plugin_url}" class="btn btn-primary">
+            {$txt.mollie_configuration}
+        </a>
+
     {else}
-        {assign var=mollieConfigUrl value='/admin/admin.php?do=ModuleCenter#Mollie'}
+        {assign var=mollieConfigUrl value=$mollie.plugin_not_installed_url}
+        <a href="{$mollie.plugin_not_installed_url}#Mollie" class="btn btn-primary">
+            {$txt.mollie_configuration}
+        </a>
     {/if}
-    <a href="{$mollieConfigUrl}" class="btn btn-primary">
-        {$txt.mollie_configuration}
-    </a>
+
 </div>
 <div class="mollie-payment-method-info-container">
     <div class="logo">

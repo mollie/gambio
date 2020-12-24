@@ -22,6 +22,7 @@ class PathProvider
     {
         return new \ExistingFile(new \NonEmptyStringType(static::getAdminTemplatePath($fileName, $subDir)));
     }
+
     /**
      * Return path to the given filename name
      *
