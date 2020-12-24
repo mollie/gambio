@@ -7,6 +7,7 @@ use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\MollieModuleChecker;
 use Mollie\Gambio\Utility\PathProvider;
+use Mollie\Gambio\Utility\UrlProvider;
 use Mollie\Infrastructure\Configuration\Configuration;
 use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
 use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
@@ -58,7 +59,7 @@ class mollie
         $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
 
-        $this->title = $this->_prependLogo("/images/icons/payment/{$this->code}.png", $this->title);
+        $this->title = $this->_prependLogo(UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png"), $this->title);
 
         $this->sort_order = @constant($this->_formatKey('SORT_ORDER'));
         $this->enabled    = @constant($this->_formatKey('STATUS')) === 'True';
@@ -292,7 +293,7 @@ class mollie
                 'set_function'        => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
             ],
             'LOGO'                 => [
-                'configuration_value' => "/images/icons/payment/{$this->code}.png",
+                'configuration_value' =>  UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png"),
                 'set_function'        => 'mollie_logo_upload( ',
             ],
             'CHECKOUT_NAME'        => [
@@ -378,6 +379,10 @@ class mollie
             'is_method_active' => $this->_isMethodEnabled($order),
             'logo_path'        => $this->_getMethodLogo(),
             'is_installed'     => MollieModuleChecker::isInstalled(),
+            'css_folder'       => UrlProvider::getPluginCssUrl(''),
+            'plugin_url'       => UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule'),
+
+            'plugin_not_installed_url' => UrlProvider::generateAdminUrl('admin.php', 'ModuleCenter'),
         ];
 
         return mollie_render_template($descPath, $data);
@@ -566,8 +571,9 @@ class mollie
     {
         $constantKey = $this->_formatKey('LOGO');
         $imagePath   = defined($constantKey) ? @constant($constantKey) : null;
+        $defaultImagePath = UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png");
 
-        return !empty($imagePath) ? $imagePath : "/images/icons/payment/{$this->code}.png";
+        return !empty($imagePath) ? $imagePath : $defaultImagePath;
     }
 
     /**
@@ -679,6 +685,18 @@ class mollie
         }
 
         return $surcharge;
+    }
+
+    /**
+     * Check if module installed
+     *
+     * @return bool
+     */
+    protected function _isInstalled()
+    {
+        $statusKey = $this->_formatKey('STATUS');
+
+        return defined($statusKey);
     }
 }
 

@@ -24,10 +24,6 @@ class OrderMapper
      * @var \OrderReadServiceInterface
      */
     private $orderReadService;
-    /**
-     * @var \ProductReadServiceInterface
-     */
-    private $productReadService;
 
 
     /**
@@ -36,7 +32,6 @@ class OrderMapper
     public function __construct()
     {
         $this->orderReadService = \StaticGXCoreLoader::getService('OrderRead');
-        $this->productReadService = \StaticGXCoreLoader::getService('ProductRead');
     }
 
     /**
@@ -69,6 +64,8 @@ class OrderMapper
         $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($sourceOrder->getOrderTotals()));
 
         $orderMollie->setLines($lines);
+
+        $orderMollie->setPayment($this->getCommonPaymentData());
 
         return $orderMollie;
     }
@@ -112,7 +109,7 @@ class OrderMapper
         $sourceOrder = $this->orderReadService->getOrderById(new \IdType($orderId));
         $currency = $sourceOrder->getCurrencyCode()->getCode();
 
-        $payment = new Payment();
+        $payment = $this->getCommonPaymentData();
 
         $amount  = $this->_getAmount($currency, $this->getOrderTotalAmount($sourceOrder->getOrderTotals(), $sourceOrder->getOrderItems()));
         $payment->setAmount($amount);
@@ -124,7 +121,6 @@ class OrderMapper
         $email = $sourceOrder->getCustomerEmail();
         $phone = $sourceOrder->getCustomerTelephone();
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
-        $payment->setWebhookUrl($this->_getConfigService()->getWebhookUrl());
 
         return $payment;
     }
@@ -163,7 +159,28 @@ class OrderMapper
         return $mollieAddress;
     }
 
+    /**
+     * Return payment data for orders and payment api
+     *
+     * @return Payment
+     */
+    private function getCommonPaymentData()
+    {
+        $payment = new Payment();
+        $payment->setWebhookUrl($this->_getConfigService()->getWebhookUrl());
 
+        $this->addSpecificParameters($payment);
+
+
+        return $payment;
+    }
+
+    /**
+     * @param \OrderTotalCollection $orderTotals
+     * @param \OrderItemCollection $lines
+     *
+     * @return float|int
+     */
     private function getOrderTotalAmount(\OrderTotalCollection $orderTotals, \OrderItemCollection $lines)
     {
         /** @var \OrderTotalInterface $orderTotal */

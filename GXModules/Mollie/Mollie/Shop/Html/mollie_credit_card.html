@@ -1,0 +1,39 @@
+{load_language_text section="module_center_module"}
+
+{{if $mollie.isLegacy}}
+    <script src="https://js.mollie.com/v1/mollie.js"></script>
+{{/if}}
+
+<div class="mollie-component-wrapper {{if $mollie.isLegacy}}mollie-hidden{{/if}}"
+     data-method-id="{{$mollie.payment_method}}"
+     data-profile-id="{{$mollie.profile_id}}"
+     data-test-mode="{{$mollie.test_mode}}"
+     data-language-code="{{$mollie.lang}}"
+>
+    <div class="form-fields">
+        <div class="form-group form-group--cardHolder">
+            <label class="label" for="{{$mollie.payment_method}}-card-holder">{$txt.mollie_card_holder}</label>
+            <div id="{{$mollie.payment_method}}-card-holder" data-type="card-holder"></div>
+            <div id="{{$mollie.payment_method}}-card-holder-error" data-type="card-holder-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--cardNumber">
+            <label class="label" for="{{$mollie.payment_method}}-card-number">{$txt.mollie_card_number}</label>
+            <div id="{{$mollie.payment_method}}-card-number" data-type="card-number"></div>
+            <div id="{{$mollie.payment_method}}-card-number-error" data-type="card-number-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--expiryDate">
+            <label class="label" for="{{$mollie.payment_method}}-expiry-date">{$txt.mollie_expiry_date}</label>
+            <div id="{{$mollie.payment_method}}-expiry-date" data-type="expiry-date"></div>
+            <div id="{{$mollie.payment_method}}-expiry-date-error" data-type="expiry-date-error" class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--verificationCode">
+            <label class="label" for="{{$mollie.payment_method}}-verification-code">{$txt.mollie_verification_code}</label>
+            <div id="{{$mollie.payment_method}}-verification-code" data-type="verification-code"></div>
+            <div id="{{$mollie.payment_method}}-verification-code-error" data-type="verification-code-error" class="field-error" role="alert"></div>
+        </div>
+    </div>
+</div>
+
