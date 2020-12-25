@@ -91,6 +91,9 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*0.1.4*
+- Bugfix: Fix issuer class not found.
+
 *0.1.3*
 - New feature: Implemented integration with Mollie Components.
 - New feature: Added iDeal, Giftcard, and KBC/CBC issuer selection in the checkout.
