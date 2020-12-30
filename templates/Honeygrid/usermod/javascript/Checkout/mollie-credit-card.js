@@ -31,14 +31,25 @@
                 return selectedMethod.value === 'mollie_creditcard';
             }
 
+            selectedMethod = document.querySelector('input[name=payment]');
+            if (selectedMethod.type === 'hidden') {
+                return selectedMethod.value === 'mollie_creditcard';
+            }
+
             return false;
         }
 
         function mountIfActive() {
             let creditCardWrapper = document.querySelector('.mollie_creditcard');
-            if (creditCardWrapper && creditCardWrapper.classList.contains('active')) {
+            let isActive = creditCardWrapper.classList.contains('active') || isCreditCardOnlyPayment();
+            if (creditCardWrapper && isActive) {
                 MollieComponents.creditCard.mount(cardWrapper);
             }
         }
+
+        function isCreditCardOnlyPayment() {
+            return paymentMethods.length === 1 && paymentMethods[0].classList.contains('mollie_creditcard');
+        }
+
     });
 })();
