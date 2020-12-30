@@ -12,6 +12,26 @@ class GambioStatusRepository extends GambioBaseRepository
 {
 
     /**
+     * Returns all order status in format
+     * [$statusId => ['id', 'names','color']]
+     *
+     * @return array
+     */
+    public function getAllStatuses()
+    {
+        $results = $this->getAll();
+        $statuses = [];
+        foreach ($results as $result) {
+            $id = $result[$this->_getIdentifierKey()];
+            $statuses[$id]['id'] = $id;
+            $statuses[$id]['names'][$result['language_id']] = $result['orders_status_name'];
+            $statuses[$id]['color'] = $result['color'];
+        }
+
+        return $statuses;
+    }
+
+    /**
      * @param array $insertPayload
      *
      * @return string
