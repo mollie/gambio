@@ -12,7 +12,7 @@ use Mollie\Gambio\Utility\UrlProvider;
  */
 class ConfigurationService extends Configuration
 {
-    const MOLLIE_GAMBIO_VERSION = '0.1.4';
+    const MOLLIE_GAMBIO_VERSION = '0.1.5';
 
     /**
      * @inheritDoc
