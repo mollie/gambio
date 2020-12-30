@@ -198,18 +198,49 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     private function _formatOrderStatuses()
     {
         $formattedStatuses = [];
-        $statuses = $this->orderStatusRepository->getAll();
+        $statuses = $this->orderStatusRepository->getAllStatuses();
         foreach ($statuses as $status) {
-            if ($status['language_id'] !== $_SESSION['languages_id']) {
-                continue;
-            }
-
-            $formattedStatus['id'] = $status['orders_status_id'];
-            $formattedStatus['name'] = $status['orders_status_name'];
+            $formattedStatus['id'] = $status['id'];
+            $formattedStatus['name'] = $this->_getStatusName($status['names']);
 
             $formattedStatuses[] = $formattedStatus;
         }
 
         return $formattedStatuses;
+    }
+
+    /**
+     * Returns order status name
+     *
+     * @param array $statusNames
+     *
+     * @return string
+     */
+    private function _getStatusName($statusNames)
+    {
+        $activeLanguageId = $_SESSION['languages_id'];
+        if (array_key_exists($activeLanguageId, $statusNames)) {
+            return $statusNames[$activeLanguageId];
+        }
+
+        return $this->_getFallbackName($statusNames);
+    }
+
+    /**
+     * Returns status name in the first available language
+     *
+     * @param array $statusNames
+     *
+     * @return string
+     */
+    private function _getFallbackName($statusNames)
+    {
+        foreach (xtc_get_languages() as $language) {
+            if (array_key_exists($language['id'], $statusNames)) {
+                return $statusNames[$language['id']];
+            }
+        }
+
+        return '';
     }
 }
