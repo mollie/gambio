@@ -91,6 +91,9 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*2.0.4*
+- Bugfix: Use first available language for status name fallback instead of English.
+
 *2.0.3*
 - New feature: Implemented integration with Mollie Components.
 - New feature: Added iDeal, Giftcard, and KBC/CBC issuer selection in the checkout.
