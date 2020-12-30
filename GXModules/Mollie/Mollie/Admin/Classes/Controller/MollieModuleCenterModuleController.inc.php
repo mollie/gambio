@@ -202,12 +202,32 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
             try {
                 $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType($_SESSION['language_code'])));
             } catch (InvalidArgumentException $exception) {
-                $formattedStatus['name'] = $status->getName(new LanguageCode(new StringType('en')));
+                $formattedStatus['name'] = $this->_getFallbackName($status);
             }
 
             $formattedStatuses[] = $formattedStatus;
         }
 
         return $formattedStatuses;
+    }
+
+    /**
+     * Returns status name in the first available language
+     *
+     * @param OrderStatus $status
+     *
+     * @return string|null
+     */
+    private function _getFallbackName(OrderStatus $status)
+    {
+        foreach (xtc_get_languages() as $language) {
+            try {
+                return $status->getName(new LanguageCode(new StringType($language['code'])));
+            } catch (Exception $exception) {
+                continue;
+            }
+        }
+
+        return '';
     }
 }
