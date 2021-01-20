@@ -3,9 +3,10 @@
 use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\DTO\Orders\Order;
 use Mollie\BusinessLogic\Http\DTO\Orders\OrderLine;
-use Mollie\BusinessLogic\Integration\Event\IntegrationOrderCanceledEvent;
 use Mollie\BusinessLogic\Integration\Event\IntegrationOrderLineChangedEvent;
 use Mollie\BusinessLogic\Integration\Event\IntegrationOrderTotalChangedEvent;
+use Mollie\BusinessLogic\Notifications\NotificationHub;
+use Mollie\BusinessLogic\Notifications\NotificationText;
 use Mollie\BusinessLogic\OrderReference\OrderReferenceService;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\Gambio\Utility\MollieModuleChecker;
@@ -71,7 +72,11 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     {
         try {
             $orderId = $_POST['gm_multi_status'][0];
-            $this->_getEventBus()->fire(new IntegrationOrderCanceledEvent($orderId));
+            NotificationHub::pushInfo(
+                new NotificationText('mollie.payment.integration.event.notification.order_cancel.title'),
+                new NotificationText('mollie.payment.integration.event.notification.order_cancel.description'),
+                $orderId
+            );
         } catch (Exception $exception) {
             $langKey = 'mollie.payment.integration.event.notification.order_cancel_error.description';
             $this->pushMessage('error', $langKey, $exception);
