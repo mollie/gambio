@@ -91,6 +91,9 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*0.1.6*
+- Bugfix: Fix issues with mollie components when it is only payment method.
+
 *0.1.5*
 - Bugfix: Use first available language for status name fallback instead of English.
 

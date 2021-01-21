@@ -5,6 +5,7 @@
         let allIssuerLists = document.querySelectorAll('.mollie-issuers');
 
         showIssuerList();
+        showIssuersIfOnlyPaymentMethod();
 
         for (let i = 0; i < issuerListWrappers.length; i++) {
             addIssuerListListeners(issuerListWrappers[i]);
@@ -22,7 +23,6 @@
                     event.stopPropagation();
                 });
             }
-
 
             function disableAll(issuers) {
                 for (let i = 0; i < issuers.length; i++) {
@@ -62,7 +62,27 @@
                 return document.querySelector('.' + selectedMethod.value).querySelector('.mollie-issuers');
             }
 
+            // in case when only one payment method is rendering, input type is hidden
+            selectedMethod = document.querySelector('input[name=payment]');
+            if (selectedMethod.type === 'hidden') {
+                return document.querySelector('.' + selectedMethod.value).querySelector('.mollie-issuers');
+            }
+
             return null;
+        }
+
+        /**
+         * Display issuer list in case of only payment method
+         */
+        function showIssuersIfOnlyPaymentMethod() {
+            if (paymentMethods.length !== 1) {
+                return;
+            }
+
+            let issuerListWrapper = document.querySelector('.mollie-issuers');
+            if (issuerListWrapper) {
+                issuerListWrapper.classList.remove('mollie-hidden');
+            }
         }
     });
 })();
