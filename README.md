@@ -93,7 +93,6 @@ The payment methods are disabled by default in your account so you firstly need 
 # Release notes
 *0.1.6*
 - Bugfix: Fix issues with mollie components when it is only payment method.
-- Bugfix: Restock product quantity, recalculate delivery status and reset article status when order is canceled during the checkout due to failed payment.
 
 *0.1.5*
 - Bugfix: Use first available language for status name fallback instead of English.
