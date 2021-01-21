@@ -111,6 +111,9 @@ var MollieComponents = window.MollieComponents || {};
 
         function getSelectedMethod() {
             let selectedMethod =  document.querySelector('input[name=payment]:checked');
+            if (!selectedMethod && isCreditCardOnlyPayment()) {
+                selectedMethod = document.querySelector('input[name=payment]');
+            }
 
             return selectedMethod ? selectedMethod.value : null;
         }
@@ -148,6 +151,12 @@ var MollieComponents = window.MollieComponents || {};
          */
         function isMounted() {
             return document.querySelectorAll('.mollie-component').length > 0;
+        }
+
+        function isCreditCardOnlyPayment() {
+            let paymentMethods = document.querySelectorAll('li.list-group-item');
+
+            return paymentMethods.length === 1 && paymentMethods[0].classList.contains('mollie_creditcard');
         }
     }
 
