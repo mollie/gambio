@@ -91,6 +91,10 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*2.0.5*
+- Bugfix: Fix issues with mollie components when it is only payment method.
+- Bugfix: Add assets files on the checkout for Honeygrid theme.
+
 *2.0.4*
 - Bugfix: Use first available language for status name fallback instead of English.
 

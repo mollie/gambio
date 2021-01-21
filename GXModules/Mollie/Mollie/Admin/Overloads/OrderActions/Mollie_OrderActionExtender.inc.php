@@ -1,8 +1,7 @@
 <?php
 
-use Mollie\BusinessLogic\Integration\Event\IntegrationOrderCanceledEvent;
-use Mollie\Infrastructure\ServiceRegister;
-use Mollie\Infrastructure\Utility\Events\EventBus;
+use Mollie\BusinessLogic\Notifications\NotificationHub;
+use Mollie\BusinessLogic\Notifications\NotificationText;
 
 require_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/autoload.php';
 
@@ -33,10 +32,13 @@ class Mollie_OrderActionExtender extends Mollie_OrderActionExtender_parent
         StringType $comment = null
     ) {
         try {
-            /** @var EventBus $eventBus */
-            $eventBus = ServiceRegister::getService(EventBus::CLASS_NAME);
             foreach ($orderIds as $orderId) {
-                $eventBus->fire(new IntegrationOrderCanceledEvent($orderId));
+
+                NotificationHub::pushInfo(
+                    new NotificationText('mollie.payment.integration.event.notification.order_cancel.title'),
+                    new NotificationText('mollie.payment.integration.event.notification.order_cancel.description'),
+                    $orderId
+                );
             }
 
             parent::cancelOrder(
