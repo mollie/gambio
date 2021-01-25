@@ -9,10 +9,12 @@ use Mollie\Gambio\Entity\Repository\GambioProductAttributesRepository;
 use Mollie\Gambio\Entity\Repository\GambioProductPropertiesCombisRepository;
 use Mollie\Gambio\Entity\Repository\GambioProductRepository;
 use Mollie\Gambio\Entity\Repository\GambioSpecialsRepository;
-use Mollie\Gambio\Services\Business\ConfigurationService;
-use Mollie\Infrastructure\Configuration\Configuration;
-use Mollie\Infrastructure\ServiceRegister;
 
+/**
+ * Class BaseResetService
+ *
+ * @package Mollie\Gambio\OrderReset
+ */
 abstract class BaseResetService
 {
     /**
@@ -64,16 +66,5 @@ abstract class BaseResetService
         }
 
         return 0;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isVersion4()
-    {
-        /** @var ConfigurationService $configService */
-        $configService = ServiceRegister::getService(Configuration::CLASS_NAME);
-
-        return version_compare($configService->getIntegrationVersion(), '4.0.0', 'ge');
     }
 }

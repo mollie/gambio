@@ -49,10 +49,5 @@ class OrderResetService extends BaseResetService
             $this->reactivateArticleService->reactivate($order);
             $this->reshipService->reship($order);
         }
-
-        if ($this->isVersion4()) {
-            $deleteHistoryService = \DeleteHistoryServiceFactory::writeService();
-            $deleteHistoryService->reportDeletion(\DeletedId::create($orderId), \DeleteHistoryScope::orders());
-        }
     }
 }

@@ -50,14 +50,6 @@ class RestockService extends BaseResetService
      */
     private function increaseCombisQuantity($combisCount, $useCombisQuantity)
     {
-        if ($this->isVersion4()) {
-            return $combisCount > 0 &&
-                (
-                    ($useCombisQuantity === \PropertiesCombisAdminControl::DEFAULT_GLOBAL && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK == 'true') ||
-                    $useCombisQuantity === \PropertiesCombisAdminControl::COMBI_STOCK
-                );
-        }
-
         return $combisCount > 0 &&
             (
                 ((int)$useCombisQuantity === 0 && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK == 'true') ||
@@ -89,17 +81,6 @@ class RestockService extends BaseResetService
      */
     private function isChangedProductStock($combisCount, $useCombisQuantity, $order)
     {
-        if ($this->isVersion4()) {
-            /** @var \ProductStockService $stockService */
-            $stockService = \MainFactory::create('ProductStockService');
-
-            return $stockService->isChangeProductStock(
-                $useCombisQuantity,
-                (int)$order['products_properties_combis_id'],
-                $order['products_attributes_filename']
-            );
-        }
-
         return (int)$combisCount === 0 ||
             (int)$useCombisQuantity === 1 ||
             ((int)$useCombisQuantity === 0 && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK != 'true');
