@@ -10,7 +10,11 @@ namespace Mollie\Gambio\OrderReset;
 class RestockService extends BaseResetService
 {
 
-    public function restock($order, $order_id)
+    /**
+     * @param array $order
+     * @param int $orderId
+     */
+    public function restock($order, $orderId)
     {
         if($this->specialsRepository->countByProductAndDate($order['products_id'], $order['date_purchased']) > 0) {
             $this->specialsRepository->increaseProductsQuantity($order['products_id'], $order['products_quantity']);
@@ -34,7 +38,7 @@ class RestockService extends BaseResetService
         }
 
         if(ATTRIBUTE_STOCK_CHECK == 'true') {
-            $this->increaseAttributesStock($order_id, $order);
+            $this->increaseAttributesStock($orderId, $order);
         }
     }
 
@@ -54,12 +58,12 @@ class RestockService extends BaseResetService
     }
 
     /**
-     * @param int $order_id
+     * @param int $orderId
      * @param array $order
      */
-    private function increaseAttributesStock($order_id, $order)
+    private function increaseAttributesStock($orderId, $order)
     {
-        $ordersAttributes = $this->productAttributesRepository->getOrdersAttributes($order_id, $order['orders_products_id']);
+        $ordersAttributes = $this->productAttributesRepository->getOrdersAttributes($orderId, $order['orders_products_id']);
         foreach ($ordersAttributes as $ordersAttribute) {
             $productAttributesId = $this->productAttributesRepository->getProductAttributesId($order['products_id'], $ordersAttribute['products_options'], $ordersAttribute['products_options_values']);
             if($productAttributesId) {
