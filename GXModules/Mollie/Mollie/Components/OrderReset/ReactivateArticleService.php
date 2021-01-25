@@ -11,6 +11,9 @@ namespace Mollie\Gambio\OrderReset;
 class ReactivateArticleService extends BaseResetService
 {
 
+    /**
+     * @param array $order
+     */
     public function reactivate($order)
     {
         if ($this->reactivateProduct($order)) {
