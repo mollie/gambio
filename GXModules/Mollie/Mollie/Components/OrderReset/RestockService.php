@@ -23,8 +23,8 @@ class RestockService extends BaseResetService
         $combisCount = $this->productPropertiesCombisRepository->countByProductId($order['products_id']);
         $useCombisQuantity = $this->getUseCombisCount($combisCount, $order);
 
-        $stockService = \MainFactory::create('ProductStockService');
-        if($stockService->isChangeProductStock($useCombisQuantity, (int)$order['products_properties_combis_id'], $order['products_attributes_filename'])) {
+
+        if($this->isChangedProductStock($combisCount, $useCombisQuantity, $order)) {
             $this->productRepository->increaseProductQuantity($order['products_id'], $order['products_quantity']);
         }
 
@@ -48,12 +48,20 @@ class RestockService extends BaseResetService
      *
      * @return bool
      */
-    private function increaseCombisQuantity(int $combisCount, int $useCombisQuantity)
+    private function increaseCombisQuantity($combisCount, $useCombisQuantity)
     {
+        if ($this->isVersion4()) {
+            return $combisCount > 0 &&
+                (
+                    ($useCombisQuantity === \PropertiesCombisAdminControl::DEFAULT_GLOBAL && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK == 'true') ||
+                    $useCombisQuantity === \PropertiesCombisAdminControl::COMBI_STOCK
+                );
+        }
+
         return $combisCount > 0 &&
             (
-                ($useCombisQuantity === \PropertiesCombisAdminControl::DEFAULT_GLOBAL && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK == 'true') ||
-                $useCombisQuantity === \PropertiesCombisAdminControl::COMBI_STOCK
+                ((int)$useCombisQuantity === 0 && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK == 'true') ||
+                (int)$useCombisQuantity === 2
             );
     }
 
@@ -70,5 +78,30 @@ class RestockService extends BaseResetService
                 $this->productAttributesRepository->increaseAttributesStock($productAttributesId, $order['products_quantity']);
             }
         }
+    }
+
+    /**
+     * @param int $combisCount
+     * @param int $useCombisQuantity
+     * @param array $order
+     *
+     * @return bool
+     */
+    private function isChangedProductStock($combisCount, $useCombisQuantity, $order)
+    {
+        if ($this->isVersion4()) {
+            /** @var \ProductStockService $stockService */
+            $stockService = \MainFactory::create('ProductStockService');
+
+            return $stockService->isChangeProductStock(
+                $useCombisQuantity,
+                (int)$order['products_properties_combis_id'],
+                $order['products_attributes_filename']
+            );
+        }
+
+        return (int)$combisCount === 0 ||
+            (int)$useCombisQuantity === 1 ||
+            ((int)$useCombisQuantity === 0 && STOCK_CHECK == 'true' && ATTRIBUTE_STOCK_CHECK != 'true');
     }
 }
