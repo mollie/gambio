@@ -106,6 +106,9 @@ $t_language_text_section_content_array = [
     'mollie.payment.integration.event.notification.order_cancel_error.title'       => 'Synchronisieren von Shop-Änderungen fehlgeschlagen',
     'mollie.payment.integration.event.notification.order_cancel_error.description' => 'Mollie-Bestellung konnte nicht storniert werden. Antwort Mollie-API {api_message}',
 
+    'mollie.payment.integration.event.notification.order_cancel.title'       => 'Order cancel event detected',
+    'mollie.payment.integration.event.notification.order_cancel.description' => 'Order cancel is not supported, so this change is not synchronized to the Mollie',
+
     'mollie.payment.integration.event.notification.billing_address_change_error.title'       => 'Synchronisieren von Shop-Änderungen fehlgeschlagen',
     'mollie.payment.integration.event.notification.billing_address_change_error.description' => 'Aktualisieren der Rechnungsadresse für die Mollie-Bestellung fehlgeschlagen. Antwort Mollie-API {api_message}',
 
