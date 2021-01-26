@@ -4,6 +4,7 @@
 namespace Mollie\Gambio\MollieRedirect;
 
 use Mollie\Gambio\Mappers\OrderStatusMapper;
+use Mollie\Gambio\OrderReset\OrderResetService;
 use Mollie\Gambio\Utility\MollieTranslator;
 use Mollie\Gambio\Utility\UrlProvider;
 
@@ -23,6 +24,10 @@ class MollieRedirectProvider
      * @var OrderStatusMapper
      */
     private $statusMapper;
+    /**
+     * @var OrderResetService
+     */
+    private $orderResetService;
 
     /**
      * PaymentLinkProvider constructor.
@@ -30,6 +35,7 @@ class MollieRedirectProvider
     public function __construct()
     {
         $this->orderReadService = \StaticGXCoreLoader::getService('OrderRead');
+        $this->orderResetService = new OrderResetService();
         $this->statusMapper = new OrderStatusMapper();
     }
 
@@ -48,6 +54,8 @@ class MollieRedirectProvider
         if ($order) {
             $statusMapping = $this->statusMapper->getStatusMap();
             if ((int)$order->getStatusId() === (int)$statusMapping['mollie_canceled']) {
+                $this->orderResetService->resetOrder($orderId);
+
                 return $this->_getCanceledPaymentUrl($order);
             }
         }

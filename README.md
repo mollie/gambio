@@ -90,6 +90,9 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*1.0.6*
+- Optimization: Restock product quantity, recalculate delivery status and reset article status when order is canceled during the checkout due to failed payment.
+
 *1.0.5*
 - Bugfix: Fix issues with mollie components when it is only payment method.
 - Bugfix: Add assets files on the checkout for Honeygrid theme.

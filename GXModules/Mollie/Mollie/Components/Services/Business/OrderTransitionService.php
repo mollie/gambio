@@ -3,6 +3,7 @@
 namespace Mollie\Gambio\Services\Business;
 
 use Mollie\BusinessLogic\Integration\Interfaces\OrderTransitionService as BaseService;
+use Mollie\Gambio\OrderReset\OrderResetService;
 use Mollie\Gambio\Utility\MollieTranslator;
 
 /**
@@ -30,6 +31,8 @@ class OrderTransitionService implements BaseService
     {
         $comment = $this->getComment('mollie_expired');
         $this->mapToCancelledStatus($orderId, $comment);
+        $orderResetService = new OrderResetService();
+        $orderResetService->resetOrder($orderId);
     }
 
     /**
