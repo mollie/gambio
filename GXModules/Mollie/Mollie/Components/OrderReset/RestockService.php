@@ -48,7 +48,7 @@ class RestockService extends BaseResetService
      *
      * @return bool
      */
-    private function increaseCombisQuantity(int $combisCount, int $useCombisQuantity)
+    private function increaseCombisQuantity($combisCount, $useCombisQuantity)
     {
         return $combisCount > 0 &&
             (
