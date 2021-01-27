@@ -65,7 +65,14 @@ class StatusWebHookHandler
      */
     protected function isOrderStatusChanged(OrderChangedWebHookEvent $event)
     {
-        return $event->getCurrentOrder()->getStatus() !== $event->getNewOrder()->getStatus();
+        $currentStatus = $event->getCurrentOrder()->getStatus();
+        $newStatus = $event->getNewOrder()->getStatus();
+        // check for initial state transition
+        if ($currentStatus === null && $newStatus === 'created') {
+            return false;
+        }
+
+        return $currentStatus !== $newStatus;
     }
 
     /**
