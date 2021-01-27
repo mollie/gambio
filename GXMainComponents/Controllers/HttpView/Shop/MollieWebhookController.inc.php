@@ -1,6 +1,8 @@
 <?php
 
+use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\OrderReference\Exceptions\MollieReferenceNotFoundException;
+use Mollie\BusinessLogic\OrderReference\Model\OrderReference;
 use Mollie\BusinessLogic\OrderReference\OrderReferenceService;
 use Mollie\BusinessLogic\WebHook\WebHookContext;
 use Mollie\BusinessLogic\WebHook\WebHookTransformer;
@@ -52,8 +54,13 @@ class MollieWebhookController extends HttpViewController
     {
         /** @var OrderReferenceService $orderReferenceService */
         $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
-        if (!$orderReferenceService->getByMollieReference($_POST['id'])) {
-            throw new MollieReferenceNotFoundException('Mollie reference not found:' . $_POST['id']);
+        $orderReference = $orderReferenceService->getByMollieReference($_POST['id']);
+
+        if (!$orderReference) {
+            $orderReference = $this->_getOrderReferenceFromPayment($orderReferenceService);
+            if (!$orderReference) {
+                throw new MollieReferenceNotFoundException('Mollie reference not found:' . $_POST['id']);
+            }
         }
     }
 
@@ -67,5 +74,25 @@ class MollieWebhookController extends HttpViewController
         }
 
         return $this->webhookTransformer;
+    }
+
+    /**
+     * @param OrderReferenceService $orderReferenceService
+     *
+     * @return OrderReference|null
+     */
+    protected function _getOrderReferenceFromPayment(OrderReferenceService $orderReferenceService)
+    {
+        /** @var Proxy $proxy */
+        $proxy = ServiceRegister::getService(Proxy::CLASS_NAME);
+        try {
+            $payment = $proxy->getPayment($_POST['id']);
+            if ($payment && $mollieId = $payment->getOrderId()) {
+                return $orderReferenceService->getByMollieReference($mollieId);
+            }
+        } catch (\Exception $e) {
+        }
+
+        return null;
     }
 }
