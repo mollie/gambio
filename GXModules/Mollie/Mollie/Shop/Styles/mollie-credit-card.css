@@ -109,3 +109,7 @@
         padding: 40px;
     }
 }
+
+.mollie_creditcard .well {
+    background-color: inherit !important;
+}
