@@ -26,3 +26,9 @@ define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_LOGO_DESC', 'Veuillez charger le logo
 
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
+
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');
+
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE_TITLE', 'Days To Expire (Payment)');
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE_DESC', 'How many days before payment for this method becomes expired? Leave empty to use default expiration (28 days)');

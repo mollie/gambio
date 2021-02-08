@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_APPLEPAY_LOGO_DESC', 'Upload een logo dat zal word
 
 define('MODULE_PAYMENT_MOLLIE_APPLEPAY_SORT_ORDER_TITLE', 'Sorteer de weergavevolgorde bij de checkout');
 define('MODULE_PAYMENT_MOLLIE_APPLEPAY_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
+
+define('MODULE_PAYMENT_MOLLIE_APPLEPAY_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_APPLEPAY_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');

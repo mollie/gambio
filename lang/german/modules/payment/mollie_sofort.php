@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_SOFORT_LOGO_DESC', 'Bitte laden Sie ein Logo hoch,
 
 define('MODULE_PAYMENT_MOLLIE_SOFORT_SORT_ORDER_TITLE', 'Sortierreihenfolge der Anzeige beim Checkout');
 define('MODULE_PAYMENT_MOLLIE_SOFORT_SORT_ORDER_DESC', 'Der niedrigste Wert wird beim Checkout zuerst angezeigt');
+
+define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');

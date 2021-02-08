@@ -5,6 +5,26 @@ use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
 
 /**
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_input_integer($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_integer_input.html', 'ConfigFields');
+    $data         = [
+        'key'   => $key,
+        'value' => $key_value,
+        'title' => @constant("{$key}_TITLE"),
+        'desc'  => @constant("{$key}_DESC"),
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders issuer list select element
  *
  * @param string $key_value

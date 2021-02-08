@@ -27,3 +27,5 @@ define('MODULE_PAYMENT_MOLLIE_PAYPAL_LOGO_DESC', 'Upload een logo dat zal worden
 define('MODULE_PAYMENT_MOLLIE_PAYPAL_SORT_ORDER_TITLE', 'Sorteer de weergavevolgorde bij de checkout');
 define('MODULE_PAYMENT_MOLLIE_PAYPAL_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
 
+define('MODULE_PAYMENT_MOLLIE_PAYPAL_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_PAYPAL_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');

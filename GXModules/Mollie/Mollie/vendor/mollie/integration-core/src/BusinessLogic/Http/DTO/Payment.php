@@ -2,6 +2,7 @@
 
 namespace Mollie\BusinessLogic\Http\DTO;
 
+use Mollie\BusinessLogic\Http\DTO\Orders\Order;
 use Mollie\BusinessLogic\Http\DTO\Refunds\Refund;
 
 /**
@@ -86,6 +87,14 @@ class Payment extends BaseDto
      * @var string
      */
     protected $issuer;
+    /**
+     * @var \DateTime
+     */
+    protected $dueDate;
+    /**
+     * @var \DateTime
+     */
+    protected $expiresAt;
 
     /**
      * @inheritDoc
@@ -111,6 +120,9 @@ class Payment extends BaseDto
         $method = is_array($method) ? $method : array($method);
         $result->method = $method;
         $result->metadata = static::getValue($raw, 'metadata', array());
+
+        $result->dueDate = \DateTime::createFromFormat(Order::MOLLIE_DATE_FORMAT, static::getValue($raw, 'dueDate'));
+        $result->expiresAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'expiresAt'));
 
         $shippingAddress = static::getValue($raw, 'shippingAddress', array());
         if (!empty($shippingAddress)) {
@@ -163,6 +175,8 @@ class Payment extends BaseDto
             'metadata' => $this->metadata,
             'cardToken' => $this->cardToken,
             'issuer' => $this->issuer,
+            'dueDate' => $this->dueDate ? $this->dueDate->format(Order::MOLLIE_DATE_FORMAT) : null,
+            'expiresAt' => $this->expiresAt ? $this->expiresAt->format(DATE_ATOM) : null,
             '_embedded' => $embedded,
             '_links' => $links,
         );
@@ -471,5 +485,48 @@ class Payment extends BaseDto
     public function setIssuer($issuer)
     {
         $this->issuer = $issuer;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDueDate()
+    {
+        return $this->dueDate;
+    }
+
+    /**
+     * @param \DateTime $dueDate
+     */
+    public function setDueDate($dueDate)
+    {
+        $this->dueDate = $dueDate;
+    }
+
+    /**
+     * Calculates exipire date
+     *
+     * @param int $daysToExpire
+     */
+    public function calculateDueDate($daysToExpire)
+    {
+        $this->dueDate = new \DateTime();
+        $this->dueDate->add(new \DateInterval("P{$daysToExpire}D"));
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param \DateTime $expiresAt
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
     }
 }
