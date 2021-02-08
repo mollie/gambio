@@ -17,8 +17,6 @@ function mollie_input_integer($key_value, $key = '')
     $data         = [
         'key'   => $key,
         'value' => $key_value,
-        'title' => @constant("{$key}_TITLE"),
-        'desc'  => @constant("{$key}_DESC"),
     ];
 
     return mollie_render_template($templatePath, $data);
