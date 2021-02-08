@@ -104,6 +104,10 @@ class ProxyDataProvider
             'lines' => $this->transformOrderLines($orderLines),
         );
 
+        if ($expiresAt = $order->getExpiresAt()) {
+            $orderData['expiresAt'] = $expiresAt->format(Order::MOLLIE_DATE_FORMAT);
+        }
+
         if ($shippingAddress = $order->getShippingAddress()) {
             $orderData['shippingAddress'] = $this->transformAddress($shippingAddress);
         }
@@ -165,6 +169,11 @@ class ProxyDataProvider
             $type = $orderLine->getType();
             if (!empty($type)) {
                 $orderLineData['type'] = $type;
+            }
+
+            $category = $orderLine->getCategory();
+            if (!empty($category)) {
+                $orderLineData['category'] = $category;
             }
 
             if ($discountAmount = $orderLine->getDiscountAmount()) {
@@ -399,6 +408,10 @@ class ProxyDataProvider
 
         if ($payment->getWebhookUrl()) {
             $paymentSpecific['webhookUrl'] = $payment->getWebhookUrl();
+        }
+
+        if ($payment->getDueDate()) {
+            $paymentSpecific['dueDate'] = $payment->getDueDate()->format(Order::MOLLIE_DATE_FORMAT);
         }
 
         return $paymentSpecific;

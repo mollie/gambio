@@ -29,3 +29,6 @@ define('MODULE_PAYMENT_MOLLIE_GIFTCARD_SORT_ORDER_DESC', "Le plus bas est affich
 
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
+
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');

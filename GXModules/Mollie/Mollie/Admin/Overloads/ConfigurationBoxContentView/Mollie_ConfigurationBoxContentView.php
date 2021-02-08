@@ -1,6 +1,7 @@
 <?php
 
-use Mollie\Gambio\Utility\CustomFieldsProvider;
+use Mollie\Gambio\CustomFields\Factory\CustomFieldsProviderFactory;
+use Mollie\Gambio\CustomFields\Providers\CustomFieldsProvider;
 
 require_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/mollie_config_fields.php';
 
@@ -19,11 +20,13 @@ class Mollie_ConfigurationBoxContentView extends Mollie_ConfigurationBoxContentV
      * Sets a content array like in the box class
      *
      * @param array $oldSchoolContents
+     *
+     * @throws Exception
      */
     public function setOldSchoolContents(array $oldSchoolContents)
     {
         if(isset($_GET['set'], $_GET['module']) && $_GET['set'] === 'payment' && $this->_isMolliePayment()) {
-            $this->customFieldsProvider = new CustomFieldsProvider($_GET['module']);
+            $this->customFieldsProvider = CustomFieldsProviderFactory::getProvider($_GET['module']);
             if (!isset($_GET['action'])) {
                 $this->_appendCustomOverview($oldSchoolContents);
             } elseif ($_GET['action'] === 'edit') {

@@ -350,6 +350,9 @@ class mollie
             ],
             'CHECKOUT_DESCRIPTION'   =>  [
                 'value' => $this->translate($_SESSION['language_code'], 'mollie_checkout_desc'),
+            ],
+            'ORDER_EXPIRES' => [
+                'value' => null,
             ]
         ];
 

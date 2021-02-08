@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_EPS_LOGO_DESC', 'Please upload logo that will be u
 
 define('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_TITLE', 'Sort order of display in checkout');
 define('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');

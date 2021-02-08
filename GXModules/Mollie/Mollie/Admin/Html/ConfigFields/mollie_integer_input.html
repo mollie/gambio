@@ -1,0 +1,8 @@
+{load_language_text section="module_center_module"}
+
+<span class="options-title">{$mollie.title}</span>
+{$mollie.desc}
+
+<div>
+    <input type="number" name="configuration[{{$mollie.key}}]" min="1" max="{{$mollie.max_input}}" value="{{$mollie.value}}">
+</div>
