@@ -2,6 +2,7 @@
 
 namespace Mollie\Gambio\CustomFields\Providers;
 
+use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\Gambio\Utility\PathProvider;
 
 /**
@@ -67,7 +68,9 @@ class CustomFieldsProvider
      */
     protected function renderDaysToExpireOverview()
     {
-        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('ORDER_EXPIRES'));
+        return $this->isOrdersApi() ?
+            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('ORDER_EXPIRES')) :
+            '';
     }
 
     /**
@@ -78,7 +81,8 @@ class CustomFieldsProvider
     {
         $orderExpiresKey = $this->_formatKey('ORDER_EXPIRES');
 
-        return mollie_input_integer($this->getConstantValue($orderExpiresKey), $orderExpiresKey);
+        return $this->isOrdersApi() ?
+            mollie_input_integer($this->getConstantValue($orderExpiresKey), $orderExpiresKey) : '';
     }
 
     /**
@@ -178,6 +182,14 @@ class CustomFieldsProvider
             'title' => $this->getConstantValue($this->_formatKey("{$key}_TITLE")),
             'value' => $this->getConstantValue($this->_formatKey($key)),
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isOrdersApi()
+    {
+        return $this->getConstantValue($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_ORDERS;
     }
 
     /**

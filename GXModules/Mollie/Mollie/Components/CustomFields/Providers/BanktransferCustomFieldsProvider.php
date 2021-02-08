@@ -16,10 +16,13 @@ class BanktransferCustomFieldsProvider extends CustomFieldsProvider
      */
     protected function renderDaysToExpireEdit()
     {
+        if ($this->isOrdersApi()) {
+            return parent::renderDaysToExpireEdit();
+        }
+
         $dueDateKey = $this->_formatKey('DUE_DATE');
 
-        return parent::renderDaysToExpireEdit() .
-            mollie_input_integer($this->getConstantValue($dueDateKey), $dueDateKey);
+        return mollie_input_integer($this->getConstantValue($dueDateKey), $dueDateKey);
     }
 
     /**
@@ -29,7 +32,10 @@ class BanktransferCustomFieldsProvider extends CustomFieldsProvider
      */
     protected function renderDaysToExpireOverview()
     {
-        return parent::renderDaysToExpireOverview() .
-            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('DUE_DATE'));
+        if ($this->isOrdersApi()) {
+            return parent::renderDaysToExpireOverview();
+        }
+
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('DUE_DATE'));
     }
 }

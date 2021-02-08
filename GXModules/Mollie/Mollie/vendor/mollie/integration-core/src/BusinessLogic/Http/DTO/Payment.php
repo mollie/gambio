@@ -504,7 +504,7 @@ class Payment extends BaseDto
     }
 
     /**
-     * Calculates exipire date
+     * Calculates expire date
      *
      * @param int $daysToExpire
      */
