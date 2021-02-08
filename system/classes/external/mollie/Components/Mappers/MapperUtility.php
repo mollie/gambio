@@ -126,4 +126,28 @@ trait MapperUtility
 
         return $this->configService;
     }
+
+    /**
+     * @param string $paymentClass
+     *
+     * @return mixed
+     */
+    protected function getDaysToExpireOrder($paymentClass)
+    {
+        $module = strtoupper($paymentClass);
+        $key = "MODULE_PAYMENT_{$module}_ORDER_EXPIRES";
+
+        return @constant($key);
+    }
+
+    protected function getDaysToExpirePayment($paymentClass)
+    {
+        if ($paymentClass === 'mollie_banktransfer' && defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE')) {
+            $daysToExpire = MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE;
+
+            return !empty($daysToExpire) ? $daysToExpire : null;
+        }
+
+        return null;
+    }
 }

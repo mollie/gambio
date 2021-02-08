@@ -455,6 +455,17 @@ class Order extends BaseDto
     }
 
     /**
+     * Calculates expire date
+     *
+     * @param int $daysToExpire
+     */
+    public function calculateExpiresAt($daysToExpire)
+    {
+        $this->expiresAt = new \DateTime();
+        $this->expiresAt->add(new \DateInterval("P{$daysToExpire}D"));
+    }
+
+    /**
      * @return \DateTime
      */
     public function getExpiredAt()
