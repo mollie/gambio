@@ -66,7 +66,9 @@ class PaymentMethodConfig extends Entity
         'image',
         'enabled',
         'useMollieComponents',
-        'issuerListStyle'
+        'issuerListStyle',
+        'daysToOrderExpire',
+        'daysToPaymentExpire',
     );
 
     /**
@@ -110,6 +112,14 @@ class PaymentMethodConfig extends Entity
      * @var string
      */
     protected $issuerListStyle = self::ISSUER_LIST;
+    /**
+     * @var int
+     */
+    protected $daysToOrderExpire;
+    /**
+     * @var int
+     */
+    protected $daysToPaymentExpire;
 
     /**
      * @inheritDoc
@@ -378,5 +388,37 @@ class PaymentMethodConfig extends Entity
     public function setIssuerListStyle($issuerListStyle)
     {
         $this->issuerListStyle = $issuerListStyle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysToOrderExpire()
+    {
+        return $this->daysToOrderExpire;
+    }
+
+    /**
+     * @param int $daysToOrderExpire
+     */
+    public function setDaysToOrderExpire($daysToOrderExpire)
+    {
+        $this->daysToOrderExpire = $daysToOrderExpire;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysToPaymentExpire()
+    {
+        return $this->daysToPaymentExpire;
+    }
+
+    /**
+     * @param int $daysToPaymentExpire
+     */
+    public function setDaysToPaymentExpire($daysToPaymentExpire)
+    {
+        $this->daysToPaymentExpire = $daysToPaymentExpire;
     }
 }

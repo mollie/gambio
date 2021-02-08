@@ -26,3 +26,6 @@ define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_LOGO_DESC', 'Veuillez charger le log
 
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
+
+define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_ORDER_EXPIRES_TITLE', 'Days To Expire');
+define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)<br><br>Please note: It is not possible to use an expiry date more than 28 days in the future, unless another maximum is agreed between the merchant and Klarna.');
