@@ -269,7 +269,15 @@ class mollie
      */
     public function keys()
     {
-        $keys         = $this->_getAllKeys($this->_configuration());
+        $configuration = $this->_configuration();
+        if (@constant($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_PAYMENT) {
+            unset($configuration['ORDER_EXPIRES']);
+        } else {
+            unset($configuration['DUE_DATE']);
+        }
+
+        $keys = $this->_getAllKeys($configuration);
+
         $hiddenFields = $this->_getAllKeys($this->_getHiddenFields());
         if (!$this->_otMollieEnabled()) {
             $hiddenFields[] = $this->_formatKey('SURCHARGE');
@@ -307,6 +315,10 @@ class mollie
             'API_METHOD'           => [
                 'configuration_value' => $this->_getDefaultApi(),
                 'set_function'        => 'mollie_api_select( ',
+            ],
+            'ORDER_EXPIRES'           => [
+                'configuration_value' => null,
+                'set_function'        => 'mollie_input_integer( ',
             ],
             'SURCHARGE'            => [
                 'configuration_value' => '0',
@@ -697,6 +709,14 @@ class mollie
         $statusKey = $this->_formatKey('STATUS');
 
         return defined($statusKey);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isPaymentApi()
+    {
+        return @constant($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_PAYMENT;
     }
 }
 

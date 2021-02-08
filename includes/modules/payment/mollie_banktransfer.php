@@ -10,20 +10,16 @@ class mollie_banktransfer extends mollie
     public $title = 'Bank transfer';
 
     /**
-     * @return array
-     *
-     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     * @inheritDoc
      */
-    protected function _getHiddenFields()
+    public function _configuration()
     {
-        $hiddenFields = parent::_getHiddenFields();
-        $hiddenFields['DUE_DATE'] = [
-            'value' => null,
+        $config = parent::_configuration();
+        $config['DUE_DATE'] = [
+            'configuration_value' => null,
+            'set_function'        => 'mollie_input_integer( ',
         ];
 
-        return $hiddenFields;
+        return $config;
     }
 }
