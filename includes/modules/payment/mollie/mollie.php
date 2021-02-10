@@ -353,7 +353,10 @@ class mollie
             ],
             'ORDER_EXPIRES' => [
                 'value' => null,
-            ]
+            ],
+            'TRANSACTION_DESCRIPTION'   =>  [
+                'value' => '{orderNumber}',
+            ],
         ];
 
         foreach (xtc_get_languages() as $language) {
@@ -364,6 +367,10 @@ class mollie
 
             $fields['CHECKOUT_DESCRIPTION_' . $code] = [
                 'value' => $this->translate($code, 'mollie_checkout_desc'),
+            ];
+
+            $fields['TRANSACTION_DESCRIPTION_' . $code] = [
+                'value' => '{orderNumber}',
             ];
         }
 

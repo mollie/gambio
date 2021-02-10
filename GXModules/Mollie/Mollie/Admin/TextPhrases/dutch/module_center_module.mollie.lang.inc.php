@@ -90,6 +90,8 @@ $t_language_text_section_content_array = [
     'mollie_unknown_error'           => 'Er is een onbekende fout opgetreden op de Mollie-API',
     'mollie_checkout_desc'           => 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.',
 
+    'mollie_transaction_desc_label' => 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.',
+
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'Lijst met afbeeldingen',
 

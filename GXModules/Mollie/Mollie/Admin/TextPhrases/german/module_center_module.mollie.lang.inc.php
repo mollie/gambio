@@ -60,6 +60,8 @@ $t_language_text_section_content_array = [
     'mollie_expiry_date'             => 'Verfallsdatum',
     'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
 
+    'mollie_transaction_desc_label' => 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.',
+
     'mollie_canceled_comment' => 'Der Kunde hat die Zahlung abgebrochen.',
     'mollie_expired_comment'  => 'Die Zahlung ist bei Mollie abgelaufen.',
     'mollie_failed_comment'   => 'Die Zahlung ist fehlgeschlagen und kann mit der gewählten Zahlungsmethode nicht abgeschlossen werden.',

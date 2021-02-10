@@ -115,7 +115,8 @@ class CustomFieldsProvider
     protected function renderCheckoutNameAndDescription()
     {
         return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CHECKOUT_NAME')) .
-            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CHECKOUT_DESCRIPTION'));
+            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CHECKOUT_DESCRIPTION')) .
+            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('TRANSACTION_DESCRIPTION'));
     }
 
     /**
@@ -126,9 +127,11 @@ class CustomFieldsProvider
     {
         $titleKey = $this->_formatKey('CHECKOUT_NAME');
         $descKey = $this->_formatKey('CHECKOUT_DESCRIPTION');
+        $transactionDescKey = $this->_formatKey('TRANSACTION_DESCRIPTION');
 
         return mollie_multi_language_text($this->getConstantValue($titleKey), $titleKey) .
-            mollie_multi_language_text($this->getConstantValue($descKey), $descKey);
+            mollie_multi_language_text($this->getConstantValue($descKey), $descKey) .
+            mollie_multi_language_text_area($this->getConstantValue($transactionDescKey), $transactionDescKey);
     }
 
     /**

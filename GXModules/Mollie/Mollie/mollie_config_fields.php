@@ -88,7 +88,9 @@ function mollie_api_select($key_value, $key = '')
 }
 
 /**
- * @param        $key_value
+ * Renders multi lang input
+ *
+ * @param string $key_value
  * @param string $key
  *
  * @return string|string[]
@@ -96,8 +98,38 @@ function mollie_api_select($key_value, $key = '')
  */
 function mollie_multi_language_text($key_value, $key = '')
 {
-    $data         = [];
+
     $templatePath = PathProvider::getAdminTemplatePath('multi_lang_field.html', 'ConfigFields');
+
+    return mollie_multi_language_field($templatePath, $key_value, $key);
+}
+/**
+ * Renders multi lang input
+ *
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_multi_language_text_area($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('multi_lang_text_area.html', 'ConfigFields');
+
+    return mollie_multi_language_field($templatePath, $key_value, $key);
+}
+
+/**
+ * @param string $templatePath
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_multi_language_field($templatePath, $key_value, $key = '')
+{
+    $data         = [];
 
     foreach (xtc_get_languages() as $language) {
         $langKey                 = $key . '_' . strtoupper($language['code']);

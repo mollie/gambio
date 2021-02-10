@@ -32,3 +32,6 @@ define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_DESC', 'How many days b
 
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE_TITLE', 'Days To Expire (Payment)');
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE_DESC', 'How many days before payment for this method becomes expired? Leave empty to use default expiration (28 days)');
+
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_TITLE', 'Transaction description');
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_DESC', 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.');

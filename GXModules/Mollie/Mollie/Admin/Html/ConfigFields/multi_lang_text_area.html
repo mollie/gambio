@@ -1,0 +1,18 @@
+<script src="{$mollie.js_admin}mollie-multi-lang.js"></script>
+<link rel="stylesheet" href="{$mollie.css_admin}mollie_multi_lang_field.css">
+
+<span class="options-title">{$mollie.title}</span>
+{$mollie.desc}
+
+<div id="mollie-lang-wrapper">
+    {foreach item=module_data from=$mollie.lang_specific}
+    <div class="mollie-lang-input">
+        <img src="{{$module_data.image}}" />
+        <textarea class="multi-lang-input" name="configuration[{{$module_data.lang_key}}]">
+            {{$module_data.lang_value}}
+        </textarea>
+    </div>
+    {/foreach}
+    <input type="hidden" name="configuration[{{$mollie.key}}]" value="{{$mollie.default_value}}" />
+    <input type="hidden" class="current-key" value="{{$mollie.current_lang_key}}" />
+</div>

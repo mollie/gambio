@@ -101,6 +101,8 @@ $t_language_text_section_content_array = [
     'mollie_expiry_date'             => 'Expiry date',
     'mollie_verification_code'       => 'Verification code',
 
+    'mollie_transaction_desc_label' => 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.',
+
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',
     'mollie_failed_comment'   => 'The payment has failed and cannot be completed with selected payment method.',
