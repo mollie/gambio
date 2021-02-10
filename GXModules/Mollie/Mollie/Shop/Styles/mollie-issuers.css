@@ -1,3 +1,7 @@
+.mollie-issuer-list-wrapper {
+    min-width: 200px;
+}
+
 .mollie-issuer-list-wrapper li {
     list-style-type:none;
     padding-bottom: 10px
@@ -31,4 +35,9 @@
 
 .mollie-issuer-dropdown-wrapper label{
     padding: 0 10px 0 0;
+}
+
+.issuer-not-selected {
+    color: #F30106;
+    font-weight: bold;
 }
