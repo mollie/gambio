@@ -32,3 +32,8 @@
 .mollie-issuer-dropdown-wrapper label{
     padding: 0 10px 0 0;
 }
+
+.issuer-not-selected {
+    color: #F30106;
+    font-weight: bold;
+}
