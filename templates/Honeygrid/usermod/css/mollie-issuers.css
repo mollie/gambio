@@ -44,3 +44,8 @@
 .mollie-hidden {
     display: none;
 }
+
+.issuer-not-selected {
+    color: #F30106;
+    font-weight: bold;
+}
