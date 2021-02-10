@@ -21,19 +21,20 @@
             <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
             <ul>
                 <input type="hidden" class="issuer-list-value" name="{{$mollie.payment_method}}-issuer" value="{{$mollie.issuers.0.id}}">
-                {assign var=isFirst value='1'}
                 {foreach item=module_data from=$mollie.issuers}
 
                 <li>
                     <label>
                         <img src="{{$module_data.image.svg}}">
                         <span>{$module_data.name}</span>
-                        <input class="mollie-issuer-list" type="radio" name="{{$module_data.id}}" value="{{$module_data.id}}" {{if $isFirst == '1'}}checked{{/if}}>
-                        {assign var=isFirst value='0'}
+                        <input class="mollie-issuer-list" type="radio" name="{{$module_data.id}}" value="{{$module_data.id}}">
                     </label>
                 </li>
                 {/foreach}
             </ul>
+            <div class="issuer-not-selected hidden">
+                {$txt.mollie_issuer_not_selected}
+            </div>
         </div>
     {/if}
 
