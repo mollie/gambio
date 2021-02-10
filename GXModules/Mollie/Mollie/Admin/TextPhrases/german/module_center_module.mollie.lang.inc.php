@@ -92,6 +92,7 @@ $t_language_text_section_content_array = [
 
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'Liste mit Abbildungen',
+    'mollie_issuer_not_selected'     => 'Issuer not selected!',
 
     'mollie_select_bank'             => 'Bank auswählen',
     'mollie_card_holder'             => 'Kartenhalter',
