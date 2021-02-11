@@ -8,9 +8,7 @@
     {foreach item=module_data from=$mollie.lang_specific}
     <div class="mollie-lang-input">
         <img src="{{$module_data.image}}" />
-        <textarea class="multi-lang-input" name="configuration[{{$module_data.lang_key}}]">
-            {{$module_data.lang_value}}
-        </textarea>
+        <textarea class="multi-lang-input" name="configuration[{{$module_data.lang_key}}]">{{$module_data.lang_value}}</textarea>
     </div>
     {/foreach}
     <input type="hidden" name="configuration[{{$mollie.key}}]" value="{{$mollie.default_value}}" />

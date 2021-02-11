@@ -42,7 +42,7 @@ class CustomFieldsProvider
     public function renderAllCustomFields()
     {
         return $this->renderLogoEdit() .
-            $this->renderCheckoutNameAndDescriptionEdit() .
+            $this->renderMultiLangEdit() .
             $this->renderApiEdit() .
             $this->renderDaysToExpireEdit() .
             $this->renderCountryZonesEdit();
@@ -56,7 +56,7 @@ class CustomFieldsProvider
     public function renderCustomOverviewFields()
     {
         return $this->renderLogoOverview() .
-            $this->renderCheckoutNameAndDescription() .
+            $this->renderMultiLangFieldsOverview() .
             $this->renderApiOverview() .
             $this->renderDaysToExpireOverview() .
             $this->renderCountryZonesOverview();
@@ -112,26 +112,34 @@ class CustomFieldsProvider
      * @return string
      * @throws \Exception
      */
-    protected function renderCheckoutNameAndDescription()
+    protected function renderMultiLangFieldsOverview()
     {
+        $transactionDesc = !$this->isOrdersApi() ?
+            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('TRANSACTION_DESCRIPTION')) :
+            '';
+
         return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CHECKOUT_NAME')) .
             mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CHECKOUT_DESCRIPTION')) .
-            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('TRANSACTION_DESCRIPTION'));
+            $transactionDesc;
     }
 
     /**
      * @return string
      * @throws \Exception
      */
-    protected function renderCheckoutNameAndDescriptionEdit()
+    protected function renderMultiLangEdit()
     {
         $titleKey = $this->_formatKey('CHECKOUT_NAME');
         $descKey = $this->_formatKey('CHECKOUT_DESCRIPTION');
+
         $transactionDescKey = $this->_formatKey('TRANSACTION_DESCRIPTION');
+        $transactionDescEdit = !$this->isOrdersApi() ?
+            mollie_multi_language_text_area($this->getConstantValue($transactionDescKey), $transactionDescKey) :
+            '';
 
         return mollie_multi_language_text($this->getConstantValue($titleKey), $titleKey) .
             mollie_multi_language_text($this->getConstantValue($descKey), $descKey) .
-            mollie_multi_language_text_area($this->getConstantValue($transactionDescKey), $transactionDescKey);
+            $transactionDescEdit;
     }
 
     /**
