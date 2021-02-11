@@ -273,7 +273,7 @@ class mollie
         if (@constant($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_PAYMENT) {
             unset($configuration['ORDER_EXPIRES']);
         } else {
-            unset($configuration['DUE_DATE']);
+            unset($configuration['DUE_DATE'], $configuration['TRANSACTION_DESCRIPTION']);
         }
 
         $keys = $this->_getAllKeys($configuration);
@@ -311,6 +311,10 @@ class mollie
             'CHECKOUT_DESCRIPTION' => [
                 'configuration_value' => $this->translate($currentLang, 'mollie_checkout_desc'),
                 'set_function'        => 'mollie_multi_language_text( ',
+            ],
+            'TRANSACTION_DESCRIPTION' => [
+                'configuration_value' => '{orderNumber}',
+                'set_function'        => 'mollie_multi_language_text_area( ',
             ],
             'API_METHOD'           => [
                 'configuration_value' => $this->_getDefaultApi(),
@@ -368,6 +372,10 @@ class mollie
 
             $fields['CHECKOUT_DESCRIPTION_' . $code] = [
                 'configuration_value' => $this->translate($code, 'mollie_checkout_desc'),
+            ];
+
+            $fields['TRANSACTION_DESCRIPTION_' . $code] = [
+                'configuration_value' => '{orderNumber}',
             ];
         }
 
