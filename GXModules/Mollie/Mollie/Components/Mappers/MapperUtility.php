@@ -7,6 +7,8 @@ namespace Mollie\Gambio\Mappers;
 use Mollie\BusinessLogic\Configuration;
 use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\DTO\Payment;
+use Mollie\BusinessLogic\PaymentMethod\DTO\DescriptionParameters;
+use Mollie\BusinessLogic\PaymentMethod\PaymentTransactionDescriptionService;
 use Mollie\Gambio\Entity\Repository\GambioProductRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\UrlProvider;
@@ -22,6 +24,26 @@ trait MapperUtility
      * @var ConfigurationService
      */
     protected $configService;
+    /**
+     * @var PaymentTransactionDescriptionService
+     */
+    protected $transactionDescriptionService;
+
+    protected function _getPaymentTransactionDescription(\OrderInterface $sourceOrder)
+    {
+        $customerAddress = $sourceOrder->getCustomerAddress();
+
+        $descriptionParameters = DescriptionParameters::fromArray([
+            'orderNumber' => $sourceOrder->getOrderId(),
+            'firstName' => $customerAddress->getFirstname(),
+            'lastName' => $customerAddress->getLastname(),
+            'company' => $customerAddress->getCompany(),
+            'cartNumber' => $_SESSION['cart']->cartID,
+            'storeName' => defined('STORE_NAME') ? STORE_NAME : null,
+        ]);
+
+        return $this->_getTransactionDescriptionService()->formatPaymentDescription($descriptionParameters, $sourceOrder->getPaymentType()->getPaymentClass());
+    }
 
     /**
      * @param $orderId
@@ -125,6 +147,18 @@ trait MapperUtility
         }
 
         return $this->configService;
+    }
+
+    /**
+     * @return PaymentTransactionDescriptionService
+     */
+    private function _getTransactionDescriptionService()
+    {
+        if ($this->transactionDescriptionService === null) {
+            $this->transactionDescriptionService = ServiceRegister::getService(PaymentTransactionDescriptionService::CLASS_NAME);
+        }
+
+        return $this->transactionDescriptionService;
     }
 
     /**

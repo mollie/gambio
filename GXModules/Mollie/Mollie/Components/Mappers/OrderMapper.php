@@ -117,7 +117,7 @@ class OrderMapper
 
         $amount  = $this->_getAmount($currency, $this->getOrderTotalAmount($sourceOrder->getOrderTotals(), $sourceOrder->getOrderItems()));
         $payment->setAmount($amount);
-        $payment->setDescription("Order $orderId");
+        $payment->setDescription($this->_getPaymentTransactionDescription($sourceOrder));
         $payment->setOrderId((string)$orderId);
         $payment->setRedirectUrl($this->_getRedirectUrl($orderId));
         $payment->setLocale($this->_getLanguage());
