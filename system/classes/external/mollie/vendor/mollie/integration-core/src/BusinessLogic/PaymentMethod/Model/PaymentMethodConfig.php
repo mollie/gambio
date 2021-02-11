@@ -69,6 +69,7 @@ class PaymentMethodConfig extends Entity
         'issuerListStyle',
         'daysToOrderExpire',
         'daysToPaymentExpire',
+        'transactionDescription',
     );
 
     /**
@@ -120,6 +121,10 @@ class PaymentMethodConfig extends Entity
      * @var int
      */
     protected $daysToPaymentExpire;
+    /**
+     * @var string
+     */
+    protected $transactionDescription = '{orderNumber}';
 
     /**
      * @inheritDoc
@@ -420,5 +425,21 @@ class PaymentMethodConfig extends Entity
     public function setDaysToPaymentExpire($daysToPaymentExpire)
     {
         $this->daysToPaymentExpire = $daysToPaymentExpire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransactionDescription()
+    {
+        return $this->transactionDescription;
+    }
+
+    /**
+     * @param string $transactionDescription
+     */
+    public function setTransactionDescription($transactionDescription)
+    {
+        $this->transactionDescription = $transactionDescription;
     }
 }
