@@ -43,15 +43,16 @@ abstract class VersionCheckService extends BaseService
 
         $latestVersion = $proxy->getLatestPluginVersion($this->getConfigService()->getExtensionVersionCheckUrl());
         if (version_compare($latestVersion, $this->getConfigService()->getExtensionVersion(), 'gt')) {
-            $this->flashMessage();
+            $this->flashMessage($latestVersion);
         }
     }
 
     /**
      * Display message in the shop
-     * @return mixed
+     *
+     * @param string $latestVersion
      */
-    abstract protected function flashMessage();
+    abstract protected function flashMessage($latestVersion);
 
     /**
      * @return Configuration

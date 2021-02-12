@@ -14,12 +14,15 @@ class VersionCheckService extends \Mollie\BusinessLogic\VersionCheck\VersionChec
 
     /**
      * @inheritDoc
+     * @param string $latestVersion
+     *
+     * @return mixed|void
      */
-    protected function flashMessage()
+    protected function flashMessage($latestVersion)
     {
         $messageKey = 'mollie_version_outdated_message';
         $params = [
-            '{versionNumber}' => $this->getConfigService()->getExtensionVersion(),
+            '{versionNumber}' => $latestVersion,
             '{downloadUrl}' => $this->getConfigService()->getExtensionDownloadUrl(),
         ];
 
