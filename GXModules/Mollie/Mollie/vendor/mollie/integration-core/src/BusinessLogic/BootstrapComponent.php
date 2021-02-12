@@ -36,6 +36,7 @@ use Mollie\BusinessLogic\Refunds\RefundService;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderLineRefundWebHookHandler;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderRefundWebHookHandler;
 use Mollie\BusinessLogic\Shipments\ShipmentService;
+use Mollie\BusinessLogic\VersionCheck\Http\VersionCheckProxy;
 use Mollie\BusinessLogic\WebHook\OrderChangedWebHookEvent;
 use Mollie\BusinessLogic\WebHook\PaymentChangedWebHookEvent;
 use Mollie\BusinessLogic\WebHook\WebHookContext;
@@ -70,6 +71,21 @@ class BootstrapComponent extends \Mollie\Infrastructure\BootstrapComponent
                 $transformer = ServiceRegister::getService(ProxyDataProvider::CLASS_NAME);
 
                 return new Proxy($config, new LoggingHttpClient($client), $transformer);
+            }
+        );
+
+
+        ServiceRegister::registerService(
+            VersionCheckProxy::CLASS_NAME,
+            function () {
+                /** @var Configuration $config */
+                $config = ServiceRegister::getService(Configuration::CLASS_NAME);
+                /** @var HttpClient $client */
+                $client = ServiceRegister::getService(HttpClient::CLASS_NAME);
+                /** @var ProxyDataProvider $transformer */
+                $transformer = ServiceRegister::getService(ProxyDataProvider::CLASS_NAME);
+
+                return new VersionCheckProxy($config, new LoggingHttpClient($client), $transformer);
             }
         );
 

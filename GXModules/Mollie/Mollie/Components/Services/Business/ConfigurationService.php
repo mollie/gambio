@@ -13,6 +13,8 @@ use Mollie\Gambio\Utility\UrlProvider;
 class ConfigurationService extends Configuration
 {
     const MOLLIE_GAMBIO_VERSION = '1.0.6';
+    const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/mollie/gambio/3.5-4.0/GXModules/Mollie/Mollie/composer.json';
+    const PLUGIN_DOWNLOAD_URL = 'https://raw.githubusercontent.com/mollie/gambio/4.1-4.x/GXModules/Mollie/Mollie/composer.json';
 
     /**
      * @inheritDoc
@@ -115,13 +117,39 @@ class ConfigurationService extends Configuration
         return $this->getConfigValue('liveApiKey');
     }
 
+    /**
+     * @param string $apiKey
+     */
     public function setTestKey($apiKey)
     {
         $this->saveConfigValue('liveTestKey', $apiKey);
     }
 
+    /**
+     * @return string
+     */
     public function getTestApiKey()
     {
         return $this->getConfigValue('liveTestKey');
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     */
+    public function getExtensionVersionCheckUrl()
+    {
+        return static::VERSION_CHECK_URL;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     */
+    public function getExtensionDownloadUrl()
+    {
+        return static::PLUGIN_DOWNLOAD_URL;
     }
 }
