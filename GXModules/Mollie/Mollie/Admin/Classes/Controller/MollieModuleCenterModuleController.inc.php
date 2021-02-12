@@ -4,6 +4,7 @@ use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
 use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethodService;
+use Mollie\BusinessLogic\VersionCheck\VersionCheckService;
 use Mollie\Gambio\Mappers\OrderStatusMapper;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\MollieModuleChecker;
@@ -35,20 +36,27 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
      * @var \OrderStatusService
      */
     protected $orderStatusService;
+    /**
+     * @var VersionCheckService
+     */
+    protected $versionCheckService;
 
     /**
      *
      */
     protected function _init()
     {
-        $this->pageTitle          = $this->languageTextManager->get_text('mollie_title');
-        $this->configService      = ServiceRegister::getService(Configuration::CLASS_NAME);
-        $this->paymentService     = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
-        $this->orderStatusService = StaticGXCoreLoader::getService('OrderStatus');
+        $this->pageTitle           = $this->languageTextManager->get_text('mollie_title');
+        $this->configService       = ServiceRegister::getService(Configuration::CLASS_NAME);
+        $this->paymentService      = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
+        $this->versionCheckService = ServiceRegister::getService(VersionCheckService::CLASS_NAME);
+        $this->orderStatusService  = StaticGXCoreLoader::getService('OrderStatus');
     }
 
     /**
-     * @return AdminLayoutHttpControllerResponse
+     * Performs version checking and redirects to the mollie config page
+     *
+     * @return RedirectHttpControllerResponse
      *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
@@ -56,6 +64,26 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
      * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     public function actionDefault()
+    {
+        $this->versionCheckService->checkForNewVersion();
+
+        $redirectUrl = UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule/Mollie');
+
+        return MainFactory::create('RedirectHttpControllerResponse', $redirectUrl);
+    }
+
+    /**
+     * Renders mollie config page
+     *
+     * @return AdminLayoutHttpControllerResponse
+     *
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     * @throws \Mollie\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
+     */
+    public function actionMollie()
     {
         $pageTitle = new NonEmptyStringType($this->pageTitle);
         $template  = PathProvider::getAdminTemplate('mollie_configuration.html');
