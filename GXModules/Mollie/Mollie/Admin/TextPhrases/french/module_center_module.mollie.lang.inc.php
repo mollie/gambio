@@ -157,4 +157,7 @@ $t_language_text_section_content_array = [
 
     'mollie.payment.webhook.notification.order_line_cancel_info.title'       => 'La ligne de commande Mollie a changé',
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'La ligne de commande est annulée sur le portail Mollie.',
+
+    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>'
+
 ];

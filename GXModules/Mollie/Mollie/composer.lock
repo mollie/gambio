@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edb0fd5a06f91dde996cfeee57e56189",
+    "content-hash": "6cd1aa30fb0057628de3b2263d9f8c42",
     "packages": [
         {
             "name": "mollie/integration-core",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mollie/orocore.git",
-                "reference": "e1ec8c75be3b6b2389d4b690f8295d5492fe3027"
+                "reference": "de792fbed0a9b028d78ede1984d2acec629a4b6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/orocore/zipball/e1ec8c75be3b6b2389d4b690f8295d5492fe3027",
-                "reference": "e1ec8c75be3b6b2389d4b690f8295d5492fe3027",
+                "url": "https://api.github.com/repos/mollie/orocore/zipball/de792fbed0a9b028d78ede1984d2acec629a4b6b",
+                "reference": "de792fbed0a9b028d78ede1984d2acec629a4b6b",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "proprietary"
             ],
             "description": "Mollie integrations core library",
-            "time": "2021-02-09T08:27:09+00:00"
+            "time": "2021-02-12T08:55:22+00:00"
         }
     ],
     "packages-dev": [],
