@@ -11,6 +11,7 @@ use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\OrderReference\Model\OrderReference;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentTransactionDescriptionService;
+use Mollie\BusinessLogic\VersionCheck\VersionCheckService;
 use Mollie\Gambio\APIProcessor\OrderProcessor;
 use Mollie\Gambio\APIProcessor\PaymentProcessor;
 use Mollie\Gambio\APIProcessor\ProcessorRegister;
@@ -101,6 +102,15 @@ class BootstrapComponent extends \Mollie\BusinessLogic\BootstrapComponent
                 return TransactionDescriptionService::getInstance();
             }
         );
+
+        ServiceRegister::registerService(
+            VersionCheckService::CLASS_NAME,
+            static function () {
+                return Services\Business\VersionCheckService::getInstance();
+            }
+        );
+
+
 
         static::initProcessors();
     }
