@@ -12,7 +12,6 @@ use Mollie\Gambio\Utility\UrlProvider;
  */
 class ConfigurationService extends Configuration
 {
-    const MOLLIE_GAMBIO_VERSION = '2.0.6';
     const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/mollie/gambio/4.1-4.x/GXModules/Mollie/Mollie/composer.json';
     const PLUGIN_DOWNLOAD_URL = 'https://raw.githubusercontent.com/mollie/gambio/4.1-4.x/GXModules/Mollie/Mollie/composer.json';
 
@@ -63,7 +62,9 @@ class ConfigurationService extends Configuration
      */
     public function getExtensionVersion()
     {
-        return static::MOLLIE_GAMBIO_VERSION;
+        $composerContent = json_decode(file_get_contents(__DIR__ . '/../../../composer.json'), true);
+
+        return $composerContent['version'];
     }
 
     /**
