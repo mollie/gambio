@@ -43,4 +43,16 @@ class VersionCheckProxy extends Proxy
     {
         return $endpoint;
     }
+
+    /**
+     * @inheritDoc
+     * @return array|string[]
+     */
+    protected function getRequestHeaders()
+    {
+        $headers = parent::getRequestHeaders();
+        unset($headers['token']);
+
+        return $headers;
+    }
 }
