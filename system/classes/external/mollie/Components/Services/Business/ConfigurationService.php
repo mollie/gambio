@@ -12,8 +12,8 @@ use Mollie\Gambio\Utility\UrlProvider;
  */
 class ConfigurationService extends Configuration
 {
-    const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/mollie/gambio/3.5-4.0/GXModules/Mollie/Mollie/composer.json';
-    const PLUGIN_DOWNLOAD_URL = 'https://github.com/mollie/gambio/tree/3.5-4.0';
+    const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/mollie/gambio/3.0-3.4/system/classes/external/mollie/composer.json';
+    const PLUGIN_DOWNLOAD_URL = 'https://github.com/mollie/gambio/tree/3.0-3.4';
 
     /**
      * @inheritDoc
