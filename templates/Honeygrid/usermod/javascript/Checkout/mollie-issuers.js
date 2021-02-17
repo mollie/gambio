@@ -42,7 +42,9 @@
 
             function setSelectedIssuer() {
                 let selectedIssuer = issuerListWrapper.querySelector('input[type="radio"]:checked')
-                issuerListHiddenInput.value = selectedIssuer.value;
+                if (selectedIssuer) {
+                    issuerListHiddenInput.value = selectedIssuer.value;
+                }
             }
         }
 
