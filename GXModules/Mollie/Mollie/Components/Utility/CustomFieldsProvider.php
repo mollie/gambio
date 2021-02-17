@@ -10,7 +10,7 @@ namespace Mollie\Gambio\Utility;
  */
 class CustomFieldsProvider
 {
-    const MAX_OVERVIEW_TEXT_LENGTH = 30;
+    const MAX_OVERVIEW_TEXT_LENGTH = 50;
 
     private $module;
 
