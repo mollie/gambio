@@ -92,7 +92,7 @@ $t_language_text_section_content_array = [
 
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'Lijst met afbeeldingen',
-    'mollie_issuer_not_selected'     => 'Issuer not selected!',
+    'mollie_issuer_not_selected'     => 'Issuer not selected',
 
 
     'mollie_select_bank'             => 'Selecteer Bank',
