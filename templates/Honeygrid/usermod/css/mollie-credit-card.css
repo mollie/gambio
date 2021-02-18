@@ -1,9 +1,9 @@
 .mollie-component-wrapper {
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #ffffff;
-    max-width: 350px;
+    margin: 0;
+    padding: 0;
+    max-width: 400px;
     min-width: 345px;
+    background: transparent;
 }
 
 .form-fields {
