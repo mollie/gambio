@@ -10,6 +10,8 @@ namespace Mollie\Gambio\Utility;
  */
 class CustomFieldsProvider
 {
+    const MAX_OVERVIEW_TEXT_LENGTH = 50;
+
     private $module;
 
     /**
@@ -94,9 +96,13 @@ class CustomFieldsProvider
      */
     private function _formatOverviewData($key)
     {
+        $value = $this->getConstantValue($this->_formatKey($key));
+        $value = strlen($value) > static::MAX_OVERVIEW_TEXT_LENGTH ?
+            substr($value, 0, self::MAX_OVERVIEW_TEXT_LENGTH) . ' ...' : $value;
+
         return [
             'title' => $this->getConstantValue($this->_formatKey("{$key}_TITLE")),
-            'value' => $this->getConstantValue($this->_formatKey($key)),
+            'value' => $value,
         ];
     }
 
