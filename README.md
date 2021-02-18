@@ -91,6 +91,11 @@ The payment methods are disabled by default in your account so you firstly need 
  6. **Check if there is any information in the logfile `Toolbox` » `Show logs`**
 
 # Release notes
+*0.1.8*
+- Optimization: Set the transparent background color for the mollie components.
+- Optimization: By default, none of the issuers are selected. If the issuer is not selected on the payment checkout form submit, the customer will not be able to proceed with the checkout, and an error message will be displayed.
+- Removed ING Home'Pay payment method from the plugin.
+
 *0.1.7*
 - Optimization: Restock product quantity, recalculate delivery status and reset article status when order is canceled during the checkout due to failed payment.
 
