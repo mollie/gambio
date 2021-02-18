@@ -42,7 +42,9 @@
 
             function setSelectedIssuer() {
                 let selectedIssuer = issuerListWrapper.querySelector('input[type="radio"]:checked')
-                issuerListHiddenInput.value = selectedIssuer.value;
+                if (selectedIssuer) {
+                    issuerListHiddenInput.value = selectedIssuer.value;
+                }
             }
         }
 
@@ -119,6 +121,8 @@
                 if (issuerErrorMessage) {
                     issuerErrorMessage.classList.remove('hidden')
                 }
+
+                scrollToActiveMethod();
             }
         }
 
@@ -128,12 +132,23 @@
          * @returns {null|Element}
          */
         function getActiveIssuerListWrapper() {
-            let activeMethodWrapper = document.querySelector('.list-group-item.active');
+            let activeMethodWrapper = getActiveMethod();
             if (activeMethodWrapper) {
-                return  activeMethodWrapper.querySelector('.mollie-issuer-list-wrapper');
+                return activeMethodWrapper.querySelector('.mollie-issuer-list-wrapper');
             }
 
             return null;
+        }
+
+        function scrollToActiveMethod() {
+            let activeMethodWrapper = getActiveMethod();
+            if (activeMethodWrapper) {
+                activeMethodWrapper.scrollIntoView();
+            }
+        }
+
+        function getActiveMethod() {
+            return document.querySelector('.list-group-item.active');
         }
 
     });
