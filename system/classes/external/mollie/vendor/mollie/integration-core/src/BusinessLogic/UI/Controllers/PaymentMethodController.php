@@ -47,6 +47,7 @@ class PaymentMethodController
      * @param string|null $billingCountry The billing country of your customer in ISO 3166-1 alpha-2 format.
      * @param Amount|null $amount
      * @param string $apiMethod Api method to use for availability checking. Default is orders api
+     * @param array $orderLineCategories
      *
      * @return PaymentMethodConfig[]
      *
@@ -59,7 +60,8 @@ class PaymentMethodController
         $profileId,
         $billingCountry = null,
         $amount = null,
-        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS
+        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS,
+        $orderLineCategories = array()
     ) {
         /** @var PaymentMethodService $paymentMethodService */
         $paymentMethodService = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
@@ -67,7 +69,8 @@ class PaymentMethodController
             $profileId,
             $billingCountry,
             $amount,
-            $apiMethod
+            $apiMethod,
+            $orderLineCategories
         );
     }
 

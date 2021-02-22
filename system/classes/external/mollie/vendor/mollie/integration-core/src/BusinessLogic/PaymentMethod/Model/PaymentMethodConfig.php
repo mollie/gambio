@@ -26,6 +26,13 @@ class PaymentMethodConfig extends Entity
     const ISSUER_LIST = 'list';
     const ISSUER_DROPDOWN = 'dropdown';
 
+    const VOUCHER_CATEGORY_NONE = 'none';
+    const VOUCHER_CATEGORY_GIFT = 'gift';
+    const VOUCHER_CATEGORY_MEAL = 'meal';
+    const VOUCHER_CATEGORY_ECO = 'eco';
+    const VOUCHER_CATEGORY_CUSTOM = 'custom';
+
+    const PRODUCT_ATTRIBUTE_DEFAULT = 'mollie_voucher_category';
     /**
      * @var string[]
      */
@@ -70,6 +77,8 @@ class PaymentMethodConfig extends Entity
         'daysToOrderExpire',
         'daysToPaymentExpire',
         'transactionDescription',
+        'voucherCategory',
+        'productAttribute',
     );
 
     /**
@@ -125,6 +134,14 @@ class PaymentMethodConfig extends Entity
      * @var string
      */
     protected $transactionDescription = '{orderNumber}';
+    /**
+     * @var string
+     */
+    protected $voucherCategory = self::VOUCHER_CATEGORY_NONE;
+    /**
+     * @var string
+     */
+    protected $productAttribute = self::PRODUCT_ATTRIBUTE_DEFAULT;
 
     /**
      * @inheritDoc
@@ -441,5 +458,37 @@ class PaymentMethodConfig extends Entity
     public function setTransactionDescription($transactionDescription)
     {
         $this->transactionDescription = $transactionDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVoucherCategory()
+    {
+        return $this->voucherCategory;
+    }
+
+    /**
+     * @param string $voucherCategory
+     */
+    public function setVoucherCategory($voucherCategory)
+    {
+        $this->voucherCategory = $voucherCategory;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductAttribute()
+    {
+        return $this->productAttribute;
+    }
+
+    /**
+     * @param string $productAttribute
+     */
+    public function setProductAttribute($productAttribute)
+    {
+        $this->productAttribute = $productAttribute;
     }
 }
