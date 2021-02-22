@@ -34,7 +34,7 @@ class MollieConfigurationController extends AdminHttpViewController
 
         return MainFactory::create(
             'RedirectHttpControllerResponse',
-            UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule')
+            UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule/Mollie')
         );
     }
 
@@ -79,9 +79,13 @@ class MollieConfigurationController extends AdminHttpViewController
      */
     private function _handleException(Exception $e)
     {
-        $messageKey = 'mollie_connect_failure';
+        $messageKey = 'mollie_configuration_failure';
         $lang       = new MollieTranslator();
-        $message    = $lang->translate($messageKey) . " {$e->getMessage()}";
+        $params = [
+            '{api_message}' => $e->getMessage(),
+        ];
+
+        $message    = $lang->translate($messageKey, $params);
         $GLOBALS['messageStack']->add_session($message, 'error');
     }
 }

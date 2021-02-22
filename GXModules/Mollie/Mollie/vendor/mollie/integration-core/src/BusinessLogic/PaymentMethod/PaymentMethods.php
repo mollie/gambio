@@ -16,4 +16,5 @@ class PaymentMethods
     const iDEAL = 'ideal';
     const KBC = 'kbc';
     const GiftCard = 'giftcard';
+    const Vouchers = 'voucher';
 }
