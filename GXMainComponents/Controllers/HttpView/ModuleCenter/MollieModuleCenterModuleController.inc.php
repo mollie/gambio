@@ -58,6 +58,7 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         $this->paymentService         = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
         $this->versionCheckService    = ServiceRegister::getService(VersionCheckService::CLASS_NAME);
         $this->maintenanceModeService = ServiceRegister::getService(MaintenanceModeService::CLASS_NAME);
+        $this->orderStatusRepository = new GambioStatusRepository();
     }
 
     /**
