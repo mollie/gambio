@@ -17,14 +17,13 @@ class MaintenanceModeService extends BaseService
      * @inheritDoc
      *
      * @return bool
+     * @throws \Doctrine\DBAL\DBALException
      */
     protected function isMaintenanceMode()
     {
-        /** @var \Gambio\Core\Configuration\ConfigurationService $configService */
-        $configService = \LegacyDependencyContainer::getInstance()->get(\Gambio\Core\Configuration\ConfigurationService::class);
-        $offlineConfig = $configService->find('gm_configuration/GM_SHOP_OFFLINE');
+        $offlineConfig = gm_get_conf('GM_SHOP_OFFLINE');
 
-        return $offlineConfig ? $offlineConfig->value() === 'checked' : false;
+        return $offlineConfig ? $offlineConfig === 'checked' : false;
     }
 
     /**
