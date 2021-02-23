@@ -1,6 +1,7 @@
 <?php
 
 use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
+use Mollie\BusinessLogic\MaintenanceMode\MaintenanceModeService;
 use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethodService;
@@ -43,15 +44,20 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     protected $versionCheckService;
 
     /**
+     * @var MaintenanceModeService
+     */
+    protected $maintenanceModeService;
+
+    /**
      *
      */
     protected function _init()
     {
-        $this->pageTitle             = $this->languageTextManager->get_text('mollie_title');
-        $this->configService         = ServiceRegister::getService(Configuration::CLASS_NAME);
-        $this->paymentService        = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
-        $this->orderStatusRepository = new GambioStatusRepository();
-        $this->versionCheckService = ServiceRegister::getService(VersionCheckService::CLASS_NAME);
+        $this->pageTitle              = $this->languageTextManager->get_text('mollie_title');
+        $this->configService          = ServiceRegister::getService(Configuration::CLASS_NAME);
+        $this->paymentService         = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
+        $this->versionCheckService    = ServiceRegister::getService(VersionCheckService::CLASS_NAME);
+        $this->maintenanceModeService = ServiceRegister::getService(MaintenanceModeService::CLASS_NAME);
     }
 
     /**
@@ -67,6 +73,7 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     public function actionDefault()
     {
         $this->versionCheckService->checkForNewVersion();
+        $this->maintenanceModeService->checkMaintenanceMode();
 
         $redirectUrl = UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule/Mollie');
 
