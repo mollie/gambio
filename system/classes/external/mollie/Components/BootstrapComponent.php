@@ -7,6 +7,7 @@ use Mollie\BusinessLogic\Authorization\Interfaces\AuthorizationService;
 use Mollie\BusinessLogic\Http\ApiKey\ProxyDataProvider;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderLineTransitionService;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderTransitionService;
+use Mollie\BusinessLogic\MaintenanceMode\MaintenanceModeService;
 use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\OrderReference\Model\OrderReference;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
@@ -110,7 +111,12 @@ class BootstrapComponent extends \Mollie\BusinessLogic\BootstrapComponent
             }
         );
 
-
+        ServiceRegister::registerService(
+            MaintenanceModeService::CLASS_NAME,
+            static function () {
+                return Services\Business\MaintenanceModeService::getInstance();
+            }
+        );
 
         static::initProcessors();
     }
