@@ -72,9 +72,9 @@ class DescriptionParameters extends BaseDto
         return array(
             '{orderNumber}' => $this->orderNumber,
             '{storeName}' => $this->storeName,
-            '{firstName}' => $this->firstName,
-            '{lastName}' => $this->lastName,
-            '{company}' => $this->company,
+            '{customerFirstname}' => $this->firstName,
+            '{customerLastname}' => $this->lastName,
+            '{customerCompany}' => $this->company,
             '{cartNumber}' => $this->cartNumber,
         );
     }
@@ -89,9 +89,9 @@ class DescriptionParameters extends BaseDto
         return new static(
             static::getValue($raw, 'orderNumber'),
             static::getValue($raw, 'storeName'),
-            static::getValue($raw, 'firstName'),
-            static::getValue($raw, 'lastName'),
-            static::getValue($raw, 'company'),
+            static::getValue($raw, 'customerFirstname'),
+            static::getValue($raw, 'customerLastname'),
+            static::getValue($raw, 'customerCompany'),
             static::getValue($raw, 'cartNumber')
         );
     }
