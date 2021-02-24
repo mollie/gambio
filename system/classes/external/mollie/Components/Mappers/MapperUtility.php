@@ -35,9 +35,9 @@ trait MapperUtility
 
         $descriptionParameters = DescriptionParameters::fromArray([
             'orderNumber' => $sourceOrder->getOrderId(),
-            'firstName' => $customerAddress->getFirstname(),
-            'lastName' => $customerAddress->getLastname(),
-            'company' => $customerAddress->getCompany(),
+            'customerFirstname' => $customerAddress->getFirstname(),
+            'customerLastname' => $customerAddress->getLastname(),
+            'customerCompany' => $customerAddress->getCompany(),
             'cartNumber' => $_SESSION['cart']->cartID,
             'storeName' => defined('STORE_NAME') ? STORE_NAME : null,
         ]);
