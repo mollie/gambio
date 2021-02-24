@@ -201,13 +201,12 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         foreach ($paymentMethodConfigs as $methodConfig) {
             $originalConfig     = $methodConfig->getOriginalAPIConfig();
             $id = $originalConfig->getId();
-            $isActive = constant('MODULE_PAYMENT_MOLLIE_' . strtoupper($id) . '_STATUS');
             $methodsFormatted[] = [
                 'id'          => $originalConfig->getId(),
                 'label'       => $originalConfig->getDescription(),
                 'image_src'   => $originalConfig->getImage()->getSvg(),
                 'is_enabled'  => $methodConfig->isEnabled(),
-                'is_active'   => $isActive === strtolower('true'),
+                'is_active'   => $this->_isMethodActive($id),
                 'module_link' => UrlProvider::generateAdminUrl('modules.php', null, ['set' => 'payment', 'module' => "mollie_{$originalConfig->getId()}"])
             ];
         }
@@ -267,5 +266,18 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         }
 
         return '';
+    }
+
+    /**
+     * @param string $mollieId
+     *
+     * @return bool
+     */
+    private function _isMethodActive($mollieId)
+    {
+        $statusKey = 'MODULE_PAYMENT_MOLLIE_' . strtoupper($mollieId) . '_STATUS';
+
+        return defined($statusKey) ?
+            strtolower_wrapper(@constant($statusKey)) === 'true' : false;
     }
 }
