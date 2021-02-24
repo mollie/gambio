@@ -160,5 +160,9 @@ $t_language_text_section_content_array = [
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'Order line is canceled in Mollie portal.',
 
     'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>',
-    'mollie_system_offline_message'   => 'Your website is running in offline mode. Since Mollie sends a message to your website when the payment status changes, Mollie won\'t be able to to access your website when in offline mode'
+    'mollie_system_offline_message'   => 'Your website is running in offline mode. Since Mollie sends a message to your website when the payment status changes, Mollie won\'t be able to to access your website when in offline mode',
+
+    'mollie_status_label'          => 'Mollie status',
+    'mollie_gambio_status_label'   => 'Gambio status',
+    'mollie_method_label'          => 'Method',
 ];

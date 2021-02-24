@@ -9,6 +9,12 @@
     </legend>
     <table class="mollie-payment-methods">
         <tbody>
+        <tr>
+            <td class="mollie-payment-status"><b>{$txt.mollie_method_label}</b></td>
+            <td></td>
+            <td class="mollie-payment-status"><b>{$txt.mollie_method_label}</b></td>
+            <td class="mollie-payment-status"><b>{$txt.mollie_gambio_method_label}</b></td>
+        </tr>
         {foreach item=module_data from=$content.methods}
         <tr>
             <td class="mollie-payment-image">
@@ -27,6 +33,18 @@
                     {else}
                         <i class="fa fa-circle-thin" aria-hidden="true"></i>
                         {$txt.mollie_disabled}
+                    {/if}
+                </div>
+            </td>
+
+            <td class="mollie-payment-status">
+                <div class="badge badge-warning {if $module_data.is_active}active{/if}">
+                    {if $module_data.is_active}
+                        <i class="fa fa-circle" aria-hidden="true"></i>
+                        {$txt.mollie_active}
+                    {else}
+                        <i class="fa fa-circle-thin" aria-hidden="true"></i>
+                        {$txt.mollie_inactive}
                     {/if}
                 </div>
             </td>
