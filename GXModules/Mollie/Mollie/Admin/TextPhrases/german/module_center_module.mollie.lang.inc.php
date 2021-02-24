@@ -157,6 +157,10 @@ $t_language_text_section_content_array = [
     'mollie.payment.webhook.notification.order_line_cancel_info.title'       => 'Mollie order line changed',
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'Bestellposition im Molli-Portal storniert.',
 
-    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>'
+    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>',
+
+    'mollie_status_label'          => 'Mollie status',
+    'mollie_gambio_status_label'   => 'Gambio status',
+    'mollie_method_label'          => 'Method',
 
 ];
