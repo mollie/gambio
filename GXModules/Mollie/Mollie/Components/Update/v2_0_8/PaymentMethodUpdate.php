@@ -69,12 +69,17 @@ class PaymentMethodUpdate
      */
     private function addBanktransferSpecificField()
     {
-        $options = [
+        $configOptions = [
             'key' => 'DUE_DATE',
             'value' => null,
         ];
 
-        $this->insertConfig($options);
+        $configKey = $this->_formatKey($configOptions['key']);
+        if (!defined($configKey)) {
+            $this->insertConfig($configOptions);
+            define($configKey, $configOptions['value']);
+        }
+
     }
 
     /**
@@ -85,7 +90,7 @@ class PaymentMethodUpdate
         $repository = new GambioConfigRepository();
 
         $insert['key'] = $this->_formatKey($options['key'], true);
-        $insert['value'] = $options['value'];
+        $insert['value'] = xtc_db_input($options['value']);
         $insert['legacy_group_id'] = 6;
         $insert['sort_order'] = 0;
 

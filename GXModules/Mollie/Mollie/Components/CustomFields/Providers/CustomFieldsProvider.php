@@ -134,7 +134,7 @@ class CustomFieldsProvider
 
         $transactionDescKey = $this->_formatKey('TRANSACTION_DESCRIPTION');
         $transactionDescEdit = !$this->isOrdersApi() ?
-            mollie_multi_language_text_area($this->getConstantValue($transactionDescKey), $transactionDescKey) :
+            mollie_multi_language_text($this->getConstantValue($transactionDescKey), $transactionDescKey) :
             '';
 
         return mollie_multi_language_text($this->getConstantValue($titleKey), $titleKey) .
