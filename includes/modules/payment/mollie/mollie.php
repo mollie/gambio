@@ -6,6 +6,7 @@ use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
+use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
 use Mollie\Gambio\Utility\MollieModuleChecker;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
@@ -56,6 +57,8 @@ class mollie
 
         include(DIR_FS_CATALOG . 'lang/' . $_SESSION['language'] . '/modules/payment/' . $this->code . '.php');
 
+        $updater = new PaymentMethodUpdate($this->code, $this->_isInstalled());
+        $updater->addConfigFields();
 
         $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
