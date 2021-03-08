@@ -113,6 +113,7 @@ class GambioAuthorizationWrapper
         }
 
         $this->authService->connect($token);
+        $this->isTest ? $this->configService->setTestKey($token->getToken()) : $this->configService->setLiveKey($token->getToken());
     }
 
     /**
