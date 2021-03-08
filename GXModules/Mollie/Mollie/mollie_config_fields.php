@@ -17,6 +17,8 @@ function mollie_input_integer($key_value, $key = '')
     $data         = [
         'key'   => $key,
         'value' => $key_value,
+
+        'wrapper_class' => str_replace('configuration/', '', $key),
     ];
 
     return mollie_render_template($templatePath, $data);
@@ -91,7 +93,6 @@ function mollie_api_select($key_value, $key = '')
  */
 function mollie_multi_language_text($key_value, $key = '')
 {
-
     $templatePath = PathProvider::getAdminTemplatePath('multi_lang_field.html', 'ConfigFields');
 
     return mollie_multi_language_field($templatePath, $key_value, $key);
@@ -123,6 +124,7 @@ function mollie_multi_language_field($templatePath, $key_value, $key = '')
     $data['default_value']    = stripslashes(@constant($key . '_' . $currentLang));
     $data['key']              = $key;
     $data['current_lang_key'] = $key . '_' . $currentLang;
+    $data['wrapper_class']    = str_replace('configuration/', '', $key);
 
     return mollie_render_template($templatePath, $data);
 }
