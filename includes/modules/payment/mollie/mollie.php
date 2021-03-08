@@ -317,7 +317,7 @@ class mollie
             ],
             'TRANSACTION_DESCRIPTION' => [
                 'configuration_value' => '{orderNumber}',
-                'set_function'        => 'mollie_multi_language_text_area( ',
+                'set_function'        => 'mollie_multi_language_text( ',
             ],
             'API_METHOD'           => [
                 'configuration_value' => $this->_getDefaultApi(),

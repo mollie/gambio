@@ -69,12 +69,17 @@ class PaymentMethodUpdate
      */
     private function addBanktransferSpecificField()
     {
-        $options = [
+        $configOptions = [
             'key' => 'DUE_DATE',
             'value' => null,
+            'set_function' => 'mollie_input_integer ('
         ];
 
-        $this->insertConfig($options);
+        $configKey = $this->_formatKey($configOptions['key']);
+        if (!defined($configKey)) {
+            $this->insertConfig($configOptions);
+            define($configKey, $configOptions['value']);
+        }
     }
 
     /**
@@ -84,9 +89,10 @@ class PaymentMethodUpdate
     {
         $repository = new GambioConfigRepository();
 
-        $insert['key'] = $this->_formatKey($options['key'], true);
-        $insert['value'] = $options['value'];
-        $insert['legacy_group_id'] = 6;
+        $insert['configuration_key'] = $this->_formatKey($options['key']);
+        $insert['configuration_value'] = xtc_db_input($options['value']);
+        $insert['configuration_group_id'] = 6;
+        $insert['set_function'] = xtc_db_input($options['set_function']);
         $insert['sort_order'] = 0;
 
         $repository->insert($insert);
@@ -96,16 +102,14 @@ class PaymentMethodUpdate
      * Returns fully formatted key
      *
      * @param string $key
-     * @param bool $addPrefix
      *
      * @return string
      */
-    protected function _formatKey($key, $addPrefix = false)
+    protected function _formatKey($key)
     {
         $code = strtoupper($this->code);
-        $constantKey = "MODULE_PAYMENT_{$code}_{$key}";
 
-        return $addPrefix ? "configuration/$constantKey" : $constantKey;
+        return "MODULE_PAYMENT_{$code}_{$key}";
     }
 
     /**
@@ -117,10 +121,12 @@ class PaymentMethodUpdate
             [
                 'key' => 'ORDER_EXPIRES',
                 'value' => null,
+                'set_function' => 'mollie_input_integer( ',
             ],
             [
                 'key' => 'TRANSACTION_DESCRIPTION',
                 'value' => static::TRANSACTION_DESC_DEFAULT_VALUE,
+                'set_function' => 'mollie_multi_language_text( ',
             ]
         ];
 
