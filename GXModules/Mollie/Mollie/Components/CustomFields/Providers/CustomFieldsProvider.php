@@ -82,8 +82,7 @@ class CustomFieldsProvider
     {
         $orderExpiresKey = $this->_formatKey('ORDER_EXPIRES');
 
-        return $this->isOrdersApi() ?
-            mollie_input_integer($this->getConstantValue($orderExpiresKey), $orderExpiresKey) : '';
+        return mollie_input_integer($this->getConstantValue($orderExpiresKey), $orderExpiresKey);
     }
 
     /**
@@ -132,15 +131,11 @@ class CustomFieldsProvider
     {
         $titleKey = $this->_formatKey('CHECKOUT_NAME');
         $descKey = $this->_formatKey('CHECKOUT_DESCRIPTION');
-
         $transactionDescKey = $this->_formatKey('TRANSACTION_DESCRIPTION');
-        $transactionDescEdit = !$this->isOrdersApi() ?
-            mollie_multi_language_text($this->getConstantValue($transactionDescKey), $transactionDescKey) :
-            '';
 
         return mollie_multi_language_text($this->getConstantValue($titleKey), $titleKey) .
             mollie_multi_language_text($this->getConstantValue($descKey), $descKey) .
-            $transactionDescEdit;
+            mollie_multi_language_text($this->getConstantValue($transactionDescKey), $transactionDescKey);
     }
 
     /**

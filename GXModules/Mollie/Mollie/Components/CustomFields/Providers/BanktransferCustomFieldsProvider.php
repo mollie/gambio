@@ -16,13 +16,9 @@ class BanktransferCustomFieldsProvider extends CustomFieldsProvider
      */
     protected function renderDaysToExpireEdit()
     {
-        if ($this->isOrdersApi()) {
-            return parent::renderDaysToExpireEdit();
-        }
-
         $dueDateKey = $this->_formatKey('DUE_DATE');
 
-        return mollie_input_integer($this->getConstantValue($dueDateKey), $dueDateKey);
+        return parent::renderDaysToExpireEdit() . mollie_input_integer($this->getConstantValue($dueDateKey), $dueDateKey);
     }
 
     /**
