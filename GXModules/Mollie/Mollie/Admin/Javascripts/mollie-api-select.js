@@ -17,12 +17,24 @@ $(document).ready(function () {
 
         if (apiMethod === 'payment_api') {
             wrapper.find(formatSelector('transaction_description')).removeClass('hidden');
+            wrapper.find('.mollie_transaction_description_title').removeClass('hidden');
+            wrapper.find('.mollie_transaction_description_desc').removeClass('hidden');
             wrapper.find(formatSelector('due_date')).removeClass('hidden');
+            wrapper.find('.mollie_due_date_title').removeClass('hidden');
+            wrapper.find('.mollie_due_date_desc').removeClass('hidden');
             wrapper.find(formatSelector('order_expires')).addClass('hidden');
+            wrapper.find('.mollie_order_expires_title').addClass('hidden');
+            wrapper.find('.mollie_order_expires_desc').addClass('hidden');
         } else {
             wrapper.find(formatSelector('transaction_description')).addClass('hidden');
+            wrapper.find('.mollie_transaction_description_title').addClass('hidden');
+            wrapper.find('.mollie_transaction_description_desc').addClass('hidden');
             wrapper.find(formatSelector('due_date')).addClass('hidden');
+            wrapper.find('.mollie_due_date_title').addClass('hidden');
+            wrapper.find('.mollie_due_date_desc').addClass('hidden');
             wrapper.find(formatSelector('order_expires')).removeClass('hidden');
+            wrapper.find('.mollie_order_expires_title').removeClass('hidden');
+            wrapper.find('.mollie_order_expires_desc').removeClass('hidden');
         }
     }
 

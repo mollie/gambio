@@ -27,8 +27,8 @@ define('MODULE_PAYMENT_MOLLIE_SOFORT_LOGO_DESC', 'Bitte laden Sie ein Logo hoch,
 define('MODULE_PAYMENT_MOLLIE_SOFORT_SORT_ORDER_TITLE', 'Sortierreihenfolge der Anzeige beim Checkout');
 define('MODULE_PAYMENT_MOLLIE_SOFORT_SORT_ORDER_DESC', 'Der niedrigste Wert wird beim Checkout zuerst angezeigt');
 
-define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_TITLE', 'Days To Expire');
-define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');
+define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_TITLE', '<span class="mollie_order_expires_title">Days To Expire</span>');
+define('MODULE_PAYMENT_MOLLIE_SOFORT_ORDER_EXPIRES_DESC', '<span class="mollie_order_expires_desc">How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)</span>');
 
-define('MODULE_PAYMENT_MOLLIE_SOFORT_TRANSACTION_DESCRIPTION_TITLE', 'Transaction description');
-define('MODULE_PAYMENT_MOLLIE_SOFORT_TRANSACTION_DESCRIPTION_DESC', 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.');
+define('MODULE_PAYMENT_MOLLIE_SOFORT_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transaction description</span>');
+define('MODULE_PAYMENT_MOLLIE_SOFORT_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.</span>');
