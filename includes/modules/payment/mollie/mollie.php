@@ -273,12 +273,6 @@ class mollie
     public function keys()
     {
         $configuration = $this->_configuration();
-        if (@constant($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_PAYMENT) {
-            unset($configuration['ORDER_EXPIRES']);
-        } else {
-            unset($configuration['DUE_DATE'], $configuration['TRANSACTION_DESCRIPTION']);
-        }
-
         $keys = $this->_getAllKeys($configuration);
 
         $hiddenFields = $this->_getAllKeys($this->_getHiddenFields());
