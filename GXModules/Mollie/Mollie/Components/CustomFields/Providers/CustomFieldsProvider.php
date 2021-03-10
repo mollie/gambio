@@ -69,7 +69,7 @@ class CustomFieldsProvider
      */
     protected function renderDaysToExpireOverview()
     {
-        return $this->isOrdersApi() ?
+        return $this->isOrdersApi() || $this->module === 'mollie_banktransfer' ?
             mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('ORDER_EXPIRES')) :
             '';
     }

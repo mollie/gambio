@@ -2,7 +2,6 @@
 
 namespace Mollie\Gambio\CustomFields\Factory;
 
-use Mollie\Gambio\CustomFields\Providers\BanktransferCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\CustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\IssuerListSupportedCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\KlarnaCustomFieldsProvider;
@@ -23,10 +22,6 @@ class CustomFieldsProviderFactory
      */
     public static function getProvider($methodKey)
     {
-        if ($methodKey === 'mollie_banktransfer') {
-            return new BanktransferCustomFieldsProvider($methodKey);
-        }
-
         if (strpos($methodKey, 'klarna') !== false) {
             return new KlarnaCustomFieldsProvider($methodKey);
         }

@@ -23,15 +23,37 @@ $(document).ready(function () {
             return;
         }
 
+        let transactionDesc = wrapper.find(formatSelector('transaction_description'));
+        let orderExpires = wrapper.find(formatSelector('order_expires'));
         if (apiMethod === 'payment_api') {
-            wrapper.find(formatSelector('transaction_description')).removeClass('hidden');
-            wrapper.find(formatSelector('due_date')).removeClass('hidden');
-            wrapper.find(formatSelector('order_expires')).addClass('hidden');
+            showPaymentApiFields(transactionDesc, orderExpires);
         } else {
-            wrapper.find(formatSelector('transaction_description')).addClass('hidden');
-            wrapper.find(formatSelector('due_date')).addClass('hidden');
-            wrapper.find(formatSelector('order_expires')).removeClass('hidden');
+            showOrderApiField(transactionDesc, orderExpires);
         }
+    }
+
+    /**
+     * Shows fields for payment api
+     *
+     * @param {jQuery} transactionDesc
+     * @param {jQuery} orderExpires
+     */
+    function showPaymentApiFields(transactionDesc, orderExpires) {
+        transactionDesc.removeClass('hidden');
+        if (getUrlParameter('module') !== 'mollie_banktransfer') {
+            orderExpires.addClass('hidden');
+        }
+    }
+
+    /**
+     * Shows fields for orders api
+     *
+     * @param {jQuery} transactionDesc
+     * @param {jQuery} orderExpires
+     */
+    function showOrderApiField(transactionDesc, orderExpires) {
+        transactionDesc.addClass('hidden');
+        orderExpires.removeClass('hidden');
     }
 
     /**
