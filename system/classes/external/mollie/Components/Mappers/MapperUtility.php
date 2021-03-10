@@ -29,6 +29,13 @@ trait MapperUtility
      */
     protected $transactionDescriptionService;
 
+    /**
+     * Returns formatted payment description
+     *
+     * @param \OrderInterface $sourceOrder
+     *
+     * @return string
+     */
     protected function _getPaymentTransactionDescription(\OrderInterface $sourceOrder)
     {
         $customerAddress = $sourceOrder->getCustomerAddress();
@@ -162,9 +169,11 @@ trait MapperUtility
     }
 
     /**
+     * Returns order expiry days
+     *
      * @param string $paymentClass
      *
-     * @return mixed
+     * @return int|null
      */
     protected function getDaysToExpireOrder($paymentClass)
     {
@@ -174,6 +183,13 @@ trait MapperUtility
         return @constant($key);
     }
 
+    /**
+     * Returns payment expiry days (only for banktransfer)
+     *
+     * @param string $paymentClass
+     *
+     * @return int|null
+     */
     protected function getDaysToExpirePayment($paymentClass)
     {
         if ($paymentClass === 'mollie_banktransfer' && defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE')) {

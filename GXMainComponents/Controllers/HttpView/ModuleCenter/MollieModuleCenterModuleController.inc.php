@@ -106,6 +106,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns assets collection for the module page
+     *
      * @return AssetCollection
      */
     private function _getAssets()
@@ -122,6 +124,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns template data array
+     *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
      * @throws UnprocessableEntityRequestException
@@ -144,7 +148,9 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
-     * @param $isConnected
+     * Returns required data
+     *
+     * @param bool $isConnected
      *
      * @return array
      */
@@ -165,6 +171,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns data when the user is connected
+     *
      * @return array
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
@@ -193,6 +201,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Formats payment method for rendering
+     *
      * @param PaymentMethodConfig[] $paymentMethodConfigs
      *
      * @return array
@@ -217,6 +227,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Retunrs total number of notification pages
+     *
      * @return int
      * @throws \Mollie\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
      */
@@ -229,6 +241,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Formats order statuses for rendering
+     *
      * @return array
      * @throws Exception
      */
@@ -282,6 +296,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Check if gambio payment module is active
+     *
      * @param string $mollieId
      *
      * @return bool

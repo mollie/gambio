@@ -10,6 +10,8 @@ require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/autoload.ph
 class MollieConnectController extends AdminHttpViewController
 {
     /**
+     * Performs token check action
+     *
      * @return HttpControllerResponseInterface|mixed
      */
     public function actionDefault()
