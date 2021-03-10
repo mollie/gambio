@@ -3,6 +3,7 @@
 namespace Mollie\Gambio\Update\v2_0_8;
 
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
+use Mollie\Gambio\Entity\Repository\GambioLanguageRepository;
 
 /**
  * Class PaymentMethodUpdate
@@ -65,7 +66,7 @@ class PaymentMethodUpdate
     }
 
     /**
-     *
+     * Adds banktransfer specific field
      */
     private function addBanktransferSpecificField()
     {
@@ -83,6 +84,8 @@ class PaymentMethodUpdate
     }
 
     /**
+     * Insert given options to the configuration table
+     *
      * @param array $options
      */
     private function insertConfig($options)
@@ -113,6 +116,8 @@ class PaymentMethodUpdate
     }
 
     /**
+     * Returns all common fields that should be updated
+     *
      * @return array
      */
     protected function getCommonFields()
@@ -130,7 +135,8 @@ class PaymentMethodUpdate
             ]
         ];
 
-        foreach (xtc_get_languages() as $language) {
+        $languageRepository = new GambioLanguageRepository();
+        foreach ($languageRepository->getLanguages() as $language) {
             $code = strtoupper($language['code']);
             $configFields[] = [
                 'key' => 'TRANSACTION_DESCRIPTION_' . $code,
