@@ -192,8 +192,8 @@ trait MapperUtility
      */
     protected function getDaysToExpirePayment($paymentClass)
     {
-        if ($paymentClass === 'mollie_banktransfer' && defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE')) {
-            $daysToExpire = MODULE_PAYMENT_MOLLIE_BANKTRANSFER_DUE_DATE;
+        if ($paymentClass === 'mollie_banktransfer' && defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES')) {
+            $daysToExpire = MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES;
 
             return !empty($daysToExpire) ? $daysToExpire : null;
         }
