@@ -10,6 +10,7 @@ class mollie_banktransfer extends mollie
     public $title = 'Bank transfer';
 
     /**
+     * @inheritDoc
      * @return array
      *
      * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException

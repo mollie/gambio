@@ -5,6 +5,8 @@ use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
 
 /**
+ * Renders input integer field
+ *
  * @param string $key_value
  * @param string $key
  *
@@ -69,6 +71,8 @@ function mollie_get_payment_logo($code, $src)
 }
 
 /**
+ * Renders api select field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -106,6 +110,8 @@ function mollie_multi_language_text($key_value, $key = '')
 }
 
 /**
+ * Renders multi language field
+ *
  * @param string $templatePath
  * @param string $key_value
  * @param string $key
@@ -139,6 +145,8 @@ function mollie_multi_language_field($templatePath, $key_value, $key = '')
 }
 
 /**
+ * Renders multiple choices select country field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -171,6 +179,8 @@ function mollie_multi_select_countries($key_value, $key = '')
 }
 
 /**
+ * Renders logo upload field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -198,6 +208,8 @@ function mollie_logo_upload($key_value, $key = '')
 }
 
 /**
+ * Renders template with given path and data
+ *
  * @param string $path
  * @param array  $data
  *
@@ -220,6 +232,8 @@ function mollie_render_template($path, $data = [])
 }
 
 /**
+ * Appends prefix to the key
+ *
  * @param string $key
  *
  * @return string

@@ -16,7 +16,7 @@ class MollieConfigurationController extends AdminHttpViewController
 {
 
     /**
-     * Saves
+     * Saves configuration parameters (test mode, api keys, status mapping)
      *
      * @return HttpControllerResponseInterface|mixed
      */

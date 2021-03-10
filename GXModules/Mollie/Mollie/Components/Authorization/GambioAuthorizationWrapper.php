@@ -158,6 +158,8 @@ class GambioAuthorizationWrapper
     }
 
     /**
+     * Displays success message
+     *
      * @param ApiKey $key
      *
      * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
@@ -178,6 +180,8 @@ class GambioAuthorizationWrapper
     }
 
     /**
+     * Displays error message
+     *
      * @param string $keyType
      * @param string $exceptionMessage
      */
