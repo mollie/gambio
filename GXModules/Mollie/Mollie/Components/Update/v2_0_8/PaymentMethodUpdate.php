@@ -46,9 +46,6 @@ class PaymentMethodUpdate
         }
 
         $this->addCommonFields();
-        if (strpos($this->code, 'banktransfer') !== false) {
-            $this->addBanktransferSpecificField();
-        }
     }
 
     /**
@@ -62,24 +59,6 @@ class PaymentMethodUpdate
                 $this->insertConfig($configOptions);
                 define($configKey, $configOptions['value']);
             }
-        }
-    }
-
-    /**
-     * Adds banktransfer specific field
-     */
-    private function addBanktransferSpecificField()
-    {
-        $configOptions = [
-            'key' => 'DUE_DATE',
-            'value' => null,
-            'set_function' => 'mollie_input_integer ('
-        ];
-
-        $configKey = $this->_formatKey($configOptions['key']);
-        if (!defined($configKey)) {
-            $this->insertConfig($configOptions);
-            define($configKey, $configOptions['value']);
         }
     }
 
