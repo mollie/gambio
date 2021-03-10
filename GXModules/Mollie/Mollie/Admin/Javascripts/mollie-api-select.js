@@ -2,13 +2,21 @@ $(document).ready(function () {
     let apiMethodChooser = $('.mollie-api-select');
 
     if (apiMethodChooser.length) {
+        // initial fields display
         displayFieldsBasedOnMethod(apiMethodChooser.val());
+
+        // adding change listener
         apiMethodChooser.change(function () {
             displayFieldsBasedOnMethod(($(this).val()))
         })
 
     }
 
+    /**
+     * Displays fields based on the selected payment method
+     *
+     * @param {string} apiMethod
+     */
     function displayFieldsBasedOnMethod(apiMethod) {
         let wrapper = $('#configuration-box-form');
         if (wrapper.length === 0) {
@@ -39,6 +47,7 @@ $(document).ready(function () {
     }
 
     /**
+     * Format selector for fetching config field
      *
      * @param {string} configKey
      * @returns {string}
@@ -50,7 +59,8 @@ $(document).ready(function () {
     }
 
     /**
-     * Returns
+     * Returns query parameter value
+     *
      * @param {string} key
      * @returns {null|string}
      */

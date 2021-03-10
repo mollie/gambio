@@ -10,6 +10,8 @@ require_once __DIR__ . '/../../../autoload.php';
 class MollieConnectController extends AdminHttpViewController
 {
     /**
+     * Performs token check action
+     *
      * @return HttpControllerResponseInterface|mixed
      */
     public function actionDefault()
