@@ -12,7 +12,7 @@ use Mollie\Gambio\Utility\PathProvider;
  */
 class CustomFieldsProvider
 {
-    const MAX_OVERVIEW_TEXT_LENGTH = 30;
+    const MAX_OVERVIEW_TEXT_LENGTH = 50;
     /**
      * @var string
      */
