@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased](https://github.com/mollie/orocore/compare/v1.1.2...dev)
+## [Unreleased](https://github.com/mollie/orocore/compare/v1.2.0...dev)
+
+## [v1.2.0](https://github.com/mollie/orocore/compare/v1.2.0) - 2021-03-18
  **BREAKING** Added `Configuration::getExtensionVersionCheckUrl` and 
  `Configuration::getExtensionDownloadUrl`
  - Added `VersionCheckService` for checking the latest plugin version. 

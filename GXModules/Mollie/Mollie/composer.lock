@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cd1aa30fb0057628de3b2263d9f8c42",
+    "content-hash": "ca3621524013c278f44c15b885b9ac6a",
     "packages": [
         {
             "name": "mollie/integration-core",
-            "version": "dev-dev",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mollie/orocore.git",
-                "reference": "d03022fb63806560b62d16877b4f9e3db57fa9d6"
+                "reference": "fda8c8a44f8fd148dede27f5909c6e959edc2e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/orocore/zipball/d03022fb63806560b62d16877b4f9e3db57fa9d6",
-                "reference": "d03022fb63806560b62d16877b4f9e3db57fa9d6",
+                "url": "https://api.github.com/repos/mollie/orocore/zipball/fda8c8a44f8fd148dede27f5909c6e959edc2e9c",
+                "reference": "fda8c8a44f8fd148dede27f5909c6e959edc2e9c",
                 "shasum": ""
             },
             "require": {
@@ -45,15 +45,13 @@
                 "proprietary"
             ],
             "description": "Mollie integrations core library",
-            "time": "2021-03-18T07:40:21+00:00"
+            "time": "2021-03-18T15:36:10+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mollie/integration-core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
