@@ -363,6 +363,45 @@ class Proxy
     }
 
     /**
+     * Returns enabled methods for the given profile ID
+     * @param string $profileId
+     *
+     * @return PaymentMethod[]
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws HttpRequestException
+     * @throws UnprocessableEntityRequestException
+     */
+    public function getEnabledPaymentMethodsForProfile($profileId)
+    {
+        $queryParams = array(
+            'profileId' => $profileId,
+            'include' => 'issuers',
+            'includeWallets' => 'applepay',
+            'resource' => 'orders',
+        );
+
+        if ($this->configService->isTestMode()) {
+            $queryParams['testmode'] = 'true';
+        }
+
+        $url = static::BASE_URL . static::API_VERSION . 'methods?' . http_build_query($queryParams);
+        $response = $this->client->request(
+            self::HTTP_METHOD_GET,
+            $url,
+            $this->getRequestHeaders()
+        );
+
+        $this->validateResponse($response);
+
+        $result = $response->decodeBodyAsJson();
+
+        return PaymentMethod::fromArrayBatch(
+            !empty($result['_embedded']['methods']) ? $result['_embedded']['methods'] : array()
+        );
+    }
+
+    /**
      * Creates new payment on Mollie
      *
      * @param Payment $payment Data for a new payment
