@@ -23,7 +23,7 @@ class VersionCheckService extends \Mollie\BusinessLogic\VersionCheck\VersionChec
         $messageKey = 'mollie_version_outdated_message';
         $params = [
             '{versionNumber}' => $latestVersion,
-            '{downloadUrl}' => $this->getConfigService()->getExtensionDownloadUrl(),
+            '{downloadUrl}' => $this->getConfigService()->getExtensionDownloadUrl($latestVersion),
         ];
 
         $lang       = new MollieTranslator();

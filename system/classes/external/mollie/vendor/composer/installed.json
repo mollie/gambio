@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "git@github.com:mollie/orocore.git",
-            "reference": "b3b070c0bb6474354ef98c3a61a094f82fab9126"
+            "reference": "d03022fb63806560b62d16877b4f9e3db57fa9d6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mollie/orocore/zipball/b3b070c0bb6474354ef98c3a61a094f82fab9126",
-            "reference": "b3b070c0bb6474354ef98c3a61a094f82fab9126",
+            "url": "https://api.github.com/repos/mollie/orocore/zipball/d03022fb63806560b62d16877b4f9e3db57fa9d6",
+            "reference": "d03022fb63806560b62d16877b4f9e3db57fa9d6",
             "shasum": ""
         },
         "require": {
@@ -23,7 +23,7 @@
             "phpunit/phpunit": "^4.8.35",
             "symfony/console": "^5.1"
         },
-        "time": "2021-02-24T10:47:47+00:00",
+        "time": "2021-03-18T07:40:21+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
