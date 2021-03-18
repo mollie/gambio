@@ -17,4 +17,5 @@ class PaymentMethods
     const KBC = 'kbc';
     const GiftCard = 'giftcard';
     const Vouchers = 'voucher';
+    const Banktransfer = 'banktransfer';
 }
