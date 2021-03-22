@@ -30,8 +30,8 @@ define('MODULE_PAYMENT_MOLLIE_GIFTCARD_SORT_ORDER_DESC', 'De laagste wordt als e
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_TITLE', 'Issuer list style');
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_TITLE', '<span class="mollie_order_expires_title">Days To Expire</span>');
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_DESC', '<span class="mollie_order_expires_desc">How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)</span>');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_TITLE', '<span class="mollie_order_expires_title">Dagen tot verstrijken</span>');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_DESC', '<span class="mollie_order_expires_desc">Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)</span>');
 
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transaction description</span>');
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.</span>');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transactiebeschrijving</span>');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.</span>');
