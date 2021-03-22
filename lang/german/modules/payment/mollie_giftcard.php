@@ -30,8 +30,8 @@ define('MODULE_PAYMENT_MOLLIE_GIFTCARD_SORT_ORDER_DESC', 'Der niedrigste Wert wi
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_TITLE', 'Issuer list style');
 define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_TITLE', 'Days To Expire');
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_TITLE', 'Tage bis zum Ablauf');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_ORDER_EXPIRES_DESC', 'Wie viele Tage, bevor Bestellungen für diese Methode abgelaufen sind? Leer lassen, um den Standardablauf zu verwenden (28 Tage)');
 
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_TITLE', 'Transaction description');
-define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_DESC', 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_TITLE', 'Transaktion Beschreibung');
+define('MODULE_PAYMENT_MOLLIE_GIFTCARD_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
