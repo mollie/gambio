@@ -13,10 +13,10 @@ $t_language_text_section_content_array = [
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/de',
     'mollie_status'                  => 'Status',
-    'mollie_connect_success'         => '<i class="fa fa-check"></i> Verbindung zu <b>{key_type} API</b> erfolgreich.<br><br><i class="fa fa-cog"></i> Enabled methods: {enabled_methods}',
+    'mollie_connect_success'         => '<i class="fa fa-check"></i> Verbindung zu <b>{key_type} API</b> erfolgreich.<br><br><i class="fa fa-cog"></i> Aktivierte Methoden: {enabled_methods}',
     'mollie_connect_failure'         => '<i class="fa times"></i> Ein Authentifizierungsfehler ist aufgetreten. Ungültiges Zugriffstoken Profil.',
-    'mollie_keys_missing'            => '<i class="fa fa-times"></i> Please provide at least one API key',
-    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> An error during save Mollie configuration: {api_message}',
+    'mollie_keys_missing'            => '<i class="fa fa-times"></i> Bitte geben Sie mindestens einen API-Schlüssel an',
+    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> Ein Fehler beim Speichern der Mollie-Konfiguration: {api_message}',
     'mollie_active'                  => 'Aktiv',
     'mollie_inactive'                => 'Inaktiv',
     'mollie_configure'               => 'Konfigurieren',
@@ -94,13 +94,15 @@ $t_language_text_section_content_array = [
 
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'Liste mit Abbildungen',
-    'mollie_issuer_not_selected'     => 'Issuer not selected',
+    'mollie_issuer_not_selected'     => 'Aussteller nicht ausgewählt',
 
     'mollie_select_bank'             => 'Bank auswählen',
     'mollie_card_holder'             => 'Kartenhalter',
     'mollie_card_number'             => 'Kartenhalter',
     'mollie_expiry_date'             => 'Verfallsdatum',
     'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
+
+    'mollie_transaction_desc_label' => 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.',
 
     'mollie_canceled_comment' => 'Der Kunde hat die Zahlung abgebrochen.',
     'mollie_expired_comment'  => 'Die Zahlung ist bei Mollie abgelaufen.',
@@ -109,8 +111,8 @@ $t_language_text_section_content_array = [
     'mollie.payment.integration.event.notification.order_cancel_error.title'       => 'Synchronisieren von Shop-Änderungen fehlgeschlagen',
     'mollie.payment.integration.event.notification.order_cancel_error.description' => 'Mollie-Bestellung konnte nicht storniert werden. Antwort Mollie-API {api_message}',
 
-    'mollie.payment.integration.event.notification.order_cancel.title'       => 'Order cancel event detected',
-    'mollie.payment.integration.event.notification.order_cancel.description' => 'Order cancel is not supported, so this change is not synchronized to the Mollie',
+    'mollie.payment.integration.event.notification.order_cancel.title'       => 'Auftragsstornierungsereignis erkannt',
+    'mollie.payment.integration.event.notification.order_cancel.description' => 'Die Stornierung von Bestellungen wird nicht unterstützt, daher wird diese Änderung nicht mit dem Mollie synchronisiert',
 
     'mollie.payment.integration.event.notification.billing_address_change_error.title'       => 'Synchronisieren von Shop-Änderungen fehlgeschlagen',
     'mollie.payment.integration.event.notification.billing_address_change_error.description' => 'Aktualisieren der Rechnungsadresse für die Mollie-Bestellung fehlgeschlagen. Antwort Mollie-API {api_message}',
@@ -157,7 +159,8 @@ $t_language_text_section_content_array = [
     'mollie.payment.webhook.notification.order_line_cancel_info.title'       => 'Mollie order line changed',
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'Bestellposition im Molli-Portal storniert.',
 
-    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>',
+    'mollie_version_outdated_message' => 'Eine neue Modulversion {versionNumber} ist verfügbar. Bitte laden Sie die neueste Version herunter <a href="{downloadUrl}" target="_blank">here</a>',
+    'mollie_system_offline_message'   => 'Ihre Website wird im Offline-Modus ausgeführt. Da Mollie eine Nachricht an Ihre Website sendet, wenn sich der Zahlungsstatus ändert, kann Mollie im Offline-Modus nicht auf Ihre Website zugreifen',
 
     'mollie_status_label'          => 'Mollie status',
     'mollie_gambio_status_label'   => 'Gambio status',
