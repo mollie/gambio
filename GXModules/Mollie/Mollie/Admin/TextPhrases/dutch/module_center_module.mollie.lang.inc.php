@@ -13,10 +13,10 @@ $t_language_text_section_content_array = [
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/nl',
     'mollie_status'                  => 'Status',
-    'mollie_connect_success'         => '<i class="fa fa-check"></i> Er is succesvol een verbinding tot stand gebracht met de <b>{key_type} API</b>.<br><br><i class="fa fa-cog"></i> Enabled methods: {enabled_methods}',
+    'mollie_connect_success'         => '<i class="fa fa-check"></i> Er is succesvol een verbinding tot stand gebracht met de <b>{key_type} API</b>.<br><br><i class="fa fa-cog"></i> Ingeschakelde methoden: {enabled_methods}',
     'mollie_connect_failure'         => '<i class="fa fa-times"></i> Er heeft zich een authenticatiefout voorgedaan. Ongeldig toegangstoken voor profiel.',
-    'mollie_keys_missing'            => '<i class="fa fa-times"></i> Please provide at least one API key',
-    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> An error during save Mollie configuration: {api_message}',
+    'mollie_keys_missing'            => '<i class="fa fa-times"></i> Geef ten minste één API-sleutel op',
+    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> Een fout tijdens het opslaan van de Mollie-configuratie: {api_message}',
     'mollie_active'                  => 'Actief',
     'mollie_inactive'                => 'Inactief',
     'mollie_configure'               => 'Configureer',
@@ -92,9 +92,11 @@ $t_language_text_section_content_array = [
     'mollie_unknown_error'           => 'Er is een onbekende fout opgetreden op de Mollie-API',
     'mollie_checkout_desc'           => 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.',
 
+    'mollie_transaction_desc_label' => 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.',
+
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'Lijst met afbeeldingen',
-    'mollie_issuer_not_selected'     => 'Issuer not selected',
+    'mollie_issuer_not_selected'     => 'Uitgever niet geselecteerd',
 
 
     'mollie_select_bank'             => 'Selecteer Bank',
@@ -110,8 +112,8 @@ $t_language_text_section_content_array = [
     'mollie.payment.integration.event.notification.order_cancel_error.title'       => 'Synchronisatie van winkelwijziging mislukt',
     'mollie.payment.integration.event.notification.order_cancel_error.description' => 'De bestelling van Mollie kan niet worden geannuleerd. Reactie Mollie API: {api_message}',
 
-    'mollie.payment.integration.event.notification.order_cancel.title'       => 'Order cancel event detected',
-    'mollie.payment.integration.event.notification.order_cancel.description' => 'Order cancel is not supported, so this change is not synchronized to the Mollie',
+    'mollie.payment.integration.event.notification.order_cancel.title'       => 'Gebeurtenis annuleren bestelling gedetecteerd',
+    'mollie.payment.integration.event.notification.order_cancel.description' => 'Annuleren van bestellingen wordt niet ondersteund, dus deze wijziging wordt niet gesynchroniseerd met de Mollie',
 
     'mollie.payment.integration.event.notification.billing_address_change_error.title'       => 'Synchronisatie van winkelwijziging mislukt',
     'mollie.payment.integration.event.notification.billing_address_change_error.description' => 'Het factuuradres van de Mollie-bestelling kan niet worden bijgewerkt. Reactie Mollie API: {api_message}',
@@ -158,9 +160,10 @@ $t_language_text_section_content_array = [
     'mollie.payment.webhook.notification.order_line_cancel_info.title'       => 'De orderregel van Mollie is gewijzigd',
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'Orderregel is geannuleerd in het Mollie-portaal.',
 
-    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>',
+    'mollie_version_outdated_message' => 'Er is een nieuwe moduleversie {versionNumber} beschikbaar. Download de laatste versie <a href="{downloadUrl}" target="_blank">here</a>',
+    'mollie_system_offline_message'   => 'Uw website draait in offline modus. Aangezien Mollie een bericht naar uw website stuurt wanneer de betalingsstatus verandert, heeft Mollie geen toegang tot uw website in de offline modus',
 
     'mollie_status_label'          => 'Mollie status',
     'mollie_gambio_status_label'   => 'Gambio status',
-    'mollie_method_label'          => 'Method',
+    'mollie_method_label'          => 'Methode',
 ];
