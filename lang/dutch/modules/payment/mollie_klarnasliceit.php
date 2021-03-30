@@ -19,7 +19,7 @@ define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_SURCHARGE_TITLE', 'Toeslag');
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_SURCHARGE_DESC', 'Voer de extra kosten in voor een betaling in de standaardvaluta. Als het veld leeg is, worden er geen extra betalingskosten aan klanten in rekening gebracht..');
 
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_API_METHOD_TITLE', 'API-methode');
-define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
+define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties. <a href="https://docs.mollie.com/payments/overview" target="_blank">Lees meer</a>.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
 
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_KLARNASLICEIT_LOGO_DESC', 'Upload een logo dat zal worden gebruikt bij het afrekenen.');

@@ -19,7 +19,7 @@ define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SURCHARGE_TITLE', 'Supplément');
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SURCHARGE_DESC', 'Veuillez entrer le coût additionnel pour un paiement dans la devise par défaut. Si le champ est vide, auncun coût additionnel de paiement ne sera facturé au client.');
 
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_API_METHOD_TITLE', "Méthode d'API");
-define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_API_METHOD_DESC', "<b>API de paiement</b><br>Utilisez la plateforme d'API de paiement pour les transactions.<br><br><b>API de commande</b><br>Utilisez la nouvelle plateforme d'API de commande et obtenez plus d'informations sur les commandes. <a href='https://docs.mollie.com/orders/why-use-orders' target='_blank'>Read more</a>.");
+define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_API_METHOD_DESC', "<b>Payment API</b><br>Utilisez la plateforme Payment API pour les transactions. <a href='https://docs.mollie.com/payments/overview' target='_blank'>Reaad more</a>..<br><br><b>Order API</b><br>Utilisez la nouvelle plateforme Order API et obtenez plus d'informations sur les commandes. <a href='https://docs.mollie.com/orders/why-use-orders' target='_blank'>Read more</a>.");
 
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_LOGO_DESC', 'Veuillez charger le logo à utiliser au checkout.');
