@@ -87,8 +87,8 @@ $t_language_text_section_content_array = [
     'mollie_shipment_create_error'   => 'Erstellen Lieferung für zugehörige Mollie-Bestellung fehlgeschlagen. Antwort Mollie-API {api_message}',
     'mollie_change_logo'             => 'Logo ändern',
     'mollie_change_logo_error'       => 'Logo konnte nicht hochgeladen werden',
-    'mollie_orders_api'              => 'Auftrags-API',
-    'mollie_payments_api'            => 'Zahlungs-API',
+    'mollie_orders_api'              => 'Order API',
+    'mollie_payments_api'            => 'Payment API',
     'mollie_unknown_error'           => 'Unbekannter Fehler in der Mollie-API',
     'mollie_checkout_desc'           => 'Nach dem Kontrollieren Ihrer Bestellung werden Sie zur Website des Zahlungsanbieters weitergeleitet, um den Einkauf abzuschließen.',
 
