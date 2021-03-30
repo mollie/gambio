@@ -49,7 +49,7 @@ trait MapperUtility
             'storeName' => defined('STORE_NAME') ? STORE_NAME : null,
         ]);
 
-        return $this->_getTransactionDescriptionService()->formatPaymentDescription($descriptionParameters, $sourceOrder->getPaymentType()->getPaymentClass());
+        return $this->_getTransactionDescriptionService()->formatPaymentDescription($descriptionParameters, $sourceOrder->getPaymentType()->getModule());
     }
 
     /**
