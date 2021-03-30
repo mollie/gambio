@@ -16,7 +16,7 @@ $t_language_text_section_content_array = [
     'mollie_connect_success'         => '<i class="fa fa-check"></i> Verbindung zu <b>{key_type} API</b> erfolgreich.<br><br><i class="fa fa-cog"></i> Aktivierte Methoden: {enabled_methods}',
     'mollie_connect_failure'         => '<i class="fa times"></i> Ein Authentifizierungsfehler ist aufgetreten. Ungültiges Zugriffstoken Profil.',
     'mollie_keys_missing'            => '<i class="fa fa-times"></i> Bitte geben Sie mindestens einen API-Schlüssel an',
-    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> Ein Fehler beim Speichern der Mollie-Konfiguration: {api_message}',
+    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> Ein Fehler im Speichern der Mollie-Konfiguration: {api_message}',
     'mollie_active'                  => 'Aktiv',
     'mollie_inactive'                => 'Inaktiv',
     'mollie_configure'               => 'Konfigurieren',
