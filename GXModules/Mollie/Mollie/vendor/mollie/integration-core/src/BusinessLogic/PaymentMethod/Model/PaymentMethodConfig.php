@@ -26,12 +26,22 @@ class PaymentMethodConfig extends Entity
     const ISSUER_DROPDOWN = 'dropdown';
     const ISSUER_LIST = 'list';
 
+    const VOUCHER_CATEGORY_NONE = 'none';
+    const VOUCHER_CATEGORY_GIFT = 'gift';
+    const VOUCHER_CATEGORY_MEAL = 'meal';
+    const VOUCHER_CATEGORY_ECO = 'eco';
+    const VOUCHER_CATEGORY_CUSTOM = 'custom';
+
+    const PRODUCT_ATTRIBUTE_DEFAULT = 'mollie_voucher_category';
+
+    const DEFAULT_TRANSACTION_DESCRIPTION = '{orderNumber}';
     /**
      * @var string[]
      */
     protected static $adiMethodRestrictions = array(
         PaymentMethods::KlarnaPayLater => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaSliceIt => self::API_METHOD_ORDERS,
+        PaymentMethods::Vouchers => self::API_METHOD_ORDERS
     );
 
     /**
@@ -66,7 +76,12 @@ class PaymentMethodConfig extends Entity
         'image',
         'enabled',
         'useMollieComponents',
-        'issuerListStyle'
+        'issuerListStyle',
+        'daysToOrderExpire',
+        'daysToPaymentExpire',
+        'transactionDescription',
+        'voucherCategory',
+        'productAttribute',
     );
 
     /**
@@ -110,6 +125,26 @@ class PaymentMethodConfig extends Entity
      * @var string
      */
     protected $issuerListStyle = self::ISSUER_LIST;
+    /**
+     * @var int
+     */
+    protected $daysToOrderExpire;
+    /**
+     * @var int
+     */
+    protected $daysToPaymentExpire;
+    /**
+     * @var string
+     */
+    protected $transactionDescription = self::DEFAULT_TRANSACTION_DESCRIPTION;
+    /**
+     * @var string
+     */
+    protected $voucherCategory = self::VOUCHER_CATEGORY_NONE;
+    /**
+     * @var string
+     */
+    protected $productAttribute = self::PRODUCT_ATTRIBUTE_DEFAULT;
 
     /**
      * @inheritDoc
@@ -378,5 +413,85 @@ class PaymentMethodConfig extends Entity
     public function setIssuerListStyle($issuerListStyle)
     {
         $this->issuerListStyle = $issuerListStyle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysToOrderExpire()
+    {
+        return $this->daysToOrderExpire;
+    }
+
+    /**
+     * @param int $daysToOrderExpire
+     */
+    public function setDaysToOrderExpire($daysToOrderExpire)
+    {
+        $this->daysToOrderExpire = $daysToOrderExpire;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysToPaymentExpire()
+    {
+        return $this->daysToPaymentExpire;
+    }
+
+    /**
+     * @param int $daysToPaymentExpire
+     */
+    public function setDaysToPaymentExpire($daysToPaymentExpire)
+    {
+        $this->daysToPaymentExpire = $daysToPaymentExpire;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransactionDescription()
+    {
+        return $this->transactionDescription ?: static::DEFAULT_TRANSACTION_DESCRIPTION;
+    }
+
+    /**
+     * @param string $transactionDescription
+     */
+    public function setTransactionDescription($transactionDescription)
+    {
+        $this->transactionDescription = $transactionDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVoucherCategory()
+    {
+        return $this->voucherCategory ?: static::VOUCHER_CATEGORY_NONE;
+    }
+
+    /**
+     * @param string $voucherCategory
+     */
+    public function setVoucherCategory($voucherCategory)
+    {
+        $this->voucherCategory = $voucherCategory;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductAttribute()
+    {
+        return $this->productAttribute ?: static::PRODUCT_ATTRIBUTE_DEFAULT;
+    }
+
+    /**
+     * @param string $productAttribute
+     */
+    public function setProductAttribute($productAttribute)
+    {
+        $this->productAttribute = $productAttribute;
     }
 }

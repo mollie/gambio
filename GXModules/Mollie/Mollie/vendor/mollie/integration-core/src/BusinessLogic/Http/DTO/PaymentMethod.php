@@ -66,6 +66,24 @@ class PaymentMethod extends BaseDto
     }
 
     /**
+     * Returns payment methods in format
+     *  method_1, method_2, ...
+     *
+     * @param PaymentMethod[] $paymentMethods
+     *
+     * @return string
+     */
+    public static function listPaymentMethodsAsString(array $paymentMethods)
+    {
+        $descriptions = array();
+        foreach ($paymentMethods as $paymentMethod) {
+            $descriptions[] = $paymentMethod->getDescription();
+        }
+
+        return implode(', ', $descriptions);
+    }
+
+    /**
      * @return string
      */
     public function getResource()

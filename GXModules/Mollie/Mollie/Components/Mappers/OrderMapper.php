@@ -66,6 +66,10 @@ class OrderMapper
         $orderMollie->setLines($lines);
 
         $orderMollie->setPayment($this->getCommonPaymentData());
+        $daysToExpire = $this->getDaysToExpireOrder($sourceOrder->getPaymentType()->getModule());
+        if (!empty($daysToExpire)) {
+            $orderMollie->calculateExpiresAt((int)$daysToExpire);
+        }
 
         return $orderMollie;
     }
@@ -113,7 +117,7 @@ class OrderMapper
 
         $amount  = $this->_getAmount($currency, $this->getOrderTotalAmount($sourceOrder->getOrderTotals(), $sourceOrder->getOrderItems()));
         $payment->setAmount($amount);
-        $payment->setDescription("Order $orderId");
+        $payment->setDescription($this->_getPaymentTransactionDescription($sourceOrder));
         $payment->setOrderId((string)$orderId);
         $payment->setRedirectUrl($this->_getRedirectUrl($orderId));
         $payment->setLocale($this->_getLanguage());
@@ -121,6 +125,11 @@ class OrderMapper
         $email = $sourceOrder->getCustomerEmail();
         $phone = $sourceOrder->getCustomerTelephone();
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
+
+        $daysToExpire = $this->getDaysToExpirePayment($sourceOrder->getPaymentType()->getModule());
+        if (!empty($daysToExpire)) {
+            $payment->calculateDueDate((int)$daysToExpire);
+        }
 
         return $payment;
     }
