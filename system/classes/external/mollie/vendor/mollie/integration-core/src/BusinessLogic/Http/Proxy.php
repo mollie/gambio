@@ -306,6 +306,7 @@ class Proxy
      * @param string|null $billingCountry The billing country of your customer in ISO 3166-1 alpha-2 format.
      * @param Amount|null $amount
      * @param string $apiMethod Api method to use for availability checking. Default is orders api
+     * @param array $orderLineCategories
      *
      * @return PaymentMethod[]
      *
@@ -317,22 +318,10 @@ class Proxy
     public function getEnabledPaymentMethods(
         $billingCountry = null,
         $amount = null,
-        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS
+        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS,
+        $orderLineCategories = array()
     ) {
-        $params = array(
-            'include' => 'issuers',
-            'includeWallets' => 'applepay',
-            'resource' => $apiMethod === PaymentMethodConfig::API_METHOD_PAYMENT ? 'payments' : 'orders',
-        );
-        if (!empty($billingCountry)) {
-            $params['billingCountry'] = $billingCountry;
-        }
-
-        if ($amount) {
-            $params['amount'] = $amount->toArray();
-        }
-
-        $queryString = http_build_query($params);
+        $queryString = $this->buildQueryParamsForEnabledMethod($apiMethod, $billingCountry, $amount, $orderLineCategories);
 
         $response = $this->call(self::HTTP_METHOD_GET, "/methods?{$queryString}");
         $result = $response->decodeBodyAsJson();
@@ -349,6 +338,7 @@ class Proxy
      * @param string|null $billingCountry The billing country of your customer in ISO 3166-1 alpha-2 format.
      * @param Amount|null $amount
      * @param string $apiMethod Api method to use for availability checking. Default is orders api
+     * @param array $orderLineCategories
      *
      * @return PaymentMethod[]
      *
@@ -360,15 +350,55 @@ class Proxy
     public function getEnabledPaymentMethodsMap(
         $billingCountry = null,
         $amount = null,
-        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS
+        $apiMethod = PaymentMethodConfig::API_METHOD_ORDERS,
+        $orderLineCategories = array()
     ) {
         $paymentMethodsMap = array();
-        $paymentMethods = $this->getEnabledPaymentMethods($billingCountry, $amount, $apiMethod);
+        $paymentMethods = $this->getEnabledPaymentMethods($billingCountry, $amount, $apiMethod, $orderLineCategories);
         foreach ($paymentMethods as $paymentMethod) {
             $paymentMethodsMap[$paymentMethod->getId()] = $paymentMethod;
         }
 
         return $paymentMethodsMap;
+    }
+
+    /**
+     * Returns enabled methods for the given profile ID
+     * @param string $profileId
+     *
+     * @return PaymentMethod[]
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws HttpRequestException
+     * @throws UnprocessableEntityRequestException
+     */
+    public function getEnabledPaymentMethodsForProfile($profileId)
+    {
+        $queryParams = array(
+            'profileId' => $profileId,
+            'include' => 'issuers',
+            'includeWallets' => 'applepay',
+            'resource' => 'orders',
+        );
+
+        if ($this->configService->isTestMode()) {
+            $queryParams['testmode'] = 'true';
+        }
+
+        $url = static::BASE_URL . static::API_VERSION . 'methods?' . http_build_query($queryParams);
+        $response = $this->client->request(
+            self::HTTP_METHOD_GET,
+            $url,
+            $this->getRequestHeaders()
+        );
+
+        $this->validateResponse($response);
+
+        $result = $response->decodeBodyAsJson();
+
+        return PaymentMethod::fromArrayBatch(
+            !empty($result['_embedded']['methods']) ? $result['_embedded']['methods'] : array()
+        );
     }
 
     /**
@@ -629,5 +659,36 @@ class Proxy
             'useragent' => 'User-Agent: '.implode(' ', $userAgents),
             'token' => 'Authorization: Bearer ' . $this->configService->getAuthorizationToken(),
         );
+    }
+
+    /**
+     * @param string $apiMethod
+     * @param string $billingCountry
+     * @param Amount $amount
+     * @param array $orderLineCategories
+     *
+     * @return string
+     */
+    protected function buildQueryParamsForEnabledMethod($apiMethod, $billingCountry, $amount, $orderLineCategories)
+    {
+        $params = array(
+            'include' => 'issuers',
+            'includeWallets' => 'applepay',
+            'resource' => $apiMethod === PaymentMethodConfig::API_METHOD_PAYMENT ? 'payments' : 'orders',
+        );
+
+        if (!empty($billingCountry)) {
+            $params['billingCountry'] = $billingCountry;
+        }
+
+        if ($amount) {
+            $params['amount'] = $amount->toArray();
+        }
+
+        if (!empty($orderLineCategories)) {
+            $params['orderLineCategories'] = implode(',', $orderLineCategories);
+        }
+
+        return http_build_query($params);
     }
 }

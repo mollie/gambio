@@ -19,7 +19,7 @@ define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_TITLE', 'Toeslag');
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_DESC', 'Voer de extra kosten in voor een betaling in de standaardvaluta. Als het veld leeg is, worden er geen extra betalingskosten aan klanten in rekening gebracht..');
 
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_API_METHOD_TITLE', 'API-methode');
-define('MODULE_PAYMENT_MOLLIE_GIROPAY_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties. <a href="https://docs.mollie.com/payments/overview" target="_blank">Lees meer</a>.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
 
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_LOGO_DESC', 'Upload een logo dat zal worden gebruikt bij het afrekenen.');
@@ -27,3 +27,8 @@ define('MODULE_PAYMENT_MOLLIE_GIROPAY_LOGO_DESC', 'Upload een logo dat zal worde
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SORT_ORDER_TITLE', 'Sorteer de weergavevolgorde bij de checkout');
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
 
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_TITLE', '<span class="mollie_order_expires_title">Dagen tot verstrijken</span>');
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_DESC', '<span class="mollie_order_expires_desc">Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)</span>');
+
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transactiebeschrijving</span>');
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.</span>');

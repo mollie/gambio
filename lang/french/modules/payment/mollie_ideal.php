@@ -19,7 +19,7 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TITLE', 'Supplément');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC', 'Veuillez entrer le coût additionnel pour un paiement dans la devise par défaut. Si le champ est vide, auncun coût additionnel de paiement ne sera facturé au client.');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE', "Méthode d'API");
-define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', "<b>API de paiement</b><br>Utilisez la plateforme d'API de paiement pour les transactions.<br><br><b>API de commande</b><br>Utilisez la nouvelle plateforme d'API de commande et obtenez plus d'informations sur les commandes. <a href='https://docs.mollie.com/orders/why-use-orders' target='_blank'>Read more</a>.");
+define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', "<b>Payment API</b><br>Utilisez la plateforme Payment API pour les transactions. <a href='https://docs.mollie.com/payments/overview' target='_blank'>Reaad more</a>..<br><br><b>Order API</b><br>Utilisez la nouvelle plateforme Order API et obtenez plus d'informations sur les commandes. <a href='https://docs.mollie.com/orders/why-use-orders' target='_blank'>Read more</a>.");
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE', 'Logo');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC', 'Veuillez charger le logo à utiliser au checkout.');
@@ -29,3 +29,10 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC', "Le plus bas est affiché 
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
 define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
+
+define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE', '<span class="mollie_order_expires_title">Jours d\'expiration</span>');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC', '<span class="mollie_order_expires_desc">Combien de jours avant l\'expiration des commandes pour cette méthode? Laissez vide pour utiliser l\'expiration par défaut (28 jours)</span>');
+
+define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Description de la transaction</span>');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.</span>');
+

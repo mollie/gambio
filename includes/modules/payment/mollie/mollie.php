@@ -5,6 +5,7 @@ use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
+use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
 use Mollie\Gambio\Utility\MollieModuleChecker;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
@@ -55,6 +56,8 @@ class mollie
 
         include(DIR_FS_CATALOG . 'lang/' . $_SESSION['language'] . '/modules/payment/' . $this->code . '.php');
 
+        $updater = new PaymentMethodUpdate($this->code, $this->_isInstalled());
+        $updater->addConfigFields();
 
         $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
@@ -269,7 +272,9 @@ class mollie
      */
     public function keys()
     {
-        $keys         = $this->_getAllKeys($this->_configuration());
+        $configuration = $this->_configuration();
+        $keys = $this->_getAllKeys($configuration);
+
         $hiddenFields = $this->_getAllKeys($this->_getHiddenFields());
         if (!$this->_otMollieEnabled()) {
             $hiddenFields[] = $this->_formatKey('SURCHARGE');
@@ -304,9 +309,17 @@ class mollie
                 'configuration_value' => $this->translate($currentLang, 'mollie_checkout_desc'),
                 'set_function'        => 'mollie_multi_language_text( ',
             ],
+            'TRANSACTION_DESCRIPTION' => [
+                'configuration_value' => '{orderNumber}',
+                'set_function'        => 'mollie_multi_language_text( ',
+            ],
             'API_METHOD'           => [
                 'configuration_value' => $this->_getDefaultApi(),
                 'set_function'        => 'mollie_api_select( ',
+            ],
+            'ORDER_EXPIRES'           => [
+                'configuration_value' => null,
+                'set_function'        => 'mollie_input_integer( ',
             ],
             'SURCHARGE'            => [
                 'configuration_value' => '0',
@@ -356,6 +369,10 @@ class mollie
 
             $fields['CHECKOUT_DESCRIPTION_' . $code] = [
                 'configuration_value' => $this->translate($code, 'mollie_checkout_desc'),
+            ];
+
+            $fields['TRANSACTION_DESCRIPTION_' . $code] = [
+                'configuration_value' => '{orderNumber}',
             ];
         }
 
@@ -697,6 +714,14 @@ class mollie
         $statusKey = $this->_formatKey('STATUS');
 
         return defined($statusKey);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isPaymentApi()
+    {
+        return @constant($this->_formatKey('API_METHOD')) === PaymentMethodConfig::API_METHOD_PAYMENT;
     }
 }
 

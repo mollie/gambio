@@ -114,6 +114,11 @@ class OrderLine extends BaseDto
      */
     protected $cancelableQuantity;
     /**
+     * @var string
+     */
+    protected $category;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -156,6 +161,9 @@ class OrderLine extends BaseDto
         $orderLine->refundableQuantity = (int)static::getValue($raw, 'refundableQuantity', 0);
         $orderLine->cancelableQuantity = (int)static::getValue($raw, 'cancelableQuantity', 0);
         $orderLine->status = static::getValue($raw, 'status');
+
+        $orderLine->category = static::getValue($raw, 'category');
+
         $orderLine->createdAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'createdAt'));
 
         foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
@@ -200,6 +208,7 @@ class OrderLine extends BaseDto
             'vatAmount' => $this->vatAmount ? $this->vatAmount->toArray() : array(),
             'discountAmount' => $this->discountAmount ? $this->discountAmount->toArray() : array(),
             'totalAmount' => $this->totalAmount ? $this->totalAmount->toArray() : array(),
+            'category' => $this->category,
             'createdAt' => $this->createdAt ? $this->createdAt->format(DATE_ATOM) : null,
             '_links' => $links,
         );
@@ -603,6 +612,22 @@ class OrderLine extends BaseDto
     public function setCancelableQuantity($cancelableQuantity)
     {
         $this->cancelableQuantity = $cancelableQuantity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 
     /**

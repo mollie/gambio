@@ -64,6 +64,7 @@
     font-weight: 400;
     text-shadow: none;
     border-radius: .25em;
+    min-width: 70px;
 }
 
 .mollie-configuration .mollie-payment-status .active {

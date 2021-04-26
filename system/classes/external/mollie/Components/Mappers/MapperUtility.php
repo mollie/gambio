@@ -7,6 +7,8 @@ namespace Mollie\Gambio\Mappers;
 use Mollie\BusinessLogic\Configuration;
 use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\DTO\Payment;
+use Mollie\BusinessLogic\PaymentMethod\DTO\DescriptionParameters;
+use Mollie\BusinessLogic\PaymentMethod\PaymentTransactionDescriptionService;
 use Mollie\Gambio\Entity\Repository\GambioProductRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Utility\UrlProvider;
@@ -22,6 +24,33 @@ trait MapperUtility
      * @var ConfigurationService
      */
     protected $configService;
+    /**
+     * @var PaymentTransactionDescriptionService
+     */
+    protected $transactionDescriptionService;
+
+    /**
+     * Returns formatted payment description
+     *
+     * @param \OrderInterface $sourceOrder
+     *
+     * @return string
+     */
+    protected function _getPaymentTransactionDescription(\OrderInterface $sourceOrder)
+    {
+        $customerAddress = $sourceOrder->getCustomerAddress();
+
+        $descriptionParameters = DescriptionParameters::fromArray([
+            'orderNumber' => $sourceOrder->getOrderId(),
+            'customerFirstname' => $customerAddress->getFirstname(),
+            'customerLastname' => $customerAddress->getLastname(),
+            'customerCompany' => $customerAddress->getCompany(),
+            'cartNumber' => $_SESSION['cart']->cartID,
+            'storeName' => defined('STORE_NAME') ? STORE_NAME : null,
+        ]);
+
+        return $this->_getTransactionDescriptionService()->formatPaymentDescription($descriptionParameters, $sourceOrder->getPaymentType()->getModule());
+    }
 
     /**
      * @param $orderId
@@ -125,5 +154,50 @@ trait MapperUtility
         }
 
         return $this->configService;
+    }
+
+    /**
+     * @return PaymentTransactionDescriptionService
+     */
+    private function _getTransactionDescriptionService()
+    {
+        if ($this->transactionDescriptionService === null) {
+            $this->transactionDescriptionService = ServiceRegister::getService(PaymentTransactionDescriptionService::CLASS_NAME);
+        }
+
+        return $this->transactionDescriptionService;
+    }
+
+    /**
+     * Returns order expiry days
+     *
+     * @param string $paymentClass
+     *
+     * @return int|null
+     */
+    protected function getDaysToExpireOrder($paymentClass)
+    {
+        $module = strtoupper($paymentClass);
+        $key = "MODULE_PAYMENT_{$module}_ORDER_EXPIRES";
+
+        return @constant($key);
+    }
+
+    /**
+     * Returns payment expiry days (only for banktransfer)
+     *
+     * @param string $paymentClass
+     *
+     * @return int|null
+     */
+    protected function getDaysToExpirePayment($paymentClass)
+    {
+        if ($paymentClass === 'mollie_banktransfer' && defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES')) {
+            $daysToExpire = MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES;
+
+            return !empty($daysToExpire) ? $daysToExpire : null;
+        }
+
+        return null;
     }
 }

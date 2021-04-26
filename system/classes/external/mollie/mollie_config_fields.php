@@ -5,6 +5,26 @@ use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
 
 /**
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_input_integer($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_integer_input.html', 'ConfigFields');
+    $data         = [
+        'key'   => $key,
+        'value' => $key_value,
+
+        'wrapper_class' => str_replace('configuration/', '', $key),
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders issuer list select dropdown
  *
  * @param string $key_value
@@ -63,7 +83,9 @@ function mollie_api_select($key_value, $key = '')
 }
 
 /**
- * @param        $key_value
+ * Renders multi lang input
+ *
+ * @param string $key_value
  * @param string $key
  *
  * @return string|string[]
@@ -71,8 +93,22 @@ function mollie_api_select($key_value, $key = '')
  */
 function mollie_multi_language_text($key_value, $key = '')
 {
-    $data         = [];
     $templatePath = PathProvider::getAdminTemplatePath('multi_lang_field.html', 'ConfigFields');
+
+    return mollie_multi_language_field($templatePath, $key_value, $key);
+}
+
+/**
+ * @param string $templatePath
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_multi_language_field($templatePath, $key_value, $key = '')
+{
+    $data         = [];
 
     foreach (xtc_get_languages() as $language) {
         $langKey                 = $key . '_' . strtoupper($language['code']);
@@ -88,6 +124,7 @@ function mollie_multi_language_text($key_value, $key = '')
     $data['default_value']    = stripslashes(@constant($key . '_' . $currentLang));
     $data['key']              = $key;
     $data['current_lang_key'] = $key . '_' . $currentLang;
+    $data['wrapper_class']    = str_replace('configuration/', '', $key);
 
     return mollie_render_template($templatePath, $data);
 }

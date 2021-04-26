@@ -3,7 +3,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased](https://github.com/mollie/orocore/compare/v1.1.0...dev)
+## [Unreleased](https://github.com/mollie/orocore/compare/v1.2.0...dev)
+
+## [v1.2.0](https://github.com/mollie/orocore/compare/v1.2.0) - 2021-03-18
+ **BREAKING** Added `Configuration::getExtensionVersionCheckUrl` and 
+ `Configuration::getExtensionDownloadUrl`
+ - Added `VersionCheckService` for checking the latest plugin version. 
+ - Added `VersionCheckProxy` is used for this service
+ - Added `MaintenanceModeService` for checking whether the shop system is 
+ in maintenance mode 
+ - Added `PaymentTransactionDescriptionService` for formatting the description 
+ of the created payment
+ - Added `PaymentMethodService::getEnabledPaymentMethodsWithTempAPIKey` and
+ `PaymentMethodService::getEnabledMethodsWithTempProfileId` for fetching the
+ enabled methods with the temporary api key and token. 
+ - Extended `PaymentMethodConfig` entity with fields: 
+   `daysToExpire`, `transactionDescription`, `voucherCategory` and `productAttribute`
  - Changed `OrderService` and `PaymentService` create method, to 
  set initial status to null
  - Added `useMollieComponents` and `issuerListStyle` to the `PaymentMethodConfig`

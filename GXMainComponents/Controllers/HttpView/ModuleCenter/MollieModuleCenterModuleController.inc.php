@@ -1,9 +1,11 @@
 <?php
 
 use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
+use Mollie\BusinessLogic\MaintenanceMode\MaintenanceModeService;
 use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethodService;
+use Mollie\BusinessLogic\VersionCheck\VersionCheckService;
 use Mollie\Gambio\Entity\Repository\GambioStatusRepository;
 use Mollie\Gambio\Mappers\OrderStatusMapper;
 use Mollie\Gambio\Services\Business\ConfigurationService;
@@ -36,21 +38,33 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
      * @var GambioStatusRepository
      */
     protected $orderStatusRepository;
+    /**
+     * @var VersionCheckService
+     */
+    protected $versionCheckService;
 
+    /**
+     * @var MaintenanceModeService
+     */
+    protected $maintenanceModeService;
 
     /**
      *
      */
     protected function _init()
     {
-        $this->pageTitle             = $this->languageTextManager->get_text('mollie_title');
-        $this->configService         = ServiceRegister::getService(Configuration::CLASS_NAME);
-        $this->paymentService        = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
+        $this->pageTitle              = $this->languageTextManager->get_text('mollie_title');
+        $this->configService          = ServiceRegister::getService(Configuration::CLASS_NAME);
+        $this->paymentService         = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
+        $this->versionCheckService    = ServiceRegister::getService(VersionCheckService::CLASS_NAME);
+        $this->maintenanceModeService = ServiceRegister::getService(MaintenanceModeService::CLASS_NAME);
         $this->orderStatusRepository = new GambioStatusRepository();
     }
 
     /**
-     * @return AdminLayoutHttpControllerResponse
+     * Performs version checking and redirects to the mollie config page
+     *
+     * @return RedirectHttpControllerResponse
      *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
@@ -58,6 +72,27 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
      * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     public function actionDefault()
+    {
+        $this->versionCheckService->checkForNewVersion();
+        $this->maintenanceModeService->checkMaintenanceMode();
+
+        $redirectUrl = UrlProvider::generateAdminUrl('admin.php', 'MollieModuleCenterModule/Mollie');
+
+        return MainFactory::create('RedirectHttpControllerResponse', $redirectUrl);
+    }
+
+    /**
+     * Renders mollie config page
+     *
+     * @return AdminLayoutHttpControllerResponse
+     *
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     * @throws \Mollie\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
+     */
+    public function actionMollie()
     {
         $pageTitle = new NonEmptyStringType($this->pageTitle);
         $template  = PathProvider::getAdminTemplate('mollie_configuration.html');
@@ -71,6 +106,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns assets collection for the module page
+     *
      * @return AssetCollection
      */
     private function _getAssets()
@@ -87,6 +124,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns template data array
+     *
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
      * @throws UnprocessableEntityRequestException
@@ -109,7 +148,9 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
-     * @param $isConnected
+     * Returns required data
+     *
+     * @param bool $isConnected
      *
      * @return array
      */
@@ -130,6 +171,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Returns data when the user is connected
+     *
      * @return array
      * @throws HttpAuthenticationException
      * @throws HttpCommunicationException
@@ -158,6 +201,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Formats payment method for rendering
+     *
      * @param PaymentMethodConfig[] $paymentMethodConfigs
      *
      * @return array
@@ -167,11 +212,13 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         $methodsFormatted = [];
         foreach ($paymentMethodConfigs as $methodConfig) {
             $originalConfig     = $methodConfig->getOriginalAPIConfig();
+            $id = $originalConfig->getId();
             $methodsFormatted[] = [
                 'id'          => $originalConfig->getId(),
                 'label'       => $originalConfig->getDescription(),
                 'image_src'   => $originalConfig->getImage()->getSvg(),
                 'is_enabled'  => $methodConfig->isEnabled(),
+                'is_active'   => $this->_isMethodActive($id),
                 'module_link' => UrlProvider::generateAdminUrl('modules.php', null, ['set' => 'payment', 'module' => "mollie_{$originalConfig->getId()}"])
             ];
         }
@@ -180,6 +227,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Retunrs total number of notification pages
+     *
      * @return int
      * @throws \Mollie\Infrastructure\ORM\Exceptions\RepositoryNotRegisteredException
      */
@@ -192,6 +241,8 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     }
 
     /**
+     * Formats order statuses for rendering
+     *
      * @return array
      * @throws Exception
      */
@@ -242,5 +293,20 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
         }
 
         return '';
+    }
+
+    /**
+     * Check if gambio payment module is active
+     *
+     * @param string $mollieId
+     *
+     * @return bool
+     */
+    private function _isMethodActive($mollieId)
+    {
+        $statusKey = 'MODULE_PAYMENT_MOLLIE_' . strtoupper($mollieId) . '_STATUS';
+
+        return defined($statusKey) ?
+            strtolower_wrapper(@constant($statusKey)) === 'true' : false;
     }
 }
