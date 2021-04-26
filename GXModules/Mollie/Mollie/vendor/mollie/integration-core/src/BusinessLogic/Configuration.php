@@ -33,6 +33,21 @@ abstract class Configuration extends \Mollie\Infrastructure\Configuration\Config
      * @return string Extension version.
      */
     abstract public function getExtensionVersion();
+    /**
+     * Returns URL for checking extension version
+     *
+     * @return string URL for checking extension version
+     */
+    abstract public function getExtensionVersionCheckUrl();
+
+    /**
+     * Returns URL for downloading plugin
+     *
+     * @param string|null $latestVersion
+     *
+     * @return string URL for downloading plugin
+     */
+    abstract public function getExtensionDownloadUrl($latestVersion = null);
 
     /**
      * Removes configuration entity with provided name.

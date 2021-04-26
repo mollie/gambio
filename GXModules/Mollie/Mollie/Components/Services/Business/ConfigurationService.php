@@ -12,7 +12,8 @@ use Mollie\Gambio\Utility\UrlProvider;
  */
 class ConfigurationService extends Configuration
 {
-    const MOLLIE_GAMBIO_VERSION = '2.0.7';
+    const VERSION_CHECK_URL = 'https://raw.githubusercontent.com/mollie/gambio/4.1-4.x/GXModules/Mollie/Mollie/composer.json';
+    const PLUGIN_DOWNLOAD_URL = 'https://github.com/mollie/gambio/releases';
 
     /**
      * @inheritDoc
@@ -61,7 +62,9 @@ class ConfigurationService extends Configuration
      */
     public function getExtensionVersion()
     {
-        return static::MOLLIE_GAMBIO_VERSION;
+        $composerContent = json_decode(file_get_contents(__DIR__ . '/../../../composer.json'), true);
+
+        return $composerContent['version'];
     }
 
     /**
@@ -115,13 +118,39 @@ class ConfigurationService extends Configuration
         return $this->getConfigValue('liveApiKey');
     }
 
+    /**
+     * @param string $apiKey
+     */
     public function setTestKey($apiKey)
     {
         $this->saveConfigValue('liveTestKey', $apiKey);
     }
 
+    /**
+     * @return string
+     */
     public function getTestApiKey()
     {
         return $this->getConfigValue('liveTestKey');
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     */
+    public function getExtensionVersionCheckUrl()
+    {
+        return static::VERSION_CHECK_URL;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     */
+    public function getExtensionDownloadUrl($latestVersion = null)
+    {
+        return $latestVersion ? static::PLUGIN_DOWNLOAD_URL . "/tag/v$latestVersion" : static::PLUGIN_DOWNLOAD_URL;
     }
 }

@@ -1,0 +1,7 @@
+.mollie-input-integer {
+    padding-top: 15px;
+}
+
+.mollie-input-integer input {
+    width: 100%;
+}

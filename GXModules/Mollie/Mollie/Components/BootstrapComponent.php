@@ -7,9 +7,12 @@ use Mollie\BusinessLogic\Authorization\Interfaces\AuthorizationService;
 use Mollie\BusinessLogic\Http\ApiKey\ProxyDataProvider;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderLineTransitionService;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderTransitionService;
+use Mollie\BusinessLogic\MaintenanceMode\MaintenanceModeService;
 use Mollie\BusinessLogic\Notifications\Model\Notification;
 use Mollie\BusinessLogic\OrderReference\Model\OrderReference;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
+use Mollie\BusinessLogic\PaymentMethod\PaymentTransactionDescriptionService;
+use Mollie\BusinessLogic\VersionCheck\VersionCheckService;
 use Mollie\Gambio\APIProcessor\OrderProcessor;
 use Mollie\Gambio\APIProcessor\PaymentProcessor;
 use Mollie\Gambio\APIProcessor\ProcessorRegister;
@@ -18,6 +21,7 @@ use Mollie\Gambio\Entity\StatusMapping;
 use Mollie\Gambio\Mappers\OrderMapper;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Services\Business\PaymentMethodService;
+use Mollie\Gambio\Services\Business\TransactionDescriptionService;
 use Mollie\Gambio\Services\Infrastructure\LoggerService;
 use Mollie\Infrastructure\Configuration\ConfigEntity;
 use Mollie\Infrastructure\Configuration\Configuration;
@@ -91,6 +95,26 @@ class BootstrapComponent extends \Mollie\BusinessLogic\BootstrapComponent
             OrderLineTransitionService::CLASS_NAME,
             static function () {
                 return new Services\Business\OrderLineTransitionService();
+            }
+        );
+        ServiceRegister::registerService(
+            PaymentTransactionDescriptionService::CLASS_NAME,
+            static function () {
+                return TransactionDescriptionService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            VersionCheckService::CLASS_NAME,
+            static function () {
+                return Services\Business\VersionCheckService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            MaintenanceModeService::CLASS_NAME,
+            static function () {
+                return Services\Business\MaintenanceModeService::getInstance();
             }
         );
 

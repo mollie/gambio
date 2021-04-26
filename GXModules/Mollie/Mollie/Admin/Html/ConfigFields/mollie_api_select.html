@@ -1,9 +1,12 @@
 {load_language_text section="module_center_module"}
 
+<script src="{$mollie.js_admin}mollie-api-select.js"></script>
+
+
 <span class="options-title">{$mollie.title}</span>
 {$mollie.desc}
 
-<select name="configuration[{{$mollie.key}}]">
+<select class="mollie-api-select" name="configuration[{{$mollie.key}}]">
     <option value="orders_api" {if $mollie.value == 'orders_api'}selected{/if}>{{$txt.mollie_orders_api}}</option>
     <option value="payment_api" {if $mollie.value == 'payment_api'}selected{/if}>{{$txt.mollie_payments_api}}</option>
 </select>
