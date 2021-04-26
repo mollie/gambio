@@ -10,15 +10,6 @@ If you have Gambio 3.5.x - 4.0.x versions, please checkout on `3.5-4.0` branch o
 https://github.com/mollie/gambio/tree/3.5-4.0
 ***
 
-## Installation of the Mollie Gambio Payments module ##
-
-[- Installation via FTP client](#install-using-ftp)
-
-[- Configuration](#configure-the-module)
-
-[- Troubleshooting](#troubleshooting)
-
-
 ## About Mollie Payments ##
 With Mollie, you can accept payments and donations online and expand your customer base internationally with support for all major payment methods through a single integration. No need to spend weeks on paperwork or security compliance procedures. No more lost conversions because you don’t support a shopper’s favourite payment method or because they don’t feel safe. We made our products and API expansive, intuitive, and safe for merchants, customers and developers alike. 
 
