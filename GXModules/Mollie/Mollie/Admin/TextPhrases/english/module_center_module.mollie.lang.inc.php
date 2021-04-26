@@ -13,8 +13,10 @@ $t_language_text_section_content_array = [
     'mollie_support'                 => 'Support',
     'mollie_support_link'            => 'https://help.mollie.com/hc/en-us',
     'mollie_status'                  => 'Status',
-    'mollie_connect_success'         => 'A connection was successfully established with the Mollie API. Please save changes to proceed with payment setup.',
-    'mollie_connect_failure'         => 'Authentication error has occurred. Invalid profile access token.',
+    'mollie_connect_success'         => '<i class="fa fa-check"></i> A connection was successfully established with the <b>{key_type} API key</b>. <br><br><i class="fa fa-cog"></i> Enabled methods: {enabled_methods}',
+    'mollie_connect_failure'         => '<i class="fa fa-times"></i> Invalid <b>{key_type} API key</b>. {api_message}',
+    'mollie_keys_missing'            => '<i class="fa fa-times"></i> Please provide at least one API key',
+    'mollie_configuration_failure'   => '<i class="fa fa-times"></i> An error during save Mollie configuration: {api_message}',
     'mollie_active'                  => 'Active',
     'mollie_inactive'                => 'Inactive',
     'mollie_configure'               => 'Configure',
@@ -102,6 +104,8 @@ $t_language_text_section_content_array = [
     'mollie_expiry_date'             => 'Expiry date',
     'mollie_verification_code'       => 'Verification code',
 
+    'mollie_transaction_desc_label' => 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.',
+
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',
     'mollie_failed_comment'   => 'The payment has failed and cannot be completed with selected payment method.',
@@ -156,4 +160,11 @@ $t_language_text_section_content_array = [
 
     'mollie.payment.webhook.notification.order_line_cancel_info.title'       => 'Mollie order line changed',
     'mollie.payment.webhook.notification.order_line_cancel_info.description' => 'Order line is canceled in Mollie portal.',
+
+    'mollie_version_outdated_message' => 'A new module version {versionNumber} is available. Please download the latest version <a href="{downloadUrl}" target="_blank">here</a>',
+    'mollie_system_offline_message'   => 'Your website is running in offline mode. Since Mollie sends a message to your website when the payment status changes, Mollie won\'t be able to to access your website when in offline mode',
+
+    'mollie_status_label'          => 'Mollie status',
+    'mollie_gambio_status_label'   => 'Gambio status',
+    'mollie_method_label'          => 'Method',
 ];

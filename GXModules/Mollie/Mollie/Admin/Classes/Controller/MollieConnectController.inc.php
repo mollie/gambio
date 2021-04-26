@@ -1,7 +1,6 @@
 <?php
 
 use Mollie\Gambio\Authorization\GambioAuthorizationWrapper;
-use Mollie\Gambio\Utility\MollieTranslator;
 
 require_once __DIR__ . '/../../../autoload.php';
 
@@ -11,44 +10,33 @@ require_once __DIR__ . '/../../../autoload.php';
 class MollieConnectController extends AdminHttpViewController
 {
     /**
+     * Performs token check action
+     *
      * @return HttpControllerResponseInterface|mixed
      */
     public function actionDefault()
     {
         $payload     = json_decode(file_get_contents('php://input'), true);
 
-        if ($this->_verifyPayload($payload) && $this->_tokensValid($payload)) {
-            $messageKey  = 'mollie_connect_success';
-            $messageType = 'success';
-        } else {
-            $messageType = 'error';
-            $messageKey  = 'mollie_connect_failure';
+        if ($this->_verifyPayload($payload)) {
+            $this->_validateTokens($payload);
         }
-
-        $lang = new MollieTranslator();
-        $GLOBALS['messageStack']->add_session($lang->translate($messageKey), $messageType);
 
         return MainFactory::create('JsonHttpControllerResponse', []);
     }
 
     /**
      * @param array $payload
-     *
-     * @return bool
      */
-    private function _tokensValid(array $payload)
+    private function _validateTokens(array $payload)
     {
-        try {
-            $authWrapper = new GambioAuthorizationWrapper(
-                $payload['is_test'],
-                $payload['live_token'],
-                $payload['test_token']
-            );
+        $authWrapper = new GambioAuthorizationWrapper(
+            $payload['is_test'],
+            $payload['live_token'],
+            $payload['test_token']
+        );
 
-            return $authWrapper->verify();
-        } catch (Exception $exception) {
-            return false;
-        }
+        $authWrapper->verify();
     }
 
     /**

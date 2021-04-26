@@ -5,6 +5,30 @@ use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
 
 /**
+ * Renders input integer field
+ *
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_input_integer($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_integer_input.html', 'ConfigFields');
+    $data         = [
+        'key'   => $key,
+        'value' => $key_value,
+        'title' => @constant("{$key}_TITLE"),
+        'desc'  => @constant("{$key}_DESC"),
+
+        'wrapper_class' => str_replace('configuration/', '', $key),
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders issuer list select element
  *
  * @param string $key_value
@@ -47,6 +71,8 @@ function mollie_get_payment_logo($code, $src)
 }
 
 /**
+ * Renders api select field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -68,7 +94,9 @@ function mollie_api_select($key_value, $key = '')
 }
 
 /**
- * @param        $key_value
+ * Renders multi lang input
+ *
+ * @param string $key_value
  * @param string $key
  *
  * @return string|string[]
@@ -76,8 +104,24 @@ function mollie_api_select($key_value, $key = '')
  */
 function mollie_multi_language_text($key_value, $key = '')
 {
-    $data         = [];
     $templatePath = PathProvider::getAdminTemplatePath('multi_lang_field.html', 'ConfigFields');
+
+    return mollie_multi_language_field($templatePath, $key_value, $key);
+}
+
+/**
+ * Renders multi language field
+ *
+ * @param string $templatePath
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_multi_language_field($templatePath, $key_value, $key = '')
+{
+    $data         = [];
 
     foreach (xtc_get_languages() as $language) {
         $langKey                 = $key . '_' . strtoupper($language['code']);
@@ -95,11 +139,14 @@ function mollie_multi_language_text($key_value, $key = '')
     $data['current_lang_key'] = $key . '_' . $currentLang;
     $data['title']            = @constant("{$key}_TITLE");
     $data['desc']             = @constant("{$key}_DESC");
+    $data['wrapper_class']    = str_replace('configuration/', '', $key);
 
     return mollie_render_template($templatePath, $data);
 }
 
 /**
+ * Renders multiple choices select country field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -132,6 +179,8 @@ function mollie_multi_select_countries($key_value, $key = '')
 }
 
 /**
+ * Renders logo upload field
+ *
  * @param        $key_value
  * @param string $key
  *
@@ -159,6 +208,8 @@ function mollie_logo_upload($key_value, $key = '')
 }
 
 /**
+ * Renders template with given path and data
+ *
  * @param string $path
  * @param array  $data
  *
@@ -181,6 +232,8 @@ function mollie_render_template($path, $data = [])
 }
 
 /**
+ * Appends prefix to the key
+ *
  * @param string $key
  *
  * @return string
