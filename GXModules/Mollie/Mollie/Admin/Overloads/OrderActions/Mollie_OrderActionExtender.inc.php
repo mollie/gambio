@@ -11,8 +11,11 @@ require_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/autoload.php';
  */
 class Mollie_OrderActionExtender extends Mollie_OrderActionExtender_parent
 {
-
     /**
+     * Adds a notification to the notification hub and propagates order cancellation to the parent.
+     * The optional customer ID argument has been added to support changes in Gambio order actions class
+     * in their 4.3.* and 4.4.* releases.
+     *
      * @param array $orderIds
      * @param BoolType $restockQuantity
      * @param BoolType $recalculateShippingStatus
@@ -20,7 +23,7 @@ class Mollie_OrderActionExtender extends Mollie_OrderActionExtender_parent
      * @param BoolType $notifyCustomer
      * @param BoolType $sendComment
      * @param StringType|null $comment
-     * @throws Exception
+     * @param IdType|null $customerId
      */
     public function cancelOrder(
         array $orderIds,
@@ -29,7 +32,8 @@ class Mollie_OrderActionExtender extends Mollie_OrderActionExtender_parent
         BoolType $resetArticleStatus,
         BoolType $notifyCustomer,
         BoolType $sendComment,
-        StringType $comment = null
+        StringType $comment = null,
+        IdType $customerId = null
     ) {
         try {
             foreach ($orderIds as $orderId) {
