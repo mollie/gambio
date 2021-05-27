@@ -23,16 +23,16 @@ require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/autoload.ph
  */
 class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExtender_parent
 {
-    private static $mollieForbiddenActions = ['product_delete', 'ot_edit', 'ot_delete'];
+    protected static $mollieForbiddenActions = ['product_delete', 'ot_edit', 'ot_delete'];
 
     /**
      * @var OrderReadService
      */
-    private $orderReadService;
+    protected $orderReadService;
     /**
      * @var EventBus
      */
-    private $eventBus;
+    protected $eventBus;
 
     /**
      * Detects mollie changes at top level (based on get and post params)
@@ -58,7 +58,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * @return bool
      */
-    private function isOrderCanceled()
+    protected function isOrderCanceled()
     {
         return array_key_exists('orders_multi_cancel', $_POST) &&
             !empty($_POST['gm_multi_status'][0])
@@ -68,7 +68,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * Order cancel handler
      */
-    private function handleOrderCancel()
+    protected function handleOrderCancel()
     {
         try {
             $orderId = $_POST['gm_multi_status'][0];
@@ -86,7 +86,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * Order lines handler
      */
-    private function _handleOrderLines()
+    protected function _handleOrderLines()
     {
         if ($_GET['action'] === 'product_edit') {
             $this->_processOrderLine($_POST);
@@ -100,7 +100,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * @param array $input
      */
-    private function _processOrderLine(array $input)
+    protected function _processOrderLine(array $input)
     {
         $orderId = $input['oID'];
         /** @var OrderReferenceService $orderReferenceService */
@@ -122,7 +122,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      * @param array $input
      * @param       $orderTotalChanged
      */
-    private function _updateOrderLine(array $input, $orderTotalChanged)
+    protected function _updateOrderLine(array $input, $orderTotalChanged)
     {
         $orderId     = $input['oID'];
         $storedOrder = $this->_getOrderReadService()->getOrderById(new IdType($orderId));
@@ -151,7 +151,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      *
      * @return string|null
      */
-    private function getLineIdFromMollie($orderId, $lineId)
+    protected function getLineIdFromMollie($orderId, $lineId)
     {
         /** @var OrderReferenceService $orderReferenceService */
         $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
@@ -174,7 +174,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      * @param string    $key
      * @param Exception $exception
      */
-    private function pushMessage($type, $key, $exception = null)
+    protected function pushMessage($type, $key, $exception = null)
     {
         $translator = new MollieTranslator();
 
@@ -192,7 +192,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      *
      * @return bool
      */
-    private function _isOrderTotalChange($input)
+    protected function _isOrderTotalChange($input)
     {
         $lineId     = $input['opID'];
         $storedItem = $this->_getOrderReadService()->getOrderItemById(new IdType($lineId));
@@ -207,7 +207,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      *
      * @return bool
      */
-    private function _isProcessable($orderId)
+    protected function _isProcessable($orderId)
     {
         if (!MollieModuleChecker::isConnected()) {
             return false;
@@ -221,7 +221,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
      *
      * @return bool
      */
-    private function _isMolliePaymentUsed($orderId)
+    protected function _isMolliePaymentUsed($orderId)
     {
         $order         = $this->_getOrderReadService()->getOrderById(new IdType($orderId));
         $paymentMethod = $order->getPaymentType()->getModule();
@@ -232,7 +232,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * @return OrderReadService
      */
-    private function _getOrderReadService()
+    protected function _getOrderReadService()
     {
         if ($this->orderReadService === null) {
             $this->orderReadService = StaticGXCoreLoader::getService('OrderRead');
@@ -244,7 +244,7 @@ class Mollie_AdminApplicationTopExtender extends Mollie_AdminApplicationTopExten
     /**
      * @return EventBus
      */
-    private function _getEventBus()
+    protected function _getEventBus()
     {
         if ($this->eventBus === null) {
             $this->eventBus = ServiceRegister::getService(EventBus::CLASS_NAME);
