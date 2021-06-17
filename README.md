@@ -39,6 +39,9 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+*1.0.9*
+- Optimization: Updated the application top extender to be extendable by other modules.
+
 *1.0.8*
 - New feature: Added order expiry days configuration.
 - New feature: Added a transaction description on payment methods.
