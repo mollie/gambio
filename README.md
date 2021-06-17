@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*0.2.0*
+- Optimization: Updated the application top extender to be extendable by other modules.
+
 *0.1.9*
 - New feature: Added order expiry days configuration.
 - New feature: Added a transaction description on payment methods.
