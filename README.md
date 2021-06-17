@@ -3,7 +3,7 @@
 ## Supported GX versions
 This branch contains mollie module which is eligible for Gambio versions 3.0.x - 3.4.x. 
 
-If you have Gambio from 4.1.x to 4.3.x versions, please checkout on `4.1-4.x` branch of this Github repository.
+If you have Gambio from 4.1.x to 4.4.x versions, please checkout on `4.1-4.x` branch of this Github repository.
 https://github.com/mollie/gambio/tree/4.1-4.x
 
 If you have Gambio 3.5.x - 4.0.x versions, please checkout on `3.5-4.0` branch of this Github repository.
@@ -19,7 +19,7 @@ Mollie requires no minimum costs, no fixed contracts, no hidden costs. At Mollie
 ```
 This branch contains mollie module which is eligible for Gambio versions 3.0.x - 3.4.x. 
 
-If you have Gambio from 4.1.x to 4.3.x versions, please checkout on `4.1-4.x` branch of this Github repository.
+If you have Gambio from 4.1.x to 4.4.x versions, please checkout on `4.1-4.x` branch of this Github repository.
 
 If you have Gambio 3.5.x - 4.0.x versions, please checkout on `3.5-4.0` branch of this Github repository.
 ```
@@ -41,7 +41,7 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
-*0.2.0*
+*0.1.10*
 - Optimization: Updated the application top extender to be extendable by other modules.
 
 *0.1.9*
