@@ -4,7 +4,7 @@ define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TEXT_TITLE', 'Betaal nu.');
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TEXT_DESCRIPTION', 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.');
 
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_STATUS_TITLE', 'Betaalmethode inschakelen');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_STATUS_DESC', 'Wil je Pay now accepteren als betalingen?');
+define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_STATUS_DESC', 'Wil je Betaal nu accepteren als betalingen?');
 
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_CHECKOUT_NAME_TITLE', 'Naam checkout');
 define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_CHECKOUT_NAME_DESC', 'Geef een naam op die wordt gebruikt bij het afrekenen.');
