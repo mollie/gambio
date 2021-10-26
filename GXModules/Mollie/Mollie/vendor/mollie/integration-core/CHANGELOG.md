@@ -3,7 +3,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased](https://github.com/mollie/orocore/compare/v1.2.0...dev)
+## Unreleased
+- Added support for the Klarna Pay Now payment method.
+
+## [v1.3.2](https://github.com/mollie/orocore/tree/v1.3.2) - 2021-10-07
+- Fixed amount conversion to smallest unit.
+
+## [v1.3.1](https://github.com/mollie/orocore/tree/v1.3.1) - 2021-10-05
+- Added support for currencies without minor units.
+
+## [v1.3.0](https://github.com/mollie/orocore/tree/v1.3.0) - 2021-09-13
+**BREAKING CHANGES**
+- Added OAuth type authorization.
+- Added sort order to payment methods.
+- Changed `Payment` DTO. Renamed method parameter to methods. 
+  Also, all corresponding getters and setters are renamed to getMethods and 
+  setMethods.
+- Changed `Order` DTO. Renamed method parameter to methods.
+  Also, all corresponding getters and setters are renamed to getMethods and
+  setMethods.
 
 ## [v1.2.0](https://github.com/mollie/orocore/compare/v1.2.0) - 2021-03-18
  **BREAKING** Added `Configuration::getExtensionVersionCheckUrl` and 
