@@ -3,7 +3,7 @@
   "version": "2.0.9",
   "require": {
     "php": ">=5.4",
-    "mollie/integration-core": "1.2.0"
+    "mollie/integration-core": "dev-feature/klarna-pay-now"
   },
   "repositories": [
     {

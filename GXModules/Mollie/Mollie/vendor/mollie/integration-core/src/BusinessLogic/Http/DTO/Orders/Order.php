@@ -34,7 +34,7 @@ class Order extends BaseDto
     /**
      * @var string[]
      */
-    protected $method;
+    protected $methods;
     /**
      * @var Amount
      */
@@ -156,7 +156,7 @@ class Order extends BaseDto
         $order->profileId = static::getValue($raw, 'profileId');
         $method = static::getValue($raw, 'method', array());
         $method = is_array($method) ? $method : array($method);
-        $order->method = $method;
+        $order->methods = $method;
         $order->amount = Amount::fromArray(static::getValue($raw, 'amount', array()));
         $order->amountCaptured = Amount::fromArray(static::getValue($raw, 'amountCaptured', array()));
         $order->amountRefunded = Amount::fromArray(static::getValue($raw, 'amountRefunded', array()));
@@ -232,7 +232,7 @@ class Order extends BaseDto
             'resource' => $this->resource,
             'id' => $this->id,
             'profileId' => $this->profileId,
-            'method' => $this->method,
+            'method' => $this->methods,
             'amount' => $this->amount->toArray(),
             'amountRefunded' => $this->amountRefunded->toArray(),
             'amountCaptured' => $this->amountCaptured->toArray(),
@@ -313,17 +313,17 @@ class Order extends BaseDto
     /**
      * @return string[]
      */
-    public function getMethod()
+    public function getMethods()
     {
-        return $this->method;
+        return $this->methods;
     }
 
     /**
      * @param string[] $method
      */
-    public function setMethod($method)
+    public function setMethods($method)
     {
-        $this->method = $method;
+        $this->methods = $method;
     }
 
     /**
