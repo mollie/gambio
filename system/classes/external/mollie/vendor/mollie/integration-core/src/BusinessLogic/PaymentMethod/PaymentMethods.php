@@ -12,6 +12,7 @@ class PaymentMethods
     const PayPal = 'paypal';
     const KlarnaPayLater = 'klarnapaylater';
     const KlarnaSliceIt = 'klarnasliceit';
+    const KlarnaPayNow = 'klarnapaynow';
     const CreditCard = 'creditcard';
     const iDEAL = 'ideal';
     const KBC = 'kbc';

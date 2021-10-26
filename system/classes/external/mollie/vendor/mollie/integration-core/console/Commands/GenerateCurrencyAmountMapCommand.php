@@ -88,7 +88,6 @@ class GenerateCurrencyAmountMapCommand extends Command
         foreach ($currencies['CcyTbl']['CcyNtry'] as $currency) {
             if (
                 !empty($currency['Ccy'])
-                && !empty($currency['CcyMnrUnts'])
                 && $currency['CcyMnrUnts'] !== 'N.A.'
                 && $currency['CcyMnrUnts'] !== '2'
             ) {
