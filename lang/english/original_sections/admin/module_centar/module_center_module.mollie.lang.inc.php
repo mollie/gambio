@@ -99,10 +99,10 @@ $t_language_text_section_content_array = [
     'mollie_issuer_not_selected'     => 'Issuer not selected',
 
     'mollie_select_bank'             => 'Select bank',
-    'mollie_card_holder'             => 'Card holder',
+    'mollie_card_holder'             => 'Name on card',
     'mollie_card_number'             => 'Card number',
     'mollie_expiry_date'             => 'Expiry date',
-    'mollie_verification_code'       => 'Verification code',
+    'mollie_verification_code'       => 'CVC/CVV',
 
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',
