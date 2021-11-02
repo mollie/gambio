@@ -40,6 +40,9 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+*2.0.10*
+- Fixed a compatibility issue in Gambio 4.3.x.
+
 *2.0.9*
 - Added support for Gambio 4.4.x.
 - Optimization: Updated the application top extender to be extendable by other modules.
