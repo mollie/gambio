@@ -106,7 +106,7 @@ abstract class Configuration extends \Mollie\Infrastructure\Configuration\Config
     /**
      * Sets authorization token.
      *
-     * @param AuthInfo $authToken Authorization token.
+     * @param string $authToken Authorization token.
      */
     public function setAuthorizationToken($authToken)
     {
