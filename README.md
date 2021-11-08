@@ -40,6 +40,8 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+*0.1.11*
+- Added support for the Klarna Pay Now payment method.
 
 *0.1.10*
 - Optimization: Updated the application top extender to be extendable by other modules.

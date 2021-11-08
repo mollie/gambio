@@ -100,10 +100,10 @@ $t_language_text_section_content_array = [
 
 
     'mollie_select_bank'             => 'Selecteer Bank',
-    'mollie_card_holder'             => 'Kaarthouder',
-    'mollie_card_number'             => 'Kaartnummer',
-    'mollie_expiry_date'             => 'Vervaldatum',
-    'mollie_verification_code'       => 'Verificatie code',
+    'mollie_card_holder'             => 'Naam kaarthouder',
+    'mollie_card_number'             => 'Creditcardnummer',
+    'mollie_expiry_date'             => 'MM/JJ',
+    'mollie_verification_code'       => 'CVV',
 
     'mollie_canceled_comment' => 'De klant heeft de betaling geannuleerd.',
     'mollie_expired_comment'  => 'De betaling is op Mollie verlopen.',

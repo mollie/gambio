@@ -49,7 +49,7 @@ class OrderMapper
         $orderMollie = new Order();
         $orderMollie->setOrderNumber((string)$orderId);
         $orderMollie->setLocale($this->_getLanguage());
-        $orderMollie->setMethod([$this->_formatPaymentMethod($sourceOrder->getPaymentType()->getModule())]);
+        $orderMollie->setMethods([$this->_formatPaymentMethod($sourceOrder->getPaymentType()->getModule())]);
         $orderMollie->setRedirectUrl($this->_getRedirectUrl($orderId));
         $email = $sourceOrder->getCustomerEmail();
         $phone =$sourceOrder->getCustomerTelephone();
@@ -121,7 +121,7 @@ class OrderMapper
         $payment->setOrderId((string)$orderId);
         $payment->setRedirectUrl($this->_getRedirectUrl($orderId));
         $payment->setLocale($this->_getLanguage());
-        $payment->setMethod([$this->_formatPaymentMethod($sourceOrder->getPaymentType()->getModule())]);
+        $payment->setMethods([$this->_formatPaymentMethod($sourceOrder->getPaymentType()->getModule())]);
         $email = $sourceOrder->getCustomerEmail();
         $phone = $sourceOrder->getCustomerTelephone();
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));

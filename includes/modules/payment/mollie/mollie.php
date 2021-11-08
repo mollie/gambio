@@ -3,6 +3,7 @@
 use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
+use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
@@ -23,6 +24,12 @@ require_once DIR_FS_DOCUMENT_ROOT . '/system/classes/external/mollie/mollie_conf
  */
 class mollie
 {
+    const KLARNA_PAYMENT_METHODS = [
+        PaymentMethods::KlarnaPayLater,
+        PaymentMethods::KlarnaPayNow,
+        PaymentMethods::KlarnaSliceIt,
+    ];
+
     public $code;
     public $title;
     public $description;
@@ -309,10 +316,6 @@ class mollie
                 'configuration_value' => $this->translate($currentLang, 'mollie_checkout_desc'),
                 'set_function'        => 'mollie_multi_language_text( ',
             ],
-            'TRANSACTION_DESCRIPTION' => [
-                'configuration_value' => '{orderNumber}',
-                'set_function'        => 'mollie_multi_language_text( ',
-            ],
             'API_METHOD'           => [
                 'configuration_value' => $this->_getDefaultApi(),
                 'set_function'        => 'mollie_api_select( ',
@@ -332,6 +335,19 @@ class mollie
                 'configuration_value' => '0',
             ],
         ];
+
+        if (!in_array($method->getId(), self::KLARNA_PAYMENT_METHODS, true)) {
+            $transactionDescription = [
+                'TRANSACTION_DESCRIPTION' => [
+                    'configuration_value' => '{orderNumber}',
+                    'set_function'        => 'mollie_multi_language_text( ',
+                ]
+            ];
+
+            $baseConfig = array_slice($baseConfig, 0, 4, true)
+                + $transactionDescription
+                + array_slice($baseConfig, 4, count($baseConfig) - 1, true);
+        }
 
         return array_merge($baseConfig, $this->_getHiddenFields());
     }

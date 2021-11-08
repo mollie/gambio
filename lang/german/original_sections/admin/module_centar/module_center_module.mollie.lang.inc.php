@@ -97,10 +97,10 @@ $t_language_text_section_content_array = [
     'mollie_issuer_not_selected'     => 'Aussteller nicht ausgewählt',
 
     'mollie_select_bank'             => 'Bank auswählen',
-    'mollie_card_holder'             => 'Kartenhalter',
-    'mollie_card_number'             => 'Kartenhalter',
-    'mollie_expiry_date'             => 'Verfallsdatum',
-    'mollie_verification_code'       => 'Verifizierungs-Schlüssel',
+    'mollie_card_holder'             => 'Name des Karteninhabers',
+    'mollie_card_number'             => 'Kreditkartennummer',
+    'mollie_expiry_date'             => 'MM/JJ',
+    'mollie_verification_code'       => 'CVV',
 
     'mollie_transaction_desc_label' => 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.',
 
