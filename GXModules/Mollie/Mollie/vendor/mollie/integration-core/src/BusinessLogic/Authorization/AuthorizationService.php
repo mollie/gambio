@@ -54,6 +54,16 @@ abstract class AuthorizationService extends BaseService implements Interfaces\Au
     }
 
     /**
+     * Returns Authorization token
+     *
+     * @return string
+     */
+    public function getAuthToken()
+    {
+        return $this->getConfigService()->getAuthorizationToken();
+    }
+
+    /**
      * @return Configuration
      */
     protected function getConfigService()

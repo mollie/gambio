@@ -1,0 +1,7 @@
+.idea/*
+!.idea/encodings.xml
+!.idea/codeStyles
+!.idea/inspectionProfiles
+
+# Custom content
+vendor
