@@ -39,7 +39,7 @@ class ProxyDataProvider
 
     public function transformPayment(Payment $payment)
     {
-        $method = $payment->getMethod();
+        $method = $payment->getMethods();
         if (count($method) === 1) {
             $method = implode('', $method);
         }
@@ -85,7 +85,7 @@ class ProxyDataProvider
             $orderLines[] = $totalAdjustment;
         }
 
-        $method = $order->getMethod();
+        $method = $order->getMethods();
         if (count($method) === 1) {
             $method = implode('', $method);
         }

@@ -35,19 +35,25 @@ class PaymentMethodConfig extends Entity
     const PRODUCT_ATTRIBUTE_DEFAULT = 'mollie_voucher_category';
 
     const DEFAULT_TRANSACTION_DESCRIPTION = '{orderNumber}';
+
     /**
      * @var string[]
      */
-    protected static $adiMethodRestrictions = array(
+    protected static $apiMethodRestrictions = array(
         PaymentMethods::KlarnaPayLater => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaSliceIt => self::API_METHOD_ORDERS,
+        PaymentMethods::KlarnaPayNow => self::API_METHOD_ORDERS,
         PaymentMethods::Vouchers => self::API_METHOD_ORDERS
     );
 
     /**
      * @var array
      */
-    protected static $surchargeRestrictedPaymentMethods = array(PaymentMethods::KlarnaPayLater, PaymentMethods::KlarnaSliceIt);
+    protected static $surchargeRestrictedPaymentMethods = array(
+        PaymentMethods::KlarnaPayLater,
+        PaymentMethods::KlarnaSliceIt,
+        PaymentMethods::KlarnaPayNow,
+    );
 
     /**
      * @var array
@@ -82,6 +88,7 @@ class PaymentMethodConfig extends Entity
         'transactionDescription',
         'voucherCategory',
         'productAttribute',
+        'sortOrder',
     );
 
     /**
@@ -133,6 +140,10 @@ class PaymentMethodConfig extends Entity
      * @var int
      */
     protected $daysToPaymentExpire;
+    /**
+     * @var int
+     */
+    protected $sortOrder = 0;
     /**
      * @var string
      */
@@ -195,7 +206,7 @@ class PaymentMethodConfig extends Entity
      */
     public function isApiMethodRestricted()
     {
-        return array_key_exists($this->getMollieId(), static::$adiMethodRestrictions);
+        return array_key_exists($this->getMollieId(), static::$apiMethodRestrictions);
     }
 
     /**
@@ -296,14 +307,14 @@ class PaymentMethodConfig extends Entity
 
         if (
             $this->isApiMethodRestricted() &&
-            $apiMethod !== static::$adiMethodRestrictions[$this->getMollieId()]
+            $apiMethod !== static::$apiMethodRestrictions[$this->getMollieId()]
         ) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Invalid payment method api value %s. Payment method %s supports only %s API method',
                     $apiMethod,
                     $this->getMollieId(),
-                    static::$adiMethodRestrictions[$this->getMollieId()]
+                    static::$apiMethodRestrictions[$this->getMollieId()]
                 )
             );
         }
@@ -493,5 +504,21 @@ class PaymentMethodConfig extends Entity
     public function setProductAttribute($productAttribute)
     {
         $this->productAttribute = $productAttribute;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
+
+    /**
+     * @param mixed $sortOrder
+     */
+    public function setSortOrder($sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
     }
 }

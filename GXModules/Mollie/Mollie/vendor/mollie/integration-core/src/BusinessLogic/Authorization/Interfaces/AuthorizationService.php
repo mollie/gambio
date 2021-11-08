@@ -30,4 +30,11 @@ interface AuthorizationService
      * Resets account
      */
     public function reset();
+
+    /**
+     * Returns Authorization token
+     *
+     * @return string|null
+     */
+    public function getAuthToken();
 }
