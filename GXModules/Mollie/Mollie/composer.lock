@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0c314ec21ef1c3edd6a1c760babed15",
+    "content-hash": "1b66bcf4439cc0639fdd65d4e24c25c2",
     "packages": [
         {
             "name": "mollie/integration-core",
-            "version": "dev-feature/klarna-pay-now",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mollie/orocore.git",
-                "reference": "60e943e74173aa77c84cd262cc2ed411d7773bd1"
+                "reference": "a60a6e1cffb055dc83d6829ae15f199e177199b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/orocore/zipball/60e943e74173aa77c84cd262cc2ed411d7773bd1",
-                "reference": "60e943e74173aa77c84cd262cc2ed411d7773bd1",
+                "url": "https://api.github.com/repos/mollie/orocore/zipball/a60a6e1cffb055dc83d6829ae15f199e177199b4",
+                "reference": "a60a6e1cffb055dc83d6829ae15f199e177199b4",
                 "shasum": ""
             },
             "require": {
@@ -45,20 +45,18 @@
                 "proprietary"
             ],
             "description": "Mollie integrations core library",
-            "time": "2021-11-02T09:20:37+00:00"
+            "time": "2021-11-08T09:59:02+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mollie/integration-core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
