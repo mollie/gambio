@@ -182,7 +182,7 @@ class PaymentMethodService extends BaseService
      *
      * @return PaymentMethodConfig[]
      */
-    protected function getPaymentMethodConfigurationsMap($profileId)
+    public function getPaymentMethodConfigurationsMap($profileId)
     {
         $paymentMethodConfigsMap = array();
 

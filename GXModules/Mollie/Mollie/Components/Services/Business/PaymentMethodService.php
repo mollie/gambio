@@ -39,7 +39,7 @@ class PaymentMethodService extends BaseService
      *
      * @return \Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig[]
      */
-    protected function getPaymentMethodConfigurationsMap($profileId)
+    public function getPaymentMethodConfigurationsMap($profileId)
     {
         $methodConfigs = [];
         $ids = $this->getSavedIds();

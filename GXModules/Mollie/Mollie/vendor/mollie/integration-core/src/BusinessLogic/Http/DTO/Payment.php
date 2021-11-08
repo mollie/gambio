@@ -59,7 +59,7 @@ class Payment extends BaseDto
     /**
      * @var string[]
      */
-    protected $method;
+    protected $methods;
     /**
      * @var Address
      */
@@ -122,8 +122,7 @@ class Payment extends BaseDto
         $result->issuer = static::getValue($raw, 'issuer');
         $result->setLocale(static::getValue($raw, 'locale'));
         $method = static::getValue($raw, 'method', array());
-        $method = is_array($method) ? $method : array($method);
-        $result->method = $method;
+        $result->methods = is_array($method) ? $method : array($method);
         $result->metadata = static::getValue($raw, 'metadata', array());
 
         $result->dueDate = \DateTime::createFromFormat(Order::MOLLIE_DATE_FORMAT, static::getValue($raw, 'dueDate'));
@@ -180,7 +179,7 @@ class Payment extends BaseDto
             'redirectUrl' => $this->redirectUrl,
             'webhookUrl' => $this->webhookUrl,
             'locale' => $this->locale,
-            'method' => $this->method,
+            'method' => $this->methods,
             'metadata' => $this->metadata,
             'cardToken' => $this->cardToken,
             'issuer' => $this->issuer,
@@ -378,17 +377,17 @@ class Payment extends BaseDto
     /**
      * @return string[]
      */
-    public function getMethod()
+    public function getMethods()
     {
-        return $this->method;
+        return $this->methods;
     }
 
     /**
      * @param string[] $method
      */
-    public function setMethod($method)
+    public function setMethods($method)
     {
-        $this->method = $method;
+        $this->methods = $method;
     }
 
     /**
