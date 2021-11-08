@@ -39,7 +39,7 @@ class PaymentMethodConfig extends Entity
     /**
      * @var string[]
      */
-    protected static $adiMethodRestrictions = array(
+    protected static $apiMethodRestrictions = array(
         PaymentMethods::KlarnaPayLater => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaSliceIt => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaPayNow => self::API_METHOD_ORDERS,
@@ -206,7 +206,7 @@ class PaymentMethodConfig extends Entity
      */
     public function isApiMethodRestricted()
     {
-        return array_key_exists($this->getMollieId(), static::$adiMethodRestrictions);
+        return array_key_exists($this->getMollieId(), static::$apiMethodRestrictions);
     }
 
     /**
@@ -307,14 +307,14 @@ class PaymentMethodConfig extends Entity
 
         if (
             $this->isApiMethodRestricted() &&
-            $apiMethod !== static::$adiMethodRestrictions[$this->getMollieId()]
+            $apiMethod !== static::$apiMethodRestrictions[$this->getMollieId()]
         ) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Invalid payment method api value %s. Payment method %s supports only %s API method',
                     $apiMethod,
                     $this->getMollieId(),
-                    static::$adiMethodRestrictions[$this->getMollieId()]
+                    static::$apiMethodRestrictions[$this->getMollieId()]
                 )
             );
         }
