@@ -113,7 +113,6 @@ abstract class mollie_issuer_providable extends mollie
         $values = [
             'key'      => $key,
             'value'    => PaymentMethodConfig::ISSUER_LIST,
-            'legacy_group_id' => 6,
             'sort_order' => 0,
         ];
 

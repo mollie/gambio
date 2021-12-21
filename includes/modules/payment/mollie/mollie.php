@@ -245,14 +245,13 @@ class mollie
     {
         $config      = $this->_configuration();
         $sortOrder   = 0;
-        $configGroup = 6;
 
         foreach ($config as $key => $data) {
             $key = $this->_formatKey($key, true);
             $type = array_key_exists('type', $data) ? $data['type'] : '';
             $sql = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME . ' ' .
-                '( `key`, `value`,  `type`, `legacy_group_id`, `sort_order`) ' .
-                "VALUES ('" . $key . "', '" . xtc_db_input($data['value']) . "', '" . $type . "', '" . $configGroup . "', '" . $sortOrder . "')";
+                '( `key`, `value`,  `type`, `sort_order`) ' .
+                "VALUES ('" . $key . "', '" . xtc_db_input($data['value']) . "', '" . $type . "', '" . $sortOrder . "')";
 
             xtc_db_query($sql);
         }

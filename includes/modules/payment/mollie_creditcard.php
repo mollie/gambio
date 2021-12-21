@@ -110,7 +110,6 @@ class mollie_creditcard extends mollie
         $repository = new GambioConfigRepository();
         $insert = $this->getComponentsConfig();
         $insert['key'] = $key;
-        $insert['legacy_group_id'] = 6;
         $insert['sort_order'] = 0;
 
         $repository->insert($insert);
