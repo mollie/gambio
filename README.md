@@ -1,13 +1,16 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 4.1.x - 4.4.x. 
+This branch contains mollie module which is eligible for Gambio versions 4.5.x.
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
 
 If you have Gambio from 3.5.x to 4.0.x versions, please checkout on `3.5-4.0` branch of this Github repository.
-https://github.com/mollie/gambio/tree/main
+https://github.com/mollie/gambio/tree/3.5-4.0
+
+If you have Gambio from 4.1.x to 4.4.x versions, please checkout on `4.1-4.4` branch of this Github repository.
+https://github.com/mollie/gambio/tree/4.1-4.4
 ***
 
 ## About Mollie Payments ##
@@ -43,5 +46,51 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
-*Unreleased*
-- Initial version of Gambio integration for versions 4.5.x.
+*3.0.12*
+- Added compatibility for Gambio versions 4.5.x.
+
+*3.0.11*
+- Added support for the Klarna Pay Now payment method.
+
+*3.0.10*
+- Fixed a compatibility issue in Gambio 4.3.x.
+
+*3.0.9*
+- Added support for Gambio 4.4.x.
+- Optimization: Updated the application top extender to be extendable by other modules.
+
+*3.0.8*
+- New feature: Added order expiry days configuration.
+- New feature: Added a transaction description on payment methods.
+- New feature: Added a notification when the current version is outdated.
+- New feature: Added a notification when the shop is in offline mode.
+- Optimization: Enabled payment methods are displayed as soon as the API token is verified.
+
+*3.0.7*
+- Optimization: Set the transparent background color for the mollie components.
+- Optimization: By default, none of the issuers are selected. If the issuer is not selected on the payment checkout form submit, the customer will not be able to proceed with the checkout, and an error message will be displayed.
+- Removed ING Home'Pay payment method from the plugin.
+
+*3.0.6*
+- Optimization: Restock product quantity, recalculate delivery status and reset article status when order is canceled during the checkout due to failed payment.
+
+*3.0.5*
+- Bugfix: Fix issues with mollie components when it is only payment method.
+- Bugfix: Add assets files on the checkout for Honeygrid theme.
+
+*3.0.4*
+- Bugfix: Use first available language for status name fallback instead of English.
+
+*3.0.3*
+- New feature: Implemented integration with Mollie Components.
+- New feature: Added iDeal, Giftcard, and KBC/CBC issuer selection in the checkout.
+- Bugfix: Fixed links and icons URL within context path.
+
+*3.0.2*
+- Removed thousand separator when sending amount to Mollie API.
+
+*3.0.1*
+- Translations for NL, DE, and FR are added.
+
+*3.0.0*
+- The initial release of Mollie integration with Gambio.
