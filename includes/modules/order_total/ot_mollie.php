@@ -171,8 +171,8 @@ class ot_mollie
         $config     = array_merge($this->_configuration(), $this->_getHiddenFields());
 
         foreach ($config as $key => $data) {
-            $install_query = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME . ' ( `key`, `value`,  legacy_group_id, sort_order, type) ' .
-                "values ('" . $key . "', '" . xtc_db_input($data['value']) . "', '6', '" . 0 . "', '" . $data['type'] . "')";
+            $install_query = 'INSERT INTO ' . GambioConfigRepository::TABLE_NAME . ' ( `key`, `value`, sort_order, type) ' .
+                "values ('" . $key . "', '" . xtc_db_input($data['value']) . "', '" . 0 . "', '" . $data['type'] . "')";
             xtc_db_query($install_query);
         }
     }

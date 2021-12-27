@@ -73,7 +73,6 @@ class PaymentMethodUpdate
 
         $insert['key'] = $this->_formatKey($options['key'], true);
         $insert['value'] = xtc_db_input($options['value']);
-        $insert['legacy_group_id'] = 6;
         $insert['sort_order'] = 0;
 
         $repository->insert($insert);
