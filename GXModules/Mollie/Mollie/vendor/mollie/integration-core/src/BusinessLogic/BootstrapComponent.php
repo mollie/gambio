@@ -3,6 +3,8 @@
 namespace Mollie\BusinessLogic;
 
 use Mollie\BusinessLogic\CheckoutLink\CheckoutLinkService;
+use Mollie\BusinessLogic\Customer\CustomerService;
+use Mollie\BusinessLogic\CustomerReference\CustomerReferenceService;
 use Mollie\BusinessLogic\Http\OrgToken\ProxyDataProvider;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\Integration\Event\IntegrationOrderBillingAddressChangedEvent;
@@ -107,6 +109,20 @@ class BootstrapComponent extends \Mollie\Infrastructure\BootstrapComponent
             PaymentService::CLASS_NAME,
             function () {
                 return PaymentService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            CustomerReferenceService::CLASS_NAME,
+            function () {
+                return CustomerReferenceService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            CustomerService::CLASS_NAME,
+            function () {
+                return CustomerService::getInstance();
             }
         );
 
