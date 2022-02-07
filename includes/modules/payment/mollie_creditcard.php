@@ -19,23 +19,18 @@ class mollie_creditcard extends mollie
         parent::__construct();
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
+        $singleClickKey = $this->_formatKey('SINGLE_CLICK_STATUS');
         $useComponents = @constant($componentsKey);
+        $useSingleClick = @constant($singleClickKey);
         if (empty($useComponents) && $this->_isInstalled()) {
             $this->setInitialMollieComponentsUsage($this->_formatKey('COMPONENTS_STATUS', true));
             define($componentsKey, 'true');
         }
-    }
 
-    /**
-     * @inheritDoc
-     * @return string[][]
-     */
-    public function _configuration()
-    {
-        $config = parent::_configuration();
-        $config['COMPONENTS_STATUS'] = $this->getComponentsConfig();
-
-        return $config;
+        if (empty($useSingleClick) && $this->_isInstalled()) {
+            $this->setInitialMollieComponentsUsage($this->_formatKey('SINGLE_CLICK_STATUS', true));
+            define($singleClickKey, 'true');
+        }
     }
 
     /**
@@ -74,6 +69,29 @@ class mollie_creditcard extends mollie
         }
 
         return parent::process_button();
+    }
+
+    protected function _getHiddenFields()
+    {
+        $fields = parent::_getHiddenFields();
+        $fields ['SINGLE_CLICK_APPROVAL_TEXT'] = [
+            'value' => $this->translate($_SESSION['language_code'], 'mollie_single_click_payment_approval_text'),
+        ];
+        $fields ['SINGLE_CLICK_DESCRIPTION'] = [
+            'value' => $this->translate($_SESSION['language_code'], 'mollie_single_click_payment_desc'),
+        ];
+
+        foreach (xtc_get_languages() as $language) {
+            $code = strtoupper($language['code']);
+            $fields['SINGLE_CLICK_APPROVAL_TEXT_' . $code] = [
+                'value' => $this->translate($code, 'mollie_single_click_payment_approval_text'),
+            ];
+            $fields['SINGLE_CLICK_DESCRIPTION_' . $code] = [
+                'value' => $this->translate($code, 'mollie_single_click_payment_desc'),
+            ];
+        }
+
+        return $fields;
     }
 
     /**
