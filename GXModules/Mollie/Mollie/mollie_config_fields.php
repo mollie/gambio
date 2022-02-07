@@ -208,6 +208,29 @@ function mollie_logo_upload($key_value, $key = '')
 }
 
 /**
+ * Renders switcher field
+ *
+ * @param string $key
+ *
+ * @return string
+ * @throws Exception
+ */
+function mollie_switcher($key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_switcher.html', 'ConfigFields');
+
+    $data = [
+        'key' => _appendPrefix($key),
+        'value' => @constant($key),
+        'title' => @constant("{$key}_TITLE"),
+        'desc' => @constant("{$key}_DESC"),
+        'key_id' =>str_replace('configuration/', '', $key)
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders template with given path and data
  *
  * @param string $path
