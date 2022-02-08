@@ -94,7 +94,7 @@ $t_language_text_section_content_array = [
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => 'You will be redirected to payment gateway website to complete your purchase after the order review step.',
     'mollie_single_click_payment_approval_text' => 'Save credit card for future purchases',
-    'mollie_single_click_payment_desc' => 'You have previously save your card. You\'l be redirected to Mollie.',
+    'mollie_single_click_payment_desc' => 'You have previously save your card. You\'ll be redirected to Mollie.',
 
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'List with images',

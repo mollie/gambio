@@ -2,6 +2,8 @@
 
 namespace Mollie\Gambio\CustomFields\Providers;
 
+use Exception;
+
 class CreditCardCustomFieldsProvider extends CustomFieldsProvider
 {
     public function renderAllCustomFields()
@@ -15,7 +17,7 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function renderSingleClickApprovalTextEdit()
     {
@@ -26,7 +28,7 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function renderSingleClickDescriptionEdit()
     {
@@ -35,12 +37,13 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
         return mollie_multi_language_text($this->getConstantValue($singleClickDescription), $singleClickDescription);
     }
 
+    /**
+     * @throws Exception
+     */
     protected function renderSwitcher($key)
     {
         $switcher = $this->_formatKey($key);
 
-        $value = defined($switcher) ? @constant($switcher) : false;
-
-        return mollie_switcher($value, $switcher);
+        return mollie_switcher($switcher);
     }
 }
