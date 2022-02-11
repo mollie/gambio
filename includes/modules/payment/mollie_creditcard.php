@@ -26,10 +26,17 @@ class mollie_creditcard extends mollie
         $this->versionCompatibilityProvider = new VersionCompatibilityProvider();
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
+        $singleClickKey = $this->_formatKey('SINGLE_CLICK_STATUS');
         $useComponents = @constant($componentsKey);
+        $useSingleClick = @constant($singleClickKey);
         if (empty($useComponents) && $this->_isInstalled()) {
             $this->setInitialMollieComponentsUsage($componentsKey);
             define($componentsKey, 'True');
+        }
+
+        if (empty($useSingleClick) && $this->_isInstalled()) {
+            $this->setInitialMollieComponentsUsage($singleClickKey);
+            define($singleClickKey, 'True');
         }
     }
 
@@ -40,9 +47,44 @@ class mollie_creditcard extends mollie
     public function _configuration()
     {
         $config = parent::_configuration();
+        $currentLang = strtoupper($_SESSION['language_code']);
+
         $config['COMPONENTS_STATUS'] = $this->getComponentsConfig();
+        $config['SINGLE_CLICK_STATUS'] = $this->getComponentsConfig();
+        $config['SINGLE_CLICK_APPROVAL_TEXT'] = [
+            'configuration_value' => $this->translate($currentLang, 'mollie_single_click_payment_approval_text'),
+            'set_function' => 'mollie_multi_language_text( ',
+        ];
+        $config['SINGLE_CLICK_DESCRIPTION'] = [
+            'configuration_value' => $this->translate($currentLang, 'mollie_single_click_payment_desc'),
+            'set_function' => 'mollie_multi_language_text( ',
+        ];
 
         return $config;
+    }
+
+    /**
+     * @return array
+     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     */
+    protected function _getHiddenFields()
+    {
+        $fields = parent::_getHiddenFields();
+
+        foreach (xtc_get_languages() as $language) {
+            $code = strtoupper($language['code']);
+            $fields['SINGLE_CLICK_APPROVAL_TEXT_' . $code] = [
+                'configuration_value' => $this->translate($code, 'mollie_single_click_payment_approval_text'),
+            ];
+            $fields['SINGLE_CLICK_DESCRIPTION_' . $code] = [
+                'configuration_value' => $this->translate($code, 'mollie_single_click_payment_desc'),
+            ];
+        }
+
+        return $fields;
     }
 
     /**
