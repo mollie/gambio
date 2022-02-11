@@ -42,22 +42,15 @@ class CustomerService extends BaseService
      */
     public function createCustomer(Customer $customer, $shopReference)
     {
+        $customerReference = $this->getCustomerReferenceService()->getByShopReference($shopReference);
+
+        if ($customerReference) {
+            return $customerReference->getMollieReference();
+        }
+
         $mollieCustomer = $this->getProxy()->createCustomer($customer);
-        $dbCustomerId = $this->getCustomerReferenceService()->saveCustomerReference($customer, $shopReference);
-
-        return $mollieCustomer->getId() !== '' && $dbCustomerId !== 0 ?
-            $mollieCustomer->getId() : null;
-    }
-
-    /**
-     * @return CustomerReferenceService
-     */
-    protected function getCustomerReferenceService()
-    {
-        /** @var CustomerReferenceService $customerReferenceService */
-        $customerReferenceService = ServiceRegister::getService(CustomerReferenceService::CLASS_NAME);
-
-        return $customerReferenceService;
+        $this->getCustomerReferenceService()->saveCustomerReference($mollieCustomer, $shopReference);
+        return $mollieCustomer->getId() !== '' ? $mollieCustomer->getId() : null;
     }
 
     /**
@@ -93,5 +86,16 @@ class CustomerService extends BaseService
         }
 
         $this->getCustomerReferenceService()->deleteByShopReference($shopReference);
+    }
+
+    /**
+     * @return CustomerReferenceService
+     */
+    protected function getCustomerReferenceService()
+    {
+        /** @var CustomerReferenceService $customerReferenceService */
+        $customerReferenceService = ServiceRegister::getService(CustomerReferenceService::CLASS_NAME);
+
+        return $customerReferenceService;
     }
 }

@@ -120,6 +120,11 @@ trait MapperUtility
             $payment->setCardToken($_SESSION['mollie_card_token']);
             unset($_SESSION['mollie_card_token']);
         }
+
+        if (!empty($_SESSION['mollie_customer_id'])) {
+            $payment->setCustomerId($_SESSION['mollie_customer_id']);
+            unset($_SESSION['mollie_customer_id']);
+        }
     }
 
     /**
@@ -157,18 +162,6 @@ trait MapperUtility
     }
 
     /**
-     * @return PaymentTransactionDescriptionService
-     */
-    private function _getTransactionDescriptionService()
-    {
-        if ($this->transactionDescriptionService === null) {
-            $this->transactionDescriptionService = ServiceRegister::getService(PaymentTransactionDescriptionService::CLASS_NAME);
-        }
-
-        return $this->transactionDescriptionService;
-    }
-
-    /**
      * Returns order expiry days
      *
      * @param string $paymentClass
@@ -199,5 +192,17 @@ trait MapperUtility
         }
 
         return null;
+    }
+
+    /**
+     * @return PaymentTransactionDescriptionService
+     */
+    private function _getTransactionDescriptionService()
+    {
+        if ($this->transactionDescriptionService === null) {
+            $this->transactionDescriptionService = ServiceRegister::getService(PaymentTransactionDescriptionService::CLASS_NAME);
+        }
+
+        return $this->transactionDescriptionService;
     }
 }
