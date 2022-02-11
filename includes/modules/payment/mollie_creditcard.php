@@ -1,8 +1,14 @@
 <?php
 
+use Mollie\BusinessLogic\CustomerReference\CustomerReferenceService;
+use Mollie\BusinessLogic\Customer\CustomerService;
+use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Infrastructure\Configuration\Configuration;
+use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpRequestException;
 use Mollie\Infrastructure\ServiceRegister;
 
 require_once __DIR__ . '/mollie/mollie.php';
@@ -12,6 +18,7 @@ require_once __DIR__ . '/mollie/mollie.php';
  */
 class mollie_creditcard extends mollie
 {
+    const  GUEST_STATUS_ID = '1';
     public $title = 'Credit card';
 
     public function __construct()
@@ -61,6 +68,10 @@ class mollie_creditcard extends mollie
     /**
      * @inheritDoc
      * @return string
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws HttpRequestException
+     * @throws UnprocessableEntityRequestException
      */
     public function process_button()
     {
@@ -68,7 +79,48 @@ class mollie_creditcard extends mollie
             $_SESSION['mollie_card_token'] = $_POST['mollieCardToken'];
         }
 
+        $statusOfSaveCreditCard = $_POST['mollie_creditcard-save-credit-card-checkbox'];
+        $statusOfUseSavedCreditCard = $_POST['mollie_creditcard-use-saved-credit-card-checkbox'];
+
+        if ($statusOfSaveCreditCard === 'on' && $statusOfUseSavedCreditCard === null) {
+            $customerId = $_SESSION['customer_id'];
+            $_SESSION['mollie_customer_id'] = $this->getCustomerService()->createCustomer($this->getCurrentCustomer(),
+                (string)$customerId);
+        }
+
+        if ($statusOfUseSavedCreditCard === 'on') {
+            $this->setExistingMollieReferece();
+
+            if (!empty($_SESSION['mollie_card_token'])) {
+                unset($_SESSION['mollie_card_token']);
+            }
+        }
+
         return parent::process_button();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setExistingMollieReferece()
+    {
+        $customer = $this->getCustomerReferenceService()->getByShopReference($_SESSION['customer_id']);
+
+        if ($customer) {
+            $_SESSION['mollie_customer_id'] = $customer->getMollieReference();
+        }
+    }
+
+    /**
+     * @return \Mollie\BusinessLogic\Http\DTO\Customer
+     */
+    protected function getCurrentCustomer()
+    {
+        $customer = new Mollie\BusinessLogic\Http\DTO\Customer();
+        $customer->setName($_SESSION['customer_first_name'] . ' ' . $_SESSION['customer_last_name']);
+        $customer->setEmail($_SESSION['gm_heidelpay_email_address']);
+
+        return $customer;
     }
 
     protected function _getHiddenFields()
@@ -95,6 +147,28 @@ class mollie_creditcard extends mollie
     }
 
     /**
+     * @return CustomerReferenceService
+     */
+    protected function getCustomerReferenceService()
+    {
+        /** @var CustomerReferenceService $customerReferenceService */
+        $customerReferenceService = ServiceRegister::getService(CustomerReferenceService::CLASS_NAME);
+
+        return $customerReferenceService;
+    }
+
+    /**
+     * @return CustomerService
+     */
+    protected function getCustomerService()
+    {
+        /** @var CustomerService $customerService */
+        $customerService = ServiceRegister::getService(CustomerService::CLASS_NAME);
+
+        return $customerService;
+    }
+
+    /**
      * @return string|string[]
      * @throws Exception
      */
@@ -109,13 +183,31 @@ class mollie_creditcard extends mollie
         $lang = $currentLanguage . '_' . $countryCode;
         $profileId = $configService->getWebsiteProfile() ? $configService->getWebsiteProfile()->getId() : null;
 
+        $renderSaveCreditCardCheckbox = false;
+        $renderUseSavedCreditCardCheckbox = false;
+        $customerStatusId = $_SESSION['customers_status']['customers_status_id'];
+        if ($customerStatusId !== self::GUEST_STATUS_ID &&
+            @constant($this->_formatKey('SINGLE_CLICK_STATUS')) === 'true')
+        {
+            $customerFromDb = $this->getCustomerReferenceService()->getByShopReference($_SESSION['customer_id']);
+            if (!$customerFromDb) {
+                $renderSaveCreditCardCheckbox = true;
+            } else {
+                $renderUseSavedCreditCardCheckbox = true;
+            }
+        }
+
         return mollie_render_template(
             $template,
             [
                 'profile_id' => $profileId,
                 'test_mode' => $configService->isTestMode(),
                 'lang' => $lang,
-                'payment_method' => $this->code
+                'payment_method' => $this->code,
+                'renderSaveCheckBox' => $renderSaveCreditCardCheckbox,
+                'approvalText' => @constant($this->_formatKey('SINGLE_CLICK_APPROVAL_TEXT')),
+                'renderUseSavedCheckbox' => $renderUseSavedCreditCardCheckbox,
+                'descriptionText' => @constant($this->_formatKey('SINGLE_CLICK_DESCRIPTION'))
             ]
         );
     }

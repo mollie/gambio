@@ -1,4 +1,4 @@
-(function() {
+(function () {
     document.addEventListener("DOMContentLoaded", function () {
 
         let cardWrapper = document.querySelector('.mollie-component-wrapper');
@@ -9,19 +9,21 @@
         }
 
         for (let i = 0; i < paymentMethods.length; i++) {
-            paymentMethods[i].onchange =  function (event) {
+            paymentMethods[i].onchange = function (event) {
 
                 let target = event.target;
-                if (target.value === 'mollie_creditcard') {
-                    setTimeout(mountIfActive, 100);
-                } else {
-                    MollieComponents.creditCard.unmount();
+                if (target.id !== 'mollie_creditcard-use-saved-credit-card-checkbox'
+                    && target.id !== 'mollie_creditcard-save-credit-card-checkbox'){
+                    if (target.value === 'mollie_creditcard') {
+                        setTimeout(mountIfActive, 100);
+                    } else {
+                        MollieComponents.creditCard.unmount();
+                    }
                 }
             }
         }
 
-        function isCreditCardMethod()
-        {
+        function isCreditCardMethod() {
             let selectedMethod = document.querySelector('input[name=payment]:checked');
             if (selectedMethod) {
                 return selectedMethod.value === 'mollie_creditcard';

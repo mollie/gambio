@@ -84,24 +84,6 @@ class CustomerReferenceService extends BaseService
     }
 
     /**
-     * @noinspection PhpDocMissingThrowsInspection
-     *
-     * Sets filter condition. Wrapper method for suppressing warning.
-     *
-     * @param QueryFilter $filter Filter object.
-     * @param string $column Column name.
-     * @param string $operator Operator. Use constants from @see Operator class.
-     * @param mixed $value Value of condition.
-     *
-     * @return QueryFilter Filter for chaining.
-     */
-    protected function setFilterCondition(QueryFilter $filter, $column, $operator, $value = null)
-    {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        return $filter->where($column, $operator, $value);
-    }
-
-    /**
      * Return customer by its Mollie identifier
      *
      * @param string $mollieReference
