@@ -109,13 +109,10 @@ class CustomerReferenceService extends BaseService
      */
     public function deleteByShopReference($shopReference)
     {
-        /** @var CustomerReference|null $customerReference */
-        $customerReference = $this->getRepository(CustomerReference::CLASS_NAME)->deleteBy(
+        $this->getRepository(CustomerReference::CLASS_NAME)->deleteBy(
             $this->setFilterCondition(
                 new QueryFilter(), 'shopReference', Operators::EQUALS, (string)$shopReference
             )
         );
-
-        return $customerReference;
     }
 }
