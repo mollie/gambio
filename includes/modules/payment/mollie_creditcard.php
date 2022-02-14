@@ -35,7 +35,7 @@ class mollie_creditcard extends mollie
         }
 
         if (empty($useSingleClick) && $this->_isInstalled()) {
-            $this->setInitialMollieComponentsUsage($singleClickKey);
+            $this->setInitialSingleClickCreditCardUsage($singleClickKey);
             define($singleClickKey, 'True');
         }
     }
@@ -154,6 +154,23 @@ class mollie_creditcard extends mollie
     {
         $repository = new GambioConfigRepository();
         $insert = $this->getComponentsConfig();
+        $insert['configuration_key'] = $key;
+        $insert['configuration_group_id'] = 6;
+        $insert['sort_order'] = 0;
+
+        $repository->insert($insert);
+    }
+
+    /**
+     * @param $key
+     */
+    private function setInitialSingleClickCreditCardUsage($key)
+    {
+        $repository = new GambioConfigRepository();
+        $insert = [
+            'configuration_value' => 'true',
+            'set_function' => 'mollie_switcher( ',
+        ];
         $insert['configuration_key'] = $key;
         $insert['configuration_group_id'] = 6;
         $insert['sort_order'] = 0;
