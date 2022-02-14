@@ -17,7 +17,9 @@
 .mollie-component-wrapper .form-group--cardHolder,
 .mollie-component-wrapper .form-group--cardNumber,
 .mollie-component-wrapper .form-group--expiryDate,
-.mollie-component-wrapper .form-group--verificationCode {
+.mollie-component-wrapper .form-group--verificationCode,
+.mollie-component-wrapper .form-group--saveCreditCardCheckbox,
+.mollie-component-wrapper .form-group--useSavedCreditCardCheckbox {
     position: relative;
     min-height: 52px;
     margin: 0;
@@ -35,6 +37,27 @@
     transform-origin: top left;
     transition: all 0.05s ease;
 }
+
+.mollie-component-wrapper .form-group--useSavedCreditCardCheckbox,
+.mollie-component-wrapper .form-group--saveCreditCardCheckbox {
+    min-height: 25px;
+}
+
+.mollie-component-wrapper .form-group--useSavedCreditCardCheckbox label,
+.mollie-component-wrapper .form-group--saveCreditCardCheckbox label {
+    font-size: 14px;
+    color: #333;
+    left: 1px;
+    top: 1px;
+}
+
+#mollie_creditcard-use-saved-credit-card-checkbox,
+#mollie_creditcard-save-credit-card-checkbox {
+    margin-top: 0;
+    margin-right: 4px;
+    transform: translateY(10%);
+}
+
 
 /* Move the label to the top on focus or when the field is dirty */
 .form-group.has-focus .label,

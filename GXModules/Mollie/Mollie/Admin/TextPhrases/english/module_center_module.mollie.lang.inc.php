@@ -105,6 +105,7 @@ $t_language_text_section_content_array = [
     'mollie_card_number'             => 'Card number',
     'mollie_expiry_date'             => 'Expiry date',
     'mollie_verification_code'       => 'CVC/CVV',
+    'mollie_use_saved_credit_card_text' => 'Use saved credit card information',
 
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',
