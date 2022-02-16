@@ -120,6 +120,11 @@ trait MapperUtility
             $payment->setCardToken($_SESSION['mollie_card_token']);
             unset($_SESSION['mollie_card_token']);
         }
+
+        if (!empty($_SESSION['mollie_customer_id'])) {
+            $payment->setCustomerId($_SESSION['mollie_customer_id']);
+            unset($_SESSION['mollie_customer_id']);
+        }
     }
 
     /**

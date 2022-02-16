@@ -15,20 +15,68 @@ var MollieComponents = window.MollieComponents || {};
             }
 
             const mollie = init(cardWrapper);
-            // mount components
+            let useSavedCreditCard = document.getElementById('mollie_creditcard-use-saved-credit-card-checkbox'),
+                saveCreditCardData = document.getElementById('mollie_creditcard-save-credit-card-checkbox'),
+                useSavedCreditCardWrapper = document.getElementsByClassName('form-group--useSavedCreditCardCheckbox')[0];
+
+            saveCreditCardData.addEventListener('change', function (event) {
+                event.stopPropagation();
+            });
+
+            if (!useSavedCreditCardWrapper.classList.contains('hidden')) {
+                let descriptionOfCreditCard = document.querySelector('.mollie_creditcard img').nextSibling;
+
+                descriptionOfCreditCard.textContent = document.getElementById('mollie_creditcard-description-hidden-input').value.replace('\\', '');
+                useSavedCreditCard.addEventListener('change', handleCheckboxUseSavedChange);
+
+                if (useSavedCreditCard.checked === false) {
+                    showComponents(cardWrapper, mollie);
+                    document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
+                } else {
+                    hideComponents();
+                }
+            } else {
+                useSavedCreditCard.value = null;
+                showComponents(cardWrapper, mollie);
+            }
+
+            addSubmitPaymentListener(cardWrapper, mollie);
+
+            function handleCheckboxUseSavedChange(event) {
+                event.stopPropagation();
+
+                if (this.checked) {
+                    hideComponents();
+                } else if (document.getElementsByClassName('form-group--cardHolder')[0].classList.contains('hidden')) {
+                    document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
+                    showComponents(cardWrapper, mollie);
+                }
+            }
+        }
+
+        function hideComponents() {
+            document.getElementsByClassName('form-group--cardHolder')[0].classList.add('hidden');
+            document.getElementsByClassName('form-group--cardNumber')[0].classList.add('hidden');
+            document.getElementsByClassName('form-group--expiryDate')[0].classList.add('hidden');
+            document.getElementsByClassName('form-group--verificationCode')[0].classList.add('hidden');
+            document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.add('hidden');
+        }
+
+        function showComponents(cardWrapper, mollie) {
+            document.getElementsByClassName('form-group--cardHolder')[0].classList.remove('hidden');
+            document.getElementsByClassName('form-group--cardNumber')[0].classList.remove('hidden');
+            document.getElementsByClassName('form-group--expiryDate')[0].classList.remove('hidden');
+            document.getElementsByClassName('form-group--verificationCode')[0].classList.remove('hidden');
+
             const cardHolder = createMollieComponent('cardHolder', 'card-holder', cardWrapper, mollie);
             const cardNumber = createMollieComponent('cardNumber', 'card-number', cardWrapper, mollie);
             const expDate = createMollieComponent('expiryDate', 'expiry-date', cardWrapper, mollie);
             const verificationCode = createMollieComponent('verificationCode', 'verification-code', cardWrapper, mollie);
 
-
-            //add validation listeners
             addValidationListeners(cardHolder, buildIdSelector('card-holder', cardWrapper));
             addValidationListeners(cardNumber, buildIdSelector('card-number', cardWrapper));
             addValidationListeners(expDate, buildIdSelector('expiry-date', cardWrapper));
             addValidationListeners(verificationCode, buildIdSelector('verification-code', cardWrapper));
-
-            addSubmitPaymentListener(cardWrapper, mollie);
         }
 
 
@@ -52,10 +100,13 @@ var MollieComponents = window.MollieComponents || {};
 
         function addSubmitPaymentListener(cardWrapper, mollie) {
             let checkoutForm = document.querySelector('#checkout_payment');
+            let useSavedCreditCard = document.querySelector('#mollie_creditcard-use-saved-credit-card-checkbox');
+
             checkoutForm.addEventListener('submit', async event => {
-                if (getSelectedMethod() === cardWrapper.getAttribute('data-method-id')) {
+                if (getSelectedMethod() === cardWrapper.getAttribute('data-method-id')
+                    && (useSavedCreditCard.checked === false || useSavedCreditCard.classList.contains('hidden'))) {
                     event.preventDefault();
-                    const { token, error } = await mollie.createToken();
+                    const {token, error} = await mollie.createToken();
                     if (error) {
                         return;
                     }
@@ -66,6 +117,8 @@ var MollieComponents = window.MollieComponents || {};
                     input.name = 'mollieCardToken';
                     checkoutForm.appendChild(input);
 
+                    checkoutForm.submit();
+                } else {
                     checkoutForm.submit();
                 }
             });
@@ -90,7 +143,7 @@ var MollieComponents = window.MollieComponents || {};
         function createMollieComponent(type, selector, cardWrapper, mollie) {
             let paymentMethod = cardWrapper.getAttribute('data-method-id');
             let baseSelector = '#' + paymentMethod + '-' + selector;
-            let errorSelector = '#' + paymentMethod+ '-' + selector + '-error';
+            let errorSelector = '#' + paymentMethod + '-' + selector + '-error';
 
             let component = mollie.createComponent(type);
             component.mount(baseSelector);
@@ -110,7 +163,7 @@ var MollieComponents = window.MollieComponents || {};
 
 
         function getSelectedMethod() {
-            let selectedMethod =  document.querySelector('input[name=payment]:checked');
+            let selectedMethod = document.querySelector('input[name=payment]:checked');
             if (!selectedMethod && isCreditCardOnlyPayment()) {
                 selectedMethod = document.querySelector('input[name=payment]');
             }
@@ -135,7 +188,7 @@ var MollieComponents = window.MollieComponents || {};
          * @param cardWrapper
          * @returns {*}
          */
-        function init (cardWrapper) {
+        function init(cardWrapper) {
             return Mollie(
                 cardWrapper.getAttribute('data-profile-id'),
                 {

@@ -14,12 +14,15 @@
             paymentMethods[i].onchange =  function (event) {
 
                 let target = event.target;
-                if (target.value === 'mollie_creditcard') {
-                    creditCardComponents.classList.remove('mollie-hidden');
-                    setTimeout(mountIfActive, 100);
-                } else {
-                    creditCardComponents.classList.add('mollie-hidden');
-                    MollieComponents.creditCard.unmount();
+                if (target.id !== 'mollie_creditcard-use-saved-credit-card-checkbox'
+                    && target.id !== 'mollie_creditcard-save-credit-card-checkbox'){
+                    if (target.value === 'mollie_creditcard') {
+                        creditCardComponents.classList.remove('mollie-hidden');
+                        setTimeout(mountIfActive, 100);
+                    } else {
+                        creditCardComponents.classList.add('mollie-hidden');
+                        MollieComponents.creditCard.unmount();
+                    }
                 }
             }
         }
