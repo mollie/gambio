@@ -19,10 +19,17 @@ class mollie_creditcard extends mollie
         parent::__construct();
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
+        $singleClickKey = $this->_formatKey('SINGLE_CLICK_STATUS');
         $useComponents = @constant($componentsKey);
+        $useSingleClick = @constant($singleClickKey);
         if (empty($useComponents) && $this->_isInstalled()) {
             $this->setInitialMollieComponentsUsage($componentsKey);
             define($componentsKey, 'True');
+        }
+
+        if (empty($useSingleClick) && $this->_isInstalled()) {
+            $this->setInitialSingleClickCreditCardUsage($singleClickKey);
+            define($singleClickKey, 'True');
         }
     }
 
@@ -33,7 +40,18 @@ class mollie_creditcard extends mollie
     public function _configuration()
     {
         $config = parent::_configuration();
+        $currentLang = strtoupper($_SESSION['language_code']);
+
         $config['COMPONENTS_STATUS'] = $this->getComponentsConfig();
+        $config['SINGLE_CLICK_STATUS'] = $this->getComponentsConfig();
+        $config['SINGLE_CLICK_APPROVAL_TEXT'] = [
+            'configuration_value' => $this->translate($currentLang, 'mollie_single_click_payment_approval_text'),
+            'set_function' => 'mollie_multi_language_text( ',
+        ];
+        $config['SINGLE_CLICK_DESCRIPTION'] = [
+            'configuration_value' => $this->translate($currentLang, 'mollie_single_click_payment_desc'),
+            'set_function' => 'mollie_multi_language_text( ',
+        ];
 
         return $config;
     }
@@ -72,6 +90,30 @@ class mollie_creditcard extends mollie
     }
 
     /**
+     * @return array
+     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     */
+    protected function _getHiddenFields()
+    {
+        $fields = parent::_getHiddenFields();
+
+        foreach (xtc_get_languages() as $language) {
+            $code = strtoupper($language['code']);
+            $fields['SINGLE_CLICK_APPROVAL_TEXT_' . $code] = [
+                'configuration_value' => $this->translate($code, 'mollie_single_click_payment_approval_text'),
+            ];
+            $fields['SINGLE_CLICK_DESCRIPTION_' . $code] = [
+                'configuration_value' => $this->translate($code, 'mollie_single_click_payment_desc'),
+            ];
+        }
+
+        return $fields;
+    }
+
+    /**
      * @return string|string[]
      * @throws Exception
      */
@@ -84,7 +126,7 @@ class mollie_creditcard extends mollie
         $currentLanguage = $_SESSION['language_code'];
         $countryCode = $currentLanguage === 'en' ? 'US' : strtoupper($currentLanguage);
         $lang = $currentLanguage . '_' . $countryCode;
-        
+
         $profileId = $configService->getWebsiteProfile() ? $configService->getWebsiteProfile()->getId() : null;
 
         return mollie_render_template(
@@ -121,5 +163,22 @@ class mollie_creditcard extends mollie
             'configuration_value' => 'True',
             'set_function' => 'gm_cfg_select_option(array(\'True\', \'False\'), ',
         ];
+    }
+
+    /**
+     * @param $key
+     */
+    private function setInitialSingleClickCreditCardUsage($key)
+    {
+        $repository = new GambioConfigRepository();
+        $insert = [
+            'configuration_value' => 'true',
+            'set_function' => 'mollie_switcher( ',
+        ];
+        $insert['configuration_key'] = $key;
+        $insert['configuration_group_id'] = 6;
+        $insert['sort_order'] = 0;
+
+        $repository->insert($insert);
     }
 }

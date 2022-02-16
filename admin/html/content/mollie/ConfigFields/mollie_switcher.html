@@ -1,0 +1,20 @@
+{load_language_text section="module_center_module"}
+
+<script src="{$mollie.js_admin}mollie-switcher.js"></script>
+
+<div>
+    <input type="hidden" name="configuration[{{$mollie.key}}]" value="false">
+    <div class="switcher mollie-switcher" title="{{$mollie.title}}" id="{$mollie.key_id|lower}_switcher">
+        <input type="checkbox" name="configuration[{{$mollie.key}}]"
+               id="{$mollie.key_id|lower}"
+               class="mollie-checkbox-input"
+               value="true"
+               {if $mollie.value== 'true'}checked{/if} title="{{$mollie.title}}">
+        <div class="switcher-toggler"></div>
+        <div class="switcher-inner">
+            <div class="switcher-state-on"><span class="fa fa-check"></span></div><div class="switcher-state-off"><span class="fa fa-times"></span></div>
+        </div>
+        <div class="switcher-text-on"></div>
+        <div class="switcher-text-off"></div>
+    </div>
+</div>
