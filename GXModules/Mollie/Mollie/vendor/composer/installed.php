@@ -25,7 +25,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../mollie/integration-core',
             'aliases' => array(),
-            'reference' => '2eb6010c7c5176d659f6523a451c986cd1817ea8',
+            'reference' => 'daf0fd690296df169e9584ef5da8210cb9bb29ed',
             'dev_requirement' => false,
         ),
     ),

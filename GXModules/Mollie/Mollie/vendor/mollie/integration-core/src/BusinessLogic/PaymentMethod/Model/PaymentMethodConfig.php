@@ -36,6 +36,11 @@ class PaymentMethodConfig extends Entity
 
     const DEFAULT_TRANSACTION_DESCRIPTION = '{orderNumber}';
 
+    const DEFAULT_SINGLE_CLICK_APPROVAL_TEXT = 'Save credit card for future purchases';
+
+    const DEFAULT_SINGLE_CLICK_DESCRIPTION = 'You have previously save your card. You\'ll be redirected to Mollie.';
+
+
     /**
      * @var string[]
      */
@@ -63,6 +68,11 @@ class PaymentMethodConfig extends Entity
     /**
      * @var array
      */
+    protected static $singleClickSupportedMethods = array(PaymentMethods::CreditCard);
+
+    /**
+     * @var array
+     */
     protected static $mollieIssuerSupportedMethods = array(
         PaymentMethods::iDEAL,
         PaymentMethods::GiftCard,
@@ -82,6 +92,9 @@ class PaymentMethodConfig extends Entity
         'image',
         'enabled',
         'useMollieComponents',
+        'useSingleClickPayment',
+        'singleClickPaymentApprovalText',
+        'singleClickPaymentDescription',
         'issuerListStyle',
         'daysToOrderExpire',
         'daysToPaymentExpire',
@@ -128,6 +141,22 @@ class PaymentMethodConfig extends Entity
      * @var bool
      */
     protected $useMollieComponents = true;
+
+    /**
+     * @var bool
+     */
+    protected $useSingleClickPayment = true;
+
+    /**
+     * @var string
+     */
+    protected $singleClickPaymentApprovalText = self::DEFAULT_SINGLE_CLICK_APPROVAL_TEXT;
+
+    /**
+     * @var string
+     */
+    protected $singleClickPaymentDescription = self::DEFAULT_SINGLE_CLICK_DESCRIPTION;
+
     /**
      * @var string
      */
@@ -215,6 +244,14 @@ class PaymentMethodConfig extends Entity
     public function isMollieComponentsSupported()
     {
         return in_array($this->getMollieId(), static::$mollieComponentsSupportedMethods, true);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSingleClickPaymentSupported()
+    {
+        return in_array($this->getMollieId(), static::$singleClickSupportedMethods, true);
     }
 
     /**
@@ -408,6 +445,54 @@ class PaymentMethodConfig extends Entity
     public function setUseMollieComponents($useMollieComponents)
     {
         $this->useMollieComponents = $useMollieComponents;
+    }
+
+    /**
+     * @return bool
+     */
+    public function useSingleClickPayment()
+    {
+        return $this->useSingleClickPayment;
+    }
+
+    /**
+     * @param bool $useSingleClickPayment
+     */
+    public function setUseSingleClickPayment($useSingleClickPayment)
+    {
+        $this->useSingleClickPayment = $useSingleClickPayment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSingleClickPaymentApprovalText()
+    {
+        return $this->singleClickPaymentApprovalText ?: static::DEFAULT_SINGLE_CLICK_APPROVAL_TEXT;
+    }
+
+    /**
+     * @param string $singleClickPaymentApprovalText
+     */
+    public function setSingleClickPaymentApprovalText($singleClickPaymentApprovalText)
+    {
+        $this->singleClickPaymentApprovalText = $singleClickPaymentApprovalText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSingleClickPaymentDescription()
+    {
+        return $this->singleClickPaymentDescription ?: static::DEFAULT_SINGLE_CLICK_DESCRIPTION;
+    }
+
+    /**
+     * @param string $singleClickPaymentDescription
+     */
+    public function setSingleClickPaymentDescription($singleClickPaymentDescription)
+    {
+        $this->singleClickPaymentDescription = $singleClickPaymentDescription;
     }
 
     /**
