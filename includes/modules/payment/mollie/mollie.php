@@ -3,6 +3,7 @@
 use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 use Mollie\Gambio\Services\Business\ConfigurationService;
@@ -358,6 +359,18 @@ class mollie
             ],
             'TRANSACTION_DESCRIPTION'   =>  [
                 'value' => '{orderNumber}',
+            ],
+            'SURCHARGE_TYPE' => [
+                'value' => SurchargeType::NO_FEE,
+            ],
+            'SURCHARGE_FIXED_AMOUNT' => [
+                'value' => 0,
+            ],
+            'SURCHARGE_PERCENTAGE' => [
+                'value' => 0,
+            ],
+            'SURCHARGE_LIMIT' => [
+                'value' => 0,
             ],
         ];
 

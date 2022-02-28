@@ -81,7 +81,10 @@ class PaymentMethodService extends BaseService
         $paymentMethodConfig->setApiMethod(@constant($prefix . '_API_METHOD'));
         $paymentMethodConfig->setName(@constant($nameKey));
         $paymentMethodConfig->setDescription(@constant($descKey));
-        $paymentMethodConfig->setSurcharge(@constant($prefix . '_SURCHARGE'));
+        $paymentMethodConfig->setSurchargeType(@constant($prefix . '_SURCHARGE_TYPE'));
+        $paymentMethodConfig->setSurchargeFixedAmount(@constant($prefix . '_SURCHARGE_FIXED_AMOUNT'));
+        $paymentMethodConfig->setSurchargePercentage(@constant($prefix . '_SURCHARGE_PERCENTAGE'));
+        $paymentMethodConfig->setSurchargeLimit(@constant($prefix . '_SURCHARGE_LIMIT'));
         $paymentMethodConfig->setImage(@constant($prefix . '_LOGO'));
 
         return $paymentMethodConfig;

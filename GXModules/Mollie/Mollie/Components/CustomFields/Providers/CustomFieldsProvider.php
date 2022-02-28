@@ -46,7 +46,9 @@ class CustomFieldsProvider
             $this->renderMultiLangEdit() .
             $this->renderApiEdit() .
             $this->renderDaysToExpireEdit() .
-            $this->renderCountryZonesEdit();
+            $this->renderCountryZonesEdit() .
+            $this->renderSurchargeTypeSelection() .
+            $this->renderSurchargeEditFields();
     }
 
     /**
@@ -156,6 +158,32 @@ class CustomFieldsProvider
         $apiMethodKey = $this->_formatKey('API_METHOD');
 
         return mollie_api_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeTypeSelection()
+    {
+        $apiMethodKey = $this->_formatKey('SURCHARGE_TYPE');
+
+        return mollie_surcharge_type_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeEditFields()
+    {
+        $surchargeFixedAmount = $this->_formatKey('SURCHARGE_FIXED_AMOUNT');
+        $surchargePercentage = $this->_formatKey('SURCHARGE_PERCENTAGE');
+        $surchargeLimit = $this->_formatKey('SURCHARGE_LIMIT');
+
+        return mollie_input_number($this->getConstantValue($surchargeFixedAmount), $surchargeFixedAmount) .
+            mollie_input_number($this->getConstantValue($surchargePercentage), $surchargePercentage, 100) .
+            mollie_input_number($this->getConstantValue($surchargeLimit), $surchargeLimit);
     }
 
     /**

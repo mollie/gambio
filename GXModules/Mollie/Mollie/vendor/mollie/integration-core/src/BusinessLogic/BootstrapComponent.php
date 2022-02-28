@@ -38,6 +38,7 @@ use Mollie\BusinessLogic\Refunds\RefundService;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderLineRefundWebHookHandler;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderRefundWebHookHandler;
 use Mollie\BusinessLogic\Shipments\ShipmentService;
+use Mollie\BusinessLogic\Surcharge\SurchargeService;
 use Mollie\BusinessLogic\VersionCheck\Http\VersionCheckProxy;
 use Mollie\BusinessLogic\WebHook\OrderChangedWebHookEvent;
 use Mollie\BusinessLogic\WebHook\PaymentChangedWebHookEvent;
@@ -144,6 +145,13 @@ class BootstrapComponent extends \Mollie\Infrastructure\BootstrapComponent
             ShipmentService::CLASS_NAME,
             function () {
                 return ShipmentService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            SurchargeService::CLASS_NAME,
+            function () {
+                return SurchargeService::getInstance();
             }
         );
 
