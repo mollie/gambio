@@ -4,6 +4,7 @@ use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
@@ -324,8 +325,21 @@ class mollie
                 'configuration_value' => null,
                 'set_function'        => 'mollie_input_integer( ',
             ],
-            'SURCHARGE'            => [
-                'configuration_value' => '0',
+            'SURCHARGE_TYPE' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: $name,
+                'set_function'        => 'mollie_surcharge_type_select( ',
+            ],
+            'SURCHARGE_FIXED_AMOUNT' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: $name,
+                'set_function'        => 'mollie_input_number( ',
+            ],
+            'SURCHARGE_PERCENTAGE' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: $name,
+                'set_function'        => 'mollie_input_number( ',
+            ],
+            'SURCHARGE_LIMIT' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: $name,
+                'set_function'        => 'mollie_input_number( ',
             ],
             'ALLOWED_ZONES'        => [
                 'configuration_value' => '0',
@@ -374,6 +388,18 @@ class mollie
             ],
             'TEXT'            => [
                 'configuration_value' => $name,
+            ],
+            'SURCHARGE_TYPE' => [
+                'value' => SurchargeType::NO_FEE,
+            ],
+            'SURCHARGE_FIXED_AMOUNT' => [
+                'value' => 0,
+            ],
+            'SURCHARGE_PERCENTAGE' => [
+                'value' => 0,
+            ],
+            'SURCHARGE_LIMIT' => [
+                'value' => 0,
             ],
         ];
 
