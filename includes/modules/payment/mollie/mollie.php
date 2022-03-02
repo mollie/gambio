@@ -4,6 +4,7 @@ use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
@@ -324,8 +325,21 @@ class mollie
                 'configuration_value' => null,
                 'set_function'        => 'mollie_input_integer( ',
             ],
-            'SURCHARGE'            => [
-                'configuration_value' => '0',
+            'SURCHARGE_TYPE' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
+                'set_function'        => 'mollie_surcharge_type_select( ',
+            ],
+            'SURCHARGE_FIXED_AMOUNT' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
+                'set_function'        => 'mollie_input_number( ',
+            ],
+            'SURCHARGE_PERCENTAGE' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
+                'set_function'        => 'mollie_input_number( ',
+            ],
+            'SURCHARGE_LIMIT' => [
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
+                'set_function'        => 'mollie_input_number( ',
             ],
             'ALLOWED_ZONES'        => [
                 'configuration_value' => '0',

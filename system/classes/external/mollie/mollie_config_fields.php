@@ -25,6 +25,33 @@ function mollie_input_integer($key_value, $key = '')
 }
 
 /**
+ * Renders input number field
+ *
+ * @param string $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_input_number($key_value, $key = '', $maxValue = PHP_INT_MAX)
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_number_input.html', 'ConfigFields');
+    $data = [
+        'key' => $key,
+        'value' => $key_value,
+        'maxValue' => $maxValue,
+
+        'wrapper_class' => str_replace('configuration/', '', $key),
+    ];
+
+    if (strpos($key, 'PERCENTAGE')) {
+        $data['maxValue'] = 100;
+    }
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders issuer list select dropdown
  *
  * @param string $key_value
@@ -38,6 +65,26 @@ function mollie_issuer_list_select($key_value, $key = '')
     $templatePath = PathProvider::getAdminTemplatePath('mollie_issuer_list_select.html', 'ConfigFields');
     $data         = [
         'key'   => $key,
+        'value' => $key_value,
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
+ * Renders surcharge type select field
+ *
+ * @param        $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_surcharge_type_select($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_surcharge_type_select.html', 'ConfigFields');
+    $data = [
+        'key' => $key,
         'value' => $key_value,
     ];
 

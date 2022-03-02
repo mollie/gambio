@@ -50,7 +50,7 @@ class mollie_creditcard extends mollie
         $currentLang = strtoupper($_SESSION['language_code']);
 
         $config['COMPONENTS_STATUS'] = $this->getComponentsConfig();
-        $config['SINGLE_CLICK_STATUS'] = $this->getComponentsConfig();
+        $config['SINGLE_CLICK_STATUS'] =  $this->getSingleClickConfig();
         $config['SINGLE_CLICK_APPROVAL_TEXT'] = [
             'configuration_value' => $this->translate($currentLang, 'mollie_single_click_payment_approval_text'),
             'set_function' => 'mollie_multi_language_text( ',
@@ -263,14 +263,23 @@ class mollie_creditcard extends mollie
     private function setInitialSingleClickCreditCardUsage($key)
     {
         $repository = new GambioConfigRepository();
-        $insert = [
-            'configuration_value' => 'true',
-            'set_function' => 'mollie_switcher( ',
-        ];
+        $insert = $this->getSingleClickConfig();
         $insert['configuration_key'] = $key;
         $insert['configuration_group_id'] = 6;
         $insert['sort_order'] = 0;
 
         $repository->insert($insert);
+    }
+
+
+    /**
+     * @return string[]
+     */
+    private function getSingleClickConfig()
+    {
+        return [
+            'configuration_value' => 'true',
+            'set_function' => 'mollie_switcher( ',
+        ];
     }
 }
