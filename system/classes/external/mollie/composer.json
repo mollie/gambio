@@ -3,7 +3,7 @@
   "version": "0.1.11",
   "require": {
     "php": ">=5.4",
-    "mollie/integration-core": "dev-feature/CR-10-01"
+    "mollie/integration-core": "dev-feature/CR-10-03"
   },
   "repositories": [
     {

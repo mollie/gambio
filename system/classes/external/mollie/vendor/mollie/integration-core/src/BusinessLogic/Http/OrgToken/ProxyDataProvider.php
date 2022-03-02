@@ -416,6 +416,10 @@ class ProxyDataProvider
             $paymentSpecific['dueDate'] = $payment->getDueDate()->format(Order::MOLLIE_DATE_FORMAT);
         }
 
+        if ($payment->getCustomerId()) {
+            $paymentSpecific['customerId'] =$payment->getCustomerId();
+        }
+
         return $paymentSpecific;
     }
 
