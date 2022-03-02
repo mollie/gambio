@@ -4,6 +4,7 @@ use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\Surcharge\SurchargeService;
 use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
@@ -113,7 +114,7 @@ class mollie
 
         $currentLang = strtoupper($_SESSION['language_code']);
         $imageUrl    = $this->_getMethodLogo();
-        $surcharge   = $this->_getSurchargeValue();
+        $surcharge   = $this->_getSurchargeValue($order);
         $descriptionLabel = stripslashes(@constant($this->_formatKey('CHECKOUT_DESCRIPTION_' . $currentLang)));
 
         $selection = [
@@ -719,11 +720,17 @@ class mollie
     /**
      * Returns surcharge with tax included
      *
+     * @param object $order
+     *
      * @return float
      */
-    protected function _getSurchargeValue()
+    protected function _getSurchargeValue($order)
     {
-        $surcharge = @constant($this->_formatKey('SURCHARGE'));
+        $surchargeType = @constant($this->_formatKey('SURCHARGE_TYPE'));
+        $surchargeFixedAmount = @constant($this->_formatKey('SURCHARGE_FIXED_AMOUNT'));
+        $surchargePercentage = @constant($this->_formatKey('SURCHARGE_PERCENTAGE'));
+        $surchargeLimit = @constant($this->_formatKey('SURCHARGE_LIMIT'));
+        $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['total']);
         if (defined('MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS')) {
             $taxRate = xtc_get_tax_rate(MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS);
             if ($taxRate) {
@@ -733,6 +740,18 @@ class mollie
 
         return $surcharge;
     }
+
+    /**
+     * @return SurchargeService
+     */
+    protected function getSurchargeService()
+    {
+        /** @var SurchargeService $surchargeService */
+        $surchargeService = ServiceRegister::getService(SurchargeService::CLASS_NAME);
+
+        return $surchargeService;
+    }
+
 
     /**
      * Check if module installed
