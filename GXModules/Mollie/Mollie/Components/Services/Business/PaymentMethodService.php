@@ -5,6 +5,7 @@ namespace Mollie\Gambio\Services\Business;
 use Mollie\BusinessLogic\Http\DTO\PaymentMethod;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethodService as BaseService;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
 
 /**
@@ -80,7 +81,7 @@ class PaymentMethodService extends BaseService
         $paymentMethodConfig->setApiMethod(@constant($prefix . '_API_METHOD'));
         $paymentMethodConfig->setName(@constant($nameKey));
         $paymentMethodConfig->setDescription(@constant($descKey));
-        $paymentMethodConfig->setSurchargeType(@constant($prefix . '_SURCHARGE_TYPE'));
+        $paymentMethodConfig->setSurchargeType(@constant($prefix . '_SURCHARGE_TYPE')?: SurchargeType::NO_FEE);
         $paymentMethodConfig->setSurchargeFixedAmount(@constant($prefix . '_SURCHARGE_FIXED_AMOUNT'));
         $paymentMethodConfig->setSurchargePercentage(@constant($prefix . '_SURCHARGE_PERCENTAGE'));
         $paymentMethodConfig->setSurchargeLimit(@constant($prefix . '_SURCHARGE_LIMIT'));

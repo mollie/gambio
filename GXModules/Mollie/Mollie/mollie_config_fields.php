@@ -44,6 +44,10 @@ function mollie_input_number($key_value, $key = '', $maxValue = PHP_INT_MAX)
         'wrapper_class' => str_replace('configuration/', '', $key),
     ];
 
+    if (strpos($key, 'PERCENTAGE')) {
+        $data['maxValue'] = 100;
+    }
+
     return mollie_render_template($templatePath, $data);
 }
 

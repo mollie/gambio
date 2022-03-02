@@ -28,25 +28,54 @@ $(document).ready(function () {
             surchargeLimit = wrapper.find(formatSelector('surcharge_limit'));
         switch (surchargeType) {
             case 'no_fee':
-                surchargeFixedAmount.addClass('hidden');
-                surchargePercentage.addClass('hidden');
-                surchargeLimit.addClass('hidden');
+                hideFields(wrapper, surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
+                hideFields(wrapper, surchargePercentage, 'mollie_surcharge_percentage_desc');
+                hideFields(wrapper, surchargeLimit, 'mollie_surcharge_limit_desc');
                 break;
             case 'fixed_fee':
-                surchargeFixedAmount.removeClass('hidden');
-                surchargePercentage.addClass('hidden');
-                surchargeLimit.addClass('hidden');
+                showFields(surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
+                hideFields(wrapper, surchargePercentage, 'mollie_surcharge_percentage_desc');
+                hideFields(wrapper, surchargeLimit, 'mollie_surcharge_limit_desc');
                 break;
             case 'percentage':
-                surchargeFixedAmount.addClass('hidden');
-                surchargePercentage.removeClass('hidden');
-                surchargeLimit.removeClass('hidden');
+                hideFields(wrapper, surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
+                showFields(surchargePercentage, 'mollie_surcharge_percentage_desc');
+                showFields(surchargeLimit, 'mollie_surcharge_limit_desc');
                 break;
             case 'fixed_fee_and_percentage':
-                surchargeFixedAmount.removeClass('hidden');
-                surchargePercentage.removeClass('hidden');
-                surchargeLimit.removeClass('hidden');
+                showFields(surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
+                showFields(surchargePercentage, 'mollie_surcharge_percentage_desc');
+                showFields(surchargeLimit, 'mollie_surcharge_limit_desc');
                 break;
+        }
+    }
+
+    function showFields(element, hiddenInputId) {
+        if (element.hasClass('hidden')) {
+            element.removeClass('hidden');
+            element[0].previousElementSibling.style.display = 'block';
+            let hiddenApprovalTextElement = $('#' + hiddenInputId);
+            if (hiddenApprovalTextElement.length > 0) {
+                element[0].before(hiddenApprovalTextElement[0].value);
+            }
+
+            hiddenApprovalTextElement.remove();
+        }
+    }
+
+    function hideFields(wrapper, element, hiddenInputId) {
+        if (!element.hasClass('hidden')) {
+            element.addClass('hidden');
+            element[0].previousElementSibling.style.display = 'none';
+            wrapper.append(
+                $(document.createElement('input')).prop({
+                    type: 'hidden',
+                    id: hiddenInputId,
+                    value: element[0].previousSibling.wholeText,
+                })
+            );
+
+            element[0].previousSibling.remove();
         }
     }
 

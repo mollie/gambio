@@ -327,19 +327,19 @@ class mollie
                 'set_function'        => 'mollie_input_integer( ',
             ],
             'SURCHARGE_TYPE' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: $name,
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
                 'set_function'        => 'mollie_surcharge_type_select( ',
             ],
             'SURCHARGE_FIXED_AMOUNT' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: $name,
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
                 'set_function'        => 'mollie_input_number( ',
             ],
             'SURCHARGE_PERCENTAGE' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: $name,
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
                 'set_function'        => 'mollie_input_number( ',
             ],
             'SURCHARGE_LIMIT' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: $name,
+                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
                 'set_function'        => 'mollie_input_number( ',
             ],
             'ALLOWED_ZONES'        => [
@@ -389,19 +389,7 @@ class mollie
             ],
             'TEXT'            => [
                 'configuration_value' => $name,
-            ],
-            'SURCHARGE_TYPE' => [
-                'value' => SurchargeType::NO_FEE,
-            ],
-            'SURCHARGE_FIXED_AMOUNT' => [
-                'value' => 0,
-            ],
-            'SURCHARGE_PERCENTAGE' => [
-                'value' => 0,
-            ],
-            'SURCHARGE_LIMIT' => [
-                'value' => 0,
-            ],
+            ]
         ];
 
         foreach (xtc_get_languages() as $language) {
