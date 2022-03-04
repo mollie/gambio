@@ -9,12 +9,8 @@ use Mollie\BusinessLogic\BaseService;
  *
  * @package Mollie\BusinessLogic\Surcharge
  */
-class SurchargeService extends BaseService
+class SurchargeService extends BaseService implements SurchargeCalculationService
 {
-    /**
-     * Fully qualified name of this class.
-     */
-    const CLASS_NAME = __CLASS__;
     /**
      * Singleton instance of this class.
      *
@@ -36,8 +32,6 @@ class SurchargeService extends BaseService
     public function calculateSurchargeAmount($type, $fixedAmount, $percentage, $limit, $subtotal)
     {
         switch ($type) {
-            case SurchargeType::NO_FEE:
-                return 0;
             case SurchargeType::FIXED_FEE:
                 return $fixedAmount;
             case SurchargeType::PERCENTAGE:
@@ -56,8 +50,8 @@ class SurchargeService extends BaseService
                 }
 
                 return $surcharge;
+            default:
+                return 0;
         }
-
-        return 0;
     }
 }
