@@ -37,10 +37,12 @@ class PaymentMethodConfig extends Entity
 
     const DEFAULT_TRANSACTION_DESCRIPTION = '{orderNumber}';
 
-    const DEFAULT_SINGLE_CLICK_APPROVAL_TEXT = 'Save credit card for future purchases';
-
-    const DEFAULT_SINGLE_CLICK_DESCRIPTION = 'You have previously save your card. You\'ll be redirected to Mollie.';
-
+    protected static $allowedSurchargeTypes = array(
+        SurchargeType::NO_FEE,
+        SurchargeType::FIXED_FEE,
+        SurchargeType::PERCENTAGE,
+        SurchargeType::FIXED_FEE_AND_PERCENTAGE
+    );
 
     /**
      * @var string[]
@@ -167,12 +169,12 @@ class PaymentMethodConfig extends Entity
     /**
      * @var string
      */
-    protected $singleClickPaymentApprovalText = self::DEFAULT_SINGLE_CLICK_APPROVAL_TEXT;
+    protected $singleClickPaymentApprovalText;
 
     /**
      * @var string
      */
-    protected $singleClickPaymentDescription = self::DEFAULT_SINGLE_CLICK_DESCRIPTION;
+    protected $singleClickPaymentDescription;
 
     /**
      * @var string
@@ -445,13 +447,12 @@ class PaymentMethodConfig extends Entity
      */
     public function setSurchargeType($surchargeType)
     {
-        $allowedTypes = array(SurchargeType::NO_FEE, SurchargeType::FIXED_FEE, SurchargeType::PERCENTAGE, SurchargeType::FIXED_FEE_AND_PERCENTAGE);
-        if (!in_array($surchargeType, $allowedTypes, true)) {
+        if (!in_array($surchargeType, static::$allowedSurchargeTypes, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Invalid surcharge type value %s. Surcharge type can be one of (%s) values',
                     $surchargeType,
-                    implode(', ', $allowedTypes)
+                    implode(', ', static::$allowedSurchargeTypes)
                 )
             );
         }
@@ -544,7 +545,7 @@ class PaymentMethodConfig extends Entity
      */
     public function getSingleClickPaymentApprovalText()
     {
-        return $this->singleClickPaymentApprovalText ?: static::DEFAULT_SINGLE_CLICK_APPROVAL_TEXT;
+        return $this->singleClickPaymentApprovalText;
     }
 
     /**
@@ -560,7 +561,7 @@ class PaymentMethodConfig extends Entity
      */
     public function getSingleClickPaymentDescription()
     {
-        return $this->singleClickPaymentDescription ?: static::DEFAULT_SINGLE_CLICK_DESCRIPTION;
+        return $this->singleClickPaymentDescription;
     }
 
     /**

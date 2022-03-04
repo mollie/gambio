@@ -47,24 +47,6 @@ class CustomerReferenceService extends BaseService
     }
 
     /**
-     * @noinspection PhpDocMissingThrowsInspection
-     *
-     * Returns an instance of repository for entity.
-     *
-     * @param string $entityClass Name of entity class.
-     *
-     * @return RepositoryInterface Instance of a repository.
-     */
-    protected function getRepository($entityClass)
-    {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        /** @var RepositoryInterface $repository */
-        $repository = RepositoryRegistry::getRepository($entityClass);
-
-        return $repository;
-    }
-
-    /**
      * Return customer by its shop identifier
      *
      * @param string $shopReference
