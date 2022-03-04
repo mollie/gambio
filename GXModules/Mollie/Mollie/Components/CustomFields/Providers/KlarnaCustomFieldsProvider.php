@@ -27,6 +27,21 @@ class KlarnaCustomFieldsProvider extends CustomFieldsProvider
 
     /**
      * @inheritDoc
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function renderCustomOverviewFields()
+    {
+        return $this->renderLogoOverview() .
+            $this->renderMultiLangFieldsOverview() .
+            $this->renderApiOverview() .
+            $this->renderDaysToExpireOverview() .
+            $this->renderCountryZonesOverview();
+    }
+
+    /**
+     * @inheritDoc
      * @return string
      */
     protected function renderApiEdit()

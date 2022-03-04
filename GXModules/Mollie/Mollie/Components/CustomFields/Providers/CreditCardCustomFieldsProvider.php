@@ -6,6 +6,12 @@ use Exception;
 
 class CreditCardCustomFieldsProvider extends CustomFieldsProvider
 {
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     * @throws Exception
+     */
     public function renderAllCustomFields()
     {
         return parent::renderAllCustomFields() .
@@ -16,6 +22,34 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
     }
 
     /**
+     * @inheritDoc
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function renderCustomOverviewFields()
+    {
+        return parent::renderCustomOverviewFields() .
+            $this->renderSwitcherOverview('COMPONENTS_STATUS') .
+            $this->renderSwitcherOverview('SINGLE_CLICK_STATUS') .
+            $this->renderSingleClickApprovalTextOverview() .
+            $this->renderSingleClickDescriptionOverview();
+    }
+
+    /**
+     * Returns single click approval text overview
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSingleClickApprovalTextOverview()
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('SINGLE_CLICK_APPROVAL_TEXT'));
+    }
+
+    /**
+     * Returns single click approval text field
+     *
      * @return string
      * @throws Exception
      */
@@ -27,6 +61,19 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
     }
 
     /**
+     * Returns single click description overview
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSingleClickDescriptionOverview()
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('SINGLE_CLICK_DESCRIPTION'));
+    }
+
+    /**
+     * Returns single click description field
+     *
      * @return string
      * @throws Exception
      */
@@ -38,6 +85,18 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
     }
 
     /**
+     * Returns switcher overview
+     *
+     * @throws Exception
+     */
+    protected function renderSwitcherOverview($key)
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData($key));
+    }
+
+    /**
+     * Returns switcher field
+     *
      * @throws Exception
      */
     protected function renderSwitcher($key)

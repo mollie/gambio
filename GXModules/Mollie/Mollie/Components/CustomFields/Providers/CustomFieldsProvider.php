@@ -62,7 +62,9 @@ class CustomFieldsProvider
             $this->renderMultiLangFieldsOverview() .
             $this->renderApiOverview() .
             $this->renderDaysToExpireOverview() .
-            $this->renderCountryZonesOverview();
+            $this->renderCountryZonesOverview().
+            $this->renderSurchargeTypeOverview() .
+            $this->renderSurchargeFieldsOverview();
     }
 
     /**
@@ -164,11 +166,35 @@ class CustomFieldsProvider
      * @return string
      * @throws \Exception
      */
+    protected function renderSurchargeTypeOverview()
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('SURCHARGE_TYPE'));
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
     protected function renderSurchargeTypeSelection()
     {
         $apiMethodKey = $this->_formatKey('SURCHARGE_TYPE');
 
         return mollie_surcharge_type_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeFieldsOverview()
+    {
+        $surchargeFixedAmount = $this->_formatOverviewData('SURCHARGE_FIXED_AMOUNT');
+        $surchargePercentage = $this->_formatOverviewData('SURCHARGE_PERCENTAGE');
+        $surchargeLimit = $this->_formatOverviewData('SURCHARGE_LIMIT');
+
+        return mollie_render_template($this->overviewTemplatePath, $surchargeFixedAmount) .
+            mollie_render_template($this->overviewTemplatePath, $surchargePercentage) .
+            mollie_render_template($this->overviewTemplatePath, $surchargeLimit);
     }
 
     /**
