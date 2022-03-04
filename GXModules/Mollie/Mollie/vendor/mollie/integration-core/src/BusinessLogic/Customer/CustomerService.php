@@ -30,6 +30,8 @@ class CustomerService extends BaseService
     protected static $instance;
 
     /**
+     * Creates a customer on the Mollie API and stores in local database
+     *
      * @param Customer $customer
      * @param $shopReference
      *
@@ -48,9 +50,16 @@ class CustomerService extends BaseService
             return $customerReference->getMollieReference();
         }
 
-        $mollieCustomer = $this->getProxy()->createCustomer($customer);
+        try {
+            $mollieCustomer = $this->getProxy()->createCustomer($customer);
+        } catch (UnprocessableEntityRequestException $exception) {
+            return null;
+        }
+
         $this->getCustomerReferenceService()->saveCustomerReference($mollieCustomer, $shopReference);
-        return $mollieCustomer->getId() !== '' ? $mollieCustomer->getId() : null;
+
+        return ($mollieCustomer->getId() !== null && $mollieCustomer->getId() !== '')
+            ? $mollieCustomer->getId() : null;
     }
 
     /**
