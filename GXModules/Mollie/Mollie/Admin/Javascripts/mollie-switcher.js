@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    let mollieSwitcher = $('.mollie-switcher');
+    let mollieSwitcher = $('.mollie-switcher'),
+        finalFieldHeight = 0;
 
     mollieSwitcher.each(function () {
         let id = this.id.substring(0, this.id.indexOf('_switcher')),
@@ -53,12 +54,48 @@ $(document).ready(function () {
 
         let approvalText = wrapper.find(formatSelector('single_click_approval_text')),
             description = wrapper.find(formatSelector('single_click_description'));
+        if (finalFieldHeight === 0) {
+            let oneDiv = approvalText.css('height');
+            if (oneDiv) {
+                let temp = parseFloat(oneDiv.substring(0, oneDiv.indexOf('px')));
+                finalFieldHeight = temp === 0 ? 0 : temp + 20;
+                if (finalFieldHeight !== 0 && !approvalText.hasClass('hidden')) {
+                    finalFieldHeight += 24;
+                }
+            }
+        }
         if (singleClickStatus) {
             approvalText.removeClass('hidden');
             description.removeClass('hidden');
+            addContentHeight(finalFieldHeight * 2);
         } else {
             approvalText.addClass('hidden');
             description.addClass('hidden');
+            removeContentHeight(finalFieldHeight * 2);
+        }
+    }
+
+    /**
+     * Adds content height
+     * @param height
+     */
+    function addContentHeight(height) {
+        let contentHeight = $('.boxCenterWrapper').css('height');
+        if (contentHeight) {
+            let contentNumber = parseFloat(contentHeight.substring(0, contentHeight.indexOf('px'))) + height;
+            $('.boxCenterWrapper').css('height', contentNumber + 'px');
+        }
+    }
+
+    /**
+     * Shortens the height of the content
+     * @param height
+     */
+    function removeContentHeight(height) {
+        let contentHeight = $('.boxCenterWrapper').css('height');
+        if (contentHeight) {
+            let contentNumber = parseFloat(contentHeight.substring(0, contentHeight.indexOf('px'))) - height;
+            $('.boxCenterWrapper').css('height', contentNumber + 'px');
         }
     }
 

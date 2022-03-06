@@ -305,9 +305,6 @@ class mollie
                 'value' => 'true',
                 'type'  => 'switcher',
             ],
-            'SURCHARGE'            => [
-                'value' => '0',
-            ],
             'SORT_ORDER'           => [
                 'value' => '0',
             ],
