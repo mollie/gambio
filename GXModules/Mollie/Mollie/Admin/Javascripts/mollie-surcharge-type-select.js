@@ -36,20 +36,41 @@ $(document).ready(function () {
                 showFields(surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
                 hideFields(wrapper, surchargePercentage, 'mollie_surcharge_percentage_desc');
                 hideFields(wrapper, surchargeLimit, 'mollie_surcharge_limit_desc');
+                setContentHeight();
                 break;
             case 'percentage':
                 hideFields(wrapper, surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
                 showFields(surchargePercentage, 'mollie_surcharge_percentage_desc');
                 showFields(surchargeLimit, 'mollie_surcharge_limit_desc');
+                setContentHeight();
                 break;
             case 'fixed_fee_and_percentage':
                 showFields(surchargeFixedAmount, 'mollie_surcharge_fixed_amount_desc');
                 showFields(surchargePercentage, 'mollie_surcharge_percentage_desc');
                 showFields(surchargeLimit, 'mollie_surcharge_limit_desc');
+                setContentHeight();
                 break;
         }
     }
 
+    /**
+     * Sets the configuration content height
+     */
+    function setContentHeight() {
+        let mollieSwitcher = $('.mollie-switcher');
+        if(mollieSwitcher.length === 0){
+            $('.boxCenterWrapper').css('height', '204.3em');
+        } else{
+            $('.boxCenterWrapper').css('height', '246.4em');
+        }
+    }
+
+    /**
+     * Shows the surcharge field
+     *
+     * @param element
+     * @param hiddenInputId
+     */
     function showFields(element, hiddenInputId) {
         if (element.hasClass('hidden')) {
             element.removeClass('hidden');
@@ -63,6 +84,13 @@ $(document).ready(function () {
         }
     }
 
+    /**
+     * Hides the surcharge field
+     *
+     * @param wrapper
+     * @param element
+     * @param hiddenInputId
+     */
     function hideFields(wrapper, element, hiddenInputId) {
         if (!element.hasClass('hidden')) {
             element.addClass('hidden');
