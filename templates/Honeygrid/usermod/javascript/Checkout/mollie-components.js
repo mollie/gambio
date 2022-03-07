@@ -17,16 +17,17 @@ var MollieComponents = window.MollieComponents || {};
             const mollie = init(cardWrapper);
             let useSavedCreditCard = document.getElementById('mollie_creditcard-use-saved-credit-card-checkbox'),
                 saveCreditCardData = document.getElementById('mollie_creditcard-save-credit-card-checkbox'),
-                useSavedCreditCardWrapper = document.getElementsByClassName('form-group--useSavedCreditCardCheckbox')[0];
+                useSavedCreditCardWrapper = document.getElementsByClassName('form-group--useSavedCreditCardCheckbox')[0],
+                descriptionOfCreditCard = document.querySelector('.mollie_creditcard img').nextSibling,
+                description = document.getElementById('mollie_creditcard-description-hidden-input').value.replace('\\', '');
+
+            descriptionOfCreditCard.textContent = '';
 
             saveCreditCardData.addEventListener('change', function (event) {
                 event.stopPropagation();
             });
 
             if (!useSavedCreditCardWrapper.classList.contains('hidden')) {
-                let descriptionOfCreditCard = document.querySelector('.mollie_creditcard img').nextSibling;
-
-                descriptionOfCreditCard.textContent = document.getElementById('mollie_creditcard-description-hidden-input').value.replace('\\', '');
                 useSavedCreditCard.addEventListener('change', handleCheckboxUseSavedChange);
 
                 if (useSavedCreditCard.checked === false) {
@@ -34,6 +35,7 @@ var MollieComponents = window.MollieComponents || {};
                     document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
                 } else {
                     hideComponents();
+                    descriptionOfCreditCard.textContent = description;
                 }
             } else {
                 useSavedCreditCard.value = null;
@@ -46,10 +48,14 @@ var MollieComponents = window.MollieComponents || {};
                 event.stopPropagation();
 
                 if (this.checked) {
+                    descriptionOfCreditCard.textContent = description;
                     hideComponents();
                 } else if (document.getElementsByClassName('form-group--cardHolder')[0].classList.contains('hidden')) {
                     document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
+                    descriptionOfCreditCard.textContent = '';
                     showComponents(cardWrapper, mollie);
+                } else {
+                    descriptionOfCreditCard.textContent = '';
                 }
             }
         }
