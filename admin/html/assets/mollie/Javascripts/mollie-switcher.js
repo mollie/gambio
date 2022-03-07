@@ -26,6 +26,7 @@ $(document).ready(function () {
     function changeStatus() {
         let id = this.id.substring(0, this.id.indexOf('_switcher')),
             checkBoxInput = $('#' + id);
+        $('.boxCenterWrapper').css('height', '246.4em');
         if (checkBoxInput.prop('checked') === true) {
             checkBoxInput.prop('checked', false);
             $(this).removeClass('checked');
