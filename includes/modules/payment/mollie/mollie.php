@@ -326,22 +326,6 @@ class mollie
                 'configuration_value' => null,
                 'set_function'        => 'mollie_input_integer( ',
             ],
-            'SURCHARGE_TYPE' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
-                'set_function'        => 'mollie_surcharge_type_select( ',
-            ],
-            'SURCHARGE_FIXED_AMOUNT' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
-                'set_function'        => 'mollie_input_number( ',
-            ],
-            'SURCHARGE_PERCENTAGE' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
-                'set_function'        => 'mollie_input_number( ',
-            ],
-            'SURCHARGE_LIMIT' => [
-                'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
-                'set_function'        => 'mollie_input_number( ',
-            ],
             'ALLOWED_ZONES'        => [
                 'configuration_value' => '0',
                 'set_function'        => 'mollie_multi_select_countries(',
@@ -362,6 +346,29 @@ class mollie
             $baseConfig = array_slice($baseConfig, 0, 4, true)
                 + $transactionDescription
                 + array_slice($baseConfig, 4, count($baseConfig) - 1, true);
+
+            $surcharge =[
+                'SURCHARGE_TYPE' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
+                    'set_function'        => 'mollie_surcharge_type_select( ',
+                ],
+                'SURCHARGE_FIXED_AMOUNT' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+                'SURCHARGE_PERCENTAGE' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+                'SURCHARGE_LIMIT' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+            ];
+
+            $baseConfig = array_slice($baseConfig, 0, 7, true)
+                + $surcharge
+                + array_slice($baseConfig, 7, count($baseConfig) - 1, true);
         }
 
         return array_merge($baseConfig, $this->_getHiddenFields());
