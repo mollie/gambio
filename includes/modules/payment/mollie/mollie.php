@@ -737,7 +737,7 @@ class mollie
         $surchargeFixedAmount = @constant($this->_formatKey('SURCHARGE_FIXED_AMOUNT'));
         $surchargePercentage = @constant($this->_formatKey('SURCHARGE_PERCENTAGE'));
         $surchargeLimit = @constant($this->_formatKey('SURCHARGE_LIMIT'));
-        $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['total']);
+        $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
         if (defined('MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS')) {
             $taxRate = xtc_get_tax_rate(MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS);
             if ($taxRate) {
