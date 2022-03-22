@@ -30,5 +30,17 @@ define('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_DESC', "Le plus bas est affiché en
 define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_TITLE', "Jours d'expiration");
 define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', "Combien de jours avant l'expiration des commandes pour cette méthode? Laissez vide pour utiliser l'expiration par défaut (28 jours)");
 
-define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
-define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
+define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
+define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_TITLE', 'Majoration de paiement');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_DESC', 'Veuillez sélectionner un type de majoration.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_TITLE', 'Montant fixe pour majoration de paiement');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_DESC', 'Coût supplémentaire à facturer au client pour les opérations de paiement défini comme un montant fixe dans la devise du magasin par défaut.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_TITLE', 'Pourcentage de majoration de paiement');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_DESC', 'Coût supplémentaire à facturer au client pour les opérations de paiement défini comme un pourcentage du sous-total du panier.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_TITLE', 'Limite de majoration de paiement');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');

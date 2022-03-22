@@ -61,9 +61,9 @@ $(document).ready(function () {
     function setContentHeight() {
         let mollieSwitcher = $('.mollie-switcher');
         if(mollieSwitcher.length === 0){
-            $('.boxCenterWrapper').css('height', '190.3em');
+            $('.boxCenterWrapper').css('height', '217em');
         } else{
-            $('.boxCenterWrapper').css('height', '228.4em');
+            $('.boxCenterWrapper').css('height', '264em');
         }
     }
 

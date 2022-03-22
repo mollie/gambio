@@ -35,3 +35,15 @@ define('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_DESC', 'Wie viele Tage, bevor Be
 
 define('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_TITLE', 'Transaktion Beschreibung');
 define('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
+
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_TYPE_TITLE', 'Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_TYPE_DESC', 'Wählen Sie einen Zuschlagstyp aus.');
+
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_FIXED_AMOUNT_TITLE', 'Fester Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_FIXED_AMOUNT_DESC', 'Zusätzliche Kosten die für Zahlungsvorgänge anfallen und als fester Betrag in der Standardwährung des Shops berechnet werden.');
+
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_TITLE', 'Anteiliger Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_DESC', 'Zusätzliche Kosten die für Zahlungsvorgänge anfallen und als Anteil am Gesamtwert des Einkaufswagens berechnet werden.');
+
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_TITLE', 'Maximaler Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC', 'Maximaler Betrag eines Zahlungszuschlags der berechnet werden kann (in der Standardwährung des Shops).');
