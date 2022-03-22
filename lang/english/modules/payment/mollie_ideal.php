@@ -37,7 +37,7 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', '<span class
 define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.</span>');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TYPE_TITLE', 'Payment surcharge');
-define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TYPE_DESC', 'Please select a surcharge type');
+define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TYPE_DESC', 'Please select a surcharge type.');
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_FIXED_AMOUNT_TITLE', 'Payment surcharge fixed amount');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_FIXED_AMOUNT_DESC', 'Extra cost to be charged to the customer for payment transactions defined as a fixed amount in default store currency.');
@@ -47,3 +47,4 @@ define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_PERCENTAGE_DESC', 'Extra cost to b
 
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_TITLE', 'Payment surcharge limit');
 define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_DESC', 'Maximum amount of payment surcharge that should be charged to the customer (in default store currency).');
+
