@@ -91,6 +91,12 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'API de paiement',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => "Vous allez être redirigé vers le site web de la passerelle de paiement pour effectuer votre achat après l'étape de révision de la commande.",
+    'mollie_single_click_payment_approval_text' => 'Enregistrer carte de crédit pour achats ultérieurs',
+    'mollie_single_click_payment_desc' => 'Vous avez précédemment enregistrer votre carte. Vous allez être redirigé vers Mollie.',
+    'mollie_surcharge_type_no_fee'   => 'Aucuns frais',
+    'mollie_surcharge_type_fixed_fee' => 'Frais fixes',
+    'mollie_surcharge_type_percentage' => 'Pourcentage',
+    'mollie_surcharge_type_fixed_fee_and_percentage' => 'Frais fixes et pourcentage',
 
     'mollie_issuer_list_dropdown'    => 'Liste déroulante',
     'mollie_issuer_list_images'      => 'Liste avec images',
@@ -102,6 +108,7 @@ $t_language_text_section_content_array = [
     'mollie_card_number'             => 'Numero de carte de credit',
     'mollie_expiry_date'             => 'MM/AA',
     'mollie_verification_code'       => 'CVV',
+    'mollie_use_saved_credit_card_text' => 'Utilisez les informations de votre carte',
 
     'mollie_transaction_desc_label' => 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.',
 

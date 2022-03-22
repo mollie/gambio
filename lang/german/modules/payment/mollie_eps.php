@@ -32,3 +32,15 @@ define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', '<span class="mollie_orde
 
 define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transaktion Beschreibung</span>');
 define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.</span>');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_TITLE', 'Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_DESC', 'Wählen Sie einen Zuschlagstyp aus.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_TITLE', 'Fester Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_DESC', 'Zusätzliche Kosten die für Zahlungsvorgänge anfallen und als fester Betrag in der Standardwährung des Shops berechnet werden.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_TITLE', 'Anteiliger Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_DESC', 'Zusätzliche Kosten die für Zahlungsvorgänge anfallen und als Anteil am Gesamtwert des Einkaufswagens berechnet werden.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_TITLE', 'Maximaler Zahlungszuschlag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_DESC', 'Maximaler Betrag eines Zahlungszuschlags der berechnet werden kann (in der Standardwährung des Shops).');
