@@ -20,14 +20,19 @@ var MollieComponents = window.MollieComponents || {};
                 useSavedCreditCardWrapper = document.getElementsByClassName('form-group--useSavedCreditCardCheckbox')[0],
                 descriptionOfCreditCard = document.querySelector('.mollie_creditcard .payment-module-description');
 
-            descriptionOfCreditCard.innerHTML = document.getElementById('mollie_creditcard-description-hidden-input').value;
-            descriptionOfCreditCard.classList.add('hidden');
+            if (descriptionOfCreditCard) {
+                descriptionOfCreditCard.innerHTML = document.getElementById('mollie_creditcard-description-hidden-input').value;
+                descriptionOfCreditCard.classList.add('hidden');
+            }
 
             saveCreditCardData.addEventListener('change', function (event) {
                 event.stopPropagation();
             });
 
-            if (!useSavedCreditCardWrapper.classList.contains('hidden')) {
+            if (useSavedCreditCardWrapper.classList.contains('hidden')) {
+                useSavedCreditCard.value = null;
+                showComponents(cardWrapper, mollie);
+            } else {
                 useSavedCreditCard.addEventListener('change', handleCheckboxUseSavedChange);
 
                 if (useSavedCreditCard.checked === false) {
@@ -35,11 +40,10 @@ var MollieComponents = window.MollieComponents || {};
                     document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
                 } else {
                     hideComponents();
-                    descriptionOfCreditCard.classList.remove('hidden');
+                    if (descriptionOfCreditCard) {
+                        descriptionOfCreditCard.classList.remove('hidden');
+                    }
                 }
-            } else {
-                useSavedCreditCard.value = null;
-                showComponents(cardWrapper, mollie);
             }
 
             addSubmitPaymentListener(cardWrapper, mollie);
@@ -48,14 +52,16 @@ var MollieComponents = window.MollieComponents || {};
                 event.stopPropagation();
 
                 if (this.checked) {
-                    descriptionOfCreditCard.classList.remove('hidden');
+                    if (descriptionOfCreditCard) {
+                        descriptionOfCreditCard.classList.remove('hidden');
+                    }
                     hideComponents();
                 } else if (document.getElementsByClassName('form-group--cardHolder')[0].classList.contains('hidden')) {
                     document.getElementsByClassName('form-group--saveCreditCardCheckbox')[0].classList.remove('hidden');
-                    descriptionOfCreditCard.classList.add('hidden');
+                    if (descriptionOfCreditCard) {
+                        descriptionOfCreditCard.classList.add('hidden');
+                    }
                     showComponents(cardWrapper, mollie);
-                } else {
-                    descriptionOfCreditCard.classList.add('hidden');
                 }
             }
         }
