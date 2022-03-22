@@ -34,7 +34,7 @@ define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_TITLE', 'Transakti
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
 
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_TYPE_TITLE', 'Zahlungszuschlag');
-define('MODULE_PAYMENT_MOLLIE_GIROPAYD_SURCHARGE_TYPE_DESC', 'Wählen Sie einen Zuschlagstyp aus.');
+define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_TYPE_DESC', 'Wählen Sie einen Zuschlagstyp aus.');
 
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_FIXED_AMOUNT_TITLE', 'Fester Zahlungszuschlag');
 define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_FIXED_AMOUNT_DESC', 'Zusätzliche Kosten die für Zahlungsvorgänge anfallen und als fester Betrag in der Standardwährung des Shops berechnet werden.');
