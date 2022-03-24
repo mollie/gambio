@@ -1,6 +1,8 @@
 <?php
 
+use Mollie\BusinessLogic\Surcharge\SurchargeService;
 use Mollie\Gambio\Entity\Repository\GambioConfigRepository;
+use Mollie\Infrastructure\ServiceRegister;
 
 /**
  * Class ot_mollie
@@ -44,8 +46,14 @@ class ot_mollie
         global $xtPrice;
         global $order;
         $paymentMethod = $order->info['payment_method'];
-        $surchargeKey = 'MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE';
-        $surcharge  = @constant($surchargeKey);
+        $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
+        $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
+        $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
+        $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
+        if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
+            $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+        }
+
         if (!empty($surcharge) && strpos($paymentMethod, 'mollie') !== false) {
             $taxRate = xtc_get_tax_rate($this->tax_class);
             if ($taxRate) {
@@ -163,6 +171,17 @@ class ot_mollie
         ];
     }
 
+
+    /**
+     * @return SurchargeService
+     */
+    protected function getSurchargeService()
+    {
+        /** @var SurchargeService $surchargeService */
+        $surchargeService = ServiceRegister::getService(SurchargeService::CLASS_NAME);
+
+        return $surchargeService;
+    }
     /**
      * Install the order total module.
      */

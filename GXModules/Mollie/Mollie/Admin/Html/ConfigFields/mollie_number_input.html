@@ -1,0 +1,12 @@
+<div class="{$mollie.wrapper_class|lower}">
+  <link rel="stylesheet" href="{$mollie.css_admin}mollie_input_integer.css">
+
+  {load_language_text section="module_center_module"}
+
+  <span class="options-title">{$mollie.title}</span>
+  {$mollie.desc}
+
+  <div class="mollie-input-number">
+    <input type="number" name="configuration[{{$mollie.key}}]" min="0" max="{{$mollie.maxValue}}" value="{{$mollie.value}}" step="any">
+  </div>
+</div>

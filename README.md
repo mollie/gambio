@@ -40,6 +40,10 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+*2.0.12*
+- Added single-click payments.
+- Added surcharge rules.
+
 *2.0.11*
 - Added support for the Klarna Pay Now payment method.
 

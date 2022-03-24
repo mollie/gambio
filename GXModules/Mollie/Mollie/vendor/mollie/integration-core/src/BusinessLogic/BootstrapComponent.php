@@ -3,6 +3,8 @@
 namespace Mollie\BusinessLogic;
 
 use Mollie\BusinessLogic\CheckoutLink\CheckoutLinkService;
+use Mollie\BusinessLogic\Customer\CustomerService;
+use Mollie\BusinessLogic\CustomerReference\CustomerReferenceService;
 use Mollie\BusinessLogic\Http\OrgToken\ProxyDataProvider;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\Integration\Event\IntegrationOrderBillingAddressChangedEvent;
@@ -36,6 +38,8 @@ use Mollie\BusinessLogic\Refunds\RefundService;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderLineRefundWebHookHandler;
 use Mollie\BusinessLogic\Refunds\WebHookHandler\OrderRefundWebHookHandler;
 use Mollie\BusinessLogic\Shipments\ShipmentService;
+use Mollie\BusinessLogic\Surcharge\SurchargeCalculationService;
+use Mollie\BusinessLogic\Surcharge\SurchargeService;
 use Mollie\BusinessLogic\VersionCheck\Http\VersionCheckProxy;
 use Mollie\BusinessLogic\WebHook\OrderChangedWebHookEvent;
 use Mollie\BusinessLogic\WebHook\PaymentChangedWebHookEvent;
@@ -111,6 +115,20 @@ class BootstrapComponent extends \Mollie\Infrastructure\BootstrapComponent
         );
 
         ServiceRegister::registerService(
+            CustomerReferenceService::CLASS_NAME,
+            function () {
+                return CustomerReferenceService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            CustomerService::CLASS_NAME,
+            function () {
+                return CustomerService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
             OrderReferenceService::CLASS_NAME,
             function () {
                 return OrderReferenceService::getInstance();
@@ -128,6 +146,13 @@ class BootstrapComponent extends \Mollie\Infrastructure\BootstrapComponent
             ShipmentService::CLASS_NAME,
             function () {
                 return ShipmentService::getInstance();
+            }
+        );
+
+        ServiceRegister::registerService(
+            SurchargeCalculationService::CLASS_NAME,
+            function () {
+                return SurchargeService::getInstance();
             }
         );
 
