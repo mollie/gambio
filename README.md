@@ -46,6 +46,10 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.0.13*
+- Added single-click payments.
+- Added surcharge rules.
+
 *3.0.12*
 - Added compatibility for Gambio versions 4.5.x.
 

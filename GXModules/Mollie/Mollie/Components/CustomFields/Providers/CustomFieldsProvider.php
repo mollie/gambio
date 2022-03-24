@@ -46,7 +46,9 @@ class CustomFieldsProvider
             $this->renderMultiLangEdit() .
             $this->renderApiEdit() .
             $this->renderDaysToExpireEdit() .
-            $this->renderCountryZonesEdit();
+            $this->renderCountryZonesEdit() .
+            $this->renderSurchargeTypeSelection() .
+            $this->renderSurchargeEditFields();
     }
 
     /**
@@ -60,7 +62,9 @@ class CustomFieldsProvider
             $this->renderMultiLangFieldsOverview() .
             $this->renderApiOverview() .
             $this->renderDaysToExpireOverview() .
-            $this->renderCountryZonesOverview();
+            $this->renderCountryZonesOverview().
+            $this->renderSurchargeTypeOverview() .
+            $this->renderSurchargeFieldsOverview();
     }
 
     /**
@@ -156,6 +160,56 @@ class CustomFieldsProvider
         $apiMethodKey = $this->_formatKey('API_METHOD');
 
         return mollie_api_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeTypeOverview()
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('SURCHARGE_TYPE'));
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeTypeSelection()
+    {
+        $apiMethodKey = $this->_formatKey('SURCHARGE_TYPE');
+
+        return mollie_surcharge_type_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeFieldsOverview()
+    {
+        $surchargeFixedAmount = $this->_formatOverviewData('SURCHARGE_FIXED_AMOUNT');
+        $surchargePercentage = $this->_formatOverviewData('SURCHARGE_PERCENTAGE');
+        $surchargeLimit = $this->_formatOverviewData('SURCHARGE_LIMIT');
+
+        return mollie_render_template($this->overviewTemplatePath, $surchargeFixedAmount) .
+            mollie_render_template($this->overviewTemplatePath, $surchargePercentage) .
+            mollie_render_template($this->overviewTemplatePath, $surchargeLimit);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderSurchargeEditFields()
+    {
+        $surchargeFixedAmount = $this->_formatKey('SURCHARGE_FIXED_AMOUNT');
+        $surchargePercentage = $this->_formatKey('SURCHARGE_PERCENTAGE');
+        $surchargeLimit = $this->_formatKey('SURCHARGE_LIMIT');
+
+        return mollie_input_number($this->getConstantValue($surchargeFixedAmount), $surchargeFixedAmount) .
+            mollie_input_number($this->getConstantValue($surchargePercentage), $surchargePercentage, 100) .
+            mollie_input_number($this->getConstantValue($surchargeLimit), $surchargeLimit);
     }
 
     /**

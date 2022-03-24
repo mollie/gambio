@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [v1.3.4](https://github.com/mollie/orocore/tree/v1.3.4) - 2022-03-08
+- Added single-click payments.
+- Added surcharge rules.
+
 ## [v1.3.3](https://github.com/mollie/orocore/tree/v1.3.3) - 2021-11-08
 - Added support for the Klarna Pay Now payment method.
 

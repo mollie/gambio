@@ -7,29 +7,51 @@
      data-language-code="{{$mollie.lang}}"
 >
     <div class="form-fields">
-        <div class="form-group form-group--cardHolder">
+        <div class="form-group form-group--useSavedCreditCardCheckbox {{if !$mollie.renderUseSavedCheckbox}}hidden {{/if}}">
+            <label class="label" for="{{$mollie.payment_method}}-use-saved-credit-card-checkbox">
+                <input type="checkbox"
+                       id="{{$mollie.payment_method}}-use-saved-credit-card-checkbox"
+                       name="{{$mollie.payment_method}}-use-saved-credit-card-checkbox"
+                       {if $mollie.renderUseSavedCheckbox}checked{/if}>{$txt.mollie_use_saved_credit_card_text}
+            </label>
+        </div>
+        <div class="form-group form-group--cardHolder {{if $mollie.renderUseSavedCheckbox}}hidden {{/if}}">
             <label class="label" for="{{$mollie.payment_method}}-card-holder">{$txt.mollie_card_holder}</label>
             <div id="{{$mollie.payment_method}}-card-holder" data-type="card-holder"></div>
-            <div id="{{$mollie.payment_method}}-card-holder-error" data-type="card-holder-error" class="field-error" role="alert"></div>
+            <div id="{{$mollie.payment_method}}-card-holder-error" data-type="card-holder-error" class="field-error"
+                 role="alert"></div>
         </div>
 
-        <div class="form-group form-group--cardNumber">
+        <div class="form-group form-group--cardNumber {{if $mollie.renderUseSavedCheckbox}}hidden {{/if}}">
             <label class="label" for="{{$mollie.payment_method}}-card-number">{$txt.mollie_card_number}</label>
             <div id="{{$mollie.payment_method}}-card-number" data-type="card-number"></div>
-            <div id="{{$mollie.payment_method}}-card-number-error" data-type="card-number-error" class="field-error" role="alert"></div>
+            <div id="{{$mollie.payment_method}}-card-number-error" data-type="card-number-error" class="field-error"
+                 role="alert"></div>
         </div>
 
-        <div class="form-group form-group--expiryDate">
+        <div class="form-group form-group--expiryDate {{if $mollie.renderUseSavedCheckbox}}hidden {{/if}}">
             <label class="label" for="{{$mollie.payment_method}}-expiry-date">{$txt.mollie_expiry_date}</label>
             <div id="{{$mollie.payment_method}}-expiry-date" data-type="expiry-date"></div>
-            <div id="{{$mollie.payment_method}}-expiry-date-error" data-type="expiry-date-error" class="field-error" role="alert"></div>
+            <div id="{{$mollie.payment_method}}-expiry-date-error" data-type="expiry-date-error" class="field-error"
+                 role="alert"></div>
         </div>
 
-        <div class="form-group form-group--verificationCode">
-            <label class="label" for="{{$mollie.payment_method}}-verification-code">{$txt.mollie_verification_code}</label>
+        <div class="form-group form-group--verificationCode {{if $mollie.renderUseSavedCheckbox}}hidden {{/if}}">
+            <label class="label"
+                   for="{{$mollie.payment_method}}-verification-code">{$txt.mollie_verification_code}</label>
             <div id="{{$mollie.payment_method}}-verification-code" data-type="verification-code"></div>
-            <div id="{{$mollie.payment_method}}-verification-code-error" data-type="verification-code-error" class="field-error" role="alert"></div>
+            <div id="{{$mollie.payment_method}}-verification-code-error" data-type="verification-code-error"
+                 class="field-error" role="alert"></div>
+        </div>
+
+        <div class="form-group form-group--saveCreditCardCheckbox {{if !$mollie.renderSaveCheckBox}}hidden {{/if}}">
+            <label class="label" for="{{$mollie.payment_method}}-save-credit-card-checkbox">
+                <input type="checkbox"
+                       id="{{$mollie.payment_method}}-save-credit-card-checkbox"
+                       name="{{$mollie.payment_method}}-save-credit-card-checkbox"
+                >{$mollie.approvalText}
+            </label>
         </div>
     </div>
+    <input id="{{$mollie.payment_method}}-description-hidden-input" type="hidden" value="{{$mollie.descriptionText}}">
 </div>
-
