@@ -4,6 +4,7 @@ namespace Mollie\BusinessLogic\PaymentMethod\Model;
 
 use Mollie\BusinessLogic\Http\DTO\PaymentMethod;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Infrastructure\ORM\Configuration\EntityConfiguration;
 use Mollie\Infrastructure\ORM\Configuration\IndexMap;
 use Mollie\Infrastructure\ORM\Entity;
@@ -36,6 +37,13 @@ class PaymentMethodConfig extends Entity
 
     const DEFAULT_TRANSACTION_DESCRIPTION = '{orderNumber}';
 
+    protected static $allowedSurchargeTypes = array(
+        SurchargeType::NO_FEE,
+        SurchargeType::FIXED_FEE,
+        SurchargeType::PERCENTAGE,
+        SurchargeType::FIXED_FEE_AND_PERCENTAGE
+    );
+
     /**
      * @var string[]
      */
@@ -63,6 +71,11 @@ class PaymentMethodConfig extends Entity
     /**
      * @var array
      */
+    protected static $singleClickSupportedMethods = array(PaymentMethods::CreditCard);
+
+    /**
+     * @var array
+     */
     protected static $mollieIssuerSupportedMethods = array(
         PaymentMethods::iDEAL,
         PaymentMethods::GiftCard,
@@ -78,10 +91,16 @@ class PaymentMethodConfig extends Entity
         'name',
         'description',
         'apiMethod',
-        'surcharge',
+        'surchargeType',
+        'surchargeFixedAmount',
+        'surchargePercentage',
+        'surchargeLimit',
         'image',
         'enabled',
         'useMollieComponents',
+        'useSingleClickPayment',
+        'singleClickPaymentApprovalText',
+        'singleClickPaymentDescription',
         'issuerListStyle',
         'daysToOrderExpire',
         'daysToPaymentExpire',
@@ -108,9 +127,22 @@ class PaymentMethodConfig extends Entity
      */
     protected  $apiMethod;
     /**
+     * @var string One of SurchargeType::NO_FEE, SurchargeType::FIXED_FEE, SurchargeType::PERCENTAGE or
+     * SurchargeType::FIXED_FEE_AND_PERCENTAGE
+     */
+    protected $surchargeType;
+    /**
      * @var float
      */
-    protected  $surcharge;
+    protected $surchargeFixedAmount;
+    /**
+     * @var float
+     */
+    protected $surchargePercentage;
+    /**
+     * @var float
+     */
+    protected $surchargeLimit;
     /**
      * @var null|string
      */
@@ -128,6 +160,22 @@ class PaymentMethodConfig extends Entity
      * @var bool
      */
     protected $useMollieComponents = true;
+
+    /**
+     * @var bool
+     */
+    protected $useSingleClickPayment = true;
+
+    /**
+     * @var string
+     */
+    protected $singleClickPaymentApprovalText;
+
+    /**
+     * @var string
+     */
+    protected $singleClickPaymentDescription;
+
     /**
      * @var string
      */
@@ -215,6 +263,14 @@ class PaymentMethodConfig extends Entity
     public function isMollieComponentsSupported()
     {
         return in_array($this->getMollieId(), static::$mollieComponentsSupportedMethods, true);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSingleClickPaymentSupported()
+    {
+        return in_array($this->getMollieId(), static::$singleClickSupportedMethods, true);
     }
 
     /**
@@ -379,19 +435,77 @@ class PaymentMethodConfig extends Entity
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getSurcharge()
+    public function getSurchargeType()
     {
-        return $this->surcharge;
+        return $this->surchargeType ?: SurchargeType::NO_FEE;
     }
 
     /**
-     * @param float $surcharge
+     * @param string $surchargeType
      */
-    public function setSurcharge($surcharge)
+    public function setSurchargeType($surchargeType)
     {
-        $this->surcharge = $surcharge;
+        if (!in_array($surchargeType, static::$allowedSurchargeTypes, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Invalid surcharge type value %s. Surcharge type can be one of (%s) values',
+                    $surchargeType,
+                    implode(', ', static::$allowedSurchargeTypes)
+                )
+            );
+        }
+
+        $this->surchargeType = $surchargeType;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSurchargeFixedAmount()
+    {
+        return $this->surchargeFixedAmount;
+    }
+
+    /**
+     * @param float $surchargeFixedAmount
+     */
+    public function setSurchargeFixedAmount($surchargeFixedAmount)
+    {
+        $this->surchargeFixedAmount = $surchargeFixedAmount;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSurchargePercentage()
+    {
+        return $this->surchargePercentage;
+    }
+
+    /**
+     * @param float $surchargePercentage
+     */
+    public function setSurchargePercentage($surchargePercentage)
+    {
+        $this->surchargePercentage = $surchargePercentage;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSurchargeLimit()
+    {
+        return $this->surchargeLimit;
+    }
+
+    /**
+     * @param float $surchargeLimit
+     */
+    public function setSurchargeLimit($surchargeLimit)
+    {
+        $this->surchargeLimit = $surchargeLimit;
     }
 
     /**
@@ -408,6 +522,54 @@ class PaymentMethodConfig extends Entity
     public function setUseMollieComponents($useMollieComponents)
     {
         $this->useMollieComponents = $useMollieComponents;
+    }
+
+    /**
+     * @return bool
+     */
+    public function useSingleClickPayment()
+    {
+        return $this->useSingleClickPayment;
+    }
+
+    /**
+     * @param bool $useSingleClickPayment
+     */
+    public function setUseSingleClickPayment($useSingleClickPayment)
+    {
+        $this->useSingleClickPayment = $useSingleClickPayment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSingleClickPaymentApprovalText()
+    {
+        return $this->singleClickPaymentApprovalText;
+    }
+
+    /**
+     * @param string $singleClickPaymentApprovalText
+     */
+    public function setSingleClickPaymentApprovalText($singleClickPaymentApprovalText)
+    {
+        $this->singleClickPaymentApprovalText = $singleClickPaymentApprovalText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSingleClickPaymentDescription()
+    {
+        return $this->singleClickPaymentDescription;
+    }
+
+    /**
+     * @param string $singleClickPaymentDescription
+     */
+    public function setSingleClickPaymentDescription($singleClickPaymentDescription)
+    {
+        $this->singleClickPaymentDescription = $singleClickPaymentDescription;
     }
 
     /**

@@ -4,6 +4,8 @@ use Mollie\BusinessLogic\Http\DTO\Amount;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\Surcharge\SurchargeService;
+use Mollie\BusinessLogic\Surcharge\SurchargeType;
 use Mollie\Gambio\APIProcessor\ProcessorFactory;
 use Mollie\Gambio\Services\Business\ConfigurationService;
 use Mollie\Gambio\Update\v2_0_8\PaymentMethodUpdate;
@@ -112,7 +114,7 @@ class mollie
 
         $currentLang = strtoupper($_SESSION['language_code']);
         $imageUrl    = $this->_getMethodLogo();
-        $surcharge   = $this->_getSurchargeValue();
+        $surcharge   = $this->_getSurchargeValue($order);
         $descriptionLabel = stripslashes(@constant($this->_formatKey('CHECKOUT_DESCRIPTION_' . $currentLang)));
 
         $selection = [
@@ -324,9 +326,6 @@ class mollie
                 'configuration_value' => null,
                 'set_function'        => 'mollie_input_integer( ',
             ],
-            'SURCHARGE'            => [
-                'configuration_value' => '0',
-            ],
             'ALLOWED_ZONES'        => [
                 'configuration_value' => '0',
                 'set_function'        => 'mollie_multi_select_countries(',
@@ -347,6 +346,30 @@ class mollie
             $baseConfig = array_slice($baseConfig, 0, 4, true)
                 + $transactionDescription
                 + array_slice($baseConfig, 4, count($baseConfig) - 1, true);
+
+            $surcharge =[
+                'SURCHARGE_TYPE' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
+                    'set_function'        => 'mollie_surcharge_type_select( ',
+                ],
+                'SURCHARGE_FIXED_AMOUNT' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+                'SURCHARGE_PERCENTAGE' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+                'SURCHARGE_LIMIT' => [
+                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
+                    'set_function'        => 'mollie_input_number( ',
+                ],
+            ];
+
+            $baseConfig = array_slice($baseConfig, 0, 7, true)
+                + $surcharge
+                + array_slice($baseConfig, 7, count($baseConfig) - 1, true);
+
         }
 
         return array_merge($baseConfig, $this->_getHiddenFields());
@@ -374,7 +397,7 @@ class mollie
             ],
             'TEXT'            => [
                 'configuration_value' => $name,
-            ],
+            ]
         ];
 
         foreach (xtc_get_languages() as $language) {
@@ -705,11 +728,17 @@ class mollie
     /**
      * Returns surcharge with tax included
      *
+     * @param object $order
+     *
      * @return float
      */
-    protected function _getSurchargeValue()
+    protected function _getSurchargeValue($order)
     {
-        $surcharge = @constant($this->_formatKey('SURCHARGE'));
+        $surchargeType = @constant($this->_formatKey('SURCHARGE_TYPE'));
+        $surchargeFixedAmount = @constant($this->_formatKey('SURCHARGE_FIXED_AMOUNT'));
+        $surchargePercentage = @constant($this->_formatKey('SURCHARGE_PERCENTAGE'));
+        $surchargeLimit = @constant($this->_formatKey('SURCHARGE_LIMIT'));
+        $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
         if (defined('MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS')) {
             $taxRate = xtc_get_tax_rate(MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS);
             if ($taxRate) {
@@ -718,6 +747,17 @@ class mollie
         }
 
         return $surcharge;
+    }
+
+    /**
+     * @return SurchargeService
+     */
+    protected function getSurchargeService()
+    {
+        /** @var SurchargeService $surchargeService */
+        $surchargeService = ServiceRegister::getService(SurchargeService::CLASS_NAME);
+
+        return $surchargeService;
     }
 
     /**

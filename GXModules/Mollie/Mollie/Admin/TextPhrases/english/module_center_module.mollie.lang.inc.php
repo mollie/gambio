@@ -93,6 +93,12 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'Payments API',
     'mollie_unknown_error'           => 'Unknown error occurred on Mollie API',
     'mollie_checkout_desc'           => 'You will be redirected to payment gateway website to complete your purchase after the order review step.',
+    'mollie_single_click_payment_approval_text' => 'Save credit card for future purchases',
+    'mollie_single_click_payment_desc' => "You have previously saved your card. You'll be redirected to Mollie.",
+    'mollie_surcharge_type_no_fee'   => 'No fee',
+    'mollie_surcharge_type_fixed_fee' => 'Fixed fee',
+    'mollie_surcharge_type_percentage' => 'Percentage',
+    'mollie_surcharge_type_fixed_fee_and_percentage' => 'Fixed fee and percentage',
 
     'mollie_issuer_list_dropdown'    => 'Dropdown',
     'mollie_issuer_list_images'      => 'List with images',
@@ -103,6 +109,7 @@ $t_language_text_section_content_array = [
     'mollie_card_number'             => 'Card number',
     'mollie_expiry_date'             => 'Expiry date',
     'mollie_verification_code'       => 'CVC/CVV',
+    'mollie_use_saved_credit_card_text' => 'Use saved credit card information',
 
     'mollie_canceled_comment' => 'The customer has canceled the payment.',
     'mollie_expired_comment'  => 'The payment has expired on Mollie.',

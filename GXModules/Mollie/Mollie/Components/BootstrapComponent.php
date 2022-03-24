@@ -4,6 +4,7 @@ namespace Mollie\Gambio;
 
 use Mollie\BusinessLogic\Authorization\ApiKey\ApiKeyAuthService;
 use Mollie\BusinessLogic\Authorization\Interfaces\AuthorizationService;
+use Mollie\BusinessLogic\CustomerReference\Model\CustomerReference;
 use Mollie\BusinessLogic\Http\ApiKey\ProxyDataProvider;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderLineTransitionService;
 use Mollie\BusinessLogic\Integration\Interfaces\OrderTransitionService;
@@ -132,6 +133,7 @@ class BootstrapComponent extends \Mollie\BusinessLogic\BootstrapComponent
         RepositoryRegistry::registerRepository(Notification::getClassName(), BaseRepository::getClassName());
         RepositoryRegistry::registerRepository(StatusMapping::getClassName(), BaseRepository::getClassName());
         RepositoryRegistry::registerRepository(OrderReference::getClassName(), BaseRepository::getClassName());
+        RepositoryRegistry::registerRepository(CustomerReference::getClassName(), BaseRepository::getClassName());
     }
 
     /**
