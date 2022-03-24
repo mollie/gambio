@@ -32,3 +32,15 @@ define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', '<span class="mollie_orde
 
 define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_TITLE', '<span class="mollie_transaction_description_title">Transactiebeschrijving</span>');
 define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_DESC', '<span class="mollie_transaction_description_desc">De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.</span>');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_TITLE', 'Betalingstoeslag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_TYPE_DESC', 'Selecteer het type toeslag.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_TITLE', 'Betalingstoeslag vast bedrag');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_FIXED_AMOUNT_DESC', 'Extra kosten die aan de klant worden doorberekend voor betalingstransacties bepaald als een vast bedrag in standaard winkelvaluta.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_TITLE', 'Betalingstoeslag percentage');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_DESC', 'Extra kosten die aan de klant worden doorberekend voor betalingstransacties bepaald als een percentage van het subtotaal van de winkelwagen.');
+
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_TITLE', 'Betalingstoeslag limiet');
+define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');
