@@ -1,0 +1,14 @@
+{load_language_text section="module_center_module"}
+
+<script src="{$mollie.js_admin}mollie-surcharge-type-select.js"></script>
+
+
+<span class="options-title">{$mollie.title}</span>
+{$mollie.desc}
+
+<select class="mollie-surcharge-type-select" name="configuration[{{$mollie.key}}]">
+    <option value="no_fee" {if $mollie.value == 'no_fee'}selected{/if}>{{$txt.mollie_surcharge_type_no_fee}}</option>
+    <option value="fixed_fee" {if $mollie.value == 'fixed_fee'}selected{/if}>{{$txt.mollie_surcharge_type_fixed_fee}}</option>
+    <option value="percentage" {if $mollie.value == 'percentage'}selected{/if}>{{$txt.mollie_surcharge_type_percentage}}</option>
+    <option value="fixed_fee_and_percentage" {if $mollie.value == 'fixed_fee_and_percentage'}selected{/if}>{{$txt.mollie_surcharge_type_fixed_fee_and_percentage}}</option>
+</select>

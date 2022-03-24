@@ -2,6 +2,7 @@
 
 namespace Mollie\Gambio\CustomFields\Factory;
 
+use Mollie\Gambio\CustomFields\Providers\CreditCardCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\CustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\IssuerListSupportedCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\KlarnaCustomFieldsProvider;
@@ -24,6 +25,10 @@ class CustomFieldsProviderFactory
     {
         if (strpos($methodKey, 'klarna') !== false) {
             return new KlarnaCustomFieldsProvider($methodKey);
+        }
+
+        if($methodKey === 'mollie_creditcard'){
+            return new CreditCardCustomFieldsProvider($methodKey);
         }
 
         if (in_array($methodKey, ['mollie_ideal', 'mollie_kbc', 'mollie_giftcard'], true)) {

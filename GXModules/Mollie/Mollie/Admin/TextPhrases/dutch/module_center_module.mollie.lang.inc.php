@@ -91,6 +91,12 @@ $t_language_text_section_content_array = [
     'mollie_payments_api'            => 'Payments API',
     'mollie_unknown_error'           => 'Er is een onbekende fout opgetreden op de Mollie-API',
     'mollie_checkout_desc'           => 'Nadat je de bestelling hebt gecontroleerd, word je doorgestuurd naar de website van de betalingsprovider om je aankoop af te ronden.',
+    'mollie_single_click_payment_approval_text' => 'Bewaar creditcard voor toekomstige aankopen',
+    'mollie_single_click_payment_desc' => 'U heeft uw kaart eerder opgeslagen. U wordt doorgestuurd naar Mollie.',
+    'mollie_surcharge_type_no_fee'   => 'Geen kosten',
+    'mollie_surcharge_type_fixed_fee' => 'Vaste kosten',
+    'mollie_surcharge_type_percentage' => 'Percentage',
+    'mollie_surcharge_type_fixed_fee_and_percentage' => 'Vaste kosten en percentage',
 
     'mollie_transaction_desc_label' => 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.',
 
@@ -104,6 +110,7 @@ $t_language_text_section_content_array = [
     'mollie_card_number'             => 'Creditcardnummer',
     'mollie_expiry_date'             => 'MM/JJ',
     'mollie_verification_code'       => 'CVV',
+    'mollie_use_saved_credit_card_text' => 'Gebruik opgeslagen creditcardinformatie',
 
     'mollie_canceled_comment' => 'De klant heeft de betaling geannuleerd.',
     'mollie_expired_comment'  => 'De betaling is op Mollie verlopen.',

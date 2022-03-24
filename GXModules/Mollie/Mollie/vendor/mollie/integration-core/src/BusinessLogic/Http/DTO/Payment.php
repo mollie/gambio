@@ -31,6 +31,10 @@ class Payment extends BaseDto
     /**
      * @var string
      */
+    protected $customerId;
+    /**
+     * @var string
+     */
     protected $description;
     /**
      * @var Amount
@@ -112,6 +116,7 @@ class Payment extends BaseDto
         $result->id = static::getValue($raw, 'id');
         $result->profileId = static::getValue($raw, 'profileId');
         $result->orderId = static::getValue($raw, 'orderId');
+        $result->customerId = static::getValue($raw, 'customerId');
         $result->description = static::getValue($raw, 'description');
         $result->amount = Amount::fromArray(static::getValue($raw, 'amount', array()));
         $result->amountRefunded = Amount::fromArray(static::getValue($raw, 'amountRefunded', array()));
@@ -172,6 +177,7 @@ class Payment extends BaseDto
             'id' => $this->id,
             'profileId' => $this->profileId,
             'orderId' => $this->orderId,
+            'customerId' => $this->customerId,
             'description' => $this->description,
             'amount' => $this->amount->toArray(),
             'amountRefunded' => $this->amountRefunded->toArray(),
@@ -260,6 +266,22 @@ class Payment extends BaseDto
     public function setOrderId($orderId)
     {
         $this->orderId = $orderId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @param string $customerId
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
     }
 
     /**
