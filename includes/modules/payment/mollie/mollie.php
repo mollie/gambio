@@ -306,6 +306,7 @@ class mollie
             ],
             'SORT_ORDER'           => [
                 'value' => '0',
+                'type' => 'text'
             ],
         ];
 

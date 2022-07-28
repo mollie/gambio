@@ -153,6 +153,7 @@ class ot_mollie
             ],
             'configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER' => [
                 'value' => self::DEFAULT_OT_MOLLIE_SORT_ORDER,
+                'type'  => 'text'
             ],
         ];
     }
