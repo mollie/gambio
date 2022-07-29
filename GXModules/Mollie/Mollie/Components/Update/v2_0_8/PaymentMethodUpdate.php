@@ -42,13 +42,14 @@ class PaymentMethodUpdate
     /**
      * Adds missing fields if the methods is already installed
      */
-    public function addConfigFields()
+    public function upsertConfigFields()
     {
         if (!$this->isInstalled) {
             return;
         }
 
         $this->addCommonFields();
+        $this->updateSortOrderType();
     }
 
     /**
@@ -66,6 +67,17 @@ class PaymentMethodUpdate
     }
 
     /**
+     * Updates method sort order type value
+     *
+     * @return void
+     */
+    private function updateSortOrderType()
+    {
+        $key = $this->_formatKey('SORT_ORDER', true);
+        $this->updateConfigField($key, 'type', 'text');
+    }
+
+    /**
      * Insert given options to the configuration table
      *
      * @param array $options
@@ -79,6 +91,24 @@ class PaymentMethodUpdate
         $insert['sort_order'] = 0;
 
         $repository->insert($insert);
+    }
+
+    /**
+     * Updates config field in database
+     *
+     * @param string $key
+     * @param string $field
+     * @param $value
+     * @return void
+     */
+    private function updateConfigField($key, $field, $value)
+    {
+        $repository = new GambioConfigRepository();
+
+        $configField = $repository->select($key, $field);
+        if (count($configField) > 0 &&  $configField[0][$field] !== $value) {
+            $repository->update($key, [$field => $value]);
+        }
     }
 
     /**
@@ -140,8 +170,7 @@ class PaymentMethodUpdate
             ];
         }
 
-        if($this->code === 'mollie_creditcard')
-        {
+        if ($this->code === 'mollie_creditcard') {
             $configFields[] = [
                 'key' => 'SINGLE_CLICK_APPROVAL_TEXT',
                 'value' => $this->translate($_SESSION['language_code'], 'mollie_single_click_payment_approval_text'),

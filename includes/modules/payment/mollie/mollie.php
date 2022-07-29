@@ -60,7 +60,7 @@ class mollie
         include(DIR_FS_CATALOG . 'lang/' . $_SESSION['language'] . '/modules/payment/' . $this->code . '.php');
 
         $updater = new PaymentMethodUpdate($this->code, $this->_isInstalled());
-        $updater->addConfigFields();
+        $updater->upsertConfigFields();
 
         $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
