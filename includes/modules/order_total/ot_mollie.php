@@ -35,8 +35,26 @@ class ot_mollie
         $this->output      = [];
         $this->enabled     = defined('MODULE_ORDER_TOTAL_MOLLIE_STATUS') ?
             strtolower(MODULE_ORDER_TOTAL_MOLLIE_STATUS) === 'true' : false;
+        $this->updateConfigField('configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER', 'type', 'text');
     }
 
+    /**
+     * Updates config field in database
+     *
+     * @param string $key
+     * @param string $field
+     * @param $value
+     * @return void
+     */
+    private function updateConfigField($key, $field, $value)
+    {
+        $repository = new GambioConfigRepository();
+
+        $configField = $repository->select($key, $field);
+        if (count($configField) > 0 &&  $configField[0][$field] !== $value) {
+            $repository->update($key, [$field => $value]);
+        }
+    }
 
     /**
      * Displays surcharge on checkout screen and modifies total price
@@ -153,6 +171,7 @@ class ot_mollie
             ],
             'configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER' => [
                 'value' => self::DEFAULT_OT_MOLLIE_SORT_ORDER,
+                'type'  => 'text'
             ],
         ];
     }
@@ -171,7 +190,6 @@ class ot_mollie
         ];
     }
 
-
     /**
      * @return SurchargeService
      */
@@ -182,6 +200,7 @@ class ot_mollie
 
         return $surchargeService;
     }
+
     /**
      * Install the order total module.
      */
