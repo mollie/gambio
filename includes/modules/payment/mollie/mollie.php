@@ -67,8 +67,10 @@ class mollie
 
         $this->title = $this->_prependLogo("/images/icons/payment/{$this->code}.png", $this->title);
 
-        $this->sort_order = @constant($this->_formatKey('SORT_ORDER'));
-        $this->enabled    = @constant($this->_formatKey('STATUS')) === 'true';
+        $this->sort_order = defined($this->_formatKey('SORT_ORDER')) ?
+            @constant($this->_formatKey('SORT_ORDER')) : null;
+        $this->enabled = defined($this->_formatKey('STATUS')) &&
+            @constant($this->_formatKey('STATUS')) === 'true';
 
         $this->description = $this->_renderDescription($order);
     }
