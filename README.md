@@ -1,7 +1,7 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 4.5.x.
+This branch contains mollie module which is eligible for Gambio versions 4.5.x - 4.6.x.
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
@@ -45,6 +45,12 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+
+*3.0.15*
+- Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
+
+*3.0.14*
+- Added compatibility wth Gambio 4.5.3.0.
 
 *3.0.13*
 - Added single-click payments.

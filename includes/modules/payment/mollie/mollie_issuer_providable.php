@@ -31,7 +31,7 @@ abstract class mollie_issuer_providable extends mollie
 
         $currentMethod = $this->getCurrentMethod();
         $issuerListKey = $this->_formatKey('ISSUER_LIST');
-        $issuerListType = @constant($issuerListKey);
+        $issuerListType = defined($issuerListKey) ? @constant($issuerListKey) : null;
 
         if (empty($issuerListType) && $this->_isInstalled()) {
             $this->setInitialIssuerListStyle($this->_formatKey('ISSUER_LIST', true));

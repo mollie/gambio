@@ -60,15 +60,17 @@ class mollie
         include(DIR_FS_CATALOG . 'lang/' . $_SESSION['language'] . '/modules/payment/' . $this->code . '.php');
 
         $updater = new PaymentMethodUpdate($this->code, $this->_isInstalled());
-        $updater->addConfigFields();
+        $updater->upsertConfigFields();
 
         $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
 
         $this->title = $this->_prependLogo("/images/icons/payment/{$this->code}.png", $this->title);
 
-        $this->sort_order = @constant($this->_formatKey('SORT_ORDER'));
-        $this->enabled    = @constant($this->_formatKey('STATUS')) === 'true';
+        $this->sort_order = defined($this->_formatKey('SORT_ORDER')) ?
+            @constant($this->_formatKey('SORT_ORDER')) : null;
+        $this->enabled = defined($this->_formatKey('STATUS')) &&
+            @constant($this->_formatKey('STATUS')) === 'true';
 
         $this->description = $this->_renderDescription($order);
     }
@@ -306,6 +308,7 @@ class mollie
             ],
             'SORT_ORDER'           => [
                 'value' => '0',
+                'type' => 'text'
             ],
         ];
 

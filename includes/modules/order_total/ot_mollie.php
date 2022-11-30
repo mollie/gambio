@@ -35,8 +35,26 @@ class ot_mollie
         $this->output      = [];
         $this->enabled     = defined('MODULE_ORDER_TOTAL_MOLLIE_STATUS') ?
             strtolower(MODULE_ORDER_TOTAL_MOLLIE_STATUS) === 'true' : false;
+        $this->updateConfigField('configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER', 'type', 'text');
     }
 
+    /**
+     * Updates config field in database
+     *
+     * @param string $key
+     * @param string $field
+     * @param $value
+     * @return void
+     */
+    private function updateConfigField($key, $field, $value)
+    {
+        $repository = new GambioConfigRepository();
+
+        $configField = $repository->select($key, $field);
+        if (count($configField) > 0 &&  $configField[0][$field] !== $value) {
+            $repository->update($key, [$field => $value]);
+        }
+    }
 
     /**
      * Displays surcharge on checkout screen and modifies total price
@@ -46,12 +64,14 @@ class ot_mollie
         global $xtPrice;
         global $order;
         $paymentMethod = $order->info['payment_method'];
-        $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
-        $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
-        $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
-        $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
-        if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
-            $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+        if ($paymentMethod) {
+            $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
+            $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
+            $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
+            $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
+            if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
+                $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+            }
         }
 
         if (!empty($surcharge) && strpos($paymentMethod, 'mollie') !== false) {
@@ -153,6 +173,7 @@ class ot_mollie
             ],
             'configuration/MODULE_ORDER_TOTAL_MOLLIE_SORT_ORDER' => [
                 'value' => self::DEFAULT_OT_MOLLIE_SORT_ORDER,
+                'type'  => 'text'
             ],
         ];
     }
@@ -171,7 +192,6 @@ class ot_mollie
         ];
     }
 
-
     /**
      * @return SurchargeService
      */
@@ -182,6 +202,7 @@ class ot_mollie
 
         return $surchargeService;
     }
+
     /**
      * Install the order total module.
      */
