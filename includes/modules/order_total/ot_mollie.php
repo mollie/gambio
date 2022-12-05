@@ -45,12 +45,14 @@ class ot_mollie
         global $xtPrice;
         global $order;
         $paymentMethod = $order->info['payment_method'];
-        $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
-        $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
-        $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
-        $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
-        if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
-            $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+        if ($paymentMethod) {
+            $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
+            $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
+            $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
+            $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
+            if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
+                $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+            }
         }
 
         if (!empty($surcharge) && strpos($paymentMethod, 'mollie') !== false) {
