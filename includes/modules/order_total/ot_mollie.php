@@ -1,6 +1,7 @@
 <?php
 
 use Mollie\BusinessLogic\Surcharge\SurchargeService;
+use Mollie\Gambio\BootstrapComponent;
 use Mollie\Infrastructure\ServiceRegister;
 
 /**
@@ -34,6 +35,7 @@ class ot_mollie
         $this->output      = [];
         $this->enabled     = defined('MODULE_ORDER_TOTAL_MOLLIE_STATUS') ?
             strtolower(MODULE_ORDER_TOTAL_MOLLIE_STATUS) === 'true' : false;
+        BootstrapComponent::init();
     }
 
 
