@@ -40,6 +40,10 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+
+*0.1.13*
+- Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
+
 *0.1.12*
 - Added single-click payments.
 - Added surcharge rules.
