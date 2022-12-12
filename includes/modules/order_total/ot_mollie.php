@@ -1,6 +1,7 @@
 <?php
 
 use Mollie\BusinessLogic\Surcharge\SurchargeService;
+use Mollie\Gambio\BootstrapComponent;
 use Mollie\Infrastructure\ServiceRegister;
 
 /**
@@ -34,6 +35,7 @@ class ot_mollie
         $this->output      = [];
         $this->enabled     = defined('MODULE_ORDER_TOTAL_MOLLIE_STATUS') ?
             strtolower(MODULE_ORDER_TOTAL_MOLLIE_STATUS) === 'true' : false;
+        BootstrapComponent::init();
     }
 
 
@@ -45,12 +47,18 @@ class ot_mollie
         global $xtPrice;
         global $order;
         $paymentMethod = $order->info['payment_method'];
-        $surchargeType = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE');
-        $surchargeFixedAmount = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT');
-        $surchargePercentage = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE');
-        $surchargeLimit = @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT');
-        if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
-            $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+        if ($paymentMethod) {
+            $surchargeType = defined('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE') ?
+                @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_TYPE') : null;
+            $surchargeFixedAmount = defined('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT') ?
+                @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_FIXED_AMOUNT') : null;
+            $surchargePercentage = defined('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE') ?
+                @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_PERCENTAGE') : null;
+            $surchargeLimit = defined('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT') ?
+                @constant('MODULE_PAYMENT_' . strtoupper($paymentMethod) . '_SURCHARGE_LIMIT') : null;
+            if ($surchargeType !== null && $surchargeFixedAmount !== null && $surchargePercentage !== null && $surchargeLimit !== null) {
+                $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
+            }
         }
 
         if (!empty($surcharge) && strpos($paymentMethod, 'mollie') !== false) {
