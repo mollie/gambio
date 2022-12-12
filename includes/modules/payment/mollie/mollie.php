@@ -73,8 +73,10 @@ class mollie
 
         $this->title = $this->_prependLogo(UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png"), $this->title);
 
-        $this->sort_order = @constant($this->_formatKey('SORT_ORDER'));
-        $this->enabled    = @constant($this->_formatKey('STATUS')) === 'True';
+        $this->sort_order = defined($this->_formatKey('SORT_ORDER')) ?
+            @constant($this->_formatKey('SORT_ORDER')) : null;
+        $this->enabled = defined($this->_formatKey('STATUS')) &&
+            @constant($this->_formatKey('STATUS')) === 'True';
 
         $this->description = $this->_renderDescription($order);
     }
@@ -311,7 +313,8 @@ class mollie
                 'set_function'        => 'mollie_logo_upload( ',
             ],
             'CHECKOUT_NAME'        => [
-                'configuration_value' => @constant($this->_formatKey('_CHECKOUT_NAME_' . $currentLang)) ?: $name,
+                'configuration_value' =>  defined($this->_formatKey('CHECKOUT_NAME_' . $currentLang)) ?
+                    @constant($this->_formatKey('CHECKOUT_NAME_' . $currentLang)) : $name,
                 'set_function'        => 'mollie_multi_language_text( ',
             ],
             'CHECKOUT_DESCRIPTION' => [
@@ -349,19 +352,23 @@ class mollie
 
             $surcharge =[
                 'SURCHARGE_TYPE' => [
-                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_TYPE_' . $currentLang)) ?: SurchargeType::NO_FEE,
+                    'configuration_value' => defined($this->_formatKey('SURCHARGE_TYPE_')) ?
+                        @constant($this->_formatKey('SURCHARGE_TYPE_' . $currentLang)) : SurchargeType::NO_FEE,
                     'set_function'        => 'mollie_surcharge_type_select( ',
                 ],
                 'SURCHARGE_FIXED_AMOUNT' => [
-                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_FIXED_AMOUNT_' . $currentLang)) ?: 0,
+                    'configuration_value' => defined($this->_formatKey('SURCHARGE_FIXED_AMOUNT_')) ?
+                        @constant($this->_formatKey('SURCHARGE_FIXED_AMOUNT_' . $currentLang)) : 0,
                     'set_function'        => 'mollie_input_number( ',
                 ],
                 'SURCHARGE_PERCENTAGE' => [
-                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_PERCENTAGE_' . $currentLang)) ?: 0,
+                    'configuration_value' => defined($this->_formatKey('SURCHARGE_PERCENTAGE_')) ?
+                        @constant($this->_formatKey('SURCHARGE_PERCENTAGE_' . $currentLang)) : 0,
                     'set_function'        => 'mollie_input_number( ',
                 ],
                 'SURCHARGE_LIMIT' => [
-                    'configuration_value' => @constant($this->_formatKey('_SURCHARGE_LIMIT_' . $currentLang)) ?: 0,
+                    'configuration_value' => defined($this->_formatKey('SURCHARGE_LIMIT_')) ?
+                        @constant($this->_formatKey('SURCHARGE_LIMIT_' . $currentLang)) : 0,
                     'set_function'        => 'mollie_input_number( ',
                 ],
             ];
