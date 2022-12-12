@@ -46,6 +46,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.0.15*
+- Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
+
 *3.0.14*
 - Added compatibility wth Gambio 4.5.3.0.
 

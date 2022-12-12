@@ -220,7 +220,7 @@ function mollie_multi_select_countries($key_value, $key = '')
 
     $data['key']   = _appendPrefix($key);
     $data['title'] = @constant("{$key}_TITLE");
-    $data['desc']  = @constant("{$key}_DES");
+    $data['desc']  = @constant("{$key}_DESC");
     $templatePath  = PathProvider::getAdminTemplatePath('mollie_zones_multiple.html', 'ConfigFields');
 
     return mollie_render_template($templatePath, $data);
