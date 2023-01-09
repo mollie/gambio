@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.0.14*
+- Fixed URL for version check.
+
 *2.0.13*
 - Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
 
