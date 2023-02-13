@@ -40,6 +40,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*1.0.13*
+- Fixed loading js and css files
+
 *1.0.12*
 - Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
 - Fixed problem with not registered service
