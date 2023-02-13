@@ -46,6 +46,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.0.17*
+- Fixed loading js and css files
+
 *3.0.16*
 - Fixed URL for version check.
 
