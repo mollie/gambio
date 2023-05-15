@@ -27,8 +27,8 @@ class mollie_creditcard extends mollie
 
         $componentsKey = $this->_formatKey('COMPONENTS_STATUS');
         $singleClickKey = $this->_formatKey('SINGLE_CLICK_STATUS');
-        $useComponents = @constant($componentsKey);
-        $useSingleClick = @constant($singleClickKey);
+        $useComponents = $this->_getConstantValue($componentsKey);
+        $useSingleClick = $this->_getConstantValue($singleClickKey);
         if (empty($useComponents) && $this->_isInstalled()) {
             $this->setInitialMollieComponentsUsage($this->_formatKey('COMPONENTS_STATUS', true));
             define($componentsKey, 'true');
@@ -53,7 +53,7 @@ class mollie_creditcard extends mollie
         }
 
         $configKey = $this->_formatKey('COMPONENTS_STATUS');
-        if (@constant($configKey) === 'true') {
+        if ($this->_getConstantValue($configKey) === 'true') {
             $selection['fields'] = [
                 [
                     'title' => $this->_renderCreditCardInfo(),
@@ -187,7 +187,7 @@ class mollie_creditcard extends mollie
         $renderUseSavedCreditCardCheckbox = false;
         $customerStatusId = $_SESSION['customers_status']['customers_status_id'];
         if ($customerStatusId !== self::GUEST_STATUS_ID &&
-            @constant($this->_formatKey('SINGLE_CLICK_STATUS')) === 'true')
+            $this->_getConstantValue($this->_formatKey('SINGLE_CLICK_STATUS')) === 'true')
         {
             $customerFromDb = $this->getCustomerReferenceService()->getByShopReference($_SESSION['customer_id']);
             if (!$customerFromDb) {
@@ -205,9 +205,9 @@ class mollie_creditcard extends mollie
                 'lang' => $lang,
                 'payment_method' => $this->code,
                 'renderSaveCheckBox' => $renderSaveCreditCardCheckbox,
-                'approvalText' => @constant($this->_formatKey('SINGLE_CLICK_APPROVAL_TEXT')),
+                'approvalText' => $this->_getConstantValue($this->_formatKey('SINGLE_CLICK_APPROVAL_TEXT')),
                 'renderUseSavedCheckbox' => $renderUseSavedCreditCardCheckbox,
-                'descriptionText' => @constant($this->_formatKey('SINGLE_CLICK_DESCRIPTION'))
+                'descriptionText' => $this->_getConstantValue($this->_formatKey('SINGLE_CLICK_DESCRIPTION'))
             ]
         );
     }
