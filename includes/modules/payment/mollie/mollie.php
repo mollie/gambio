@@ -62,15 +62,15 @@ class mollie
         $updater = new PaymentMethodUpdate($this->code, $this->_isInstalled());
         $updater->upsertConfigFields();
 
-        $this->title = @constant($this->_formatKey('TEXT_TITLE')) ?: $this->title;
+        $this->title = $this->_getConstantValue($this->_formatKey('TEXT_TITLE')) ?: $this->title;
         $this->titleLabel = $this->title;
 
         $this->title = $this->_prependLogo("/images/icons/payment/{$this->code}.png", $this->title);
 
         $this->sort_order = defined($this->_formatKey('SORT_ORDER')) ?
-            @constant($this->_formatKey('SORT_ORDER')) : null;
+            $this->_getConstantValue($this->_formatKey('SORT_ORDER')) : null;
         $this->enabled = defined($this->_formatKey('STATUS')) &&
-            @constant($this->_formatKey('STATUS')) === 'true';
+            $this->_getConstantValue($this->_formatKey('STATUS')) === 'true';
 
         $this->description = $this->_renderDescription($order);
     }
@@ -111,11 +111,11 @@ class mollie
         $currentLang = strtoupper($_SESSION['language_code']);
         $imageUrl    = $this->_getMethodLogo();
         $surcharge = $this->_getSurchargeValue($order);
-        $descriptionLabel = stripslashes(@constant($this->_formatKey('CHECKOUT_DESCRIPTION_' . $currentLang)));
+        $descriptionLabel = stripslashes($this->_getConstantValue($this->_formatKey('CHECKOUT_DESCRIPTION_' . $currentLang)));
 
         $selection = [
             'id'          => $this->code,
-            'module'      => stripslashes(@constant($this->_formatKey('CHECKOUT_NAME_' . $currentLang))),
+            'module'      => stripslashes($this->_getConstantValue($this->_formatKey('CHECKOUT_NAME_' . $currentLang))),
             'description' => $this->_prependLogo($imageUrl, $descriptionLabel),
             'logo_url'    => $imageUrl,
             'logo_alt'    => $this->titleLabel,
@@ -406,7 +406,7 @@ class mollie
         $configService = ServiceRegister::getService(Configuration::CLASS_NAME);
         $data          = [
             'payment_code'     => $this->code,
-            'payment_label'    => stripslashes(@constant($this->_formatKey('TEXT_TITLE'))),
+            'payment_label'    => stripslashes($this->_getConstantValue($this->_formatKey('TEXT_TITLE'))),
             'version'          => $configService->getExtensionVersion(),
             'is_connected'     => MollieModuleChecker::isConnected(),
             'is_method_active' => $this->_isMethodEnabled($order),
@@ -432,7 +432,7 @@ class mollie
     protected function _setOriginalConfig()
     {
         $key            = $this->_formatKey('ORIGINAL_CONFIG');
-        $originalConfig = json_decode(@constant($key), true);
+        $originalConfig = json_decode($this->_getConstantValue($key), true);
         if (empty($originalConfig)) {
             $config = $this->_getCurrentMollieMethod()->toArray();
             $sql    = 'UPDATE ' . GambioConfigRepository::TABLE_NAME . " 
@@ -499,7 +499,7 @@ class mollie
 
         $billing            = $order->billing;
         $zonesKey           = $this->_formatKey('ALLOWED_ZONES');
-        $availableCountries = @constant($zonesKey);
+        $availableCountries = $this->_getConstantValue($zonesKey);
         if (!empty($availableCountries)) {
             $availableCountries = explode(',', $availableCountries);
             if (!in_array(strtoupper($billing['country']['iso_code_2']), $availableCountries, true)) {
@@ -609,7 +609,7 @@ class mollie
     protected function _getMethodLogo()
     {
         $constantKey = $this->_formatKey('LOGO');
-        $imagePath   = defined($constantKey) ? @constant($constantKey) : null;
+        $imagePath   = $this->_getConstantValue($constantKey);
 
         $defaultImagePath = UrlProvider::generateShopUrl("images/icons/payment/{$this->code}.png");
 
@@ -726,10 +726,10 @@ class mollie
      */
     protected function _getSurchargeValue($order)
     {
-        $surchargeType = @constant($this->_formatKey('SURCHARGE_TYPE'));
-        $surchargeFixedAmount = @constant($this->_formatKey('SURCHARGE_FIXED_AMOUNT'));
-        $surchargePercentage = @constant($this->_formatKey('SURCHARGE_PERCENTAGE'));
-        $surchargeLimit = @constant($this->_formatKey('SURCHARGE_LIMIT'));
+        $surchargeType = $this->_getConstantValue($this->_formatKey('SURCHARGE_TYPE'));
+        $surchargeFixedAmount = $this->_getConstantValue($this->_formatKey('SURCHARGE_FIXED_AMOUNT'));
+        $surchargePercentage = $this->_getConstantValue($this->_formatKey('SURCHARGE_PERCENTAGE'));
+        $surchargeLimit = $this->_getConstantValue($this->_formatKey('SURCHARGE_LIMIT'));
         $surcharge = $this->getSurchargeService()->calculateSurchargeAmount($surchargeType, $surchargeFixedAmount, $surchargePercentage, $surchargeLimit, $order->info['subtotal']);
 
         if (defined('MODULE_ORDER_TOTAL_MOLLIE_TAX_CLASS')) {
@@ -751,6 +751,16 @@ class mollie
         $surchargeService = ServiceRegister::getService(SurchargeService::CLASS_NAME);
 
         return $surchargeService;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return mixed|null
+     */
+    protected function _getConstantValue($key)
+    {
+        return defined($key) ? @constant($key) : null;
     }
 
     /**
