@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.0.16*
+- Fixed shipping costs per product
+
 *2.0.15*
 - Fixed loading js and css files
 
