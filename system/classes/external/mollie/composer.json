@@ -1,6 +1,6 @@
 {
   "name": "mollie/gambio",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "require": {
     "php": ">=5.4",
     "mollie/integration-core": "1.3.4"

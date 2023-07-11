@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*0.1.14*
+- Fixed shipping costs per product.
+
 *0.1.13*
 - Fixed to not access undefined constants and check if payment method is not null for surcharge calculate.
 
