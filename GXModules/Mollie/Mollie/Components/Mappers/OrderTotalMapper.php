@@ -13,8 +13,8 @@ class OrderTotalMapper
 {
     use MapperUtility;
 
-    private static $surcharges = ['ot_mollie', 'ot_tsexcellence', 'ot_loworderfee'];
-    private static $discounts = ['ot_coupon', 'ot_discount', 'ot_payment', 'ot_gambioultra', 'ot_gv'];
+    private static $surcharges = ['ot_mollie', 'ot_tsexcellence', 'ot_loworderfee', 'ot_gambioultra'];
+    private static $discounts = ['ot_coupon', 'ot_discount', 'ot_payment', 'ot_gv'];
     private static $shipping = ['ot_shipping', 'ot_ps_fee'];
 
     /**
