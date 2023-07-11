@@ -46,6 +46,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.0.19*
+- Fixed shipping costs per product.
+
 *3.0.18*
 - Added compatibility for Gambio versions 4.8.x and PHP8.2.
 
