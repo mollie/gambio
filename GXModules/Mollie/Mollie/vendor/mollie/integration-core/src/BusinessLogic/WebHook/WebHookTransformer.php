@@ -54,76 +54,6 @@ class WebHookTransformer extends BaseService
     }
 
     /**
-     * @param $rawRequest
-     *
-     * @throws HttpCommunicationException
-     */
-    protected function doHandle($rawRequest)
-    {
-        $request = array();
-        parse_str($rawRequest, $request);
-
-        // Fire order web hook event for order payment web hooks
-        $payment = $this->tryGetPayment($request['id']);
-        if ($payment && $payment->getOrderId()) {
-            $request['id'] = $payment->getOrderId();
-        }
-
-        $orderReference = $this->getOrderReferenceData($request['id']);
-        if (!$orderReference) {
-            WebHookContext::stop();
-            return;
-        }
-
-        $changeEvent = $this->fireChangeEvent($orderReference);
-        if ($changeEvent) {
-            $this->updateOrderReference($changeEvent);
-        }
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return Payment|null
-     */
-    protected function tryGetPayment($id)
-    {
-        try {
-            $payment = $this->getProxy()->getPayment($id);
-        } catch (\Exception $e) {
-            $payment = null;
-        }
-
-        return $payment;
-    }
-
-    /**
-     * @param string $mollieReference Payment or order id
-     *
-     * @return OrderReference|null
-     */
-    protected function getOrderReferenceData($mollieReference)
-    {
-        /** @var OrderReferenceService $orderReferenceService */
-        $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
-        return $orderReferenceService->getByMollieReference($mollieReference);
-    }
-
-    /**
-     * @param OrderChangedWebHookEvent|PaymentChangedWebHookEvent $changeEvent
-     */
-    protected function updateOrderReference($changeEvent)
-    {
-        /** @var OrderReferenceService $orderReferenceService */
-        $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
-        $orderReferenceService->updateOrderReference(
-            $this->getNewOrderReferencePayload($changeEvent),
-            $changeEvent->getOrderReference()->getShopReference(),
-            $changeEvent->getOrderReference()->getApiMethod()
-        );
-    }
-
-    /**
      * @param OrderReference $orderReference
      *
      * @return OrderChangedWebHookEvent|PaymentChangedWebHookEvent|null
@@ -194,7 +124,7 @@ class WebHookTransformer extends BaseService
         } catch (HttpCommunicationException $e) {
             Logger::logError(
                 'Failed to create web hook event from payload because off network connection problems.',
-            'Core',
+                'Core',
                 array(
                     'ExceptionMessage' => $e->getMessage(),
                     'ExceptionTrace' => $e->getTraceAsString(),
@@ -214,6 +144,92 @@ class WebHookTransformer extends BaseService
         }
 
         return $changeEvent;
+    }
+
+    /**
+     * @param $rawRequest
+     *
+     * @throws HttpCommunicationException
+     */
+    protected function doHandle($rawRequest)
+    {
+        $request = array();
+        parse_str($rawRequest, $request);
+
+        // Fire order web hook event for order payment web hooks
+        $request['id'] = $this->determineRequestId($request['id']);
+
+        $orderReference = $this->getOrderReferenceData($request['id']);
+        if (!$orderReference) {
+            WebHookContext::stop();
+            return;
+        }
+
+        $changeEvent = $this->fireChangeEvent($orderReference);
+        if ($changeEvent) {
+            $this->updateOrderReference($changeEvent);
+        }
+    }
+
+    /**
+     * @param $id
+     *
+     * @return string
+     */
+    protected function determineRequestId($id)
+    {
+        if (strpos($id, 'ord') === 0) {
+            return $id;
+        }
+
+        $payment = $this->tryGetPayment($id);
+        if ($payment && $payment->getOrderId()) {
+            $id = $payment->getOrderId();
+        }
+
+        return $id;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Payment|null
+     */
+    protected function tryGetPayment($id)
+    {
+        try {
+            $payment = $this->getProxy()->getPayment($id);
+        } catch (\Exception $e) {
+            $payment = null;
+        }
+
+        return $payment;
+    }
+
+    /**
+     * @param string $mollieReference Payment or order id
+     *
+     * @return OrderReference|null
+     */
+    protected function getOrderReferenceData($mollieReference)
+    {
+        /** @var OrderReferenceService $orderReferenceService */
+        $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
+        return $orderReferenceService->getByMollieReference($mollieReference);
+    }
+
+    /**
+     * @param OrderChangedWebHookEvent|PaymentChangedWebHookEvent $changeEvent
+     */
+    protected function updateOrderReference($changeEvent)
+    {
+        /** @var OrderReferenceService $orderReferenceService */
+        $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
+        $orderReferenceService->updateOrderReference(
+            $this->getNewOrderReferencePayload($changeEvent),
+            $changeEvent->getOrderReference()->getShopReference(),
+            $changeEvent->getOrderReference()->getApiMethod()
+        );
     }
 
     /**

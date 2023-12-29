@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [v1.3.6](https://github.com/mollie/orocore/tree/v1.3.6) - 2022-09-15
+- Revert changes from previous release.
+
+## [v1.3.5](https://github.com/mollie/orocore/tree/v1.3.5) - 2022-09-13
+- Updated the access modifier of the fireChangeEvent method in 
+WebHookTransformer.
+
 ## [v1.3.4](https://github.com/mollie/orocore/tree/v1.3.4) - 2022-03-08
 - Added single-click payments.
 - Added surcharge rules.
