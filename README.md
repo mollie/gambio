@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*0.1.15*
+- Do not call payments API with order token.
+
 *0.1.14*
 - Fixed shipping costs per product.
 

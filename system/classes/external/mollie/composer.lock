@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da3926f8a5fe19106e304ee29aa74ab8",
+    "content-hash": "cf20fe4f9bf7aeb6f827a2bc94545b34",
     "packages": [
         {
             "name": "mollie/integration-core",
