@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a7cfb4e08044cab5247f40e05d3a28d",
+    "content-hash": "cf20fe4f9bf7aeb6f827a2bc94545b34",
     "packages": [
         {
             "name": "mollie/integration-core",
-            "version": "1.3.4",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mollie/orocore.git",
-                "reference": "b1f45941eecafe15720998c23c1516c16b6cba52"
+                "reference": "20a6c72f2dc4df1602dff085f66da8d93a02a597"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mollie/orocore/zipball/b1f45941eecafe15720998c23c1516c16b6cba52",
-                "reference": "b1f45941eecafe15720998c23c1516c16b6cba52",
+                "url": "https://api.github.com/repos/mollie/orocore/zipball/20a6c72f2dc4df1602dff085f66da8d93a02a597",
+                "reference": "20a6c72f2dc4df1602dff085f66da8d93a02a597",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "proprietary"
             ],
             "description": "Mollie integrations core library",
-            "time": "2022-03-08T09:02:35+00:00"
+            "time": "2024-02-23T16:33:33+00:00"
         }
     ],
     "packages-dev": [],
@@ -58,5 +58,5 @@
         "php": ">=5.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }
