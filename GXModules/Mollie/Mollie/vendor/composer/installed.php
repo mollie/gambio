@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.10',
-        'version' => '1.0.10.0',
+        'pretty_version' => '1.0.15',
+        'version' => '1.0.15.0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'mollie/gambio' => array(
-            'pretty_version' => '1.0.10',
-            'version' => '1.0.10.0',
+            'pretty_version' => '1.0.15',
+            'version' => '1.0.15.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'mollie/integration-core' => array(
-            'pretty_version' => '1.3.4',
-            'version' => '1.3.4.0',
+            'pretty_version' => '1.3.7',
+            'version' => '1.3.7.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mollie/integration-core',
             'aliases' => array(),
-            'reference' => 'b1f45941eecafe15720998c23c1516c16b6cba52',
+            'reference' => '20a6c72f2dc4df1602dff085f66da8d93a02a597',
             'dev_requirement' => false,
         ),
     ),
