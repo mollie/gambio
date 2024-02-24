@@ -1,7 +1,7 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 4.5.x - 4.6.x.
+This branch contains mollie module which is eligible for Gambio versions 4.5.x - 4.8.x.
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
@@ -29,11 +29,11 @@ If you have Gambio from 3.5.x to 4.0.x versions, please checkout on `3.5-4.0` br
 If you have Gambio from 4.1.x to 4.4.x versions, please checkout on `4.1-4.4` branch of this Github repository.
 ```
 
-To install the Mollie plugin for the **Gambio 4.1.x - 4.4.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
+To install the Mollie plugin for the **Gambio 4.5.x - 4.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
- 1. Download the latest `2.x.x` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 4.1.x - 4.4.x.
- 2. Copy the all content of the `gambio-2.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
+ 1. Download the latest `3.x.x` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 4.1.x - 4.4.x.
+ 2. Copy the all content of the `gambio-3.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
  3. Go to `Toolbox` » `Cache` on the Gambio admin page
  4. Clear the module, output, and text cache
  5. Go to `Modules` » `Modules-Center` on the Gambio admin page
@@ -45,6 +45,15 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+
+*3.0.20*
+- Do not call payments API with order token
+
+*3.0.19*
+- Fixed shipping costs per product.
+
+*3.0.18*
+- Added compatibility for Gambio versions 4.8.x and PHP8.2.
 
 *3.0.17*
 - Fixed loading js and css files
