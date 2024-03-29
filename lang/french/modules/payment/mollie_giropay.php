@@ -28,7 +28,7 @@ defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SORT_ORDER_TITLE') ?: define('MODULE_PAYM
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
 
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_TITLE', "Jours d'expiration");
-define('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_DESC', "Combien de jours avant l'expiration des commandes pour cette méthode? Laissez vide pour utiliser l'expiration par défaut (28 jours)");
+defined('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_ORDER_EXPIRES_DESC', "Combien de jours avant l'expiration des commandes pour cette méthode? Laissez vide pour utiliser l'expiration par défaut (28 jours)");
 
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
@@ -43,4 +43,4 @@ defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_PERCENTAGE_TITLE') ?: define('M
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_PERCENTAGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_PERCENTAGE_DESC', 'Coût supplémentaire à facturer au client pour les opérations de paiement défini comme un pourcentage du sous-total du panier.');
 
 defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_LIMIT_TITLE', 'Limite de majoration de paiement');
-define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');
+defined('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_GIROPAY_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');

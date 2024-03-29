@@ -28,7 +28,7 @@ defined('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_TITLE') ?: define('MODULE_PAYMENT_
 defined('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_EPS_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
 
 defined('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_TITLE', 'Dagen tot verstrijken');
-define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_EPS_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
 
 defined('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_EPS_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
@@ -43,4 +43,4 @@ defined('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_TITLE') ?: define('MODUL
 defined('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_PERCENTAGE_DESC', 'Extra kosten die aan de klant worden doorberekend voor betalingstransacties bepaald als een percentage van het subtotaal van de winkelwagen.');
 
 defined('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_TITLE', 'Betalingstoeslag limiet');
-define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_EPS_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');

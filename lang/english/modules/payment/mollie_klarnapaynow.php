@@ -28,7 +28,7 @@ defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_SORT_ORDER_TITLE') ?: define('MODULE
 defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
 
 defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_ORDER_EXPIRES_TITLE', 'Days To Expire');
-define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)<br><br>Please note: It is not possible to use an expiry date more than 28 days in the future, unless another maximum is agreed between the merchant and Klarna.');
+defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)<br><br>Please note: It is not possible to use an expiry date more than 28 days in the future, unless another maximum is agreed between the merchant and Klarna.');
 
 defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TRANSACTION_DESCRIPTION_TITLE', 'Transaction description');
 defined('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KLARNAPAYNOW_TRANSACTION_DESCRIPTION_DESC', 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.');

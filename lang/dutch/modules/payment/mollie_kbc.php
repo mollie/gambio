@@ -31,7 +31,7 @@ defined('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT
 defined('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
 defined('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_TITLE', 'Dagen tot verstrijken');
-define('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
+defined('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
 
 defined('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
@@ -46,4 +46,4 @@ defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_TITLE') ?: define('MODUL
 defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_DESC', 'Extra kosten die aan de klant worden doorberekend voor betalingstransacties bepaald als een percentage van het subtotaal van de winkelwagen.');
 
 defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_TITLE', 'Betalingstoeslag limiet');
-define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');
+defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');
