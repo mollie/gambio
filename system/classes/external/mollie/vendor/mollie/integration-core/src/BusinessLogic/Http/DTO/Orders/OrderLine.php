@@ -142,7 +142,7 @@ class OrderLine extends BaseDto
         $orderLine->type = static::getValue($raw, 'type', null);
         $orderLine->sku = static::getValue($raw, 'sku', null);
 
-        $orderLine->metadata = static::getValue($raw, 'metadata', array());
+        $orderLine->metadata = (array)static::getValue($raw, 'metadata', array());
         $orderLine->id = static::getValue($raw, 'id');
         $orderLine->orderId = static::getValue($raw, 'orderId');
         $orderLine->isCancelable = static::getValue($raw, 'isCancelable', false);
@@ -166,8 +166,8 @@ class OrderLine extends BaseDto
 
         $orderLine->createdAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'createdAt'));
 
-        foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
-            $orderLine->links[$linkKey] = Link::fromArray($linkData);
+        foreach ((array)static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
+            $orderLine->links[$linkKey] = Link::fromArray((array)$linkData);
         }
 
         return $orderLine;
