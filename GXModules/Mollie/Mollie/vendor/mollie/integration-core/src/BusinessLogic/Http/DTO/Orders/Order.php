@@ -162,7 +162,7 @@ class Order extends BaseDto
         $order->amountRefunded = Amount::fromArray(static::getValue($raw, 'amountRefunded', array()));
         $order->status = static::getValue($raw, 'status');
         $order->isCancelable = static::getValue($raw, 'isCancelable', true);
-        $order->metadata = static::getValue($raw, 'metadata', array());
+        $order->metadata = (array)static::getValue($raw, 'metadata', array());
         $order->createdAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'createdAt'));
         $order->expiresAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'expiresAt'));
         $order->expiredAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'expiredAt'));
@@ -187,8 +187,8 @@ class Order extends BaseDto
             $order->embedded['refunds'] = Refund::fromArrayBatch(static::getValue($raw['_embedded'], 'refunds', array()));
         }
 
-        foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
-            $order->links[$linkKey] = Link::fromArray($linkData);
+        foreach ((array)static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
+            $order->links[$linkKey] = Link::fromArray((array)$linkData);
         }
 
         if (!empty($raw['payment'])) {
