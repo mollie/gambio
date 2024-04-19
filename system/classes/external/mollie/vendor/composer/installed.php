@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '0.1.16',
-        'version' => '0.1.16.0',
+        'pretty_version' => '0.1.17',
+        'version' => '0.1.17.0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'mollie/gambio' => array(
-            'pretty_version' => '0.1.16',
-            'version' => '0.1.16.0',
+            'pretty_version' => '0.1.17',
+            'version' => '0.1.17.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
