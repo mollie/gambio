@@ -3,7 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [v1.3.7](https://github.com/mollie/orocore/tree/v1.3.6) - 2024-02-23
+## [v1.3.8](https://github.com/mollie/orocore/tree/v1.3.8) - 2024-04-19
+- Add casting to array in DTO classes
+
+## [v1.3.7](https://github.com/mollie/orocore/tree/v1.3.7) - 2024-02-23
 - Do not call payments API with order token
 
 ## [v1.3.6](https://github.com/mollie/orocore/tree/v1.3.6) - 2022-09-15
