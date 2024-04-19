@@ -40,6 +40,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*1.0.17*
+- Add casting to array in DTO classes
+
 *1.0.16*
 - Verify if the string constants are already defined
 
