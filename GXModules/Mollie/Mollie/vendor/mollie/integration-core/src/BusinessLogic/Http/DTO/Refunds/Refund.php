@@ -84,12 +84,12 @@ class Refund extends BaseDto
         $refund->lines = OrderLine::fromArrayBatch(static::getValue($raw, 'lines', array()));
         $refund->createdAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'createdAt'));
         $refund->description = static::getValue($raw, 'description');
-        $refund->metadata = static::getValue($raw, 'metadata', null);
+        $refund->metadata = (array)static::getValue($raw, 'metadata', null);
         $refund->paymentId = static::getValue($raw, 'paymentId');
         $refund->orderId = static::getValue($raw, 'orderId');
 
-        foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
-            $refund->links[$linkKey] = Link::fromArray($linkData);
+        foreach ((array)static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
+            $refund->links[$linkKey] = Link::fromArray((array)$linkData);
         }
 
         return $refund;

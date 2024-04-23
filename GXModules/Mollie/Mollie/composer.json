@@ -1,9 +1,9 @@
 {
   "name": "mollie/gambio",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "require": {
     "php": ">=5.4",
-    "mollie/integration-core": "1.3.7"
+    "mollie/integration-core": "1.3.8"
   },
   "repositories": [
     {

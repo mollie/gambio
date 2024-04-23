@@ -58,11 +58,11 @@ class Customer extends BaseDto
         $customer->mode = static::getValue($raw, 'mode');
         $customer->email = static::getValue($raw, 'email');
         $customer->locale = static::getValue($raw, 'locale');
-        $customer->metadata = static::getValue($raw, 'metadata', array());
+        $customer->metadata = (array)static::getValue($raw, 'metadata', array());
         $customer->createdAt = static::getValue($raw, 'createdAt');
 
-        foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
-            $customer->links[$linkKey] = Link::fromArray($linkData);
+        foreach ((array)static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
+            $customer->links[$linkKey] = Link::fromArray((array)$linkData);
         }
 
         return $customer;
