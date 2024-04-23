@@ -128,7 +128,7 @@ class Payment extends BaseDto
         $result->setLocale(static::getValue($raw, 'locale'));
         $method = static::getValue($raw, 'method', array());
         $result->methods = is_array($method) ? $method : array($method);
-        $result->metadata = static::getValue($raw, 'metadata', array());
+        $result->metadata = (array)static::getValue($raw, 'metadata', array());
 
         $result->dueDate = \DateTime::createFromFormat(Order::MOLLIE_DATE_FORMAT, static::getValue($raw, 'dueDate'));
         $result->expiresAt = \DateTime::createFromFormat(DATE_ATOM, static::getValue($raw, 'expiresAt'));
@@ -138,8 +138,8 @@ class Payment extends BaseDto
             $result->shippingAddress = Address::fromArray($shippingAddress);
         }
 
-        foreach (static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
-            $result->links[$linkKey] = Link::fromArray($linkData);
+        foreach ((array)static::getValue($raw, '_links', array()) as $linkKey => $linkData) {
+            $result->links[$linkKey] = Link::fromArray((array)$linkData);
         }
 
         if (array_key_exists('_embedded', $raw)) {
