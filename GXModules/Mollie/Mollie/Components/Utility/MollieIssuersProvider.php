@@ -106,13 +106,17 @@ class MollieIssuersProvider
     private function renderIssuerList()
     {
         $template = PathProvider::getShopTemplatePath('mollie_issuer_list.html');
+        $issuers = $this->_formatIssuers();
+
+        if ($this->paymentMethod->getId() === 'ideal') {
+            $issuers = array();
+        }
 
         return mollie_render_template(
             $template,
             [
-                'isLegacy' => $this->versionCompatibilityProvider->isLegacyVersion(),
                 'payment_method' => $this->code,
-                'issuers' => $this->_formatIssuers(),
+                'issuers' => $issuers,
                 'list_type' => $this->issuerListType,
             ]
         );
