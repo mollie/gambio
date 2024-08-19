@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.0.20*
+- Change from iDeal 1.0 to iDeal 2.0 payment method
+
 *2.0.19*
 - Add casting to array in DTO classes
 
