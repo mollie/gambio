@@ -1,7 +1,6 @@
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
         let issuerListWrappers = document.querySelectorAll('.mollie-issuer-list-wrapper');
-
         const paymentMethods = document.querySelectorAll('input[type="radio"]');
 
         //switch to iDeal 2.0 without issuers
@@ -18,6 +17,11 @@
             }
         });
 
+        //in case if ideal is the only available payment method, it won't be shown as radio button but as li element
+        const issuerMethod = document.querySelector('li.mollie_ideal');
+        if (issuerMethod) {
+            hideIdealCheckoutPaymentForm();
+        }
 
         for (let i = 0; i < issuerListWrappers.length; i++) {
             addIssuerListListeners(issuerListWrappers[i]);
