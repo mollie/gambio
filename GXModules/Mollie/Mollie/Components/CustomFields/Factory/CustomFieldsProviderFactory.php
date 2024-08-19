@@ -31,7 +31,7 @@ class CustomFieldsProviderFactory
             return new CreditCardCustomFieldsProvider($methodKey);
         }
 
-        if (in_array($methodKey, ['mollie_ideal', 'mollie_kbc', 'mollie_giftcard'], true)) {
+        if (in_array($methodKey, ['mollie_kbc', 'mollie_giftcard'], true)) {
             return new IssuerListSupportedCustomFieldsProvider($methodKey);
         }
 
