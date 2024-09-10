@@ -51,7 +51,8 @@ class PaymentMethodConfig extends Entity
         PaymentMethods::KlarnaPayLater => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaSliceIt => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaPayNow => self::API_METHOD_ORDERS,
-        PaymentMethods::Vouchers => self::API_METHOD_ORDERS
+        PaymentMethods::Vouchers => self::API_METHOD_ORDERS,
+        PaymentMethods::Billie => self::API_METHOD_ORDERS
     );
 
     /**
@@ -61,6 +62,7 @@ class PaymentMethodConfig extends Entity
         PaymentMethods::KlarnaPayLater,
         PaymentMethods::KlarnaSliceIt,
         PaymentMethods::KlarnaPayNow,
+        PaymentMethods::Billie
     );
 
     /**
