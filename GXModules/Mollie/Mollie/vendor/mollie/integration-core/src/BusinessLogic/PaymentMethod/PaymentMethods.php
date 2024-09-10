@@ -19,4 +19,5 @@ class PaymentMethods
     const GiftCard = 'giftcard';
     const Vouchers = 'voucher';
     const Banktransfer = 'banktransfer';
+    const Billie = 'billie';
 }
