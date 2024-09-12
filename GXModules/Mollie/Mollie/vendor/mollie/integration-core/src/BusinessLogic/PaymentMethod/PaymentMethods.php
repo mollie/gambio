@@ -21,4 +21,5 @@ class PaymentMethods
     const Banktransfer = 'banktransfer';
     const Billie = 'billie';
     const Klarna = 'klarna';
+    const Riverty = 'riverty';
 }
