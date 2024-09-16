@@ -22,4 +22,5 @@ class PaymentMethods
     const Billie = 'billie';
     const Klarna = 'klarna';
     const Riverty = 'riverty';
+    const Trustly = 'trustly';
 }
