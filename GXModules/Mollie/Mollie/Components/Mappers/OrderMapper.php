@@ -125,6 +125,7 @@ class OrderMapper
         $email = $sourceOrder->getCustomerEmail();
         $phone = $sourceOrder->getCustomerTelephone();
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
+        $payment->setBillingAddress($this->getAddressData($sourceOrder->getBillingAddress(), $email, $phone));
 
         $daysToExpire = $this->getDaysToExpirePayment($sourceOrder->getPaymentType()->getModule());
         if (!empty($daysToExpire)) {
