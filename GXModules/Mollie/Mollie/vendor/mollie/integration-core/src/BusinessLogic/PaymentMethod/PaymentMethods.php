@@ -23,5 +23,6 @@ class PaymentMethods
     const Klarna = 'klarna';
     const Riverty = 'riverty';
     const Trustly = 'trustly';
+    const Twint = 'twint';
     const Alma = 'alma';
 }
