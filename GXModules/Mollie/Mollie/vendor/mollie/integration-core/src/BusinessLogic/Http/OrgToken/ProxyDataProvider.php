@@ -58,6 +58,8 @@ class ProxyDataProvider
         );
 
         $shippingAddress = $payment->getShippingAddress();
+        $billingAddress = $payment->getBillingAddress();
+
         if ($shippingAddress && $method === PaymentMethods::PayPal) {
             $result['shippingAddress'] = array(
                 'streetAndNumber' => $shippingAddress->getStreetAndNumber(),
@@ -66,6 +68,20 @@ class ProxyDataProvider
                 'region' => $shippingAddress->getRegion(),
                 'postalCode' => $shippingAddress->getPostalCode(),
                 'country' => $shippingAddress->getCountry(),
+            );
+        }
+
+        if ($billingAddress && $method === PaymentMethods::Alma) {
+            $result['billingAddress'] = array(
+                'streetAndNumber' => $billingAddress->getStreetAndNumber(),
+                'streetAdditional' => $billingAddress->getStreetAdditional(),
+                'city' => $billingAddress->getCity(),
+                'region' => $billingAddress->getRegion(),
+                'postalCode' => $billingAddress->getPostalCode(),
+                'country' => $billingAddress->getCountry(),
+                'givenName' => $billingAddress->getGivenName(),
+                'familyName' => $billingAddress->getFamilyName(),
+                'email' => $billingAddress->getEmail() ?: null
             );
         }
 
