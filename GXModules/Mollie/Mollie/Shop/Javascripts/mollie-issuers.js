@@ -1,12 +1,40 @@
-(function() {
+(function () {
     document.addEventListener("DOMContentLoaded", function () {
         let issuerListWrappers = document.querySelectorAll('.mollie-issuer-list-wrapper');
+        const paymentMethods = document.querySelectorAll('input[type="radio"]');
+
+        //switch to iDeal 2.0 without issuers
+        paymentMethods.forEach(function (method) {
+            if (method.value.includes('mollie_')) {
+                if (method.value === 'mollie_ideal') {
+                    if (method.checked) {
+                        hideIdealCheckoutPaymentForm();
+                    }
+                    method.addEventListener('click', function () {
+                        hideIdealCheckoutPaymentForm();
+                    });
+                }
+            }
+        });
+
+        //in case if ideal is the only available payment method, it won't be shown as radio button but as li element
+        const issuerMethod = document.querySelector('li.mollie_ideal');
+        if (issuerMethod) {
+            hideIdealCheckoutPaymentForm();
+        }
+
         for (let i = 0; i < issuerListWrappers.length; i++) {
             addIssuerListListeners(issuerListWrappers[i]);
         }
 
         let checkoutForm = document.querySelector('#checkout_payment');
         checkoutForm.addEventListener('submit', async event => {
+            //skip checking issuer selection for iDeal 2.0 payment method
+            let activeMethod = getActiveMethod();
+            if (activeMethod.classList.contains('mollie_ideal')) {
+                return;
+            }
+
             if (!isIssuersSelected()) {
                 showIssuerErrorMessage();
                 event.preventDefault();
@@ -94,6 +122,13 @@
 
         function getActiveMethod() {
             return document.querySelector('.list-group-item.active');
+        }
+
+        function hideIdealCheckoutPaymentForm() {
+            let checkoutPaymentForm = document.querySelector('.checkout-payment-form');
+            if (checkoutPaymentForm) {
+                checkoutPaymentForm.style.display = 'none';
+            }
         }
 
     });
