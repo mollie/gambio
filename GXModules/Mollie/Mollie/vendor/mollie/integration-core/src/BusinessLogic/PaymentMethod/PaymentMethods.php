@@ -19,4 +19,8 @@ class PaymentMethods
     const GiftCard = 'giftcard';
     const Vouchers = 'voucher';
     const Banktransfer = 'banktransfer';
+    const Billie = 'billie';
+    const Klarna = 'klarna';
+    const Riverty = 'riverty';
+    const Trustly = 'trustly';
 }
