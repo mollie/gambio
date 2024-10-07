@@ -6,6 +6,8 @@ use Mollie\Gambio\CustomFields\Providers\CreditCardCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\CustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\IssuerListSupportedCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\KlarnaCustomFieldsProvider;
+use Mollie\Gambio\CustomFields\Providers\BillieCustomFieldsProvider;
+use Mollie\Gambio\CustomFields\Providers\RivertyCustomFieldsProvider;
 
 /**
  * Class CustomFieldsProviderFactory
@@ -25,6 +27,14 @@ class CustomFieldsProviderFactory
     {
         if (strpos($methodKey, 'klarna') !== false) {
             return new KlarnaCustomFieldsProvider($methodKey);
+        }
+
+        if (strpos($methodKey, 'mollie_billie') !== false) {
+            return new BillieCustomFieldsProvider($methodKey);
+        }
+
+        if (strpos($methodKey, 'riverty') !== false) {
+            return new RivertyCustomFieldsProvider($methodKey);
         }
 
         if($methodKey === 'mollie_creditcard'){

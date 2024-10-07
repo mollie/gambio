@@ -41,6 +41,12 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.0.20*
+- Add Billie payment method
+- Add Klarna One payment method
+- Add Rivery payment method
+- Deactivate Giropay. Add Trustly payment method
+
 *2.0.19*
 - Add casting to array in DTO classes
 
