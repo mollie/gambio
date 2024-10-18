@@ -40,6 +40,11 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*1.0.19*
+- Add Twint payment method
+- Add Alma payment method
+- Change from iDeal 1.0 to iDeal 2.0 payment method
+
 *1.0.18*
 - Add Billie payment method
 - Add Klarna One payment method
