@@ -21,13 +21,13 @@
 
         {if $content.is_connected}
 
-            {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_payment_methods.html"}
+        {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_payment_methods.html"}
 
-            {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_order_statuses.html"}
+        {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_order_statuses.html"}
 
-            {if $content.notification_page_count > 0}
-                {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_notifications.html"}
-            {/if}
+        {if $content.notification_page_count > 0}
+        {include file="get_usermod:Mollie/Mollie/Admin/Html/ConfigSections/mollie_notifications.html"}
+        {/if}
         {/if}
 
         <div class="row bottom-save-bar-content">

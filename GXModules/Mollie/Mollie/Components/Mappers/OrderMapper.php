@@ -118,6 +118,12 @@ class OrderMapper
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
         $payment->setBillingAddress($this->getAddressData($sourceOrder->getBillingAddress(), $email, $phone));
 
+        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency);
+        $orderTotalMapper = new OrderTotalMapper($currency);
+        $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($sourceOrder->getOrderTotals()));
+
+        $payment->setLines($lines);
+
         $daysToExpire = $this->getDaysToExpirePayment($sourceOrder->getPaymentType()->getPaymentClass());
         if (!empty($daysToExpire)) {
             $payment->calculateDueDate((int)$daysToExpire);

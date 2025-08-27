@@ -19,6 +19,7 @@ $(document).ready(function () {
      * @param {string} surchargeType
      */
     function displayFieldsBasedOnSurchargeType(surchargeType) {
+        console.log('displayFieldsBasedOnSurchargeType called');
         let wrapper = $('#configuration-box-form');
         if (wrapper.length === 0) {
             return;

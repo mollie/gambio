@@ -45,7 +45,6 @@ class CustomFieldsProvider
         return $this->renderLogoEdit() .
             $this->renderMultiLangEdit() .
             $this->renderApiEdit() .
-            $this->renderDaysToExpireEdit() .
             $this->renderCountryZonesEdit() .
             $this->renderSurchargeTypeSelection() .
             $this->renderSurchargeEditFields();
@@ -61,32 +60,9 @@ class CustomFieldsProvider
         return $this->renderLogoOverview() .
             $this->renderMultiLangFieldsOverview() .
             $this->renderApiOverview() .
-            $this->renderDaysToExpireOverview() .
             $this->renderCountryZonesOverview().
             $this->renderSurchargeTypeOverview() .
             $this->renderSurchargeFieldsOverview();
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    protected function renderDaysToExpireOverview()
-    {
-        return $this->isOrdersApi() || $this->module === 'mollie_banktransfer' ?
-            mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('ORDER_EXPIRES')) :
-            '';
-    }
-
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    protected function renderDaysToExpireEdit()
-    {
-        $orderExpiresKey = $this->_formatKey('ORDER_EXPIRES');
-
-        return mollie_input_integer($this->getConstantValue($orderExpiresKey), $orderExpiresKey);
     }
 
     /**
@@ -230,6 +206,26 @@ class CustomFieldsProvider
         $zonesKey = $this->_formatKey('ALLOWED_ZONES');
 
         return mollie_multi_select_countries($this->getConstantValue($zonesKey), $zonesKey);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderCaptureOverview()
+    {
+        return mollie_render_template($this->overviewTemplatePath, $this->_formatOverviewData('CAPTURE_OPTION'));
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    protected function renderCaptureEdit()
+    {
+        $apiMethodKey = $this->_formatKey('CAPTURE_OPTION');
+
+        return mollie_capture_select($this->getConstantValue($apiMethodKey), $apiMethodKey);
     }
 
     /**

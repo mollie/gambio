@@ -14,7 +14,6 @@ use Mollie\BusinessLogic\OrderReference\Model\OrderReference;
 use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentTransactionDescriptionService;
 use Mollie\BusinessLogic\VersionCheck\VersionCheckService;
-use Mollie\Gambio\APIProcessor\OrderProcessor;
 use Mollie\Gambio\APIProcessor\PaymentProcessor;
 use Mollie\Gambio\APIProcessor\ProcessorRegister;
 use Mollie\Gambio\Entity\Repository\BaseRepository;
@@ -153,7 +152,7 @@ class BootstrapComponent extends \Mollie\BusinessLogic\BootstrapComponent
         ProcessorRegister::registerProcessor(
             PaymentMethodConfig::API_METHOD_ORDERS,
             static function () use ($mapper){
-                return new OrderProcessor($mapper);
+                return new PaymentProcessor($mapper);
             }
         );
     }
