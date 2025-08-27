@@ -17,7 +17,7 @@ class mollie_billie extends mollie
      */
     public function keys()
     {
-        $keys   = parent::keys();
+        $keys = parent::keys();
         $hidden = ['MODULE_PAYMENT_' . strtoupper($this->code) . '_API_METHOD'];
         return array_values(array_diff($keys, $hidden));
     }

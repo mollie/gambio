@@ -30,3 +30,6 @@ defined('MODULE_PAYMENT_MOLLIE_KLARNA_ORDER_EXPIRES_DESC') ?: define('MODULE_PAY
 defined('MODULE_PAYMENT_MOLLIE_KLARNA_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KLARNA_TRANSACTION_DESCRIPTION_TITLE', 'Transaktion Beschreibung');
 defined('MODULE_PAYMENT_MOLLIE_KLARNA_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KLARNA_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
 
+defined('MODULE_PAYMENT_MOLLIE_KLARNA_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KLARNA_CAPTURE_OPTION_TITLE', 'Payment capture');
+defined('MODULE_PAYMENT_MOLLIE_KLARNA_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KLARNA_CAPTURE_OPTION_DESC', '<b>Select a capture type.<br>');
+
