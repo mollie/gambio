@@ -2,13 +2,10 @@
 
 use Mollie\BusinessLogic\Http\DTO\Payments\Amount;
 use Mollie\BusinessLogic\Http\DTO\Payments\Capture;
-use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
 use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\Gambio\Utility\MollieTranslator;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
-use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
-use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
 use Mollie\Infrastructure\ServiceRegister;
 
 require_once __DIR__ . '/../../../autoload.php';

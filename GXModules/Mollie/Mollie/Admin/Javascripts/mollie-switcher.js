@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log('mollieSwitcher');
     let mollieSwitcher = $('.mollie-switcher');
 
     mollieSwitcher.each(function () {
