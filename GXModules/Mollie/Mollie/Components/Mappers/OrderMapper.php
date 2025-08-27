@@ -25,15 +25,6 @@ class OrderMapper
      */
     private $orderReadService;
 
-
-    /**
-     * OrderMapper constructor.
-     */
-    public function __construct()
-    {
-        $this->orderReadService = \StaticGXCoreLoader::getService('OrderRead');
-    }
-
     /**
      * @param int $orderId
      *
@@ -42,7 +33,7 @@ class OrderMapper
     public function getOrder($orderId)
     {
         /** @var \OrderInterface $sourceOrder */
-        $sourceOrder = $this->orderReadService->getOrderById(new \IdType($orderId));
+        $sourceOrder = $this->getOrderReadService()->getOrderById(new \IdType($orderId));
         $orderTotals = $sourceOrder->getOrderTotals();
         $currency = $sourceOrder->getCurrencyCode()->getCode();
 
@@ -110,7 +101,7 @@ class OrderMapper
     public function getPayment($orderId)
     {
         /** @var \OrderInterface $sourceOrder */
-        $sourceOrder = $this->orderReadService->getOrderById(new \IdType($orderId));
+        $sourceOrder = $this->getOrderReadService()->getOrderById(new \IdType($orderId));
         $currency = $sourceOrder->getCurrencyCode()->getCode();
 
         $payment = $this->getCommonPaymentData();
@@ -126,6 +117,12 @@ class OrderMapper
         $phone = $sourceOrder->getCustomerTelephone();
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
         $payment->setBillingAddress($this->getAddressData($sourceOrder->getBillingAddress(), $email, $phone));
+
+        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency);
+        $orderTotalMapper = new OrderTotalMapper($currency);
+        $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($sourceOrder->getOrderTotals()));
+
+        $payment->setLines($lines);
 
         $daysToExpire = $this->getDaysToExpirePayment($sourceOrder->getPaymentType()->getPaymentClass());
         if (!empty($daysToExpire)) {
@@ -208,4 +205,17 @@ class OrderMapper
         return $totalPrice;
     }
 
+    /**
+     * Returns an instance of the order read service.
+     *
+     * @return \OrderReadServiceInterface
+     */
+    private function getOrderReadService()
+    {
+        if ($this->orderReadService === null) {
+            $this->orderReadService = \StaticGXCoreLoader::getService('OrderRead');
+        }
+
+        return $this->orderReadService;
+    }
 }

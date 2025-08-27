@@ -69,7 +69,6 @@ class PaymentLinkProvider
         }
 
         return $this->checkoutLinkService->getCheckoutLink($shopReference);
-
     }
 
     /**

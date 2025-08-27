@@ -1,15 +1,15 @@
 <?php
 
 use Mollie\BusinessLogic\Http\DTO\Refunds\Refund;
+use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
+use Mollie\BusinessLogic\Http\Proxy;
 use Mollie\BusinessLogic\OrderReference\OrderReferenceService;
-use Mollie\BusinessLogic\Orders\OrderService;
-use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
-use Mollie\BusinessLogic\Payments\PaymentService;
-use Mollie\BusinessLogic\Refunds\RefundService;
 use Mollie\Gambio\APIProcessor\Exceptions\RefundFormNotValidException;
 use Mollie\Gambio\Utility\MollieTranslator;
 use Mollie\Gambio\Utility\PathProvider;
 use Mollie\Gambio\Utility\UrlProvider;
+use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
 use Mollie\Infrastructure\Logger\Logger;
 use Mollie\Infrastructure\ServiceRegister;
 
@@ -20,32 +20,24 @@ require_once __DIR__ . '/../../../autoload.php';
  */
 class MollieRefundController extends AdminHttpViewController
 {
+    /**
+     * @var Proxy
+     */
+    private $proxy;
 
     /**
-     * @var OrderReferenceService
-     */
-    private $orderReferenceService;
-    /**
-     * @var OrderService
-     */
-    private $orderService;
-    /**
-     * @var RefundService
-     */
-    private $refundService;
-    /**
-     * @var PaymentService
-     */
-    private $paymentService;
-
-    /**
-     * @return HttpControllerResponseInterface|mixed
+     * @return AdminLayoutHttpControllerResponse
+     *
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     public function actionDefault()
     {
         $template = PathProvider::getAdminTemplate('refund.html', 'OrderDashboard/Popups');
-        $title    = new NonEmptyStringType('Mollie Configuration');
-        $data     = MainFactory::create('KeyValueCollection', $this->_getTemplateData());
+        $title = new NonEmptyStringType('Mollie Configuration');
+        $data = MainFactory::create('KeyValueCollection', $this->_getTemplateData());
 
         return MainFactory::create('AdminLayoutHttpControllerResponse', $title, $template, $data);
     }
@@ -55,37 +47,33 @@ class MollieRefundController extends AdminHttpViewController
      */
     public function actionProcessRefund()
     {
-        $messageKey  = 'mollie_refund_success';
+        $messageKey = 'mollie_refund_success';
         $messageType = 'success';
-        $apiMsg      = '';
+        $apiMsg = '';
         try {
             $orderId = $this->_getQueryParameter('orders_id');
             $payload = json_decode(file_get_contents('php://input'), true);
-            if ($payload['ordersApiUsed']) {
-                $refund = $this->_validatePayloadAndCreateOrderRefund($payload);
-                $this->_getRefundService()->refundOrderLines($orderId, $refund);
-            } else {
-                $refund = $this->_validatePayloadAndCreatePaymentRefund($payload);
-                $isOrdersApiUsed = $this->_isOrdersApiUsed($orderId);
-                $refundMethod = $isOrdersApiUsed ? 'refundWholeOrder' : 'refundPayment';
-                $this->_getRefundService()->{$refundMethod}($orderId, $refund);
-            }
+            $transactionId = $this->getTransactionId($orderId);
+
+            $refund = $this->_validatePayloadAndCreatePaymentRefund($payload);
+            $this->_getProxy()->createPaymentRefund($refund, $transactionId);
+
         } catch (Exception $exception) {
-            $messageKey  = 'mollie_refund_error';
+            $messageKey = 'mollie_refund_error';
             $messageType = 'error';
-            $apiMsg      = $exception->getMessage();
+            $apiMsg = $exception->getMessage();
             Logger::logError(
                 'Failed to process refund action',
                 'Integration',
                 [
                     'ExceptionMessage' => $exception->getMessage(),
-                    'ExceptionTrace'   => $exception->getTraceAsString(),
+                    'ExceptionTrace' => $exception->getTraceAsString(),
                 ]
             );
         }
 
         $languageTextManager = new MollieTranslator();
-        $message             = $languageTextManager->translate($messageKey) . $apiMsg;
+        $message = $languageTextManager->translate($messageKey) . $apiMsg;
         $GLOBALS['messageStack']->add_session($message, $messageType);
 
         $data['success'] = true;
@@ -95,27 +83,26 @@ class MollieRefundController extends AdminHttpViewController
 
     /**
      * @return array
+     *
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
     private function _getTemplateData()
     {
-        $orderId         = $this->_getQueryParameter('orders_id');
+        $orderId = $this->_getQueryParameter('orders_id');
+        $transactionId = $this->getTransactionId($orderId);
         /** @var OrderReadServiceInterface $orderService */
-        $orderService    = StaticGXCoreLoader::getService('OrderRead');
+        $orderService = StaticGXCoreLoader::getService('OrderRead');
         /** @var OrderInterface $gambioOrder */
-        $gambioOrder     = $orderService->getOrderById(new IdType($orderId));
+        $gambioOrder = $orderService->getOrderById(new IdType($orderId));
 
-        $isOrdersApiUsed = $this->_isOrdersApiUsed($orderId);
+        $data['payment'] = $this->_getPaymentRefund($transactionId);
 
-        if ($isOrdersApiUsed) {
-            $data['order'] = $this->_getOrderData($orderId);
-        } else {
-            $data['payment'] = $this->_getPaymentRefund($orderId);
-        }
-
-        $data['currency']           = $gambioOrder->getCurrencyCode()->getCode();
-        $data['is_orders_api']      = $isOrdersApiUsed;
-        $data['js_admin']           = UrlProvider::getPluginJavascriptUrl('');
-        $data['css_admin']           = UrlProvider::getPluginCssUrl('');
+        $data['currency'] = $gambioOrder->getCurrencyCode()->getCode();
+        $data['js_admin'] = UrlProvider::getPluginJavascriptUrl('');
+        $data['css_admin'] = UrlProvider::getPluginCssUrl('');
         $data['process_refund_url'] = UrlProvider::generateAdminUrl(
             'admin.php',
             'MollieRefund/processRefund',
@@ -126,106 +113,45 @@ class MollieRefundController extends AdminHttpViewController
     }
 
     /**
-     * @param $orderId
+     * @param string $orderId
      *
-     * @return array
-     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
-     * @throws \Mollie\BusinessLogic\OrderReference\Exceptions\ReferenceNotFoundException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
+     * @return string
      */
-    private function _getOrderData($orderId)
+    private function getTransactionId($orderId)
     {
-        $mollieOrder = $this->_getOrderService()->getOrder($orderId);
+        /** @var OrderReferenceService $orderReferenceService */
+        $orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
+        $orderReference = $orderReferenceService->getByShopReference($orderId);
 
-        $data                       = $mollieOrder->toArray();
-        $data['availableForRefund'] = $mollieOrder->getAmount()->getAmountValue() - $mollieOrder->getAmountRefunded()->getAmountValue();
+        if (strpos($orderReference->getMollieReference(), 'ord_') !== false) {
+            $payload = $orderReference->getPayload();
+            $payment = $payload['_embedded']['payments'];
+            if (count($payment) > 0) {
+                $payment = $payment[0];
+                return $payment['id'];
+            }
+        }
 
-        return $data;
+        return $orderReference->getMollieReference();
     }
 
     /**
-     * @param int $orderId
+     * @param string $transactionId
      *
      * @return array
-     * @throws \Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException
-     * @throws \Mollie\BusinessLogic\OrderReference\Exceptions\ReferenceNotFoundException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException
-     * @throws \Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
      * @throws \Mollie\Infrastructure\Http\Exceptions\HttpRequestException
      */
-    private function _getPaymentRefund($orderId)
+    private function _getPaymentRefund($transactionId)
     {
-        $molliePayment = $this->_getPaymentService()->getPayment($orderId);
+        $molliePayment = $this->_getProxy()->getPayment($transactionId);
 
-        $data                       = $molliePayment->toArray();
+        $data = $molliePayment->toArray();
         $data['availableForRefund'] = $molliePayment->getAmount()->getAmountValue() - $molliePayment->getAmountRefunded()->getAmountValue();
 
         return $data;
-    }
-
-    /**
-     * @return OrderReferenceService
-     */
-    private function _getOrderReferenceService()
-    {
-        if ($this->orderReferenceService === null) {
-            $this->orderReferenceService = ServiceRegister::getService(OrderReferenceService::CLASS_NAME);
-        }
-
-        return $this->orderReferenceService;
-    }
-
-    /**
-     * @return OrderService
-     */
-    private function _getOrderService()
-    {
-        if ($this->orderService === null) {
-            $this->orderService = ServiceRegister::getService(OrderService::CLASS_NAME);
-        }
-
-        return $this->orderService;
-    }
-
-    /**
-     * @return RefundService
-     */
-    private function _getRefundService()
-    {
-        if ($this->refundService === null) {
-            $this->refundService = ServiceRegister::getService(RefundService::CLASS_NAME);
-        }
-
-        return $this->refundService;
-    }
-
-    /**
-     * @return PaymentService
-     */
-    private function _getPaymentService()
-    {
-        if ($this->paymentService === null) {
-            $this->paymentService = ServiceRegister::getService(PaymentService::CLASS_NAME);
-        }
-
-        return $this->paymentService;
-    }
-
-    /**
-     * @param array $payload
-     *
-     * @return Refund
-     * @throws RefundFormNotValidException
-     */
-    private function _validatePayloadAndCreateOrderRefund(array $payload)
-    {
-        if (empty($payload['lines'])) {
-            throw new RefundFormNotValidException('Order lines not set in the payload');
-        }
-
-        return Refund::fromArray($payload);
     }
 
     /**
@@ -248,12 +174,14 @@ class MollieRefundController extends AdminHttpViewController
     }
 
     /**
-     * @param int $orderId
-     *
-     * @return bool
+     * @return Proxy
      */
-    private function _isOrdersApiUsed($orderId)
+    private function _getProxy()
     {
-        return $this->_getOrderReferenceService()->getApiMethod($orderId) === PaymentMethodConfig::API_METHOD_ORDERS;
+        if ($this->proxy === null) {
+            $this->proxy = ServiceRegister::getService(Proxy::CLASS_NAME);
+        }
+
+        return $this->proxy;
     }
 }

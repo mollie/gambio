@@ -2,6 +2,8 @@
 
 namespace Mollie\Gambio\CustomFields\Providers;
 
+use Exception;
+
 /**
  * Class RivertyCustomFieldsProvider
  *
@@ -9,6 +11,30 @@ namespace Mollie\Gambio\CustomFields\Providers;
  */
 class RivertyCustomFieldsProvider extends CustomFieldsProvider
 {
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function renderAllCustomFields()
+    {
+        return parent::renderAllCustomFields() .
+            $this->renderCaptureEdit();
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function renderCustomOverviewFields()
+    {
+        return parent::renderCustomOverviewFields() .
+            $this->renderCaptureOverview();
+    }
+
     /**
      * @inheritDoc
      * @return string

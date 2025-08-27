@@ -20,7 +20,7 @@ class BillieCustomFieldsProvider extends CustomFieldsProvider
         return $this->renderLogoEdit() .
             $this->renderMultiLangEdit() .
             $this->renderApiEdit() .
-            $this->renderDaysToExpireEdit() .
+            $this->renderCaptureEdit() .
             $this->renderCountryZonesEdit();
     }
 
@@ -35,7 +35,7 @@ class BillieCustomFieldsProvider extends CustomFieldsProvider
         return $this->renderLogoOverview() .
             $this->renderMultiLangFieldsOverview() .
             $this->renderApiOverview() .
-            $this->renderDaysToExpireOverview() .
+            $this->renderCaptureOverview() .
             $this->renderCountryZonesOverview();
     }
 

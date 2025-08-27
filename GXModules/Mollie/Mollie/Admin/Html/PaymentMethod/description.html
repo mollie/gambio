@@ -10,12 +10,12 @@
             </svg>
         </div>
         {{if !$mollie.is_connected}}
-            <div class="mollie-info-item">
-                <div class="float-right">
-                    <i class="fa fa-exclamation-triangle shop-key-invalid" aria-hidden="true"></i>
-                    {$txt.mollie_not_connected}
-                </div>
+        <div class="mollie-info-item">
+            <div class="float-right">
+                <i class="fa fa-exclamation-triangle shop-key-invalid" aria-hidden="true"></i>
+                {$txt.mollie_not_connected}
             </div>
+        </div>
         {{/if}}
     </div>
     <div class="mollie-info-row">
@@ -33,15 +33,15 @@
 </div>
 <div class="mollie-config-button-container">
     {if $mollie.is_installed}
-        <a href="{$mollie.plugin_url}" class="btn btn-primary">
-            {$txt.mollie_configuration}
-        </a>
+    <a href="{$mollie.plugin_url}" class="btn btn-primary">
+        {$txt.mollie_configuration}
+    </a>
 
     {else}
-        {assign var=mollieConfigUrl value=$mollie.plugin_not_installed_url}
-        <a href="{$mollie.plugin_not_installed_url}#Mollie" class="btn btn-primary">
-            {$txt.mollie_configuration}
-        </a>
+    {assign var=mollieConfigUrl value=$mollie.plugin_not_installed_url}
+    <a href="{$mollie.plugin_not_installed_url}#Mollie" class="btn btn-primary">
+        {$txt.mollie_configuration}
+    </a>
     {/if}
 
 </div>
@@ -53,10 +53,10 @@
         <div class="mollie-label">
             {{$mollie.payment_label}}
             {{if $mollie.is_method_active}}
-                <div class="badge badge-success">
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    {$txt.mollie_enabled}
-                </div>
+            <div class="badge badge-success">
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                {$txt.mollie_enabled}
+            </div>
             {{else}}
             <div class="badge badge-warning">
                 <i class="fa fa-circle" aria-hidden="true"></i>
