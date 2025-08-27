@@ -7,31 +7,31 @@
             <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
             <select id="{{$mollie.payment_method}}-issuer" class="form-control mollie-issuer-dropdown" name="{{$mollie.payment_method}}-issuer">
                 {foreach item=module_data from=$mollie.issuers}
-                    <option value="{{$module_data.id}}">{$module_data.name}</option>
+                <option value="{{$module_data.id}}">{$module_data.name}</option>
                 {/foreach}
             </select>
         </label>
     </div>
     {else}
-        <div class="mollie-issuer-list-wrapper">
-            <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
-            <ul>
-                <input type="hidden" class="issuer-list-value" name="{{$mollie.payment_method}}-issuer" value="{{$mollie.issuers.0.id}}">
-                {foreach item=module_data from=$mollie.issuers}
+    <div class="mollie-issuer-list-wrapper">
+        <div class="issuer-list-label">{$txt.mollie_select_bank}</div>
+        <ul>
+            <input type="hidden" class="issuer-list-value" name="{{$mollie.payment_method}}-issuer" value="{{$mollie.issuers.0.id}}">
+            {foreach item=module_data from=$mollie.issuers}
 
-                <li>
-                    <label>
-                        <img src="{{$module_data.image.svg}}">
-                        <span>{$module_data.name}</span>
-                        <input class="mollie-issuer-list" type="radio" name="{{$mollie.payment_method}}-issuer" value="{{$module_data.id}}">
-                    </label>
-                </li>
-                {/foreach}
-            </ul>
-            <div class="issuer-not-selected hidden">
-                {$txt.mollie_issuer_not_selected}
-            </div>
+            <li>
+                <label>
+                    <img src="{{$module_data.image.svg}}">
+                    <span>{$module_data.name}</span>
+                    <input class="mollie-issuer-list" type="radio" name="{{$mollie.payment_method}}-issuer" value="{{$module_data.id}}">
+                </label>
+            </li>
+            {/foreach}
+        </ul>
+        <div class="issuer-not-selected hidden">
+            {$txt.mollie_issuer_not_selected}
         </div>
+    </div>
     {/if}
 
 </div>

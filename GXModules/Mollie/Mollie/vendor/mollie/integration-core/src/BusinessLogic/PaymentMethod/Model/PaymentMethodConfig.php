@@ -47,7 +47,7 @@ class PaymentMethodConfig extends Entity
     /**
      * @var string[]
      */
-    protected static $apiMethodRestrictions = array(
+    public static $apiMethodRestrictions = array(
         PaymentMethods::KlarnaPayLater => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaSliceIt => self::API_METHOD_ORDERS,
         PaymentMethods::KlarnaPayNow => self::API_METHOD_ORDERS,
@@ -123,15 +123,15 @@ class PaymentMethodConfig extends Entity
     /**
      * @var string
      */
-    protected  $name;
+    protected $name;
     /**
      * @var string
      */
-    protected  $description;
+    protected $description;
     /**
      * @var string One of PaymentMethodConfig::API_METHOD_PAYMENT or PaymentMethodConfig::API_METHOD_ORDERS
      */
-    protected  $apiMethod;
+    protected $apiMethod;
     /**
      * @var string One of SurchargeType::NO_FEE, SurchargeType::FIXED_FEE, SurchargeType::PERCENTAGE or
      * SurchargeType::FIXED_FEE_AND_PERCENTAGE
@@ -152,15 +152,15 @@ class PaymentMethodConfig extends Entity
     /**
      * @var null|string
      */
-    protected  $image;
+    protected $image;
     /**
      * @var bool
      */
-    protected  $enabled = false;
+    protected $enabled = false;
     /**
      * @var PaymentMethod
      */
-    protected  $originalAPIConfig;
+    protected $originalAPIConfig;
 
     /**
      * @var bool
@@ -210,6 +210,11 @@ class PaymentMethodConfig extends Entity
      * @var string
      */
     protected $productAttribute = self::PRODUCT_ATTRIBUTE_DEFAULT;
+
+    /**
+     * @var string
+     */
+    protected $captureOption;
 
     /**
      * @inheritDoc
@@ -356,31 +361,6 @@ class PaymentMethodConfig extends Entity
      */
     public function setApiMethod($apiMethod)
     {
-        $allowedMethods = array(self::API_METHOD_PAYMENT, self::API_METHOD_ORDERS);
-        if (!in_array($apiMethod, $allowedMethods, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'Invalid payment method api value %s. API method can be one of (%s) values',
-                    $apiMethod,
-                    implode(', ', $allowedMethods)
-                )
-            );
-        }
-
-        if (
-            $this->isApiMethodRestricted() &&
-            $apiMethod !== static::$apiMethodRestrictions[$this->getMollieId()]
-        ) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'Invalid payment method api value %s. Payment method %s supports only %s API method',
-                    $apiMethod,
-                    $this->getMollieId(),
-                    static::$apiMethodRestrictions[$this->getMollieId()]
-                )
-            );
-        }
-
         $this->apiMethod = $apiMethod;
     }
 
@@ -688,5 +668,22 @@ class PaymentMethodConfig extends Entity
     public function setSortOrder($sortOrder)
     {
         $this->sortOrder = $sortOrder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaptureOption()
+    {
+        return $this->captureOption;
+    }
+
+    /**
+     * @param string $captureOption
+     * @return void
+     */
+    public function setCaptureOption($captureOption)
+    {
+        $this->captureOption = $captureOption;
     }
 }
