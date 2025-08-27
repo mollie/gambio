@@ -30,9 +30,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', "Style de la liste d'émetteurs");
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE', "Jours d'expiration");
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC', "Combien de jours avant l'expiration des commandes pour cette méthode? Laissez vide pour utiliser l'expiration par défaut (28 jours)");
-
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
 

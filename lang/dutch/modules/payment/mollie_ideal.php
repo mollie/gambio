@@ -30,9 +30,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', 'Issuer list style');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE', 'Dagen tot verstrijken');
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
-
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
 
