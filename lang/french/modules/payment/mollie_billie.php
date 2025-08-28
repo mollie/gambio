@@ -30,3 +30,5 @@ defined('MODULE_PAYMENT_MOLLIE_BILLIE_ORDER_EXPIRES_DESC') ?: define('MODULE_PAY
 defined('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
 defined('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
 
+defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE', 'Payment capture');
+defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC', '<b>Select a capture type.<br>');
