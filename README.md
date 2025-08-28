@@ -46,6 +46,10 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.1.0*
+- Add Capture functionality to the plugin
+- Remove usage of Orders API
+
 *3.0.24*
 - Add Twint payment method
 - Add Alma payment method

@@ -134,7 +134,7 @@ class OrderTotalMapper
                 $line->setVatRate($taxRate);
                 $vatAmount = $line->getTotalAmount()->getAmountValue() * ($taxRate / (100 + $taxRate));
                 $line->setVatAmount($this->_getAmount($this->currency, $vatAmount));
-                
+
             }
         }
     }

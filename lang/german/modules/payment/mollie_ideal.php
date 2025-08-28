@@ -19,7 +19,7 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TITLE') ?: define('MODULE_PAYMENT
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC', 'Geben Sie die zusätzlichen Kosten für eine Zahlung in der Standardwährung ein. Bleibt dieses Feld leer, werden den Kunden keine zusätzlichen Kosten berechnet.');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE', 'API-Methode');
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Verwenden Sie für Transaktionen die Payment API Plattform. <a href="https://docs.mollie.com/payments/overview" target="_blank">Mehr</a>.<br><br><b>Order API</b><br>Verwenden Sie die neue Order API Platform, um mehr Einblicke in die Bestellungen zu erhalten. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Mehr</a>.');
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Verwenden Sie für Transaktionen die Payment API Plattform. <a href="https://docs.mollie.com/payments/overview" target="_blank">Mehr</a>.<br>');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE', 'Logo');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC', 'Bitte laden Sie ein Logo hoch, das im Checkout angezeigt werden soll.');
@@ -29,9 +29,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', 'Issuer list style');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
-
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE', 'Tage bis zum Ablauf');
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC', 'Wie viele Tage, bevor Bestellungen für diese Methode abgelaufen sind? Leer lassen, um den Standardablauf zu verwenden (28 Tage)');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', 'Transaktion Beschreibung');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
@@ -47,3 +44,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_PERCENTAGE_DESC') ?: define('MODU
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_TITLE', 'Maximaler Zahlungszuschlag');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_DESC', 'Maximaler Betrag eines Zahlungszuschlags der berechnet werden kann (in der Standardwährung des Shops).');
+
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_TITLE', 'Zahlung erfassen');
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_DESC', '<b>Wählen Sie einen Erfassungsmodus.<br>');

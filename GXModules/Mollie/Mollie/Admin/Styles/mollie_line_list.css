@@ -1,3 +1,7 @@
+.mollie-modal-content {
+    overflow: visible;
+}
+
 .mollie-navigation-wrapper {
     text-align: left;
     min-height: 40px;
@@ -16,8 +20,11 @@
     padding: 13px;
 }
 
-.active-tab .mollie-tab-text {
+.mollie-navigation-item {
     background-color:  #f5f5f5;
+}
+
+.active-tab .mollie-tab-text {
     font-weight: bold;
 }
 
@@ -50,4 +57,8 @@
 
 #mollie-popup .mollie-input-error {
     border-color: #F30106;
+}
+
+.empty-column {
+    min-width: 8vw;
 }

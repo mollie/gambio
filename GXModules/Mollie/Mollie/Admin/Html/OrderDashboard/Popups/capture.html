@@ -1,0 +1,54 @@
+{block name="mollie_capture"}
+{load_language_text section="module_center_module"}
+
+<link rel="stylesheet" href="{$content.css_admin}mollie_line_list.css">
+
+<input type="hidden" value="{$content.process_capture_url}" id="mollie-process-capture-url">
+
+<div id="mollie-shipment-content" class="main-page-content">
+    <div class="mollie-navigation-wrapper">
+        <div class="mollie-navigation-content">
+            <div class="mollie-tab-text mollie-navigation-item">
+                {$txt.mollie_paid_amount}
+            </div>
+        </div>
+    </div>
+
+    <table data-action="unshipped-items-table" class="mollie-tab-content mollie-table-content mollie-line-table"
+           style="display: table">
+        <tbody>
+        <tr>
+            <td colspan="1" class="text-right">
+                <strong>{$txt.mollie_capture_amount}:</strong>
+            </td>
+            <td colspan="1">
+                <input type="number" id="mollie-total-for-capture" value="{$content.total_for_capture}"/>
+            </td>
+            <td colspan="1" class="empty-column">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="text-right">
+                <strong>{$txt.mollie_amount_captured}:</strong>
+            </td>
+            <td colspan="1">
+                <input disabled type="text" id="mollie-captured-amount" value="{$content.captured_amount}"/>
+            </td>
+            <td colspan="1" class="empty-column">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" class="text-right">
+                <strong>{$txt.mollie_remaining_for_capture}:</strong>
+            </td>
+            <td colspan="1">
+                <input disabled type="text" id="mollie-left-for-capture-amount" value="{$content.left_for_capture}"/>
+            </td>
+            <td colspan="1" class="empty-column">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{/block}

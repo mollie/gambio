@@ -19,7 +19,7 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_TITLE') ?: define('MODULE_PAYMENT
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_DESC', 'Voer de extra kosten in voor een betaling in de standaardvaluta. Als het veld leeg is, worden er geen extra betalingskosten aan klanten in rekening gebracht..');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_TITLE', 'API-methode');
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties. <a href="https://docs.mollie.com/payments/overview" target="_blank">Lees meer</a>.<br><br><b>Order API</b><br>Gebruik het nieuwe Payment API Platform voor de transacties. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Lees meer</a>.');
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_API_METHOD_DESC', '<b>Payment API</b><br>Gebruik het Payment API Platform voor de transacties. <a href="https://docs.mollie.com/payments/overview" target="_blank">Lees meer</a>.<br>');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_TITLE', 'Logo');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_LOGO_DESC', 'Upload een logo dat zal worden gebruikt bij het afrekenen.');
@@ -29,9 +29,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_TITLE', 'Issuer list style');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
-
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_TITLE', 'Dagen tot verstrijken');
-defined('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
@@ -47,3 +44,6 @@ defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_PERCENTAGE_DESC') ?: define('MODU
 
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_TITLE', 'Betalingstoeslag limiet');
 defined('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_SURCHARGE_LIMIT_DESC', 'Maximumbedrag van de betalingstoeslag die aan de klant moet worden doorberekend (in standaard winkelvaluta).');
+
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_TITLE', 'Betaling vastleggen');
+defined('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_IDEAL_CAPTURE_OPTION_DESC', '<b>Kies een vastleggingsmethode.<br>');

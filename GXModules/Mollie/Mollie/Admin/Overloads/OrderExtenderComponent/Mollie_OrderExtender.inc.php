@@ -20,9 +20,12 @@ require_once DIR_FS_CATALOG . '/GXModules/Mollie/Mollie/mollie_config_fields.php
  */
 class Mollie_OrderExtender extends Mollie_OrderExtender_parent
 {
+    const AUTHORIZED_STATUS = 'authorized';
     private static $shipmentStatuses = ['paid', 'authorized', 'shipping', 'completed'];
     private static $refundStatuses = ['paid', 'shipping', 'completed'];
     private static $paymentLinkStatuses = ['created', 'failed', 'canceled', 'expired'];
+    private static $capturableMethods = ['mollie_billie', 'mollie_creditcard', 'mollie_klarna', 'mollie_riverty'];
+
     /**
      * @var OrderReference
      */
@@ -49,13 +52,13 @@ class Mollie_OrderExtender extends Mollie_OrderExtender_parent
         $this->v_output_buffer = [];
 
         $templatePath = PathProvider::getAdminTemplatePath('mollie_order_dashboard.html', 'OrderDashboard');
-        $output       = mollie_render_template($templatePath, $this->_getTemplateData());
+        $output = mollie_render_template($templatePath, $this->_getTemplateData());
 
         $this->v_output_buffer['below_withdrawal'] = '';
         $this->v_output_buffer['below_order_info_heading'] = $translator->translate('mollie_dashboard_title');
-        $this->v_output_buffer['below_order_info']         = $output;
-        $this->v_output_buffer['order_status']             = '';
-        $this->v_output_buffer['buttons']                  = '';
+        $this->v_output_buffer['below_order_info'] = $output;
+        $this->v_output_buffer['order_status'] = '';
+        $this->v_output_buffer['buttons'] = '';
 
         $this->addContent();
     }
@@ -76,18 +79,20 @@ class Mollie_OrderExtender extends Mollie_OrderExtender_parent
         $status = $mollieDto->getStatus();
 
         return [
-            'payment_method'          => $paymentMethod,
-            'display_payment_button'  => $this->_displayPaymentLinkButton($status),
-            'display_refund_button'   => in_array($status, self::$refundStatuses, true),
+            'payment_method' => $paymentMethod,
+            'display_payment_button' => $this->_displayPaymentLinkButton($status),
+            'display_refund_button' => in_array($status, self::$refundStatuses, true),
             'display_shipment_button' => $this->_displayShipmentButton($status, $api),
-            'logo_src'                => $methodConfig ? $methodConfig->getImage() : null,
-            'payment_method_desc'     => $methodConfig ? $methodConfig->getName() : $paymentTitle,
-            'api_used'                => $api,
-            'total_amount'            => $mollieDto->getAmount()->getAmountValue(),
-            'refunded_amount'         => $mollieDto->getAmountRefunded()->getAmountValue(),
-            'currency'                => $mollieDto->getAmount()->getCurrency(),
-            'mollie_url'              => $dashboardUrl ? $dashboardUrl->getHref() : null,
-            'status_name'             => $status
+            'display_capture_button' => $this->_displayCaptureButton($methodConfig->getId(), $status, $api),
+            'transaction_id' => $mollieDto->getId(),
+            'logo_src' => $methodConfig ? $methodConfig->getImage() : null,
+            'payment_method_desc' => $methodConfig ? $methodConfig->getName() : $paymentTitle,
+            'api_used' => $api,
+            'total_amount' => $mollieDto->getAmount()->getAmountValue(),
+            'refunded_amount' => $mollieDto->getAmountRefunded()->getAmountValue(),
+            'currency' => $mollieDto->getAmount()->getCurrency(),
+            'mollie_url' => $dashboardUrl ? $dashboardUrl->getHref() : null,
+            'status_name' => $status
         ];
     }
 
@@ -99,6 +104,20 @@ class Mollie_OrderExtender extends Mollie_OrderExtender_parent
     private function _displayPaymentLinkButton($status)
     {
         return empty($status) || in_array($status, self::$paymentLinkStatuses, true);
+    }
+
+    /**
+     * @param string $paymentMethod
+     * @param string $status
+     * @param string $apiUsed
+     *
+     * @return bool
+     */
+    private function _displayCaptureButton($paymentMethod, $status, $apiUsed)
+    {
+        return in_array($paymentMethod, self::$capturableMethods, true) &&
+            $apiUsed === PaymentMethodConfig::API_METHOD_PAYMENT &&
+            $status === self::AUTHORIZED_STATUS;
     }
 
     /**

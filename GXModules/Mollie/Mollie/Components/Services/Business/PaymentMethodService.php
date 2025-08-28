@@ -79,7 +79,7 @@ class PaymentMethodService extends BaseService
         $descKey = $prefix . '_CHECKOUT_DESCRIPTION_' . $lang;
 
         $paymentMethodConfig->setId($id);
-        $paymentMethodConfig->setApiMethod(@constant($prefix . '_API_METHOD'));
+        $paymentMethodConfig->setApiMethod(PaymentMethodConfig::API_METHOD_PAYMENT);
         $paymentMethodConfig->setName(@constant($nameKey));
         $paymentMethodConfig->setDescription(@constant($descKey));
         $paymentMethodConfig->setSurchargeType(@constant($prefix . '_SURCHARGE_TYPE')?: SurchargeType::NO_FEE);
@@ -87,6 +87,10 @@ class PaymentMethodService extends BaseService
         $paymentMethodConfig->setSurchargePercentage(@constant($prefix . '_SURCHARGE_PERCENTAGE'));
         $paymentMethodConfig->setSurchargeLimit(@constant($prefix . '_SURCHARGE_LIMIT'));
         $paymentMethodConfig->setImage(@constant($prefix . '_LOGO'));
+
+        if (defined($prefix . '_CAPTURE_OPTION')) {
+            $paymentMethodConfig->setCaptureOption(@constant($prefix . '_CAPTURE_OPTION'));
+        }
 
         return $paymentMethodConfig;
     }

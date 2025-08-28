@@ -27,9 +27,6 @@ defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_LOGO_DESC') ?: define('MODULE_PAYMEN
 defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_TITLE', 'Sorteer de weergavevolgorde bij de checkout');
 defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_SORT_ORDER_DESC', 'De laagste wordt als eerste weergegeven in het checkout-scherm.');
 
-defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_TITLE', 'Dagen tot verstrijken');
-defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_ORDER_EXPIRES_DESC', 'Hoeveel dagen voordat bestellingen voor deze methode verlopen? Laat leeg om de standaard vervaldatum te gebruiken (28 dagen)');
-
 defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BANKTRANSFER_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
 

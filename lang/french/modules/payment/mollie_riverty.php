@@ -27,9 +27,6 @@ defined('MODULE_PAYMENT_MOLLIE_RIVERTY_LOGO_DESC') ?: define('MODULE_PAYMENT_MOL
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_TITLE', "Organiser l'ordre d'affichage du checkout");
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_DESC', "Le plus bas est affiché en premier sur l'écran du checkout.");
 
-defined('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_TITLE', "Jours d'expiration");
-defined('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_DESC', "Combien de jours avant l'expiration des commandes pour cette méthode? Laissez vide pour utiliser l'expiration par défaut (28 jours)<br><br>Remarque: il n'est pas possible d'utiliser une date d'expiration de plus de 28 jours dans le futur, à moins qu'un autre maximum ne soit convenu entre le commerçant et Riverty.");
-
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_TITLE', 'Description de la transaction');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_DESC', 'La description à utiliser pour la transaction de paiement. Ces variables sont disponibles: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} et {cartNumber}.');
 
@@ -44,3 +41,6 @@ defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_PERCENTAGE_DESC') ?: define('MO
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_TITLE', 'Limite de majoration de paiement');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');
+
+defined('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_TITLE', 'Paiement capture');
+defined('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_DESC', '<b>Sélectionnez un type de capture.<br>');

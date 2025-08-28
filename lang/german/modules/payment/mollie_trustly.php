@@ -30,9 +30,6 @@ defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_SORT_ORDER_DESC') ?: define('MODULE_PAYME
 defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_ISSUER_LIST_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_ISSUER_LIST_TITLE', 'Issuer list style');
 defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_ISSUER_LIST_DESC') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_ISSUER_LIST_DESC', 'Choose the style in which issuer list will be displayed on checkout.');
 
-defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_ORDER_EXPIRES_TITLE', 'Tage bis zum Ablauf');
-defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_ORDER_EXPIRES_DESC', 'Wie viele Tage, bevor Bestellungen für diese Methode abgelaufen sind? Leer lassen, um den Standardablauf zu verwenden (28 Tage)');
-
 defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_TRANSACTION_DESCRIPTION_TITLE', 'Transaktion Beschreibung');
 defined('MODULE_PAYMENT_MOLLIE_TRUSTLY_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_TRUSTLY_TRANSACTION_DESCRIPTION_DESC', 'Die Beschreibung, die für den Zahlungsvorgang verwendet werden soll. Diese Variablen sind verfügbar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} und {cartNumber}.');
 
