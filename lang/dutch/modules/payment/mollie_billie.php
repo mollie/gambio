@@ -27,5 +27,5 @@ defined('MODULE_PAYMENT_MOLLIE_BILLIE_SORT_ORDER_DESC') ?: define('MODULE_PAYMEN
 defined('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_TITLE', 'Transactiebeschrijving');
 defined('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_TRANSACTION_DESCRIPTION_DESC', 'De beschrijving die moet worden gebruikt voor de betalingstransactie. Deze variabelen zijn beschikbaar: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany} en {cartNumber}.');
 
-defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE', 'Payment capture');
-defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC', '<b>Select a capture type.<br>');
+defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_TITLE', 'Betaling vastleggen');
+defined('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_BILLIE_CAPTURE_OPTION_DESC', '<b>Kies een vastleggingsmethode.<br>');
