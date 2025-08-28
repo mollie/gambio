@@ -83,10 +83,10 @@ class ProxyDataProvider
 
         if ($paymentMethodConfig->getCaptureOption() && in_array($paymentMethodConfig->getCaptureOption(), self::$availableCaptureMods)) {
             $result['captureMode'] = $paymentMethodConfig->getCaptureOption();
+        }
 
-            if ($method === PaymentMethods::Riverty) {
-                $result['captureMode'] = 'manual';
-            }
+        if ($method === PaymentMethods::Riverty) {
+            $result['captureMode'] = 'manual';
         }
 
         $shippingAddress = $payment->getShippingAddress();
