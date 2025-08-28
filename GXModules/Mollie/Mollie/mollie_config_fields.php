@@ -119,6 +119,29 @@ function mollie_api_select($key_value, $key = '')
 }
 
 /**
+ * Renders capture select field
+ *
+ * @param        $key_value
+ * @param string $key
+ *
+ * @return string|string[]
+ * @throws Exception
+ */
+function mollie_capture_select($key_value, $key = '')
+{
+    $templatePath = PathProvider::getAdminTemplatePath('mollie_capture_select.html', 'ConfigFields');
+    $data         = [
+        'key'   => _appendPrefix($key),
+        'value' => $key_value,
+        'title' => @constant("{$key}_TITLE"),
+        'desc'  => @constant("{$key}_DESC"),
+
+    ];
+
+    return mollie_render_template($templatePath, $data);
+}
+
+/**
  * Renders surcharge type select field
  *
  * @param        $key_value
