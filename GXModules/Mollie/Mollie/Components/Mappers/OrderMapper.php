@@ -49,18 +49,18 @@ class OrderMapper
         $orderMollie->setWebhookUrl($this->_getConfigService()->getWebhookUrl());
 
         $taxAllowed = $this->isTaxAllowedForOrder($sourceOrder->getOrderItems());
-        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency);
+        $hasTax = $this->hasTaxEntries($orderTotals);
+        $taxShownInTotal = !$taxAllowed && $hasTax;
+        $taxFree = !$taxAllowed && !$hasTax;
+        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency, $taxShownInTotal, $taxFree);
 
         $orderTotalMapper = new OrderTotalMapper($currency);
         $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($sourceOrder->getOrderTotals()));
 
-        if (!$taxAllowed) {
-            $grossTotal = $this->getGrossTotal($lines, $orderTotals, $currency);
-            $orderMollie->setAmount($this->_getAmount($currency, $grossTotal));
-        } else {
-            $orderMollie->setAmount($this->_getAmount($currency, $this->getOrderTotalAmount($orderTotals, $sourceOrder->getOrderItems())));
-        }
+        $total = $this->getOrderTotalAmount($orderTotals, $sourceOrder->getOrderItems());
+        $orderMollie->setAmount($this->_getAmount($currency, $total));
 
+        $this->addTotalAdjustment($lines, $total, $currency);
         $orderMollie->setLines($lines);
 
         $orderMollie->setPayment($this->getCommonPaymentData());
@@ -72,7 +72,7 @@ class OrderMapper
         return $orderMollie;
     }
 
-    public function getOrderLines(\OrderItemCollection $itemCollection, $currency)
+    public function getOrderLines(\OrderItemCollection $itemCollection, $currency, $taxShownInTotal = false, $taxFree = false)
     {
         $lines = [];
         /** @var \StoredOrderItemInterface $item */
@@ -87,7 +87,7 @@ class OrderMapper
             $totalPrice = $item->getFinalPrice();
             $tax = $item->getTax();
 
-            if (!$item->isTaxAllowed() && $tax > 0) {
+            if ($taxShownInTotal && $tax > 0) {
                 $unitPrice = round($unitPrice * (1 + $tax / 100), 2);
                 $totalPrice = round($totalPrice * (1 + $tax / 100), 2);
             }
@@ -99,8 +99,9 @@ class OrderMapper
 
             $mollieOrderLine->setTotalAmount($this->_getAmount($currency, $totalPrice));
 
-            $mollieOrderLine->setVatRate($tax);
-            $vat = $mollieOrderLine->getTotalAmount()->getAmountValue() * ($tax / (100 + $tax));
+            $vatRate = $taxFree ? 0 : $tax;
+            $mollieOrderLine->setVatRate($vatRate);
+            $vat = $mollieOrderLine->getTotalAmount()->getAmountValue() * ($vatRate / (100 + $vatRate));
             $mollieOrderLine->setVatAmount($this->_getAmount($currency, $vat));
             $mollieOrderLine->setSku($item->getProductModel());
 
@@ -120,7 +121,11 @@ class OrderMapper
 
         $payment = $this->getCommonPaymentData();
 
+        $orderTotals = $sourceOrder->getOrderTotals();
         $taxAllowed = $this->isTaxAllowedForOrder($sourceOrder->getOrderItems());
+        $hasTax = $this->hasTaxEntries($orderTotals);
+        $taxShownInTotal = !$taxAllowed && $hasTax;
+        $taxFree = !$taxAllowed && !$hasTax;
 
         $payment->setDescription($this->_getPaymentTransactionDescription($sourceOrder));
         $payment->setOrderId((string)$orderId);
@@ -132,17 +137,14 @@ class OrderMapper
         $payment->setShippingAddress($this->getAddressData($sourceOrder->getDeliveryAddress(), $email, $phone));
         $payment->setBillingAddress($this->getAddressData($sourceOrder->getBillingAddress(), $email, $phone));
 
-        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency);
+        $lines = $this->getOrderLines($sourceOrder->getOrderItems(), $currency, $taxShownInTotal, $taxFree);
         $orderTotalMapper = new OrderTotalMapper($currency);
-        $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($sourceOrder->getOrderTotals()));
+        $lines = array_merge($lines, $orderTotalMapper->getOrderTotals($orderTotals));
 
-        if (!$taxAllowed) {
-            $grossTotal = $this->getGrossTotal($lines, $sourceOrder->getOrderTotals(), $currency);
-            $payment->setAmount($this->_getAmount($currency, $grossTotal));
-        } else {
-            $payment->setAmount($this->_getAmount($currency, $this->getOrderTotalAmount($sourceOrder->getOrderTotals(), $sourceOrder->getOrderItems())));
-        }
+        $total = $this->getOrderTotalAmount($orderTotals, $sourceOrder->getOrderItems());
+        $payment->setAmount($this->_getAmount($currency, $total));
 
+        $this->addTotalAdjustment($lines, $total, $currency);
         $payment->setLines($lines);
 
         $daysToExpire = $this->getDaysToExpirePayment($sourceOrder->getPaymentType()->getPaymentClass());
@@ -243,41 +245,6 @@ class OrderMapper
     }
 
     /**
-     * @param OrderLine[] $lines  Passed by reference — adjustment line may be appended
-     * @param \OrderTotalCollection $orderTotals
-     * @param string $currency
-     *
-     * @return float
-     */
-    private function getGrossTotal(array &$lines, \OrderTotalCollection $orderTotals, $currency)
-    {
-        $lineSum = $this->sumLineAmounts($lines);
-
-        if (!$this->hasTaxEntries($orderTotals)) {
-            return $lineSum;
-        }
-
-        $gambioGross = $this->getGambioGrossTotal($orderTotals);
-
-        if (abs($lineSum - $gambioGross) < 0.01) {
-            return $lineSum;
-        }
-
-        $diff = $gambioGross - $lineSum;
-        $adjustment = new OrderLine();
-        $adjustment->setType('surcharge');
-        $adjustment->setName('Tax adjustment');
-        $adjustment->setQuantity(1);
-        $adjustment->setUnitPrice($this->_getAmount($currency, $diff));
-        $adjustment->setTotalAmount($this->_getAmount($currency, $diff));
-        $adjustment->setVatRate(0);
-        $adjustment->setVatAmount($this->_getAmount($currency, 0));
-        $lines[] = $adjustment;
-
-        return $gambioGross;
-    }
-
-    /**
      * Checks if the order has ot_tax entries.
      *
      * @param \OrderTotalCollection $orderTotals
@@ -296,44 +263,34 @@ class OrderMapper
     }
 
     /**
-     * Computes the GROSS total from Gambio's order total components.
-     * Only used when ot_tax entries exist (add_tax_ot=1).
-     *
-     * @param \OrderTotalCollection $orderTotals
-     *
-     * @return float
-     */
-    private function getGambioGrossTotal(\OrderTotalCollection $orderTotals)
-    {
-        $total = 0;
-        $skippedClasses = ['ot_total', 'ot_subtotal_no_tax', 'ot_total_netto'];
-
-        foreach ($orderTotals as $orderTotal) {
-            if (in_array($orderTotal->getClass(), $skippedClasses, true)) {
-                continue;
-            }
-
-            $total += $orderTotal->getValue();
-        }
-
-        return $total;
-    }
-
-    /**
-     * Computes the total amount from the sum of all line item totalAmounts.
+     * Adds a surcharge line to reconcile the line sum with the order total.
+     * Covers shipping tax, rounding differences, and other amounts not captured in line items.
      *
      * @param OrderLine[] $lines
-     *
-     * @return float
+     * @param float $total
+     * @param string $currency
      */
-    private function sumLineAmounts(array $lines)
+    private function addTotalAdjustment(array &$lines, $total, $currency)
     {
-        $total = 0;
+        $lineSum = 0;
         foreach ($lines as $line) {
-            $total += (float) $line->getTotalAmount()->getAmountValue();
+            $lineSum += (float)$line->getTotalAmount()->getAmountValue();
         }
 
-        return $total;
+        $diff = round($total - $lineSum, 2);
+        if (abs($diff) < 0.01) {
+            return;
+        }
+
+        $adjustment = new OrderLine();
+        $adjustment->setType($diff < 0 ? 'discount' : 'surcharge');
+        $adjustment->setName('Tax adjustment');
+        $adjustment->setQuantity(1);
+        $adjustment->setUnitPrice($this->_getAmount($currency, $diff));
+        $adjustment->setTotalAmount($this->_getAmount($currency, $diff));
+        $adjustment->setVatRate(0);
+        $adjustment->setVatAmount($this->_getAmount($currency, 0));
+        $lines[] = $adjustment;
     }
 
     /**
