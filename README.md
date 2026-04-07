@@ -41,6 +41,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.1.1*
+- Resolve net price calculation logic
+
 *2.1.0*
 - Add Capture functionality to the plugin
 - Remove usage of Orders API
