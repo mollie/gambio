@@ -13,13 +13,17 @@
                     method.addEventListener('click', function () {
                         hideIdealCheckoutPaymentForm();
                     });
+                } else {
+                    method.addEventListener('click', function () {
+                        showCheckoutPaymentForm();
+                    });
                 }
             }
         });
 
         //in case if ideal is the only available payment method, it won't be shown as radio button but as li element
         const issuerMethod = document.querySelector('li.mollie_ideal');
-        if (issuerMethod) {
+        if (issuerMethod && !issuerMethod.querySelector('input[type="radio"]')) {
             hideIdealCheckoutPaymentForm();
         }
 
@@ -128,6 +132,13 @@
             let checkoutPaymentForm = document.querySelector('.checkout-payment-form');
             if (checkoutPaymentForm) {
                 checkoutPaymentForm.style.display = 'none';
+            }
+        }
+
+        function showCheckoutPaymentForm() {
+            let checkoutPaymentForm = document.querySelector('.checkout-payment-form');
+            if (checkoutPaymentForm) {
+                checkoutPaymentForm.style.display = '';
             }
         }
 
