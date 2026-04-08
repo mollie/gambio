@@ -9,10 +9,17 @@ var MollieComponents = window.MollieComponents || {};
         this.mount = mount;
         this.unmount = unmount;
 
+        let _componentsCreated = false;
+        let _mounted = false;
+        let _submitListenerAdded = false;
+        let _checkboxHandler = null;
+        let _submitHandler = null;
+
         function mount(cardWrapper) {
-            if (isMounted()) {
+            if (_mounted) {
                 return;
             }
+            _mounted = true;
 
             const mollie = init(cardWrapper);
             let useSavedCreditCard = document.getElementById('mollie_creditcard-use-saved-credit-card-checkbox'),
@@ -33,6 +40,10 @@ var MollieComponents = window.MollieComponents || {};
                 useSavedCreditCard.value = null;
                 showComponents(cardWrapper, mollie);
             } else {
+                if (_checkboxHandler) {
+                    useSavedCreditCard.removeEventListener('change', _checkboxHandler);
+                }
+                _checkboxHandler = handleCheckboxUseSavedChange;
                 useSavedCreditCard.addEventListener('change', handleCheckboxUseSavedChange);
 
                 if (useSavedCreditCard.checked === false) {
@@ -80,15 +91,19 @@ var MollieComponents = window.MollieComponents || {};
             document.getElementsByClassName('form-group--expiryDate')[0].classList.remove('hidden');
             document.getElementsByClassName('form-group--verificationCode')[0].classList.remove('hidden');
 
-            const cardHolder = createMollieComponent('cardHolder', 'card-holder', cardWrapper, mollie);
-            const cardNumber = createMollieComponent('cardNumber', 'card-number', cardWrapper, mollie);
-            const expDate = createMollieComponent('expiryDate', 'expiry-date', cardWrapper, mollie);
-            const verificationCode = createMollieComponent('verificationCode', 'verification-code', cardWrapper, mollie);
+            if (!_componentsCreated) {
+                _componentsCreated = true;
 
-            addValidationListeners(cardHolder, buildIdSelector('card-holder', cardWrapper));
-            addValidationListeners(cardNumber, buildIdSelector('card-number', cardWrapper));
-            addValidationListeners(expDate, buildIdSelector('expiry-date', cardWrapper));
-            addValidationListeners(verificationCode, buildIdSelector('verification-code', cardWrapper));
+                const cardHolder = createMollieComponent('cardHolder', 'card-holder', cardWrapper, mollie);
+                const cardNumber = createMollieComponent('cardNumber', 'card-number', cardWrapper, mollie);
+                const expDate = createMollieComponent('expiryDate', 'expiry-date', cardWrapper, mollie);
+                const verificationCode = createMollieComponent('verificationCode', 'verification-code', cardWrapper, mollie);
+
+                addValidationListeners(cardHolder, buildIdSelector('card-holder', cardWrapper));
+                addValidationListeners(cardNumber, buildIdSelector('card-number', cardWrapper));
+                addValidationListeners(expDate, buildIdSelector('expiry-date', cardWrapper));
+                addValidationListeners(verificationCode, buildIdSelector('verification-code', cardWrapper));
+            }
         }
 
 
@@ -108,13 +123,37 @@ var MollieComponents = window.MollieComponents || {};
 
             }
 
+            if (_submitHandler) {
+                let form = document.querySelector('#checkout_payment');
+                if (form) {
+                    form.removeEventListener('submit', _submitHandler);
+                }
+                _submitHandler = null;
+            }
+
+            if (_checkboxHandler) {
+                let cb = document.getElementById('mollie_creditcard-use-saved-credit-card-checkbox');
+                if (cb) {
+                    cb.removeEventListener('change', _checkboxHandler);
+                }
+                _checkboxHandler = null;
+            }
+
+            _componentsCreated = false;
+            _mounted = false;
+            _submitListenerAdded = false;
         }
 
         function addSubmitPaymentListener(cardWrapper, mollie) {
+            if (_submitListenerAdded) {
+                return;
+            }
+            _submitListenerAdded = true;
+
             let checkoutForm = document.querySelector('#checkout_payment');
             let useSavedCreditCard = document.querySelector('#mollie_creditcard-use-saved-credit-card-checkbox');
 
-            checkoutForm.addEventListener('submit', async event => {
+            _submitHandler = async function (event) {
                 if (getSelectedMethod() === cardWrapper.getAttribute('data-method-id')
                     && (useSavedCreditCard.checked === false || useSavedCreditCard.classList.contains('hidden'))) {
                     event.preventDefault();
@@ -133,7 +172,8 @@ var MollieComponents = window.MollieComponents || {};
                 } else {
                     checkoutForm.submit();
                 }
-            });
+            };
+            checkoutForm.addEventListener('submit', _submitHandler);
         }
 
         function addValidationListeners(element, selector) {
