@@ -48,7 +48,7 @@ $(document).ready(function () {
     /**
      * Shows fields for orders api
      *
-     * @param {jQuery} transactionDesc
+     * @param transactionDesc
      * @param {jQuery} orderExpires
      */
     function showOrderApiField(transactionDesc, orderExpires) {

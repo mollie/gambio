@@ -10,9 +10,15 @@ use Mollie\BusinessLogic\Http\DTO\Orders\OrderLine;
 use Mollie\BusinessLogic\Http\DTO\Orders\Shipment;
 use Mollie\BusinessLogic\Http\DTO\Payment;
 use Mollie\BusinessLogic\Http\DTO\Refunds\Refund;
+use Mollie\BusinessLogic\Http\Exceptions\UnprocessableEntityRequestException;
 use Mollie\BusinessLogic\Http\Proxy;
+use Mollie\BusinessLogic\PaymentMethod\Model\PaymentMethodConfig;
 use Mollie\BusinessLogic\PaymentMethod\PaymentMethods;
+use Mollie\BusinessLogic\PaymentMethod\PaymentMethodService;
 use Mollie\Infrastructure\Exceptions\InvalidConfigurationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpAuthenticationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpCommunicationException;
+use Mollie\Infrastructure\Http\Exceptions\HttpRequestException;
 use Mollie\Infrastructure\ServiceRegister;
 
 /**
@@ -33,17 +39,34 @@ class ProxyDataProvider
         'methods'
     );
 
+    protected static $availableCaptureMods = array (
+        'manual',
+        'automatic'
+    );
+
     /**
      * @var Configuration
      */
     protected $configService;
 
+    /**
+     * @var PaymentMethodService
+     */
+    protected $paymentMethodService;
+
+    /**
+     * @throws UnprocessableEntityRequestException
+     * @throws HttpCommunicationException
+     * @throws HttpAuthenticationException
+     * @throws HttpRequestException
+     */
     public function transformPayment(Payment $payment)
     {
         $method = $payment->getMethods();
         if (count($method) === 1) {
             $method = implode('', $method);
         }
+        $paymentMethodConfig = $this->getPaymentMethodService()->getPaymentConfigurationById($payment->getProfileId(), 'mollie_' . $method);
 
         $result = array(
             'profileId' => $payment->getProfileId(),
@@ -51,13 +74,24 @@ class ProxyDataProvider
             'description' => $payment->getDescription(),
             'amount' => $payment->getAmount()->toArray(),
             'redirectUrl' => $payment->getRedirectUrl(),
-            'webhookUrl' => $payment->getWebhookUrl(),
+            'webhookUrl' =>  $payment->getWebhookUrl(),
             'locale' => $payment->getLocale(),
             'method' => $method,
             'metadata' => $payment->getMetadata(),
+            'lines' =>  $this->transformOrderLines($payment->getLines(), true)
         );
 
+        if ($paymentMethodConfig->getCaptureOption() && in_array($paymentMethodConfig->getCaptureOption(), self::$availableCaptureMods)) {
+            $result['captureMode'] = $paymentMethodConfig->getCaptureOption();
+
+            if ($method === PaymentMethods::Riverty) {
+                $result['captureMode'] = 'manual';
+            }
+        }
+
         $shippingAddress = $payment->getShippingAddress();
+        $billingAddress = $payment->getBillingAddress();
+
         if ($shippingAddress && $method === PaymentMethods::PayPal) {
             $result['shippingAddress'] = array(
                 'streetAndNumber' => $shippingAddress->getStreetAndNumber(),
@@ -66,6 +100,22 @@ class ProxyDataProvider
                 'region' => $shippingAddress->getRegion(),
                 'postalCode' => $shippingAddress->getPostalCode(),
                 'country' => $shippingAddress->getCountry(),
+                'organizationName'  => $shippingAddress->getOrganizationName()
+            );
+        }
+
+        if ($billingAddress && (array_key_exists($method, PaymentMethodConfig::$apiMethodRestrictions))) {
+            $result['billingAddress'] = array(
+                'streetAndNumber' => $billingAddress->getStreetAndNumber(),
+                'streetAdditional' => $billingAddress->getStreetAdditional(),
+                'city' => $billingAddress->getCity(),
+                'region' => $billingAddress->getRegion(),
+                'postalCode' => $billingAddress->getPostalCode(),
+                'country' => $billingAddress->getCountry(),
+                'givenName' => $billingAddress->getGivenName(),
+                'familyName' => $billingAddress->getFamilyName(),
+                'email' => $billingAddress->getEmail() ? $billingAddress->getEmail() : null,
+                'organizationName'  => $billingAddress->getOrganizationName()
             );
         }
 
@@ -150,23 +200,31 @@ class ProxyDataProvider
 
     /**
      * @param OrderLine[] $orderLines
+     * @param bool $isPayment
      *
      * @return array Order lines data as an array
      */
-    public function transformOrderLines(array $orderLines)
+    public function transformOrderLines(array $orderLines, $isPayment = false)
     {
         $result = array();
         foreach ($orderLines as $orderLine) {
             $orderLineData = array(
-                'name' => $orderLine->getName(),
                 'quantity' => $orderLine->getQuantity(),
                 'unitPrice' => $orderLine->getUnitPrice()->toArray(),
                 'totalAmount' => $orderLine->getTotalAmount()->toArray(),
                 'vatRate' => $orderLine->getVatRate(),
                 'vatAmount' => $orderLine->getVatAmount()->toArray(),
-                'sku' => $orderLine->getSku(),
-                'metadata' => $orderLine->getMetadata(),
+                'sku' => $orderLine->getSku()
             );
+
+            if (!$isPayment) {
+                $orderLineData['name'] = $orderLine->getName();
+                $orderLineData['metadata'] = $orderLine->getMetadata();
+            }
+
+            if ($isPayment) {
+                $orderLineData['description'] = $orderLine->getName();
+            }
 
             $type = $orderLine->getType();
             if (!empty($type)) {
@@ -476,6 +534,18 @@ class ProxyDataProvider
         }
 
         return $this->configService;
+    }
+
+    /**
+     * @return PaymentMethodService
+     */
+    protected function getPaymentMethodService()
+    {
+        if ($this->paymentMethodService === null) {
+            $this->paymentMethodService = ServiceRegister::getService(PaymentMethodService::CLASS_NAME);
+        }
+
+        return $this->paymentMethodService;
     }
 
     /**

@@ -9,6 +9,7 @@ use Mollie\BusinessLogic\Http\DTO\Orders\OrderLine;
 use Mollie\BusinessLogic\Http\DTO\Orders\Shipment;
 use Mollie\BusinessLogic\Http\DTO\Payment;
 use Mollie\BusinessLogic\Http\DTO\PaymentMethod;
+use Mollie\BusinessLogic\Http\DTO\Payments\Capture;
 use Mollie\BusinessLogic\Http\DTO\Refunds\Refund;
 use Mollie\BusinessLogic\Http\DTO\TokenPermission;
 use Mollie\BusinessLogic\Http\DTO\WebsiteProfile;
@@ -515,6 +516,48 @@ class Proxy extends BaseProxy
         $result = $response->decodeBodyAsJson();
 
         return is_array($result) ? Shipment::fromArray($result) : new Shipment();
+    }
+
+    /**
+     * @param Capture $capture
+     * @param string $paymentId
+     *
+     * @return Capture
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws HttpRequestException
+     * @throws UnprocessableEntityRequestException
+     */
+    public function createCapture(Capture $capture, $paymentId)
+    {
+        $captureData = $capture->toArray();
+        $response = $this->call(
+            self::HTTP_METHOD_POST,
+            "/payments/$paymentId/captures",
+            $captureData
+        );
+        $result = $response->decodeBodyAsJson();
+
+        return is_array($result) ? Capture::fromArray($result) : new Capture();
+    }
+
+    /**
+     * @param string $paymentId
+     *
+     * @throws HttpCommunicationException
+     * @throws UnprocessableEntityRequestException
+     * @throws HttpRequestException
+     * @throws HttpAuthenticationException
+     */
+    public function getCaptures($paymentId)
+    {
+        $response = $this->call(
+            self::HTTP_METHOD_GET,
+            "/payments/$paymentId/captures"
+        );
+        $result = $response->decodeBodyAsJson();
+
+        return Capture::fromArrayBatch($result['_embedded']['captures']);
     }
 
     /**

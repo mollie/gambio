@@ -8,6 +8,6 @@
 <input type="hidden" id="mollie_selected_zones" name="configuration[{{$mollie.key}}]">
 <select id="mollie_select_zones" multiple size="10">
     {foreach item=module_data from=$mollie.countries}
-        <option value="{{$module_data.code}}" {if in_array($module_data.code, $module_data.selected_countries)}selected{/if}>{{$module_data.name}}</option>
+    <option value="{{$module_data.code}}" {if in_array($module_data.code, $module_data.selected_countries)}selected{/if}>{{$module_data.name}}</option>
     {/foreach}
 </select>

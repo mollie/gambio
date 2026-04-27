@@ -1,7 +1,7 @@
 # Mollie module for Gambio
 
 ## Supported GX versions
-This branch contains mollie module which is eligible for Gambio versions 4.5.x - 4.8.x.
+This branch contains mollie module which is eligible for Gambio versions 4.5.x - 5.0.x
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 https://github.com/mollie/gambio/tree/3.0-3.4
@@ -20,7 +20,7 @@ Mollie requires no minimum costs, no fixed contracts, no hidden costs. At Mollie
    
 # Install using FTP
 ```
-This branch contains mollie module which is eligible for Gambio versions 4.5.x.
+This branch contains mollie module which is eligible for Gambio versions 4.5.x - 5.0.x.
 
 If you have Gambio from 3.0.x to 3.4.x versions, please checkout on `3.0-3.4` branch of this Github repository.
 
@@ -29,10 +29,10 @@ If you have Gambio from 3.5.x to 4.0.x versions, please checkout on `3.5-4.0` br
 If you have Gambio from 4.1.x to 4.4.x versions, please checkout on `4.1-4.4` branch of this Github repository.
 ```
 
-To install the Mollie plugin for the **Gambio 4.5.x - 4.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
+To install the Mollie plugin for the **Gambio 4.5.x - 5.0.x** system, you will need to install some FTP client (Filezilla, Free FTP, Cyberduck, WinSCP...)
 
 Step-by-step to install the Gambio module:
- 1. Download the latest `3.x.x` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 4.1.x - 4.4.x.
+ 1. Download the latest `3.x.x` version  of the module (the '.zip' file) via the [Releases page](https://github.com/mollie/gambio/releases) which is compatible with 4.5.x - 5.0.x.
  2. Copy the all content of the `gambio-3.x.x` directory from the extracted files to the root of your Gambio store on your webserver using your FTP client.
  3. Go to `Toolbox` » `Cache` on the Gambio admin page
  4. Clear the module, output, and text cache
@@ -45,6 +45,28 @@ Step-by-step to install the Gambio module:
 Read more about the integration configuration on [our Wiki](https://github.com/mollie/gambio/wiki).
 
 # Release notes
+
+*3.1.2*
+- Add compatibility with Gambio v5
+- Resolve net price calculation logic
+
+*3.1.1*
+- Add Italian and Spanish translations
+
+*3.1.0*
+- Add Capture functionality to the plugin
+- Remove usage of Orders API
+
+*3.0.24*
+- Add Twint payment method
+- Add Alma payment method
+- Change from iDeal 1.0 to iDeal 2.0 payment method
+
+*3.0.23*
+- Add Billie payment method
+- Add Klarna One payment method
+- Add Riverty payment method
+- Deactivate Giropay. Add Trustly payment method
 
 *3.0.22*
 - Add casting to array in DTO classes

@@ -2,10 +2,13 @@
 
 namespace Mollie\Gambio\CustomFields\Factory;
 
+use Mollie\Gambio\CustomFields\Providers\AlmaCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\CreditCardCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\CustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\IssuerListSupportedCustomFieldsProvider;
 use Mollie\Gambio\CustomFields\Providers\KlarnaCustomFieldsProvider;
+use Mollie\Gambio\CustomFields\Providers\BillieCustomFieldsProvider;
+use Mollie\Gambio\CustomFields\Providers\RivertyCustomFieldsProvider;
 
 /**
  * Class CustomFieldsProviderFactory
@@ -27,11 +30,23 @@ class CustomFieldsProviderFactory
             return new KlarnaCustomFieldsProvider($methodKey);
         }
 
+        if (strpos($methodKey, 'mollie_alma') !== false) {
+            return new AlmaCustomFieldsProvider($methodKey);
+        }
+
+        if (strpos($methodKey, 'mollie_billie') !== false) {
+            return new BillieCustomFieldsProvider($methodKey);
+        }
+
+        if (strpos($methodKey, 'riverty') !== false) {
+            return new RivertyCustomFieldsProvider($methodKey);
+        }
+
         if($methodKey === 'mollie_creditcard'){
             return new CreditCardCustomFieldsProvider($methodKey);
         }
 
-        if (in_array($methodKey, ['mollie_ideal', 'mollie_kbc', 'mollie_giftcard'], true)) {
+        if (in_array($methodKey, ['mollie_kbc', 'mollie_giftcard'], true)) {
             return new IssuerListSupportedCustomFieldsProvider($methodKey);
         }
 
