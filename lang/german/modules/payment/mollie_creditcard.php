@@ -19,7 +19,7 @@ defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_TITLE') ?: define('MODULE_PA
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_DESC', 'Geben Sie die zusätzlichen Kosten für eine Zahlung in der Standardwährung ein. Bleibt dieses Feld leer, werden den Kunden keine zusätzlichen Kosten berechnet.');
 
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_TITLE', 'API-Methode');
-defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_DESC', '<b>Payment API</b><br>Verwenden Sie für Transaktionen die Payment API Plattform. <a href="https://docs.mollie.com/payments/overview" target="_blank">Mehr</a>.<br><br><b>Order API</b><br>Verwenden Sie die neue Order API Platform, um mehr Einblicke in die Bestellungen zu erhalten. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Mehr</a>.');
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_API_METHOD_DESC', '<b>Payment API</b><br>Verwenden Sie für Transaktionen die Payment API Plattform. <a href="https://docs.mollie.com/payments/overview" target="_blank">Mehr</a>.<br>');
 
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_TITLE', 'Logo');
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_LOGO_DESC', 'Bitte laden Sie ein Logo hoch, das im Checkout angezeigt werden soll.');
@@ -57,3 +57,5 @@ defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_PERCENTAGE_DESC') ?: define(
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_TITLE', 'Maximaler Zahlungszuschlag');
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC', 'Maximaler Betrag eines Zahlungszuschlags der berechnet werden kann (in der Standardwährung des Shops).');
 
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_TITLE', 'Zahlung erfassen');
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_DESC', '<b>Wählen Sie einen Erfassungsmodus.<br>');

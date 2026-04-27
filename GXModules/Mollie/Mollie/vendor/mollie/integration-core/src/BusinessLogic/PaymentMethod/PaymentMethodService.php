@@ -59,6 +59,7 @@ class PaymentMethodService extends BaseService
                 $paymentMethodConfig = $savedPaymentMethodConfigs[$paymentMethod->getId()];
             }
 
+            $paymentMethodConfig->setApiMethod(PaymentMethodConfig::API_METHOD_PAYMENT);
             $paymentMethodConfig->setOriginalAPIConfig($paymentMethod);
             $paymentMethodConfig->setEnabled(array_key_exists($paymentMethod->getId(), $enabledPaymentMethods));
 
@@ -66,6 +67,29 @@ class PaymentMethodService extends BaseService
         }
 
         return $paymentMethodConfigs;
+    }
+
+    /**
+     * @param string $profileId
+     * @param string $paymentMethodId
+     *
+     * @return PaymentMethodConfig|null
+     * @throws HttpAuthenticationException
+     * @throws HttpCommunicationException
+     * @throws HttpRequestException
+     * @throws UnprocessableEntityRequestException
+     */
+    public function getPaymentConfigurationById($profileId, $paymentMethodId)
+    {
+        $configurations = $this->getAllPaymentMethodConfigurations($profileId);
+
+        foreach ($configurations as $configuration) {
+            if ($configuration->getId() === $paymentMethodId) {
+                return $configuration;
+            }
+        }
+
+        return null;
     }
 
     /**

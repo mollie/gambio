@@ -15,6 +15,7 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
     public function renderAllCustomFields()
     {
         return parent::renderAllCustomFields() .
+            $this->renderCaptureEdit() .
             $this->renderSwitcher('COMPONENTS_STATUS') .
             $this->renderSwitcher('SINGLE_CLICK_STATUS') .
             $this->renderSingleClickApprovalTextEdit() .
@@ -30,6 +31,7 @@ class CreditCardCustomFieldsProvider extends CustomFieldsProvider
     public function renderCustomOverviewFields()
     {
         return parent::renderCustomOverviewFields() .
+            $this->renderCaptureOverview() .
             $this->renderSwitcherOverview('COMPONENTS_STATUS') .
             $this->renderSwitcherOverview('SINGLE_CLICK_STATUS') .
             $this->renderSingleClickApprovalTextOverview() .

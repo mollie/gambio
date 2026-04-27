@@ -1,0 +1,10 @@
+{load_language_text section="module_center_module"}
+
+<span class="options-title">{$mollie.title}</span>
+{$mollie.desc}
+
+<select class="mollie-capture-select" name="configuration[{{$mollie.key}}]" >
+    <option value="never" {if $mollie.value == 'never'}selected{/if}>{{$txt.mollie_capture_never}}</option>
+    <option value="manual" {if $mollie.value == 'manual'}selected{/if}>{{$txt.mollie_capture_manual}}</option>
+    <option value="automatic" {if $mollie.value == 'automatic'}selected{/if}>{{$txt.mollie_capture_auto}}</option>
+</select>

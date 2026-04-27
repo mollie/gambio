@@ -26,6 +26,6 @@ class mollie_riverty extends mollie
      */
     protected function _getDefaultApi()
     {
-        return PaymentMethodConfig::API_METHOD_ORDERS;
+        return PaymentMethodConfig::API_METHOD_PAYMENT;
     }
 }

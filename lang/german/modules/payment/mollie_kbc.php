@@ -47,3 +47,6 @@ defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_PERCENTAGE_DESC') ?: define('MODULE
 
 defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_TITLE', 'Maximaler Zahlungszuschlag');
 defined('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_SURCHARGE_LIMIT_DESC', 'Maximaler Betrag eines Zahlungszuschlags der berechnet werden kann (in der Standardwährung des Shops).');
+
+defined('MODULE_PAYMENT_MOLLIE_KBC_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_KBC_CAPTURE_OPTION_TITLE', 'Zahlung erfassen');
+defined('MODULE_PAYMENT_MOLLIE_KBC_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_KBC_CAPTURE_OPTION_DESC', '<b>Wählen Sie einen Erfassungsmodus.<br>');

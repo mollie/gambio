@@ -19,16 +19,13 @@ defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_TITLE') ?: define('MODULE_PAYME
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_DESC', 'Please enter the extra costs for a payment in default currency. If field is empty, no additional payment costs will be charged to customers.');
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_TITLE', 'API method');
-defined('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_DESC', '<b>Payment API</b><br>Use the Payment API Platform for the transactions. <a href="https://docs.mollie.com/payments/overview" target="_blank">Read more</a>.<br><br><b>Order API</b><br>Use the new Order API Platform and get additional insights in the orders. <a href="https://docs.mollie.com/orders/why-use-orders" target="_blank">Read more</a>.');
+defined('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_API_METHOD_DESC', '<b>Payment API</b><br>Use the Payment API Platform for the transactions. <a href="https://docs.mollie.com/payments/overview" target="_blank">Read more</a>.<br>');
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_LOGO_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_LOGO_TITLE', 'Logo');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_LOGO_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_LOGO_DESC', 'Please upload logo that will be used in checkout.');
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_TITLE', 'Sort order of display in checkout');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SORT_ORDER_DESC', 'Lowest is displayed first in checkout screen.');
-
-defined('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_TITLE', 'Days To Expire');
-defined('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_ORDER_EXPIRES_DESC', 'How many days before orders for this method becomes expired? Leave empty to use default expiration (28 days)<br><br>Please note: It is not possible to use an expiry date more than 28 days in the future, unless another maximum is agreed between the merchant and Riverty.');
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_TITLE', 'Transaction description');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_TRANSACTION_DESCRIPTION_DESC', 'The description to be used for payment transaction. These variables are available: {orderNumber}, {storeName}, {customerFirstname}, {customerLastname}, {customerCompany}, and {cartNumber}.');
@@ -44,3 +41,6 @@ defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_PERCENTAGE_DESC') ?: define('MO
 
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_TITLE', 'Payment surcharge limit');
 defined('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_SURCHARGE_LIMIT_DESC', 'Maximum amount of payment surcharge that should be charged to the customer (in default store currency).');
+
+defined('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_TITLE', 'Payment capture');
+defined('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_RIVERTY_CAPTURE_OPTION_DESC', '<b>Select a capture type.<br>');
