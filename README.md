@@ -46,6 +46,9 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*3.1.3*
+- Fix Credit Cards display and payment issues
+
 *3.1.2*
 - Add compatibility with Gambio v5
 - Resolve net price calculation logic
