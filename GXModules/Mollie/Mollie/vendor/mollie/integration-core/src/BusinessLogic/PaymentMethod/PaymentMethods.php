@@ -25,4 +25,5 @@ class PaymentMethods
     const Trustly = 'trustly';
     const Twint = 'twint';
     const Alma = 'alma';
+    const Wero = 'wero';
 }
