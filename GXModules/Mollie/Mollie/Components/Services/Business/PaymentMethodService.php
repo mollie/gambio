@@ -78,14 +78,14 @@ class PaymentMethodService extends BaseService
         $descKey = $prefix . '_CHECKOUT_DESCRIPTION_' . $lang;
 
         $paymentMethodConfig->setId($id);
-        $paymentMethodConfig->setApiMethod(@constant($prefix . '_API_METHOD'));
-        $paymentMethodConfig->setName(@constant($nameKey));
-        $paymentMethodConfig->setDescription(@constant($descKey));
-        $paymentMethodConfig->setSurchargeType(@constant($prefix . '_SURCHARGE_TYPE')?: SurchargeType::NO_FEE);
-        $paymentMethodConfig->setSurchargeFixedAmount(@constant($prefix . '_SURCHARGE_FIXED_AMOUNT'));
-        $paymentMethodConfig->setSurchargePercentage(@constant($prefix . '_SURCHARGE_PERCENTAGE'));
-        $paymentMethodConfig->setSurchargeLimit(@constant($prefix . '_SURCHARGE_LIMIT'));
-        $paymentMethodConfig->setImage(@constant($prefix . '_LOGO'));
+        $paymentMethodConfig->setApiMethod($this->_getConstant($prefix . '_API_METHOD'));
+        $paymentMethodConfig->setName($this->_getConstant($nameKey));
+        $paymentMethodConfig->setDescription($this->_getConstant($descKey));
+        $paymentMethodConfig->setSurchargeType($this->_getConstant($prefix . '_SURCHARGE_TYPE') ?: SurchargeType::NO_FEE);
+        $paymentMethodConfig->setSurchargeFixedAmount($this->_getConstant($prefix . '_SURCHARGE_FIXED_AMOUNT'));
+        $paymentMethodConfig->setSurchargePercentage($this->_getConstant($prefix . '_SURCHARGE_PERCENTAGE'));
+        $paymentMethodConfig->setSurchargeLimit($this->_getConstant($prefix . '_SURCHARGE_LIMIT'));
+        $paymentMethodConfig->setImage($this->_getConstant($prefix . '_LOGO'));
 
         return $paymentMethodConfig;
     }
@@ -104,6 +104,23 @@ class PaymentMethodService extends BaseService
         }
 
         return null;
+    }
+
+    /**
+     * Returns the value of a constant, or null if it is not defined.
+     *
+     * Payment methods removed from the codebase (e.g. discontinued methods) can
+     * leave leftover configuration in the database, so their constants are never
+     * defined. Since PHP 8 an undefined constant lookup throws an Error that `@`
+     * cannot suppress, so this guard is required instead of a raw constant() call.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
+    private function _getConstant($name)
+    {
+        return defined($name) ? constant($name) : null;
     }
 
     /**
