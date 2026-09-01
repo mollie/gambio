@@ -21,6 +21,6 @@ class TransactionDescriptionService extends PaymentTransactionDescriptionService
         $methodIdentifier = strtoupper($methodIdentifier);
         $transactionDescriptionKey = "MODULE_PAYMENT_{$methodIdentifier}_TRANSACTION_DESCRIPTION_{$currentLang}";
 
-        return @constant($transactionDescriptionKey);
+        return defined($transactionDescriptionKey) ? constant($transactionDescriptionKey) : '';
     }
 }

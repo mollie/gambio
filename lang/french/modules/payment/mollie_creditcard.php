@@ -55,7 +55,7 @@ defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_PERCENTAGE_TITLE') ?: define
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_PERCENTAGE_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_PERCENTAGE_DESC', 'Coût supplémentaire à facturer au client pour les opérations de paiement défini comme un pourcentage du sous-total du panier.');
 
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_TITLE', 'Limite de majoration de paiement');
-defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_ORDER_EXPIRES_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');
+defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_SURCHARGE_LIMIT_DESC', 'Montant maximum de la majoration de paiement qui doit être facturée au client (dans la devise du magasin par défaut).');
 
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_TITLE') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_TITLE', 'Paiement capture');
 defined('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_DESC') ?: define('MODULE_PAYMENT_MOLLIE_CREDITCARD_CAPTURE_OPTION_DESC', '<b>Sélectionnez un type de capture.<br>');

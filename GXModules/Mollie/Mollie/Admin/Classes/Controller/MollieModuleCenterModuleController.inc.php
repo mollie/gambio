@@ -293,7 +293,6 @@ class MollieModuleCenterModuleController extends AbstractModuleCenterModuleContr
     {
         $statusKey = 'MODULE_PAYMENT_MOLLIE_' . strtoupper($mollieId) . '_STATUS';
 
-        return defined($statusKey) ?
-            strtolower_wrapper(@constant($statusKey)) === 'true' : false;
+        return defined($statusKey) && strtolower_wrapper(@constant($statusKey)) === 'true';
     }
 }
