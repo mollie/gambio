@@ -196,7 +196,7 @@ function mollie_multi_language_field($templatePath, $key_value, $key = '')
 
     foreach (xtc_get_languages() as $language) {
         $langKey                 = $key . '_' . strtoupper($language['code']);
-        $value                   = stripslashes(@constant($langKey));
+        $value                   = defined($langKey) ? stripslashes(constant($langKey)) : stripslashes('');
         $data['lang_specific'][] = [
             'lang_key'   => _appendPrefix($langKey),
             'lang_value' => $value,
@@ -205,7 +205,8 @@ function mollie_multi_language_field($templatePath, $key_value, $key = '')
     }
 
     $currentLang              = strtoupper($_SESSION['language_code']);
-    $data['default_value']    = stripslashes(@constant($key . '_' . $currentLang));
+    $data['default_value']    = defined($key . '_' . $currentLang)
+        ? stripslashes(constant($key . '_' . $currentLang)) : stripslashes('');
     $data['key']              = _appendPrefix($key);
     $data['current_lang_key'] = $key . '_' . $currentLang;
     $data['title']            = @constant("{$key}_TITLE");
