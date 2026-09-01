@@ -41,6 +41,8 @@ Read more about the integration configuration on [our Wiki](https://github.com/m
 
 # Release notes
 
+*2.1.4*
+- Guard constant lookups with defined()
 *2.1.3*
 - Add the Wero payment method
 
